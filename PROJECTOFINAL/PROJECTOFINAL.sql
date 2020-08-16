@@ -170,14 +170,6 @@ BUGS - É POSSÍVEL O PRODUTO SER O SEU PRÓPRIO GENÉRICO
 	   É POSSÍVEL REACTIVAR UM PRODUTO COM MARCA E CATEGORIA NULA	
 	   [ATENÇÃO: CRIAR REFERENCIA ÚNICA INACTIVA PARA UM GENERICO SEM PAI]
 
-	   TESTE DE PULLS, PUSH, MERGES *!*!*!*!**!*!*!*!*!!*!*!**
-	   !**!!*!*!*!**!*!*!*!!*!*
-	   *!**!*!*!*!*!*!*!!!** BUMBUM
-
-	   Comentário filipe cancelinha 
-	   Comentário Hugo Penacho
-	   Faz o merge para master
-
 DECISÕES -
 
 	    NÃO SE APAGA PRODUTOS, fica INACTIVO
