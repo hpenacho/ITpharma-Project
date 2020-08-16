@@ -175,6 +175,7 @@ BUGS - É POSSÍVEL O PRODUTO SER O SEU PRÓPRIO GENÉRICO
 	   *!**!*!*!*!*!*!*!!!** BUMBUM
 
 	   Comentário filipe cancelinha 
+	   Comentário Hugo Penacho
 
 DECISÕES -
 
