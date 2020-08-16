@@ -176,6 +176,7 @@ BUGS - É POSSÍVEL O PRODUTO SER O SEU PRÓPRIO GENÉRICO
 
 	   Comentário filipe cancelinha 
 	   Comentário Hugo Penacho
+	   Faz o merge para master
 
 DECISÕES -
 
