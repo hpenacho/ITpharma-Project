@@ -174,6 +174,8 @@ BUGS - É POSSÍVEL O PRODUTO SER O SEU PRÓPRIO GENÉRICO
 	   !**!!*!*!*!**!*!*!*!!*!*
 	   *!**!*!*!*!*!*!*!!!** BUMBUM
 
+	   Comentário filipe cancelinha 
+
 DECISÕES -
 
 	    NÃO SE APAGA PRODUTOS, fica INACTIVO
