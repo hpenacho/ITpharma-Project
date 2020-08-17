@@ -312,8 +312,3 @@ from  EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compr
 where Cliente.ID = @IDCLIENTE 
 group by EncomendaHistorico.ENC_REF, Estado.Descricao, EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, EncomendaHistorico.MoradaEntrega, EncomendaHistorico.PDF
 
---
-
-select * from produto
-
-
