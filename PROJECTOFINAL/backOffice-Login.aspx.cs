@@ -21,7 +21,7 @@ namespace PROJECTOFINAL
 
         protected void btn_login_Click(object sender, EventArgs e)
         {
-            SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["ProjectoFinalConnectionString"].ConnectionString);
+            SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["PROJECTOFINALConnectionString"].ConnectionString);
             SqlCommand myCommand = new SqlCommand();
             myCommand.Parameters.AddWithValue("@adminName", userName.Value);
             myCommand.Parameters.AddWithValue("@pw", Tools.EncryptString(password.Value));
