@@ -36,9 +36,7 @@ namespace PROJECTOFINAL
                 string errorMessage = myCommand.Parameters["@OUTPUT"].ToString();
 
                 if (errorMessage != null)
-                {
                     lbl_errorMessage.Text = errorMessage;
-                }
 
                 else
                 {
