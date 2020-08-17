@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="backOffice-Index.aspx" />
+    <Content Include="backOffice-Login.aspx" />
     <Content Include="SQLSheet.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -78,6 +79,13 @@
     </Compile>
     <Compile Include="backOffice-Index.aspx.designer.cs">
       <DependentUpon>backOffice-Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice-Login.aspx.cs">
+      <DependentUpon>backOffice-Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-Login.aspx.designer.cs">
+      <DependentUpon>backOffice-Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOfficeMasterPage.Master.cs">
       <DependentUpon>backOfficeMasterPage.Master</DependentUpon>

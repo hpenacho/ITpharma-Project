@@ -312,3 +312,30 @@ from  EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compr
 where Cliente.ID = @IDCLIENTE 
 group by EncomendaHistorico.ENC_REF, Estado.Descricao, EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, EncomendaHistorico.MoradaEntrega, EncomendaHistorico.PDF
 
+
+-- STORED PROCEDURE loginBackOffice
+-- esta usp simplesmente verifica se os dados introduzidos no login sao simultaneamente validos
+--caso nao sejam, será devolvida msg de erro, cuja falta de presença implica login com sucesso. 
+GO
+CREATE OR ALTER PROCEDURE [dbo].[usp_loginAdmins]
+
+	@adminName varchar(50),
+	@pw varchar(100),
+	@OUTPUT varchar(300)
+
+AS
+BEGIN TRY
+BEGIN TRAN
+	
+    if not exists (select '*' from administradores where userName=@adminName and password = @pw)					
+			THROW 60001, 'Wrong user name or password', 10
+					
+commit
+END TRY
+BEGIN CATCH
+	set @OUTPUT = ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+--FIM USP loginBackOffice
+
+
