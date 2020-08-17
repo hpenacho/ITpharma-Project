@@ -316,3 +316,4 @@ group by EncomendaHistorico.ENC_REF, Estado.Descricao, EncomendaHistorico.Ultima
 
 select * from produto
 
+
