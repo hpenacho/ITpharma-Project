@@ -60,31 +60,49 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_summary;
 
         /// <summary>
-        /// tb_updateDetalhe1 control.
+        /// tb_price control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_updateDetalhe1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_price;
 
         /// <summary>
-        /// fl_pdfPolheto control.
+        /// ddl_category control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fl_pdfPolheto;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_category;
 
         /// <summary>
-        /// tb_updatePreco control.
+        /// check_generic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_updatePreco;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_generic;
+
+        /// <summary>
+        /// check_category control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_category;
+
+        /// <summary>
+        /// ddl_brand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_brand;
 
         /// <summary>
         /// link_insertProduct control.

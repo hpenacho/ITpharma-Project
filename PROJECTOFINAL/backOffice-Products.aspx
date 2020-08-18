@@ -572,7 +572,7 @@
 
 
         <div class="form-group col-md-6" style="margin-top: 2em">
-            <asp:FileUpload ID="fl_updateUpload" runat="server"/>
+            <asp:FileUpload ID="fl_updateUpload" class="form-control-file" runat="server"/>
         </div> 
     </div>
     <!-- /Reference and Image -->
@@ -580,7 +580,7 @@
 
      <!-- Description -->
                    
-    <div class="form-row mt-1"> <!-- Descricão -->
+    <div class="form-row mt-1">
 
         <div class="col-lg-12">
             <label for="tb_description">Description</label>
@@ -594,7 +594,9 @@
 
     </div>
 
-    <div class="form-row mt-4"> <!-- Resumo -->
+    <!-- Resumo -->
+
+    <div class="form-row mt-4"> 
 
         <div class="col-lg-12">
             <label for="tb_summary">Summary</label>
@@ -603,31 +605,61 @@
 
     </div>
 
-    <div class="form-row mt-1"> <!-- Detalhe#1 || Detalhe#2 -->
+    <!-- /Resumo -->
 
-        <div class="col">
-            <label for="tb_updateDetalhe1">Detalhe #1</label>
-            <input class="form-control" runat="server" type="text" id="tb_updateDetalhe1" required/>
-        </div>
-
-        <div class="form-group col-md-6" style="margin-top: 2em">
-            <asp:FileUpload ID="fl_pdfPolheto" runat="server"/>
-        </div> 
-
-    </div>
-
-    <div class="form-row mt-1"> <!-- Preço-->
+   <!-- Price-->
+    <div class="form-row mt-1 d-flex justify-content-between"> 
 
         <div class="col-md-6">
-            <label for="tb_updatePreco">Price</label>
+            <label for="tb_price">Price</label>
                 <div class="input-group">
                     <div class="input-group-append">
                         <span class="input-group-text" id="inputGroupPrepend3">€</span>
                     </div>
-                <input type="number" class="form-control" runat="server" id="tb_updatePreco" aria-describedby="inputGroupPrepend3" required>
+                <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" required>
             </div>
         </div>
+
+         <div class="col-md-5">
+            <label for="ddl_category">Category</label>
+           <asp:DropDownList ID="ddl_category" class="form-control" runat="server"></asp:DropDownList>
+        </div> 
+
+
     </div>
+    <!-- /Price-->
+
+
+    <!-- Generic || Prescription -->
+    <div class="form-row mt-2 d-flex justify-content-between"> 
+
+    <div class="col-md-6 d-flex justify-content-between mt-4">
+        
+        <div class="btn-group-toggle mt-2" data-toggle="buttons">
+             <label class="btn btn-outline-success active" style="padding-left: 3em; padding-right: 3em;">
+                <input type="checkbox" runat="server" id="check_generic"> Generic
+            </label>
+        </div>
+
+         <div class="btn-group-toggle mt-2" data-toggle="buttons">
+             <label class="btn btn-outline-success active" style="padding-left: 3em; padding-right: 3em;">
+                <input type="checkbox" runat="server" id="check_category"> Prescription
+             </label>
+        </div>
+    </div>
+
+        <div class="col-md-5">
+            <label for="ddl_brand">Brand</label>
+           <asp:DropDownList ID="ddl_brand" class="form-control" runat="server"></asp:DropDownList>
+        </div>
+
+       
+
+    </div>
+
+    <!-- //Brand || Category -->
+
+
 
 
 
@@ -635,7 +667,7 @@
     <div class="form-row mt-4">
         <div class="col text-center">
              <asp:LinkButton ID="link_insertProduct" CommandName="link_updateProduct" class="btn btn-primary btn-dark w-25 mr-1" type="submit" runat="server">Insert</asp:LinkButton>
-             <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancelar</button>
+             <button type="button" class="btn btn-secondary btn-success" data-dismiss="modal">Cancel</button>
         </div>
     </div>   
   </div>
