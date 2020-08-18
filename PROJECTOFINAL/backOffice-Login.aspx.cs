@@ -23,8 +23,8 @@ namespace PROJECTOFINAL
         {
             SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["PROJECTOFINALConnectionString"].ConnectionString);
             SqlCommand myCommand = new SqlCommand();
-            myCommand.Parameters.AddWithValue("@adminName", userName.Value);
-            myCommand.Parameters.AddWithValue("@pw", Tools.EncryptString(password.Value));
+            //myCommand.Parameters.AddWithValue("@adminName", userName.Value);
+            //myCommand.Parameters.AddWithValue("@pw", Tools.EncryptString(password.Value));
 
             myCommand.CommandType = CommandType.StoredProcedure;
             myCommand.CommandText = "usp_loginAdmins";
@@ -37,12 +37,12 @@ namespace PROJECTOFINAL
                 myCommand.ExecuteNonQuery();
                 string errorMessage = myCommand.Parameters["@OUTPUT"].ToString();
 
-                if (errorMessage != null)
-                    lbl_errorMessage.Text = errorMessage;
+                if (errorMessage != null) ;
+                // lbl_errorMessage.Text = errorMessage;
 
                 else
                 {
-                    Session["activeUser"] = userName.Value;
+                    //Session["activeUser"] = userName.Value;
                     Session["AdminAuthentication"] = "sim";
                     Response.Redirect("backOffice-Index.aspx");
                 }
