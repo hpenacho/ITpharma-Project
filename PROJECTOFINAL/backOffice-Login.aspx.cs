@@ -19,7 +19,7 @@ namespace PROJECTOFINAL
             //Qualquer coisa qualquer coisa lorem ipsum
         }
 
-        protected void btn_login_Click(object sender, EventArgs e)
+       /* protected void btn_login_Click(object sender, EventArgs e)
         {
             SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["PROJECTOFINALConnectionString"].ConnectionString);
             SqlCommand myCommand = new SqlCommand();
@@ -57,7 +57,7 @@ namespace PROJECTOFINAL
                 myConn.Close();
             }
             //----------------- 
-        }
+        } */
 
     }
 }
