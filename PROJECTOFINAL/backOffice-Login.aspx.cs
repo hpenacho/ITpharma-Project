@@ -48,7 +48,7 @@ namespace PROJECTOFINAL
                     else
                     {
                         Session["activeUser"] = inputUserName.Value;
-                        Session["AdminAuthentication"] = "sim";
+                        Session["AdminAuthentication"] = "validAuth";
                         Response.Redirect("backOffice-Index.aspx");
                     }
 

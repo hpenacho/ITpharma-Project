@@ -31,8 +31,15 @@
     <form id="form1" runat="server">
 
          <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="backOffice-Index.aspx">ITPharma</a>
+            <a class="navbar-brand" href="backOffice-Index.aspx">ITpharma</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+
+             <ul class="navbar-nav ml-auto ml-md-12">
+                
+                <asp:LinkButton ID="lbtn_logout" class="btn btn-secondary" runat="server" OnClick="lbtn_logout_Click"> <i class="fas fa-sign-out-alt"></i></asp:LinkButton>
+             </ul>
+             
+             
         </nav>
 
         <div id="layoutSidenav">
@@ -101,7 +108,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                            Start Bootstrap
+                            <asp:Label ID="lbl_activeUser" runat="server" Text="Not currently authenticated" ForeColor="#66FF33"></asp:Label>
                         </div>
                 </nav>
             </div>
