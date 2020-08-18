@@ -13,9 +13,10 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>ITpharma - BackOffice</title>
-        <link href="BackOffice//BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
+        <link href="BackOffice/BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -26,10 +27,10 @@
 </head>
 
 
-<body>
+<body class="sb-nav-fixed">
     <form id="form1" runat="server">
 
-          <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="index.html">Start Bootstrap</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -120,25 +121,24 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
+                            Start Bootstrap
+                        </div>
                 </nav>
             </div>
-
             <div id="layoutSidenav_content">
-                <main>
-
-
-                    <!-- MAIN CONTENT -->
+             
+               
+            <main>
+                <!-- MAIN CONTENT -->
 
                      <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                      </asp:ContentPlaceHolder>
 
-                    <!-- / MAIN CONTENT -->
+               <!-- / MAIN CONTENT -->
+             </main>
 
 
 
-                </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -165,11 +165,9 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
         <script src="BackOffice//BackOffice-Template/dist/assets/demo/datatables-demo.js"></script>
+         <!-- /SCRIPTS -->
 
 
-
-           
-       
     </form>
 </body>
 
