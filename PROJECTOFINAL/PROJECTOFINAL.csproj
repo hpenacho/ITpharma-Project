@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="backOffice-Index.aspx" />
     <Content Include="backOffice-Login.aspx" />
+    <Content Include="BackOffice\BackOffice-Logins\floating-labels.css" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-area-demo.js" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-bar-demo.js" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-pie-demo.js" />
