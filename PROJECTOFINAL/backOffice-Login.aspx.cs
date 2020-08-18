@@ -14,51 +14,55 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //COMMENT HUGO TESTA REBASES
-            //comment do testaBranch 23
 
-            //Qualquer coisa qualquer coisa lorem ipsum
         }
 
-       /* protected void btn_login_Click(object sender, EventArgs e)
-        {
-            SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["PROJECTOFINALConnectionString"].ConnectionString);
-            SqlCommand myCommand = new SqlCommand();
-            //myCommand.Parameters.AddWithValue("@adminName", userName.Value);
-            //myCommand.Parameters.AddWithValue("@pw", Tools.EncryptString(password.Value));
+        protected void btn_login_Click(object sender, EventArgs e)
+        {            
+                SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString);
+                SqlCommand myCommand = new SqlCommand();
+                myCommand.Parameters.AddWithValue("@adminName",inputUserName.Value );
+                myCommand.Parameters.AddWithValue("@pw", inputPassword.Value);  //nao esquecer --> Tools.EncryptString(inputPassword.Value)
 
-            myCommand.CommandType = CommandType.StoredProcedure;
-            myCommand.CommandText = "usp_loginAdmins";
-          
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.CommandText = "usp_loginAdmins";
+
+
+            SqlParameter errorMessageSql = new SqlParameter();
+            errorMessageSql.ParameterName = "@errorMessage";
+            errorMessageSql.Direction = ParameterDirection.Output;
+            errorMessageSql.SqlDbType = SqlDbType.VarChar;
+            errorMessageSql.Size = 300;
+
+            myCommand.Parameters.Add(errorMessageSql);
             myCommand.Connection = myConn;
 
-            try
-            {
-                myConn.Open();
-                myCommand.ExecuteNonQuery();
-                string errorMessage = myCommand.Parameters["@OUTPUT"].ToString();
-
-                if (errorMessage != null) ;
-                // lbl_errorMessage.Text = errorMessage;
-
-                else
+                try
                 {
-                    //Session["activeUser"] = userName.Value;
-                    Session["AdminAuthentication"] = "sim";
-                    Response.Redirect("backOffice-Index.aspx");
+                    myConn.Open();
+                    myCommand.ExecuteNonQuery();
+                     
+                    if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                    lbl_errorMessage.Text = myCommand.Parameters["@errorMessage"].Value.ToString();
+
+                    else
+                    {
+                        Session["activeUser"] = inputUserName.Value;
+                        Session["AdminAuthentication"] = "sim";
+                        Response.Redirect("backOffice-Index.aspx");
+                    }
+
                 }
-
+                catch (Exception m)
+                {
+                    Response.Write(m.Message);
+                }
+                finally
+                {
+                    myConn.Close();
+                }
+                //----------------- 
             }
-            catch (Exception m)
-            {
-                Response.Write(m.Message);
-            }
-            finally
-            {
-                myConn.Close();
-            }
-            //----------------- 
-        } */
-
-    }
+            
+        }
 }

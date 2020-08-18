@@ -38,17 +38,17 @@
     <form class="form-signin" runat="server">
   <div class="text-center mb-4">
     <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Floating labels</h1>
-    <p> Administrator Login </p>
+    <h1 class="h3 mb-3 font-weight-normal">Administrator Login - ITpharma</h1>
+    <p> Please insert your login credentials below. </p>
   </div>
 
   <div class="form-label-group">
-    <input type="text" id="inputUserName" class="form-control" placeholder="Administrator Name" required autofocus>
+    <input type="text" id="inputUserName" runat="server" class="form-control" placeholder="Administrator Name" required autofocus>
     <label for="inputUserName">Administrator Name</label>
   </div>
 
   <div class="form-label-group">
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <input type="password" id="inputPassword" runat="server" class="form-control" placeholder="Password" required>
     <label for="inputPassword">Password</label>
   </div>
 
@@ -57,9 +57,12 @@
       <input type="checkbox" value="remember-me"> Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <asp:Button ID="btn_login" runat="server" class="btn btn-lg btn-primary btn-block" Text="Sign in" />
-  <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
+        <asp:Button ID="btn_login" runat="server" class="btn btn-lg btn-primary btn-block" Text="Sign in" OnClick="btn_login_Click" />
+  
+        <div class="form-label-group">
+            <asp:Label ID="lbl_errorMessage" runat="server" class="text-center" Text=" " ForeColor="Red"></asp:Label>
+        </div>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
     
 </form>
 </body>
