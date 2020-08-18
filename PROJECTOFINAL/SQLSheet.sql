@@ -336,6 +336,7 @@ BEGIN CATCH
 	set @OUTPUT = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
+
 --FIM USP loginBackOffice
 
 
