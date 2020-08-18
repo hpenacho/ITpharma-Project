@@ -31,7 +31,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="../BackOffice/BackOffice-Login/floating-labels.css" rel="stylesheet">
+    <link href="../BackOffice/BackOffice-Logins/floating-labels.css" rel="stylesheet">
 
   </head>
   <body>
