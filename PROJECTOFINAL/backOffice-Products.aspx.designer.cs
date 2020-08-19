@@ -57,7 +57,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fl_insertProductImage;
+        protected global::AjaxControlToolkit.AsyncFileUpload fl_insertProductImage;
 
         /// <summary>
         /// tb_description control.
@@ -175,6 +175,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton link_insertProduct;
+
+        /// <summary>
+        /// lbl_errors control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_errors;
 
         /// <summary>
         /// SQLcategory control.

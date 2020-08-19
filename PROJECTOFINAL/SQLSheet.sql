@@ -52,7 +52,8 @@ create table Produto(
 	ID_Marca int references Marca(ID) null,
 	precisaReceita bit default 0,
 	ref_generico varchar(20) references Produto(Codreferencia) null,
-	Activo bit default 1
+	Activo bit default 1,
+	Descontinuado bit default 0
 )
 
 create table Carrinho(
@@ -62,10 +63,11 @@ create table Carrinho(
 	Cookie varchar(50) null
 )
 
+
 create table Compra(
 	
 	ID_Encomenda int references EncomendaHistorico(ENC_REF) ON DELETE CASCADE,
-	Prod_ref varchar(20) references Produto(Codreferencia),
+	Prod_ref varchar(20) references Produto(Codreferencia) ON DELETE CASCADE,
 	Qtd int not null,
 	Total decimal(10,2) not null
 )
@@ -247,8 +249,6 @@ BEGIN CATCH
 	ROLLBACK
 END CATCH
 
-select * from produto
-delete from produto
 
 -- QUERIES
 
@@ -387,14 +387,20 @@ END CATCH
 
 
 -- [PROCEDURE] LIST PRODUCT BACKOFFICE REPEATER
+
 GO
 CREATE OR ALTER PROC usp_listBackofficeProducts AS
 SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, StockArmazem.Qtd, Produto.Activo
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
 
--- [QUERY] DELETE PRODUCT BACKOFFICE
+-- [QUERY] DELETE PRODUCT BACKOFFICE \\ Product is discontinued
 
-DELETE FROM PRODUTO WHERE Produto.Codreferencia = 
+GO
+CREATE OR ALTER PROC usp_updateBackofficeProducts(@item varchar(20)) AS
+update produto set produto.Descontinuado = 1 where Produto.Codreferencia = @item
+
+
+
 
 
 

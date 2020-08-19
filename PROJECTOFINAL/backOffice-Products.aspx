@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -211,8 +213,9 @@
                                     </div>
 
                                     <div class="form-group col-md-6" style="margin-top: 2em">
-                                        <asp:FileUpload ID="fl_insertProductImage" class="form-control-file" runat="server" />
+                                        <ajaxToolkit:AsyncFileUpload ID="fl_insertProductImage" runat="server" on/>
                                     </div>
+
                                 </div>
                                 <!-- /Reference and Image -->
 
@@ -285,15 +288,15 @@
                                             Prescription
                                         </label>
 
-                                        &nbsp;<label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
                                             Generic
                                         </label>
 
-                                        &nbsp;<label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
                                             Active
                                         </label>
 
-                                    &nbsp;</div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;</div>
 
                                     <div class="col-md-5" id="parent-product">
                                         <label for="ddl_genericParent">Parent Product</label>
@@ -358,12 +361,21 @@
                             </div>
                         </div>
 
+                        <div class="form-row mt-2">
+                            <label id="lbl_errors" runat="server"></label>
+                        </div>
+
                     </div>   <!-- //TAB SYSTEM ENDING -->
                   
-
+                    
 
                    
                     </ContentTemplate>
+
+                         <Triggers>
+                             <asp:PostBackTrigger ControlID="link_insertProduct" />
+                         </Triggers>
+
                       </asp:UpdatePanel>  <!-- END INNER UPDATE PANEL -->
 
 
@@ -371,6 +383,7 @@
             </div>
         </div>
     </div>
+            
 
       </ContentTemplate>
     </asp:UpdatePanel>
