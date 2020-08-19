@@ -4,6 +4,23 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#chkShowPersonal").click(function () {
+                if ($("#chkShowPersonal").attr("checked")) {
+                    $("#dvPersonal").fadeIn("slow");
+                } else {
+                    $("#dvPersonal").fadeOut("slow");
+                }
+            });
+        });
+
+
+
+    </script>
+
 </asp:Content>
 
 
@@ -570,7 +587,6 @@
         <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference" required>
       </div>
 
-
         <div class="form-group col-md-6" style="margin-top: 2em">
             <asp:FileUpload ID="fl_updateUpload" class="form-control-file" runat="server"/>
         </div> 
@@ -596,12 +612,17 @@
 
     <!-- Resumo -->
 
-    <div class="form-row mt-4"> 
+    <div class="form-row mt-4 d-flex justify-content-between"> 
 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <label for="tb_summary">Summary</label>
             <input class="form-control" runat="server" type="text" id="tb_summary" required/>
         </div>
+
+        <div class="col-md-5">
+            <label for="ddl_category">Category</label>
+           <asp:DropDownList ID="ddl_category" class="form-control" runat="server"></asp:DropDownList>
+        </div> 
 
     </div>
 
@@ -620,17 +641,18 @@
             </div>
         </div>
 
-         <div class="col-md-5">
-            <label for="ddl_category">Category</label>
-           <asp:DropDownList ID="ddl_category" class="form-control" runat="server"></asp:DropDownList>
-        </div> 
+        <div class="col-md-5">
+            <label for="ddl_brand">Brand</label>
+           <asp:DropDownList ID="ddl_brand" class="form-control" runat="server"></asp:DropDownList>
+        </div>
+      
 
 
     </div>
     <!-- /Price-->
 
 
-    <!-- Generic || Prescription -->
+    <!-- Generic || Prescription || Generic-Product -->
     <div class="form-row mt-2 d-flex justify-content-between"> 
 
     <div class="col-md-6 d-flex justify-content-between mt-4">
@@ -642,26 +664,52 @@
         </div>
 
          <div class="btn-group-toggle mt-2" data-toggle="buttons">
-             <label class="btn btn-outline-success active" style="padding-left: 3em; padding-right: 3em;">
-                <input type="checkbox" runat="server" id="check_category"> Prescription
+             <label class="btn btn-outline-success active" style="padding-left: 2em; padding-right: 2em;">
+                <input type="checkbox" runat="server" id="check_prescription"> Prescription
              </label>
         </div>
+
     </div>
 
-        <div class="col-md-5">
-            <label for="ddl_brand">Brand</label>
-           <asp:DropDownList ID="ddl_brand" class="form-control" runat="server"></asp:DropDownList>
+    <div class="col-md-5" id="parent-product">
+       <label for="ddl_brand">Parent Product</label>
+        <asp:DropDownList ID="DropDownList1" class="form-control" runat="server"></asp:DropDownList>
+    </div>
+
+    </div>
+
+    <!-- //Brand || Prescription || Generic-Product-->
+
+      <div class="form-row mt-4 d-flex justify-content-around">
+
+         <div class="col-md-4">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">Qty</span>
+                    </div>
+                <input type="number" value="0" class="form-control" runat="server" id="tb_qty" aria-describedby="inputGroupPrepend3">
+            </div>
         </div>
 
-       
+            <div class="col-md-4">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">Min Qty</span>
+                    </div>
+                <input type="number" value="0" class="form-control" runat="server" id="tb_minQty" aria-describedby="inputGroupPrepend3">
+            </div>
+        </div>
 
-    </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">Max Qty</span>
+                    </div>
+                <input type="number" value="1" class="form-control" runat="server" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
+            </div>
+        </div>
 
-    <!-- //Brand || Category -->
-
-
-
-
+    </div>   
 
 
     <div class="form-row mt-4">

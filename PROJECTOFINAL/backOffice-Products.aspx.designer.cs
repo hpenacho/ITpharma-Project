@@ -60,6 +60,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_summary;
 
         /// <summary>
+        /// ddl_category control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_category;
+
+        /// <summary>
         /// tb_price control.
         /// </summary>
         /// <remarks>
@@ -69,13 +78,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_price;
 
         /// <summary>
-        /// ddl_category control.
+        /// ddl_brand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_category;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_brand;
 
         /// <summary>
         /// check_generic control.
@@ -87,22 +96,49 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_generic;
 
         /// <summary>
-        /// check_category control.
+        /// check_prescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_category;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_prescription;
 
         /// <summary>
-        /// ddl_brand control.
+        /// DropDownList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_brand;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+
+        /// <summary>
+        /// tb_qty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_qty;
+
+        /// <summary>
+        /// tb_minQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_minQty;
+
+        /// <summary>
+        /// tb_maxQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_maxQty;
 
         /// <summary>
         /// link_insertProduct control.
