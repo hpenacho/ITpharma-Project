@@ -82,8 +82,8 @@
                                 <th>Price</th>
                                 <th>Qty</th>
                                 <th>Active</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th class="text-hide"></th>
+                                <th class="text-hide"></th>
                             </tr>
                         </thead>
 
