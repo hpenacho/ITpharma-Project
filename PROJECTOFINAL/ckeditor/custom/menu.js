@@ -6,19 +6,19 @@
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
-    // config.uiColor = '#AADC6E';// The toolbar groups arrangement, optimized for a single toolbar row.
+    // config.uiColor = '#333333';// The toolbar groups arrangement, optimized for a single toolbar row.
     config.toolbarGroups = [
 		//{ name: 'document', groups: ['mode', 'document', 'doctools'] },
-		{ name: 'clipboard', groups: ['clipboard', 'undo'] },
+		//{ name: 'clipboard', groups: ['clipboard', 'undo'] },
 		//{ name: 'editing', groups: ['find', 'selection', 'spellchecker'] },
 		//{ name: 'forms' },
 		{ name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
 		//{ name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
-        { name: 'paragraph', groups: ['list', 'indent', 'align'] }
+        { name: 'paragraph', groups: ['list', 'indent', 'align'] },
 		//{ name: 'links' },
 		//{ name: 'insert' },
 		//{ name: 'styles' },
-		//{ name: 'colors' },
+		{ name: 'colors' },
 		//{ name: 'tools' },
 		//{ name: 'others' },
 		//{ name: 'about' }

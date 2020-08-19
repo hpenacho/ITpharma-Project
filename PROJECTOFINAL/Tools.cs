@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -10,6 +13,21 @@ namespace PROJECTOFINAL
 {
     public class Tools
     {
+        //connection string 
+        private static string connectionString = ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString;
+        public static SqlConnection myConn { get; set; } = new SqlConnection(connectionString);
+
+        public static SqlCommand SqlProcedure(string procName)
+        {
+            SqlCommand myCommand = new SqlCommand();
+
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.CommandText = procName;
+            myCommand.Connection = myConn;
+
+            return myCommand;
+        }
+
 
         public static string EncryptString(string Message)
         {

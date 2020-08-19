@@ -15,6 +15,15 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
+        /// rpt_produtosBackoffice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_produtosBackoffice;
+
+        /// <summary>
         /// tb_name control.
         /// </summary>
         /// <remarks>
@@ -33,13 +42,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_reference;
 
         /// <summary>
-        /// fl_updateUpload control.
+        /// fl_insertProductImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fl_updateUpload;
+        protected global::System.Web.UI.WebControls.FileUpload fl_insertProductImage;
 
         /// <summary>
         /// tb_description control.
@@ -87,15 +96,6 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.DropDownList ddl_brand;
 
         /// <summary>
-        /// check_generic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_generic;
-
-        /// <summary>
         /// check_prescription control.
         /// </summary>
         /// <remarks>
@@ -105,13 +105,31 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_prescription;
 
         /// <summary>
-        /// DropDownList1 control.
+        /// check_generic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_generic;
+
+        /// <summary>
+        /// check_active control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_active;
+
+        /// <summary>
+        /// ddl_genericParent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_genericParent;
 
         /// <summary>
         /// tb_qty control.
@@ -148,5 +166,41 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton link_insertProduct;
+
+        /// <summary>
+        /// SQLcategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SQLcategory;
+
+        /// <summary>
+        /// SQLbrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SQLbrand;
+
+        /// <summary>
+        /// SQLgenericParent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SQLgenericParent;
+
+        /// <summary>
+        /// SQLrptProdutos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SQLrptProdutos;
     }
 }

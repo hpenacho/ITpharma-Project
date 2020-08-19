@@ -1,25 +1,36 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
-    <script type="text/javascript">
+    <style>
 
-        $(document).ready(function () {
+         a.active.nav-item.nav-link{background-color: orange !important;}
+         a.active.nav-item.nav-link{color:white !important;}
+         a.nav-item.nav-link{color: #333 !important;}
 
-            $("#chkShowPersonal").click(function () {
-                if ($("#chkShowPersonal").attr("checked")) {
-                    $("#dvPersonal").fadeIn("slow");
-                } else {
-                    $("#dvPersonal").fadeOut("slow");
-                }
-            });
-        });
+        td {
 
+            text-align: center; 
+            vertical-align: middle;
+        }
 
+        th {
 
-    </script>
+            text-align: center; 
+            vertical-align: middle;
+        }
+
+        #prodtrash:hover{
+            color: darkred;
+        }
+
+        #produpdate:hover{
+            color: orange;
+        }
+
+    </style>
 
 </asp:Content>
 
@@ -28,16 +39,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <script src="ckeditor/ckeditor.js"></script> <!-- CK EDITOR SCRIPT -->
+    <script src="ckeditor/ckeditor.js"></script>
+    <!-- CK EDITOR SCRIPT -->
 
 
-     <!-- Insert Products | opens a modal with all the fields necessary to insert a product -->
+    <!-- Insert Products | opens a modal with all the fields necessary to insert a product -->
 
-                            <div class="container col-lg-12 mt-5">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-success float-lg-right" data-toggle="modal" data-target="#modal-insert-product"> Add Product <i class="fas fa-plus"></i></button>
-                                </div>
-                             </div>
+    <div class="container col-lg-12 mt-5">
+        <div class="form-group">
+            <button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
+        </div>
+    </div>
 
     <!-- /Insert Products -->
 
@@ -45,503 +57,94 @@
 
     <!-- PRODUCT TABLE -->
 
-                      <div class="container-fluid">
-                        <h1 class="mt-4">Products</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Products</li>
-                        </ol>
+    <div class="container-fluid">
+        <h1 class="mt-4">Products</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active">Products</li>
+        </ol>
 
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                DataTable Example
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brielle Williamson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                <td>2012/12/02</td>
-                                                <td>$372,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Herrod Chandler</td>
-                                                <td>Sales Assistant</td>
-                                                <td>San Francisco</td>
-                                                <td>59</td>
-                                                <td>2012/08/06</td>
-                                                <td>$137,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Rhona Davidson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>Tokyo</td>
-                                                <td>55</td>
-                                                <td>2010/10/14</td>
-                                                <td>$327,900</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Colleen Hurst</td>
-                                                <td>Javascript Developer</td>
-                                                <td>San Francisco</td>
-                                                <td>39</td>
-                                                <td>2009/09/15</td>
-                                                <td>$205,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sonya Frost</td>
-                                                <td>Software Engineer</td>
-                                                <td>Edinburgh</td>
-                                                <td>23</td>
-                                                <td>2008/12/13</td>
-                                                <td>$103,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jena Gaines</td>
-                                                <td>Office Manager</td>
-                                                <td>London</td>
-                                                <td>30</td>
-                                                <td>2008/12/19</td>
-                                                <td>$90,560</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Quinn Flynn</td>
-                                                <td>Support Lead</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2013/03/03</td>
-                                                <td>$342,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Charde Marshall</td>
-                                                <td>Regional Director</td>
-                                                <td>San Francisco</td>
-                                                <td>36</td>
-                                                <td>2008/10/16</td>
-                                                <td>$470,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Haley Kennedy</td>
-                                                <td>Senior Marketing Designer</td>
-                                                <td>London</td>
-                                                <td>43</td>
-                                                <td>2012/12/18</td>
-                                                <td>$313,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tatyana Fitzpatrick</td>
-                                                <td>Regional Director</td>
-                                                <td>London</td>
-                                                <td>19</td>
-                                                <td>2010/03/17</td>
-                                                <td>$385,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michael Silva</td>
-                                                <td>Marketing Designer</td>
-                                                <td>London</td>
-                                                <td>66</td>
-                                                <td>2012/11/27</td>
-                                                <td>$198,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Paul Byrd</td>
-                                                <td>Chief Financial Officer (CFO)</td>
-                                                <td>New York</td>
-                                                <td>64</td>
-                                                <td>2010/06/09</td>
-                                                <td>$725,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gloria Little</td>
-                                                <td>Systems Administrator</td>
-                                                <td>New York</td>
-                                                <td>59</td>
-                                                <td>2009/04/10</td>
-                                                <td>$237,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bradley Greer</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>41</td>
-                                                <td>2012/10/13</td>
-                                                <td>$132,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Dai Rios</td>
-                                                <td>Personnel Lead</td>
-                                                <td>Edinburgh</td>
-                                                <td>35</td>
-                                                <td>2012/09/26</td>
-                                                <td>$217,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jenette Caldwell</td>
-                                                <td>Development Lead</td>
-                                                <td>New York</td>
-                                                <td>30</td>
-                                                <td>2011/09/03</td>
-                                                <td>$345,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Yuri Berry</td>
-                                                <td>Chief Marketing Officer (CMO)</td>
-                                                <td>New York</td>
-                                                <td>40</td>
-                                                <td>2009/06/25</td>
-                                                <td>$675,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Caesar Vance</td>
-                                                <td>Pre-Sales Support</td>
-                                                <td>New York</td>
-                                                <td>21</td>
-                                                <td>2011/12/12</td>
-                                                <td>$106,450</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Doris Wilder</td>
-                                                <td>Sales Assistant</td>
-                                                <td>Sidney</td>
-                                                <td>23</td>
-                                                <td>2010/09/20</td>
-                                                <td>$85,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Angelica Ramos</td>
-                                                <td>Chief Executive Officer (CEO)</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                <td>2009/10/09</td>
-                                                <td>$1,200,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gavin Joyce</td>
-                                                <td>Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>42</td>
-                                                <td>2010/12/22</td>
-                                                <td>$92,575</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jennifer Chang</td>
-                                                <td>Regional Director</td>
-                                                <td>Singapore</td>
-                                                <td>28</td>
-                                                <td>2010/11/14</td>
-                                                <td>$357,650</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brenden Wagner</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>28</td>
-                                                <td>2011/06/07</td>
-                                                <td>$206,850</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fiona Green</td>
-                                                <td>Chief Operating Officer (COO)</td>
-                                                <td>San Francisco</td>
-                                                <td>48</td>
-                                                <td>2010/03/11</td>
-                                                <td>$850,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shou Itou</td>
-                                                <td>Regional Marketing</td>
-                                                <td>Tokyo</td>
-                                                <td>20</td>
-                                                <td>2011/08/14</td>
-                                                <td>$163,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michelle House</td>
-                                                <td>Integration Specialist</td>
-                                                <td>Sidney</td>
-                                                <td>37</td>
-                                                <td>2011/06/02</td>
-                                                <td>$95,400</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Suki Burks</td>
-                                                <td>Developer</td>
-                                                <td>London</td>
-                                                <td>53</td>
-                                                <td>2009/10/22</td>
-                                                <td>$114,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Prescott Bartlett</td>
-                                                <td>Technical Author</td>
-                                                <td>London</td>
-                                                <td>27</td>
-                                                <td>2011/05/07</td>
-                                                <td>$145,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gavin Cortez</td>
-                                                <td>Team Leader</td>
-                                                <td>San Francisco</td>
-                                                <td>22</td>
-                                                <td>2008/10/26</td>
-                                                <td>$235,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Martena Mccray</td>
-                                                <td>Post-Sales support</td>
-                                                <td>Edinburgh</td>
-                                                <td>46</td>
-                                                <td>2011/03/09</td>
-                                                <td>$324,050</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Unity Butler</td>
-                                                <td>Marketing Designer</td>
-                                                <td>San Francisco</td>
-                                                <td>47</td>
-                                                <td>2009/12/09</td>
-                                                <td>$85,675</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Howard Hatfield</td>
-                                                <td>Office Manager</td>
-                                                <td>San Francisco</td>
-                                                <td>51</td>
-                                                <td>2008/12/16</td>
-                                                <td>$164,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hope Fuentes</td>
-                                                <td>Secretary</td>
-                                                <td>San Francisco</td>
-                                                <td>41</td>
-                                                <td>2010/02/12</td>
-                                                <td>$109,850</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vivian Harrell</td>
-                                                <td>Financial Controller</td>
-                                                <td>San Francisco</td>
-                                                <td>62</td>
-                                                <td>2009/02/14</td>
-                                                <td>$452,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Timothy Mooney</td>
-                                                <td>Office Manager</td>
-                                                <td>London</td>
-                                                <td>37</td>
-                                                <td>2008/12/11</td>
-                                                <td>$136,200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jackson Bradshaw</td>
-                                                <td>Director</td>
-                                                <td>New York</td>
-                                                <td>65</td>
-                                                <td>2008/09/26</td>
-                                                <td>$645,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Olivia Liang</td>
-                                                <td>Support Engineer</td>
-                                                <td>Singapore</td>
-                                                <td>64</td>
-                                                <td>2011/02/03</td>
-                                                <td>$234,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bruno Nash</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>38</td>
-                                                <td>2011/05/03</td>
-                                                <td>$163,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sakura Yamamoto</td>
-                                                <td>Support Engineer</td>
-                                                <td>Tokyo</td>
-                                                <td>37</td>
-                                                <td>2009/08/19</td>
-                                                <td>$139,575</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Thor Walton</td>
-                                                <td>Developer</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                <td>2013/08/11</td>
-                                                <td>$98,540</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Finn Camacho</td>
-                                                <td>Support Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>47</td>
-                                                <td>2009/07/07</td>
-                                                <td>$87,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Serge Baldwin</td>
-                                                <td>Data Coordinator</td>
-                                                <td>Singapore</td>
-                                                <td>64</td>
-                                                <td>2012/04/09</td>
-                                                <td>$138,575</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Zenaida Frank</td>
-                                                <td>Software Engineer</td>
-                                                <td>New York</td>
-                                                <td>63</td>
-                                                <td>2010/01/04</td>
-                                                <td>$125,250</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Zorita Serrano</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>56</td>
-                                                <td>2012/06/01</td>
-                                                <td>$115,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jennifer Acosta</td>
-                                                <td>Junior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>43</td>
-                                                <td>2013/02/01</td>
-                                                <td>$75,650</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cara Stevens</td>
-                                                <td>Sales Assistant</td>
-                                                <td>New York</td>
-                                                <td>46</td>
-                                                <td>2011/12/06</td>
-                                                <td>$145,600</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hermione Butler</td>
-                                                <td>Regional Director</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                <td>2011/03/21</td>
-                                                <td>$356,250</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Lael Greer</td>
-                                                <td>Systems Administrator</td>
-                                                <td>London</td>
-                                                <td>21</td>
-                                                <td>2009/02/27</td>
-                                                <td>$103,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jonas Alexander</td>
-                                                <td>Developer</td>
-                                                <td>San Francisco</td>
-                                                <td>30</td>
-                                                <td>2010/07/14</td>
-                                                <td>$86,500</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shad Decker</td>
-                                                <td>Regional Director</td>
-                                                <td>Edinburgh</td>
-                                                <td>51</td>
-                                                <td>2008/11/13</td>
-                                                <td>$183,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Michael Bruce</td>
-                                                <td>Javascript Developer</td>
-                                                <td>Singapore</td>
-                                                <td>29</td>
-                                                <td>2011/06/27</td>
-                                                <td>$183,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Donna Snider</td>
-                                                <td>Customer Support</td>
-                                                <td>New York</td>
-                                                <td>27</td>
-                                                <td>2011/01/25</td>
-                                                <td>$112,000</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Product Table
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+
+                        <thead> <!-- HEADER OF THE TABLE -->
+                            <tr>
+                                <th>Cod</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Active</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="text-center text-md-center"> 
+
+                            <!-- PRODUCTS -->
+
+                            <asp:Repeater ID="rpt_produtosBackoffice" runat="server" DataSourceID="SQLrptProdutos">
+
+                                <ItemTemplate>
+
+                             <tr>
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <%# Eval("Codreferencia") %>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <%# Eval("nome") %>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <%# Eval("preco") %> €
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <%# Eval("Qtd") %>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6> <!-- only for the filter -->  
+                                    <input class="form-check-input" style="margin-left: -9px" type="checkbox" id="check-product-active" checked='<%# Eval("Activo") %>'>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
+                                </td>
+
+                                <td style="text-align: center; vertical-align: middle;">
+                                    <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
+                                </td>
+                            </tr>
+
+                                </ItemTemplate>
+
+                           
+                            </asp:Repeater>
+
+                             <!-- //PRODUCTS -->
+                         
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- /PRODUCT TABLE -->
 
@@ -549,186 +152,223 @@
 
 
 
-<!-- insert products Modal -->
+    <!-- insert products Modal -->
 
-<div class="modal fade ml-5" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
-  <div class="modal-dialog modal-lg shadow-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-        <h5 class=" modal-title text-center" id="modal-update-label">Product Insertion</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+    <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
+        <div class="modal-dialog modal-lg shadow-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
+                    <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Insertion<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                </div>
+                <div class="modal-body">   <!-- BEGIN MODAL BODY CONTENT -->
 
+                    <!-- NAVIGATION -->
 
-
-    <!-- BEGIN CONTENT -->
-       
-   <div class="p-4">
-
-    <!-- Name -->
-     <div class="form-row"> 
-      
-      <div class="form-group col-md-12">
-        <label for="tb_name">Name</label>
-        <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Title" required>
-      </div>
-
-     </div>
-    <!-- /Name -->
-
-    <!-- Reference and Image -->
-    <div class="form-row">
-
-       <div class="form-group col-md-6">
-        <label for="tb_reference">Reference</label>
-        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference" required>
-      </div>
-
-        <div class="form-group col-md-6" style="margin-top: 2em">
-            <asp:FileUpload ID="fl_updateUpload" class="form-control-file" runat="server"/>
-        </div> 
-    </div>
-    <!-- /Reference and Image -->
-
-
-     <!-- Description -->
-                   
-    <div class="form-row mt-1">
-
-        <div class="col-lg-12">
-            <label for="tb_description">Description</label>
-            <textarea class="form-control" id="tb_description" runat="server" rows="3" required></textarea>
-              <script type="text/javascript">
-
-                  CKEDITOR.replace('<%=tb_description.ClientID%>', { customConfig: 'custom/menu.js' });
-
-              </script>
-        </div>
-
-    </div>
-
-    <!-- Resumo -->
-
-    <div class="form-row mt-4 d-flex justify-content-between"> 
-
-        <div class="col-lg-6">
-            <label for="tb_summary">Summary</label>
-            <input class="form-control" runat="server" type="text" id="tb_summary" required/>
-        </div>
-
-        <div class="col-md-5">
-            <label for="ddl_category">Category</label>
-           <asp:DropDownList ID="ddl_category" class="form-control" runat="server"></asp:DropDownList>
-        </div> 
-
-    </div>
-
-    <!-- /Resumo -->
-
-   <!-- Price-->
-    <div class="form-row mt-1 d-flex justify-content-between"> 
-
-        <div class="col-md-6">
-            <label for="tb_price">Price</label>
-                <div class="input-group">
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="inputGroupPrepend3">€</span>
+                    <div class="nav nav nav-pills nav-justified" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" style="margin-left: 2em;" id="nav-home-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
+                        <a class="nav-item nav-link" style="margin-right: 2em;" id="nav-profile-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-profile" aria-selected="false">Stock</a>
                     </div>
-                <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" required>
+
+                    <!-- /NAVIGATION -->
+
+                    <div class="tab-content" id="nav-tabContent">
+
+                        <!-- CONTENT 1 DETAILS -->
+                        <div class="tab-pane fade show active" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+
+                            <div class="p-4"> <!-- WINDOW PADDING -->
+
+                                <!-- Name -->
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-12">
+                                        <label for="tb_name">Name</label>
+                                        <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Title" required>
+                                    </div>
+
+                                </div>
+                                <!-- /Name -->
+
+                                <!-- Reference and Image -->
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="tb_reference">Reference</label>
+                                        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference" required>
+                                    </div>
+
+                                    <div class="form-group col-md-6" style="margin-top: 2em">
+                                        <asp:FileUpload ID="fl_insertProductImage" class="form-control-file" runat="server" />
+                                    </div>
+                                </div>
+                                <!-- /Reference and Image -->
+
+
+                                <!-- Description -->
+
+                                <div class="form-row mt-1">
+
+                                    <div class="col-lg-12">
+                                        <label for="tb_description">Description</label>
+                                        <textarea class="form-control" id="tb_description" runat="server" rows="3" required></textarea>
+                                        <script type="text/javascript">
+
+                                            CKEDITOR.replace('<%=tb_description.ClientID%>', { customConfig: 'custom/menu.js' });
+
+                                        </script>
+                                    </div>
+
+                                </div>
+
+                                <!-- Resumo -->
+
+                                <div class="form-row mt-4 d-flex justify-content-between">
+
+                                    <div class="col-lg-6">
+                                        <label for="tb_summary">Summary</label>
+                                        <input class="form-control" runat="server" type="text" id="tb_summary" required />
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label for="ddl_category">Category</label>
+                                        <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                    </div>
+
+                                </div>
+
+                                <!-- /Resumo -->
+
+                                <!-- Price-->
+                                <div class="form-row mt-1 d-flex justify-content-between">
+
+                                    <div class="col-md-6">
+                                        <label for="tb_price">Price</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="inputGroupPrepend3">€</span>
+                                            </div>
+                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label for="ddl_brand">Brand</label>
+                                        <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                    </div>
+
+
+
+                                </div>
+                                <!-- /Price-->
+
+
+                                <!-- Generic || Prescription || Generic-Product -->
+                                <div class="form-row mt-2 mb-2 d-flex justify-content-between">
+
+                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-between" style="margin-top: 30px;" data-toggle="buttons">
+
+                                        <label class="btn btn-outline-warning" style="padding-left: 1em; padding-right: 1em;">
+                                            <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
+                                            Prescription
+                                        </label>
+
+                                        <label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
+                                            <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                            Generic
+                                        </label>
+
+                                        <label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
+                                            <input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
+                                            Active
+                                        </label>
+
+                                    </div>
+
+                                    <div class="col-md-5" id="parent-product">
+                                        <label for="ddl_genericParent">Parent Product</label>
+                                        <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                                    </div>
+
+                                </div>
+
+                                <!-- //Brand || Prescription || Generic-Product-->
+
+
+
+                            </div>
+                            <!-- WINDOW PADDING -->
+
+                        </div>
+                        <!-- // CONTENT 1 DETAILS -->
+
+
+                        <!-- CONTENT 2 DETAILS -->
+                        <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
+
+                            <!-- STOCK -->
+
+                            <div class="form-row mt-4 d-flex justify-content-between">
+
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="number" value="0" class="form-control" runat="server" id="tb_qty" aria-describedby="inputGroupPrepend3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Cur Qty</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="number" value="0" class="form-control" runat="server" id="tb_minQty" aria-describedby="inputGroupPrepend3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Min Qty</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="number" value="1" class="form-control" runat="server" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Max Qty</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //STOCK-->
+
+                        </div>
+                        <!-- // CONTENT 2 DETAILS -->
+
+                        <div class="form-row mt-4">
+                            <div class="col text-center">
+                                <asp:LinkButton ID="link_insertProduct" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertProduct_Click">Insert</asp:LinkButton> <!-- INSERTION DRIVE -->
+                                <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- //TAB SYSTEM ENDING -->
+
+
+
+                </div>
+                <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
-
-        <div class="col-md-5">
-            <label for="ddl_brand">Brand</label>
-           <asp:DropDownList ID="ddl_brand" class="form-control" runat="server"></asp:DropDownList>
-        </div>
-      
-
-
-    </div>
-    <!-- /Price-->
-
-
-    <!-- Generic || Prescription || Generic-Product -->
-    <div class="form-row mt-2 d-flex justify-content-between"> 
-
-    <div class="col-md-6 d-flex justify-content-between mt-4">
-        
-        <div class="btn-group-toggle mt-2" data-toggle="buttons">
-             <label class="btn btn-outline-success active" style="padding-left: 3em; padding-right: 3em;">
-                <input type="checkbox" runat="server" id="check_generic"> Generic
-            </label>
-        </div>
-
-         <div class="btn-group-toggle mt-2" data-toggle="buttons">
-             <label class="btn btn-outline-success active" style="padding-left: 2em; padding-right: 2em;">
-                <input type="checkbox" runat="server" id="check_prescription"> Prescription
-             </label>
-        </div>
-
     </div>
 
-    <div class="col-md-5" id="parent-product">
-       <label for="ddl_brand">Parent Product</label>
-        <asp:DropDownList ID="DropDownList1" class="form-control" runat="server"></asp:DropDownList>
-    </div>
-
-    </div>
-
-    <!-- //Brand || Prescription || Generic-Product-->
-
-      <div class="form-row mt-4 d-flex justify-content-around">
-
-         <div class="col-md-4">
-                <div class="input-group">
-                    <div class="input-group-append">
-                        <span class="input-group-text">Qty</span>
-                    </div>
-                <input type="number" value="0" class="form-control" runat="server" id="tb_qty" aria-describedby="inputGroupPrepend3">
-            </div>
-        </div>
-
-            <div class="col-md-4">
-                <div class="input-group">
-                    <div class="input-group-append">
-                        <span class="input-group-text">Min Qty</span>
-                    </div>
-                <input type="number" value="0" class="form-control" runat="server" id="tb_minQty" aria-describedby="inputGroupPrepend3">
-            </div>
-        </div>
-
-            <div class="col-md-4">
-                <div class="input-group">
-                    <div class="input-group-append">
-                        <span class="input-group-text">Max Qty</span>
-                    </div>
-                <input type="number" value="1" class="form-control" runat="server" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
-            </div>
-        </div>
-
-    </div>   
+    <!-- /Insert products Modal -->
 
 
-    <div class="form-row mt-4">
-        <div class="col text-center">
-             <asp:LinkButton ID="link_insertProduct" CommandName="link_updateProduct" class="btn btn-primary btn-dark w-25 mr-1" type="submit" runat="server">Insert</asp:LinkButton>
-             <button type="button" class="btn btn-secondary btn-success" data-dismiss="modal">Cancel</button>
-        </div>
-    </div>   
-  </div>
-
-          <!-- END CONTENT -->
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- /Insert products Modal -->
-
+    <!-- SQLSOURCES AND REPEATER SOURCES -->
+    <asp:SqlDataSource ID="SQLcategory" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Categoria]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLbrand" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Marca]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLgenericParent" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * from produto where ref_generico IS NOT NULL"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLrptProdutos" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listBackofficeProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
 </asp:Content>
 
