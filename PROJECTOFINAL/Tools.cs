@@ -14,7 +14,7 @@ namespace PROJECTOFINAL
     public class Tools
     {
         //connection string 
-        private static string connectionString = ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString;
+        public static string connectionString = ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString;
         public static SqlConnection myConn { get; set; } = new SqlConnection(connectionString);
 
         public static SqlCommand SqlProcedure(string procName)

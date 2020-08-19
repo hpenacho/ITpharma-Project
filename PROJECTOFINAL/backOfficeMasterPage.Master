@@ -28,6 +28,14 @@
 <body class="sb-nav-fixed">
     <form id="form1" runat="server">
 
+
+
+        <!-- ScriptManager -->
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+
+
+
          <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="backOffice-Index.aspx">ITpharma</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>

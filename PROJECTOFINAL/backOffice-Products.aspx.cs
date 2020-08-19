@@ -70,5 +70,39 @@ namespace PROJECTOFINAL
 
         }
 
+        protected void rpt_produtosBackoffice_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+
+
+        }
+
+        protected void rpt_produtosBackoffice_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
+
+            if (e.CommandName.Equals("link_deleteProduct")) 
+                deleteItem(e);
+
+        }
+
+
+        // DELETES THE SELECTED PRODUCT FROM THE DATABASE 
+        private void deleteItem(RepeaterCommandEventArgs e)
+        {
+            string query = $"DELETE FROM PRODUTO WHERE Produto.Codreferencia = {e.CommandArgument}";
+
+            SqlConnection myConn = new SqlConnection(Tools.connectionString);
+            SqlCommand myCommand = new SqlCommand(query, myConn);
+
+            Tools.myConn.Open();
+            myCommand.ExecuteNonQuery();
+            Tools.myConn.Close();
+
+            rpt_produtosBackoffice.DataBind();
+        }
+
+
+
     }
 }

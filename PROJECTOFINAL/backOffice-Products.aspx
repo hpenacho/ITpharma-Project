@@ -91,7 +91,7 @@
 
                             <!-- PRODUCTS -->
 
-                            <asp:Repeater ID="rpt_produtosBackoffice" runat="server" DataSourceID="SQLrptProdutos">
+                            <asp:Repeater ID="rpt_produtosBackoffice" runat="server" DataSourceID="SQLrptProdutos" OnItemCommand="rpt_produtosBackoffice_ItemCommand" OnItemDataBound="rpt_produtosBackoffice_ItemDataBound">
 
                                 <ItemTemplate>
 
@@ -153,6 +153,10 @@
 
 
     <!-- insert products Modal -->
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+
+      
 
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
@@ -164,6 +168,12 @@
                     </h5>
                 </div>
                 <div class="modal-body">   <!-- BEGIN MODAL BODY CONTENT -->
+
+
+                    <!-- INNER UPDATE PANEL -->
+                     <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
 
                     <!-- NAVIGATION -->
 
@@ -275,17 +285,15 @@
                                             Prescription
                                         </label>
 
-                                        <label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
-                                            <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                        &nbsp;<label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
                                             Generic
                                         </label>
 
-                                        <label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
-                                            <input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
+                                        &nbsp;<label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
                                             Active
                                         </label>
 
-                                    </div>
+                                    &nbsp;</div>
 
                                     <div class="col-md-5" id="parent-product">
                                         <label for="ddl_genericParent">Parent Product</label>
@@ -350,17 +358,22 @@
                             </div>
                         </div>
 
-                    </div>
-                    <!-- //TAB SYSTEM ENDING -->
+                    </div>   <!-- //TAB SYSTEM ENDING -->
+                  
 
 
+                   
+                    </ContentTemplate>
+                      </asp:UpdatePanel>  <!-- END INNER UPDATE PANEL -->
 
-                </div>
-                <!-- END MODAL BODY CONTENT -->
+
+                </div> <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
 
+      </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- /Insert products Modal -->
 
 

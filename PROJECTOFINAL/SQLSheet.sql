@@ -392,6 +392,10 @@ CREATE OR ALTER PROC usp_listBackofficeProducts AS
 SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, StockArmazem.Qtd, Produto.Activo
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
 
+-- [QUERY] DELETE PRODUCT BACKOFFICE
+
+DELETE FROM PRODUTO WHERE Produto.Codreferencia = 
+
 
 
 
