@@ -55,6 +55,7 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
+                rpt_produtosBackoffice.DataBind();
                 System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@errorMessage"].Value.ToString());
             }
             catch (SqlException m)

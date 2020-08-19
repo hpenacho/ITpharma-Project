@@ -10,11 +10,6 @@
          a.active.nav-item.nav-link{color:white !important;}
          a.nav-item.nav-link{color: #333 !important;}
 
-        td {
-
-            text-align: center; 
-            vertical-align: middle;
-        }
 
         th {
 
@@ -28,6 +23,11 @@
 
         #produpdate:hover{
             color: orange;
+        }
+
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+         background-color: #B5EE9B;
+         transition: all 1s ease;
         }
 
     </style>
@@ -72,7 +72,7 @@
             <div class="card-body">
                 <div class="table-responsive">
 
-                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
 
                         <thead> <!-- HEADER OF THE TABLE -->
                             <tr>
@@ -95,37 +95,37 @@
 
                                 <ItemTemplate>
 
-                             <tr>
-                                <td style="text-align: center; vertical-align: middle;">
+                             <tr class="text-center">
+                                <td class="align-middle">
                                     <%# Eval("Codreferencia") %>
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <%# Eval("nome") %>
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <%# Eval("preco") %> €
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <%# Eval("Qtd") %>
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6> <!-- only for the filter -->  
                                     <input class="form-check-input" style="margin-left: -9px" type="checkbox" id="check-product-active" checked='<%# Eval("Activo") %>'>
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
                                 </td>
 
-                                <td style="text-align: center; vertical-align: middle;">
+                                <td class="align-middle">
                                     <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
                                 </td>
                             </tr>
