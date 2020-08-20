@@ -328,6 +328,7 @@ namespace PROJECTOFINAL
                     lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
 
+                tb_updateBrand.Value = "";
                 ddl_allBrands.DataBind();
             }
             catch (SqlException m)
@@ -341,7 +342,64 @@ namespace PROJECTOFINAL
 
         }
 
-
         //[ CATEGORIES ]
+
+        protected void link_deleteCategory_Click(object sender, EventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_deleteCategory");
+            myCommand.Parameters.AddWithValue("@ID", ddl_allCategories.SelectedValue);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+                ddl_allCategories.DataBind();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+        }
+
+        protected void link_updateCategory_Click(object sender, EventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_updateCategory");
+            myCommand.Parameters.AddWithValue("@ID", ddl_allCategories.SelectedValue);
+            myCommand.Parameters.AddWithValue("@descricao", tb_updateCategory.Value);
+
+            //OUTPUT - ERROR MESSAGES
+            SqlParameter errorMessage = new SqlParameter();
+            errorMessage.ParameterName = "@errorMessage";
+            errorMessage.Direction = ParameterDirection.Output;
+            errorMessage.SqlDbType = SqlDbType.VarChar;
+            errorMessage.Size = 300;
+            myCommand.Parameters.Add(errorMessage);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+
+                tb_updateCategory.Value = "";
+                ddl_allCategories.DataBind();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+        }
     }
 }

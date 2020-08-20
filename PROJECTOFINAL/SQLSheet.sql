@@ -424,7 +424,39 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 
-select * from marca
+-- [PROCEDURE] UPDATE CATEGORY
+
+GO 
+CREATE OR ALTER PROC usp_updateCategory(@ID int, @descricao varchar(100), @errorMessage varchar(200) output) AS
+BEGIN TRY
+BEGIN TRAN
+
+	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao)
+		THROW 60001,'The category specified already exists' , 10
+
+	update Categoria set Categoria.descricao = @descricao where Categoria.ID = @ID
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+
+-- [PROCEDURE] DELETE CATEGORY
+
+GO 
+CREATE OR ALTER PROC usp_deleteCategory(@ID int) AS
+BEGIN TRY
+BEGIN TRAN
+
+	delete from Categoria where Categoria.ID = @ID
+
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH
 
 
 

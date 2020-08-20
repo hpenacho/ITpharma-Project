@@ -411,6 +411,42 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_insertCategory;
 
         /// <summary>
+        /// ddl_allCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_allCategories;
+
+        /// <summary>
+        /// link_deleteCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_deleteCategory;
+
+        /// <summary>
+        /// tb_updateCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_updateCategory;
+
+        /// <summary>
+        /// link_updateCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_updateCategory;
+
+        /// <summary>
         /// lbl_insertCategoryError control.
         /// </summary>
         /// <remarks>

@@ -702,11 +702,45 @@
                 <div class=" modal-body">
 
 
-                                    <div class="form-group col-md-12 d-flex form-inline">
+                                    <div class="form-row col-md-12 d-flex form-inline">
                                             <input type="text" class="form-control w-75" runat="server" id="tb_insertCategory" placeholder="Category">
-                                            <asp:LinkButton ID="link_insertCategory" CommandArgument="usp_insertCategory" CommandName="category" class="btn btn-warning ml-3" style="padding-left: 1em; padding-right: 1em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
-                                            <label class="mt-2"  id="lbl_insertCategoryError" runat="server"></label>
+                                            <asp:LinkButton ID="link_insertCategory" CommandArgument="usp_insertCategory" CommandName="category" class="btn btn-warning ml-3 shadow shadow-sm" style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
+                                           
                                     </div>
+                                    
+                                    <div class="form-group">
+
+                                        <div class="form-row col-md-12 mt-4 d-flex form-inline">
+
+                                            <asp:DropDownList ID="ddl_allCategories" class="form-control w-75" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+
+                                            <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseCategoryUpdate" aria-expanded="false" aria-controls="collapseExample">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+
+                                            <asp:LinkButton ID="link_deleteCategory" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteCategory_Click">
+                                                <i class="fas fa-trash"></i>
+                                            </asp:LinkButton>
+                                              
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseCategoryUpdate">
+
+                                             <div class="form-row col-md-12 mt-4">
+
+                                                <input type="text" class="form-control w-75" runat="server" id="tb_updateCategory" placeholder="Update category">
+                                                <asp:LinkButton ID="link_updateCategory" class="btn btn-dark ml-3" style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateCategory_Click">Update</asp:LinkButton>
+
+                                             </div>
+
+                                       </div>
+
+                                      
+                                    </div>
+
+                                    <label class="mt-2"  id="lbl_insertCategoryError" runat="server"></label>
+                                    
                                     
                                      
 
