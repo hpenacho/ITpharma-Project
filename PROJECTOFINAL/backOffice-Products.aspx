@@ -197,9 +197,8 @@
                                 <!-- Name -->
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-12">
-                                        <label for="tb_name">Name</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Title" required>
+                                    <div class="form-group col-md-12">                                    
+                                        <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
                                     </div>
 
                                 </div>
@@ -210,7 +209,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="tb_reference">Reference</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference" required>
+                                        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference #" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
                                     </div>
 
                                     <div class="form-group col-md-6" style="margin-top: 2em">
@@ -226,7 +225,7 @@
                                 <div class="form-row mt-1">
 
                                     <div class="col-lg-12">
-                                        <label for="tb_description">Description</label>
+                                        <label for="tb_description"><p class="text-muted"> Item Description </p></label>
                                         <textarea class="form-control" id="tb_description" runat="server" rows="3" required></textarea>
                                         <script type="text/javascript">
 
@@ -242,8 +241,7 @@
                                 <div class="form-row mt-4 d-flex justify-content-between">
 
                                     <div class="col-lg-6">
-                                        <label for="tb_summary">Summary</label>
-                                        <input class="form-control" runat="server" type="text" id="tb_summary" required />
+                                        <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
                                     </div>
 
                                     <div class="col-md-5">
@@ -259,12 +257,11 @@
                                 <div class="form-row mt-1 d-flex justify-content-between">
 
                                     <div class="col-md-6">
-                                        <label for="tb_price">Price</label>
                                         <div class="input-group">
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="inputGroupPrepend3">€</span>
+                                                <span class="input-group-text" id="inputGroupPrepend3"> <i class="fas fa-euro-sign"></i> </span>
                                             </div>
-                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" required>
+                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
                                         </div>
                                     </div>
 
@@ -326,16 +323,16 @@
 
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <input type="number" value="0" class="form-control" runat="server" id="tb_qty" aria-describedby="inputGroupPrepend3">
+                                        <input type="number" value="0" class="form-control" runat="server" min="0.00" id="tb_qty" aria-describedby="inputGroupPrepend3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Cur Qty</span>
+                                            <span class="input-group-text">Qty</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <input type="number" value="0" class="form-control" runat="server" id="tb_minQty" aria-describedby="inputGroupPrepend3">
+                                        <input type="number" value="0" class="form-control" runat="server" min="0.00" id="tb_minQty" aria-describedby="inputGroupPrepend3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Min Qty</span>
                                         </div>
@@ -343,7 +340,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        <input type="number" value="1" class="form-control" runat="server" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
+                                        <input type="number" value="1" class="form-control" runat="server" min="0.00" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Max Qty</span>
                                         </div>
@@ -594,7 +591,11 @@
 
             <!-- END INNER UPDATE PANEL -->
 
-
+                            <script>
+                                $(document).ready(function(){
+                                  $('[data-toggle="tooltip"]').tooltip();   
+                                });
+                            </script>
                 </div> <!-- END MODAL BODY CONTENT -->
             </div>
         </div>

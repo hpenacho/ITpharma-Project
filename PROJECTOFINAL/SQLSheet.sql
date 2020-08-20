@@ -373,7 +373,7 @@ BEGIN TRAN
 
 	--INSERTION !!WARNING!! THE PDF FLYER IS CURRENTLY BEING INSERTED AS NULL
 
-	INSERT INTO Produto VALUES (@Codreferencia, @nome, @preco, @resumo, @descricao, @imagem, NULL, @ID_Categoria, @ID_Marca, @precisaReceita, @ref_generico, @Activo)
+	INSERT INTO Produto VALUES (@Codreferencia, @nome, @preco, @resumo, @descricao, @imagem, NULL, @ID_Categoria, @ID_Marca, @precisaReceita, @ref_generico, @Activo, 0)
 	INSERT INTO StockArmazem values(@Codreferencia, @Qtd, @QtdMin, @QtdMax)
 
 
@@ -392,6 +392,7 @@ GO
 CREATE OR ALTER PROC usp_listBackofficeProducts AS
 SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, StockArmazem.Qtd, Produto.Activo
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
+where Produto.desactivado = 0
 
 -- [PROCEDURE] LIST PRODUCT DETAILS BACKOFFICE
 
