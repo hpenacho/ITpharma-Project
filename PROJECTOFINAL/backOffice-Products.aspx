@@ -128,7 +128,7 @@
 
                                 <td class="align-middle">
                                     <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6> <!-- only for the filter -->  
-                                    <input class="form-check-input" style="margin-left: -9px" type="checkbox" id="check-product-active" checked='<%# Eval("Activo") %>'>
+                                    <asp:CheckBox ID="check_productIsActive" style="margin-left: -9px" runat="server" Checked='<%# Eval("Activo") %>' />
                                 </td>
 
                                 <td class="align-middle">
@@ -612,7 +612,7 @@
     <!-- SQLSOURCES AND REPEATER SOURCES -->
     <asp:SqlDataSource ID="SQLcategory" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Categoria]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SQLbrand" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Marca]"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SQLgenericParent" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * from produto where ref_generico IS NOT NULL"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLgenericParent" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * from produto where ref_generico IS NULL and produto.Descontinuado != 1"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SQLrptProdutos" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listBackofficeProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
 </asp:Content>

@@ -123,34 +123,28 @@ namespace PROJECTOFINAL
                 tb_updateDescription.Value = reader["descricao"].ToString();
                 ddl_updateCategory.SelectedValue = reader["ID_Categoria"].ToString();
                 ddl_updateBrand.SelectedValue = reader["ID_Marca"].ToString();
-                check_prescription.Checked = Convert.ToBoolean(reader["precisaReceita"]);
-
-                //Melhor isto
-               if(reader["ref_generico"] == DBNull.Value)
-                {
-                    ddl_updateGenericParent.Enabled = false;
-                }
-                else
-                {
-                    ddl_updateGenericParent.SelectedValue = reader["ref_generico"].ToString();
-                }
-                check_generic.Checked = Convert.ToBoolean(reader["Activo"]);
                 tb_updateCurQty.Value = reader["Qtd"].ToString();
                 tb_updateMinQty.Value = reader["QtdMin"].ToString();
                 tb_updateMaxQty.Value = reader["QtdMax"].ToString();
 
+                //OPTIONS
+                check_updatePrescription.Checked = Convert.ToBoolean(reader["precisaReceita"]);
+                check_updateActive.Checked = Convert.ToBoolean(reader["Activo"]);
+
+
+                if (reader["ref_generico"] == DBNull.Value)
+                {
+                    ddl_updateGenericParent.SelectedIndex = 0;
+                }
+                else
+                {
+                    ddl_updateGenericParent.SelectedValue = reader["ref_generico"].ToString();
+                    check_updateGeneric.Checked = true;
+                }
+               
+              
+
             }
-
-           /* myCommand.Parameters.AddWithValue("@ref_generico", check_generic.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
-            myCommand.Parameters.AddWithValue("@Activo", check_active.Checked);
-            myCommand.Parameters.AddWithValue("@Qtd", tb_qty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMin", tb_minQty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value); */
-
-
-
-
-
 
             reader.Close();
             Tools.myConn.Close();
@@ -208,23 +202,23 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@QtdMax", tb_updateMaxQty.Value);
 
             //OUTPUT - ERROR MESSAGES
-           /* SqlParameter errorMessage = new SqlParameter();
+            SqlParameter errorMessage = new SqlParameter();
             errorMessage.ParameterName = "@errorMessage";
             errorMessage.Direction = ParameterDirection.Output;
             errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300; */ 
-
-            //a merda da mensagem de erro berrava no SQL, consultar SQLsheet para detalhes
+            errorMessage.Size = 300;
+            myCommand.Parameters.Add(errorMessage);
 
             try
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
 
-                /*  if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
-                  {
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
                       lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
-                  } */   //nao funfa
+                } 
+
                 rpt_produtosBackoffice.DataBind();
             }
             catch (SqlException m)

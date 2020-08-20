@@ -426,10 +426,9 @@ CREATE OR ALTER proc usp_updateBackofficeProducts(@Codreferencia varchar(20),
 												  @Activo bit,
 												  @Qtd int,
 												  @QtdMin int,
-												  @QtdMax int)
-												 -- @errorMessage varchar(200) output) A FODER ISTO TUDO
-													-- sql queixa que a usp esperava @errorMessage e
-											--diz que nao foi submetida, no entanto estava declrada como OUTPUT
+												  @QtdMax int,
+												  @errorMessage varchar(200) output) 
+
 AS
 BEGIN TRY
 BEGIN TRAN
@@ -446,7 +445,7 @@ BEGIN TRAN
 		preco = @preco, 
 		resumo = @resumo, 
 		descricao = @descricao, 
-		imagem = @imagem, 
+		imagem = IIF(LEN(@imagem) = 0, imagem , @imagem),
 		pdfFolheto = null,
 		ID_Categoria = @ID_Categoria,
 		ID_Marca = @ID_Marca,
@@ -464,16 +463,10 @@ BEGIN TRAN
 COMMIT
 END TRY
 BEGIN CATCH
-	--set @errorMessage = ERROR_MESSAGE();  ta a foder isto tudo, comentei e bombou logo bem
+    set @errorMessage = ERROR_MESSAGE();
 	print ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
 GO
-
--- END OF QUERY (usp_updateBackofficeProducts)
-
-
-
-
 
 
