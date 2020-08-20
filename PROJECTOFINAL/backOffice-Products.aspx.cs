@@ -278,5 +278,70 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
         }
+
+
+        //[ BRANDS ]
+
+        protected void link_deleteBrand_Click(object sender, EventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_deleteBrand");
+            myCommand.Parameters.AddWithValue("@ID", ddl_allBrands.SelectedValue);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+                ddl_allBrands.DataBind();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+        }
+
+        protected void link_updateBrand_Click(object sender, EventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_updateBrand");
+            myCommand.Parameters.AddWithValue("@ID", ddl_allBrands.SelectedValue);
+            myCommand.Parameters.AddWithValue("@descricao", tb_updateBrand.Value);
+
+            //OUTPUT - ERROR MESSAGES
+            SqlParameter errorMessage = new SqlParameter();
+            errorMessage.ParameterName = "@errorMessage";
+            errorMessage.Direction = ParameterDirection.Output;
+            errorMessage.SqlDbType = SqlDbType.VarChar;
+            errorMessage.Size = 300;
+            myCommand.Parameters.Add(errorMessage);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+
+                ddl_allBrands.DataBind();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+        }
+
+
+        //[ CATEGORIES ]
     }
 }

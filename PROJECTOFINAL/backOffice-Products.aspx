@@ -58,9 +58,9 @@
    
         <div class="col-lg-12 mt-5 mb-4 d-flex d-flex justify-content-end">
 
-            <button type="button" class="btn btn-dark mr-3" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-dark mr-3" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-warning mr-3" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-dark mr-3 shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-dark mr-3 shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-warning mr-3 shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
         
         </div>
 
@@ -74,12 +74,12 @@
 
     <div class="container-fluid">
         <h1>Products</h1>
-        <ol class="breadcrumb bg-dark text-white mb-4">
+        <ol class="breadcrumb bg-dark text-white mb-4 shadow shadow-sm">
             <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
             <li class="breadcrumb-item active">Products</li>
         </ol>
 
-        <div class="card mb-4">
+        <div class="card mb-4 shadow shadow-sm">
             <div class="card-header">
                 <i class="fas fa-table mr-1"></i>
                 Product Table
@@ -618,6 +618,11 @@
     </div>
     <!-- /UPDATE products Modal -->
 
+
+
+
+
+
     <!-- INSERT BRANDS Modal -->
     <div class="modal fade ml-3 mt-5" id="modal-insert-brand" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-md shadow-lg" role="document">
@@ -633,13 +638,44 @@
                 <div class=" modal-body">
 
 
-                                    <div class="form-group col-md-12 d-flex form-inline">
+                                    <div class="form-row col-md-12 d-flex form-inline">
+
                                             <input type="text" class="form-control w-75" runat="server" id="tb_insertBrand" placeholder="Brand">
-                                            <asp:LinkButton ID="link_insertBrand" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3" style="padding-left: 1em; padding-right: 1em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
-                                            <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>
+                                            <asp:LinkButton ID="link_insertBrand" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3 shadow shadow-sm" style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
+                                           
+                                    </div>
+                                    
+                                    <div class="form-group">
+
+                                        <div class="form-row col-md-12 mt-4 d-flex form-inline">
+
+                                            <asp:DropDownList ID="ddl_allBrands" class="form-control w-75" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+
+                                            <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseBrandUpdate" aria-expanded="false" aria-controls="collapseExample">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+
+                                            <asp:LinkButton ID="link_deleteBrand" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteBrand_Click">
+                                                <i class="fas fa-trash"></i>
+                                            </asp:LinkButton>
+                                              
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseBrandUpdate">
+
+                                             <div class="form-row col-md-12 mt-4">
+                                                <input type="text" class="form-control w-75" runat="server" id="tb_updateBrand" placeholder="Update brand">
+                                                <asp:LinkButton ID="link_updateBrand" class="btn btn-dark ml-3" style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateBrand_Click">Update</asp:LinkButton>
+                                              </div>
+
+                                        </div>
+
+                                      
+
                                     </div>
 
-                                     
+                                    <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>  
 
                 </div>
                 <!-- END MODAL BODY CONTENT -->

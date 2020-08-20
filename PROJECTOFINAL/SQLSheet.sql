@@ -24,7 +24,7 @@ create table Cliente(
 	nif varchar(20) null unique,
 	nrSaude varchar(20) null unique,
 	sexo char(1) check (sexo in ('M','F')),
-	dataNascimento date not null
+	dataNascimento date null
 ) 
 
 create table Categoria(
@@ -353,7 +353,7 @@ create table Marca (
 )
 
 
--- [PROCEDURE] INSERT BRANDS \ CATEGORIES BACKOFFICE - FILIPE
+-- [PROCEDURE] INSERT BRANDS BACKOFFICE - FILIPE
 GO
 create or alter proc usp_insertCategory (@descricao varchar(100), @errorMessage varchar(200) output) AS
 BEGIN TRY
@@ -371,6 +371,7 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 
+-- [PROCEDURE] INSERT CATEGORIES BACKOFFICE - FILIPE
 
 GO
 create or alter proc usp_insertBrand(@descricao varchar(100), @errorMessage varchar(200) output) AS
@@ -389,6 +390,41 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 
+-- [PROCEDURE] UPDATE BRAND
+
+GO 
+CREATE OR ALTER PROC usp_updateBrand(@ID int, @descricao varchar(100), @errorMessage varchar(200) output) AS
+BEGIN TRY
+BEGIN TRAN
+
+	IF EXISTS (SELECT '*' from Marca where descricao = @descricao)
+		THROW 60001,'The brand specified already exists' , 10
+
+	update Marca set Marca.descricao = @descricao where Marca.ID = @ID
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+
+-- [PROCEDURE] DELETE BRAND
+
+GO 
+CREATE OR ALTER PROC usp_deleteBrand(@ID int) AS
+BEGIN TRY
+BEGIN TRAN
+
+	delete from Marca where Marca.ID = @ID
+
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH
+
+select * from marca
 
 
 

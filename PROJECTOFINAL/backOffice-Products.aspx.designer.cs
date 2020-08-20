@@ -348,6 +348,42 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_insertBrand;
 
         /// <summary>
+        /// ddl_allBrands control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_allBrands;
+
+        /// <summary>
+        /// link_deleteBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_deleteBrand;
+
+        /// <summary>
+        /// tb_updateBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_updateBrand;
+
+        /// <summary>
+        /// link_updateBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_updateBrand;
+
+        /// <summary>
         /// lbl_insertBrandError control.
         /// </summary>
         /// <remarks>
