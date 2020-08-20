@@ -402,6 +402,7 @@ SELECT *
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
 WHERE Produto.Codreferencia = @item
 
+
 -- [QUERY] DELETE PRODUCT BACKOFFICE \\ Product is discontinued
 
 GO
@@ -409,6 +410,65 @@ CREATE OR ALTER PROC usp_disableBackofficeProduct(@item varchar(20)) AS
 update produto set produto.Descontinuado = 1, produto.Activo = 0 where Produto.Codreferencia = @item
 
 
+-- [QUERY] UPDATE PRODUCT BACKOFFICE \\ For updating existing products from the backOffice
+GO
+CREATE OR ALTER proc usp_updateBackofficeProducts(@Codreferencia varchar(20),
+												  @nome varchar(150),
+												  @preco decimal(7,2),
+												  @resumo varchar(50),
+												  @descricao varchar(MAX),
+												  @imagem varbinary(MAX),
+												  @pdfFolheto varbinary(MAX),
+												  @ID_Categoria int,
+												  @ID_Marca int,
+												  @precisaReceita bit,
+												  @ref_generico varchar(20),
+												  @Activo bit,
+												  @Qtd int,
+												  @QtdMin int,
+												  @QtdMax int,
+												  @errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	--ERRORS
+
+	IF EXISTS (SELECT '*' FROM Produto WHERE Produto.nome = @nome)
+		THROW 60002, 'A product with that name already exists', 10
+
+	--!!WARNING!! THE PDF FLYER IS CURRENTLY BEING INSERTED AS NULL
+
+	UPDATE Produto
+	Set nome = @nome, 
+		preco = @preco, 
+		resumo = @resumo, 
+		descricao = @descricao, 
+		imagem = @imagem, 
+		pdfFolheto = null,
+		ID_Categoria = @ID_Categoria,
+		ID_Marca = @ID_Marca,
+		precisaReceita = @precisaReceita,
+		ref_generico = @ref_generico,
+		Activo = @Activo
+	Where Produto.Codreferencia = @Codreferencia
+
+	UPDATE StockArmazem
+	Set Qtd = @Qtd,
+		QtdMin = @QtdMin,
+		QtdMax = @QtdMax
+	Where StockArmazem.Prod_Ref = @Codreferencia
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
+
+-- END OF QUERY (usp_updateBackofficeProducts)
 
 
 

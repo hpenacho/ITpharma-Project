@@ -77,6 +77,7 @@ namespace PROJECTOFINAL
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
+                System.Diagnostics.Debug.WriteLine(lbl_errors.InnerText.ToString());
             }
             finally
             {
@@ -110,7 +111,7 @@ namespace PROJECTOFINAL
             //FILL MODAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_listBackofficeProductDetails");
             Tools.myConn.Open();
-
+            myCommand.Parameters.AddWithValue("@item", e.CommandArgument.ToString());
             var reader = myCommand.ExecuteReader();
 
             if (reader.Read())
@@ -140,11 +141,11 @@ namespace PROJECTOFINAL
 
             }
 
-            myCommand.Parameters.AddWithValue("@ref_generico", check_generic.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
+           /* myCommand.Parameters.AddWithValue("@ref_generico", check_generic.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@Activo", check_active.Checked);
             myCommand.Parameters.AddWithValue("@Qtd", tb_qty.Value);
             myCommand.Parameters.AddWithValue("@QtdMin", tb_minQty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value);
+            myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value); */
 
 
 
@@ -178,6 +179,65 @@ namespace PROJECTOFINAL
             }
         }
 
-       
+        protected void link_updateProductDetails_Click(object sender, EventArgs e)
+        {
+            lbl_errors.InnerText = "";
+
+            //Inserts the image binary
+            Stream imgstream = fl_updateProductImage.PostedFile.InputStream;
+            int imgLen = fl_updateProductImage.PostedFile.ContentLength;
+            byte[] imgBinaryData = new byte[imgLen];
+            imgstream.Read(imgBinaryData, 0, imgLen);
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_updateBackofficeProducts");
+
+            myCommand.Parameters.AddWithValue("@Codreferencia", tb_updateReference.Value);
+            myCommand.Parameters.AddWithValue("@nome", tb_updateName.Value);
+            myCommand.Parameters.AddWithValue("@preco", tb_updatePrice.Value);
+            myCommand.Parameters.AddWithValue("@resumo", tb_updateSummary.Value);
+            myCommand.Parameters.AddWithValue("@descricao", tb_updateDescription.Value);
+            myCommand.Parameters.AddWithValue("@imagem", imgBinaryData);
+            myCommand.Parameters.AddWithValue("@pdfFolheto", imgBinaryData); // alterar no futuro
+            myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_updateCategory.SelectedValue);
+            myCommand.Parameters.AddWithValue("@ID_Marca", ddl_updateBrand.SelectedValue);
+            myCommand.Parameters.AddWithValue("@precisaReceita", check_updatePrescription.Checked);
+            myCommand.Parameters.AddWithValue("@ref_generico", check_updateGeneric.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
+            myCommand.Parameters.AddWithValue("@Activo", check_updateActive.Checked);
+            myCommand.Parameters.AddWithValue("@Qtd", tb_updateCurQty.Value);
+            myCommand.Parameters.AddWithValue("@QtdMin", tb_updateMinQty.Value);
+            myCommand.Parameters.AddWithValue("@QtdMax", tb_updateMaxQty.Value);
+
+            //OUTPUT - ERROR MESSAGES
+            SqlParameter errorMessage = new SqlParameter();
+            errorMessage.ParameterName = "@errorMessage";
+            errorMessage.Direction = ParameterDirection.Output;
+            errorMessage.SqlDbType = SqlDbType.VarChar;
+            errorMessage.Size = 300;
+
+            System.Diagnostics.Debug.WriteLine("chegou a antes do try");
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+               // System.Diagnostics.Debug.WriteLine(lbl_updateErrors.InnerText.ToString());
+
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+
+        }
     }
 }

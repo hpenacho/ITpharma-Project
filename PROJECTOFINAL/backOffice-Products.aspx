@@ -429,7 +429,7 @@
                                     </div>
 
                                     <div class="form-group col-md-6" style="margin-top: 2em">
-                                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                                        <asp:FileUpload ID="fl_updateProductImage" runat="server" />
                                     </div>
 
                                 </div>
@@ -574,7 +574,7 @@
 
                         <div class="form-row mt-4">
                             <div class="col text-center">
-                                <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server">Update</asp:LinkButton> <!-- INSERTION DRIVE -->
+                                <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_updateProductDetails_Click">Update</asp:LinkButton> <!-- INSERTION DRIVE -->
                                 <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
