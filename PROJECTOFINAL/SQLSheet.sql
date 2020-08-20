@@ -588,3 +588,75 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 GO
+
+
+
+-- [QUERY] INSERT SHOP USERS INTO CLIENT  //for creating new clients
+GO
+CREATE OR ALTER proc usp_insertShopUser(@nome varchar(50),
+										@email varchar(100),
+										@password varchar(100),
+										@morada varchar(300),
+										@nif varchar(20),
+										@nrSaude varchar(20),
+										@sexo char(1),
+										@dataNascimento date,
+										@errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	--ERRORS
+
+	IF EXISTS (SELECT '*' FROM Cliente WHERE Cliente.email = @email)
+		THROW 60005, 'An account with that email is already registered, please try again.', 10
+
+	IF EXISTS (SELECT '*' FROM Cliente WHERE Cliente.nif = @nif)
+		THROW 60006, 'An account with that NIF is already registered, please try again.', 10
+
+	IF EXISTS (SELECT '*' FROM Cliente WHERE Cliente.nrSaude = @nrSaude)
+		THROW 60007, 'An account with that Health Number is already registered, please try again.', 10
+
+	INSERT INTO Cliente VALUES (@nome, @email, @password, @morada, 0, 1, @nif, @nrSaude, @sexo, @dataNascimento)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
+
+-- [QUERY] UPDATE SHOP USERS INFO //for updating client info
+GO
+CREATE OR ALTER proc usp_updateShopUser(@id int,
+										@nome varchar(50),
+										@email varchar(100),
+										@active bit,
+										@firstActivation bit,
+										@errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	--ERRORS
+
+	IF EXISTS (SELECT '*' FROM Cliente WHERE Cliente.email = @email AND Cliente.ID != @id)
+		THROW 60008, 'The updated email is already in use by another Shop User, no changes were made.', 10
+	
+	UPDATE Cliente
+	Set nome = @nome, 
+		email = @email, 
+		activo = @active, 
+		firstActivation = @firstActivation 
+	Where Cliente.ID = @id
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
