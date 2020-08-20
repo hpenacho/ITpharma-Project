@@ -73,6 +73,7 @@
     <Content Include="backOffice-Index.aspx" />
     <Content Include="backOffice-Login.aspx" />
     <Content Include="backOffice-Products.aspx" />
+    <Content Include="backOffice-ShopUsers.aspx" />
     <Content Include="BackOffice\BackOffice-Logins\floating-labels.css" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-area-demo.js" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-bar-demo.js" />
@@ -471,6 +472,13 @@
     </Compile>
     <Compile Include="backOffice-Products.aspx.designer.cs">
       <DependentUpon>backOffice-Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice-ShopUsers.aspx.cs">
+      <DependentUpon>backOffice-ShopUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-ShopUsers.aspx.designer.cs">
+      <DependentUpon>backOffice-ShopUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOfficeMasterPage.Master.cs">
       <DependentUpon>backOfficeMasterPage.Master</DependentUpon>
