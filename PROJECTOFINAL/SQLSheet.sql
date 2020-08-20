@@ -397,7 +397,7 @@ CREATE OR ALTER PROC usp_updateBrand(@ID int, @descricao varchar(100), @errorMes
 BEGIN TRY
 BEGIN TRAN
 
-	IF EXISTS (SELECT '*' from Marca where descricao = @descricao)
+	IF EXISTS (SELECT '*' from Marca where descricao = @descricao AND Marca.ID != @ID)
 		THROW 60001,'The brand specified already exists' , 10
 
 	update Marca set Marca.descricao = @descricao where Marca.ID = @ID
@@ -431,7 +431,7 @@ CREATE OR ALTER PROC usp_updateCategory(@ID int, @descricao varchar(100), @error
 BEGIN TRY
 BEGIN TRAN
 
-	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao)
+	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao AND Categoria.ID != @ID)
 		THROW 60001,'The category specified already exists' , 10
 
 	update Categoria set Categoria.descricao = @descricao where Categoria.ID = @ID

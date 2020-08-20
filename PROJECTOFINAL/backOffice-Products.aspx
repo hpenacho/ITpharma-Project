@@ -217,13 +217,17 @@
                                 <!-- Reference and Image -->
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-6">
-                                        <label for="tb_reference">Reference</label>
+                                    <div class="form-group col-md-6 mt-1">
                                         <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference #" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
                                     </div>
 
-                                    <div class="form-group col-md-6" style="margin-top: 2em">
-                                        <asp:FileUpload ID="fl_insertProductImage" runat="server" />
+                                    <div class="input-group col-md-6 mt-1">
+                                        <div class="custom-file">
+                                            <asp:FileUpload ID="fl_insertProductImage" class="custom-file-input" runat="server" />
+                                            <label id="custom-file-label" class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                        </div>
+                                            <div class="input-group-append">
+                                        </div>
                                     </div>
 
                                 </div>
@@ -256,16 +260,19 @@
                                         <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
                                     </div>
 
-                                    <div class="col-md-5">
-                                        <label for="ddl_category">Category</label>
-                                        <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+
+                                    <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
+                                       <div class="input-group-prepend">
+                                            <label class="input-group-text" for="ddl_category">Category</label>
+                                       </div>
+                                            <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
                                     </div>
 
                                 </div>
 
                                 <!-- /Resumo -->
 
-                                <!-- Price-->
+                                <!-- Price || Brand-->
                                 <div class="form-row mt-1 d-flex justify-content-between">
 
                                     <div class="col-md-6">
@@ -277,9 +284,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-5">
-                                        <label for="ddl_brand">Brand</label>
-                                        <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                     <div class="input-group mb-3 col-md-5">
+                                       <div class="input-group-prepend">
+                                            <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                       </div>
+                                            <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
                                     </div>
 
 
@@ -291,9 +300,9 @@
                                 <!-- Generic || Prescription || Generic-Product -->
                                 <div class="form-row mt-2 mb-2 d-flex justify-content-between">
 
-                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-between" style="margin-top: 30px;" data-toggle="buttons">
+                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-between" data-toggle="buttons">
 
-                                        <label class="btn btn-outline-warning" style="padding-left: 1em; padding-right: 1em;">
+                                        <label class="btn btn-outline-warning rounded-left" style="padding-left: 1em; padding-right: 1em;">
                                             <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
                                             Prescription
                                         </label>
@@ -303,17 +312,22 @@
                                             Generic
                                         </label>
 
-                                        <label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
+                                        <label class="btn btn-outline-dark rounded-right" style="padding-left: 2em; padding-right: 2em;">
                                             <input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
                                             Active
                                         </label>
 
                                     </div>
 
-                                    <div class="col-md-5" id="parent-product">
-                                        <label for="ddl_genericParent">Parent Product</label>
-                                        <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
-                                    </div>
+
+                                    <div class="input-group col-md-5">
+                                       <div class="input-group-prepend">
+                                          <label class="input-group-text" for="ddl_genericParent">Generic&nbsp;&nbsp;</label>
+                                       </div>
+                                            <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                                   </div>
+
+                                    
 
                                 </div>
 
@@ -366,7 +380,7 @@
                         </div>
                         <!-- // CONTENT 2 DETAILS -->
 
-                        <div class="form-row mt-4">
+                        <div class="form-row mt-2">
                             <div class="col text-center">
                                 <asp:LinkButton ID="link_insertProduct" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertProduct_Click">Insert</asp:LinkButton>
                                 <!-- INSERTION DRIVE -->
@@ -619,11 +633,14 @@
     <!-- /UPDATE products Modal -->
 
 
-
-
-
-
     <!-- INSERT BRANDS Modal -->
+
+    <asp:UpdatePanel ID="updateBrands" runat="server"  UpdateMode="Conditional">
+        <ContentTemplate>
+
+
+
+
     <div class="modal fade ml-3 mt-5" id="modal-insert-brand" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-md shadow-lg" role="document">
             <div class="modal-content">
@@ -638,6 +655,10 @@
                 <div class=" modal-body">
 
 
+                    <asp:UpdatePanel runat="server">
+                         <ContentTemplate>
+
+
                                     <div class="form-row col-md-12 d-flex form-inline">
 
                                             <input type="text" class="form-control w-75" runat="server" id="tb_insertBrand" placeholder="Brand">
@@ -649,7 +670,7 @@
 
                                         <div class="form-row col-md-12 mt-4 d-flex form-inline">
 
-                                            <asp:DropDownList ID="ddl_allBrands" class="form-control w-75" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddl_allBrands" class="form-control w-75" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID" AutoPostBack="True"></asp:DropDownList>
 
                                             <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseBrandUpdate" aria-expanded="false" aria-controls="collapseExample">
                                                 <i class="fas fa-pen"></i>
@@ -677,13 +698,21 @@
 
                                     <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>  
 
+
+                               
+
+
                 </div>
+
+                              </ContentTemplate>
+                             </asp:UpdatePanel>
                 <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
     <!-- /INSERT BRANDS Modal -->
-
+      </ContentTemplate>
+        </asp:UpdatePanel>
 
 
 
@@ -756,9 +785,17 @@
 
      <script type="text/javascript">
 
-         $(document).ready(function () {
-             $('[data-toggle="tooltip"]').tooltip();
-         });
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+
+            $('#fl_insertProductImage').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+     
 
      </script>
 

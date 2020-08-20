@@ -259,14 +259,16 @@ namespace PROJECTOFINAL
                     if (((LinkButton)sender).CommandName == "brand")
                     {
                         lbl_insertBrandError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                        ddl_allBrands.DataBind();
+                        ddl_allBrands.SelectedIndex = 0;
                     }
                     else
                     {
                         lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                        ddl_allCategories.DataBind();
+                        ddl_allCategories.SelectedIndex = 0;
                     }
                 }
-
-                rpt_produtosBackoffice.DataBind();
 
             }
             catch (SqlException m)
@@ -291,7 +293,6 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
-                ddl_allBrands.DataBind();
             }
             catch (SqlException m)
             {
@@ -300,6 +301,8 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                ddl_allBrands.DataBind();
+                ddl_allBrands.SelectedIndex = 0;
             }
 
         }
@@ -329,7 +332,7 @@ namespace PROJECTOFINAL
                 }
 
                 tb_updateBrand.Value = "";
-                ddl_allBrands.DataBind();
+               
             }
             catch (SqlException m)
             {
@@ -338,6 +341,8 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                ddl_allBrands.DataBind();
+                ddl_allBrands.SelectedIndex = 0;
             }
 
         }

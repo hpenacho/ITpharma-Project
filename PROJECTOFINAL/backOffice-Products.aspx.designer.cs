@@ -330,6 +330,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_updateErrors;
 
         /// <summary>
+        /// updateBrands control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateBrands;
+
+        /// <summary>
         /// tb_insertBrand control.
         /// </summary>
         /// <remarks>
