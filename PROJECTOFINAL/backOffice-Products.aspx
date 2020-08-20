@@ -6,6 +6,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
+     <script>
+
+       function openModal() { $('#modal-update-product').modal('show'); }
+
+     </script>
+
+
+
     <style>
 
          a.active.nav-item.nav-link{background-color: orange !important;}
@@ -155,16 +163,11 @@
 
 
     <!-- insert products Modal -->
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-
-      
-
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Insertion<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Product Insertion<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                         </button>
                     </h5>
@@ -173,23 +176,21 @@
 
 
                     <!-- INNER UPDATE PANEL -->
-                     <asp:UpdatePanel runat="server">
-                        <ContentTemplate>
 
 
                     <!-- NAVIGATION -->
 
-                    <div class="nav nav nav-pills nav-justified" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" style="margin-left: 2em;" id="nav-home-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
-                        <a class="nav-item nav-link" style="margin-right: 2em;" id="nav-profile-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-profile" aria-selected="false">Stock</a>
+                    <div class="nav nav nav-pills nav-justified" id="insert-nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" style="margin-left: 2em;" id="insert-nav-home-tab" data-toggle="tab" href="#insert-nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
+                        <a class="nav-item nav-link" style="margin-right: 2em;" id="insert-nav-profile-tab" data-toggle="tab" href="#insert-nav-stock" role="tab" aria-controls="nav-profile" aria-selected="false">Stock</a>
                     </div>
 
                     <!-- /NAVIGATION -->
 
-                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-content" id="insert-nav-tabContent">
 
                         <!-- CONTENT 1 DETAILS -->
-                        <div class="tab-pane fade show active" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+                        <div class="tab-pane fade show active" id="insert-nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
 
                             <div class="p-4"> <!-- WINDOW PADDING -->
 
@@ -213,7 +214,7 @@
                                     </div>
 
                                     <div class="form-group col-md-6" style="margin-top: 2em">
-                                        <ajaxToolkit:AsyncFileUpload ID="fl_insertProductImage" runat="server" on/>
+                                        <asp:FileUpload ID="fl_insertProductImage" runat="server" />
                                     </div>
 
                                 </div>
@@ -317,7 +318,7 @@
 
 
                         <!-- CONTENT 2 DETAILS -->
-                        <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
+                        <div class="tab-pane fade" id="insert-nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
 
                             <!-- STOCK -->
 
@@ -368,15 +369,230 @@
                     </div>   <!-- //TAB SYSTEM ENDING -->
                   
                     
+                             <!-- END INNER UPDATE PANEL -->
 
-                   
-                    </ContentTemplate>
 
-                         <Triggers>
-                             <asp:PostBackTrigger ControlID="link_insertProduct" />
-                         </Triggers>
+                </div> <!-- END MODAL BODY CONTENT -->
+            </div>
+        </div>
+    </div>
+    <!-- /Insert products Modal -->
 
-                      </asp:UpdatePanel>  <!-- END INNER UPDATE PANEL -->
+
+    <!-- UPDATE products Modal -->
+    <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
+        <div class="modal-dialog modal-lg shadow-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
+                    <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Update<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                </div>
+                <div class="modal-body">   <!-- BEGIN MODAL BODY CONTENT -->
+
+
+                    <!-- INNER UPDATE PANEL -->
+                
+
+
+                    <!-- NAVIGATION -->
+
+                    <div class="nav nav nav-pills nav-justified" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" style="margin-left: 2em;" id="nav-home-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
+                        <a class="nav-item nav-link" style="margin-right: 2em;" id="nav-profile-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-profile" aria-selected="false">Stock</a>
+                    </div>
+
+                    <!-- /NAVIGATION -->
+
+                    <div class="tab-content" id="nav-tabContent">
+
+                        <!-- CONTENT 1 DETAILS -->
+                        <div class="tab-pane fade show active" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+
+                            <div class="p-4"> <!-- WINDOW PADDING -->
+
+                                <!-- Name -->
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-12">
+                                        <label for="tb_updateName">Name</label>
+                                        <input type="text" class="form-control" runat="server" id="tb_updateName" placeholder="Title" required>
+                                    </div>
+
+                                </div>
+                                <!-- /Name -->
+
+                                <!-- Reference and Image -->
+                                <div class="form-row">
+
+                                    <div class="form-group col-md-6">
+                                        <label for="tb_updateReference">Reference</label>
+                                        <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference" required>
+                                    </div>
+
+                                    <div class="form-group col-md-6" style="margin-top: 2em">
+                                        <asp:FileUpload ID="FileUpload1" runat="server" />
+                                    </div>
+
+                                </div>
+                                <!-- /Reference and Image -->
+
+
+                                <!-- Description -->
+
+                                <div class="form-row mt-1">
+
+                                    <div class="col-lg-12">
+                                        <label for="tb_description">Description</label>
+                                        <textarea class="form-control" id="tb_updateDescription" runat="server" rows="3" required></textarea>
+                                        <script type="text/javascript">
+
+                                            CKEDITOR.replace('<%=tb_updateDescription.ClientID%>', { customConfig: 'custom/menu.js' });
+
+                                        </script>
+                                    </div>
+
+                                </div>
+
+                                <!-- Resumo -->
+
+                                <div class="form-row mt-4 d-flex justify-content-between">
+
+                                    <div class="col-lg-6">
+                                        <label for="tb_updateSummary">Summary</label>
+                                        <input class="form-control" runat="server" type="text" id="tb_updateSummary" required />
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label for="ddl_updateCategory">Category</label>
+                                        <asp:DropDownList ID="ddl_updateCategory" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                    </div>
+
+                                </div>
+
+                                <!-- /Resumo -->
+
+                                <!-- Price-->
+                                <div class="form-row mt-1 d-flex justify-content-between">
+
+                                    <div class="col-md-6">
+                                        <label for="tb_updatePrice">Price</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="inputGroupPrepend3">€</span>
+                                            </div>
+                                            <input type="number" class="form-control" runat="server" id="tb_updatePrice" aria-describedby="inputGroupPrepend3" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label for="ddl_updateBrand">Brand</label>
+                                        <asp:DropDownList ID="ddl_updateBrand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                    </div>
+
+
+
+                                </div>
+                                <!-- /Price-->
+
+
+                                <!-- Generic || Prescription || Generic-Product -->
+                                <div class="form-row mt-2 mb-2 d-flex justify-content-between">
+
+                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-between" style="margin-top: 30px;" data-toggle="buttons">
+
+                                        <label class="btn btn-outline-warning" style="padding-left: 1em; padding-right: 1em;">
+                                            <input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
+                                            Prescription
+                                        </label>
+
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
+                                            <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
+                                            Generic
+                                        </label>
+
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
+                                            <input type="checkbox" name="active" class="pr-2 pl-2" id="check_updateActive" runat="server" autocomplete="off">
+                                            Active
+                                        </label>
+
+                                    &nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+                                    <div class="col-md-5">
+                                        <label for="ddl_updateGenericParent">Parent Product</label>
+                                        <asp:DropDownList ID="ddl_updateGenericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                                    </div>
+
+                                </div>
+
+                                <!-- //Brand || Prescription || Generic-Product-->
+
+
+
+                            </div>
+                            <!-- WINDOW PADDING -->
+
+                        </div>
+                        <!-- // CONTENT 1 DETAILS -->
+
+
+                        <!-- CONTENT 2 DETAILS -->
+                        <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
+
+                            <!-- STOCK -->
+
+                            <div class="form-row mt-4 d-flex justify-content-between">
+
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="number" value="0" class="form-control" runat="server" id="tb_updateCurQty" aria-describedby="inputGroupPrepend3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Cur Qty</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="number" value="0" class="form-control" runat="server" id="tb_updateMinQty" aria-describedby="inputGroupPrepend3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Min Qty</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="number" value="1" class="form-control" runat="server" id="tb_updateMaxQty" aria-describedby="inputGroupPrepend3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Max Qty</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //STOCK-->
+
+                        </div>
+                        <!-- // CONTENT 2 DETAILS -->
+
+                        <div class="form-row mt-4">
+                            <div class="col text-center">
+                                <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server">Update</asp:LinkButton> <!-- INSERTION DRIVE -->
+                                <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="form-row mt-2">
+                            <div class="col text-center">
+                                <label id="lbl_updateErrors" runat="server"></label>
+                            </div>
+                        </div>
+
+                    </div>   <!-- //TAB SYSTEM ENDING -->
+                  
+                    
+
+            <!-- END INNER UPDATE PANEL -->
 
 
                 </div> <!-- END MODAL BODY CONTENT -->
@@ -384,10 +600,12 @@
         </div>
     </div>
             
+    <!-- /UPDATE products Modal -->
 
-      </ContentTemplate>
-    </asp:UpdatePanel>
-    <!-- /Insert products Modal -->
+
+
+
+
 
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->

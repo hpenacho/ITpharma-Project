@@ -33,7 +33,6 @@ namespace PROJECTOFINAL
             byte[] imgBinaryData = new byte[imgLen];
             imgstream.Read(imgBinaryData, 0, imgLen);
 
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertBackofficeProducts");
 
             myCommand.Parameters.AddWithValue("@Codreferencia", tb_reference.Value);
@@ -96,20 +95,72 @@ namespace PROJECTOFINAL
 
         protected void rpt_produtosBackoffice_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-
-            if (e.CommandName.Equals("link_deleteProduct"))
+            switch (e.CommandName)
             {
-                deleteItem(e);
+                case "link_deleteProduct": deleteItem(e); break;
+                case "link_updateProduct": updateItem(e); break;
             }
 
             rpt_produtosBackoffice.DataBind();
+        }
+
+        private void updateItem(RepeaterCommandEventArgs e)
+        {
+
+            //FILL MODAL
+            SqlCommand myCommand = Tools.SqlProcedure("usp_listBackofficeProductDetails");
+            Tools.myConn.Open();
+
+            var reader = myCommand.ExecuteReader();
+
+            if (reader.Read())
+            {
+                tb_updateReference.Value = reader["Codreferencia"].ToString();
+                tb_updateName.Value = reader["nome"].ToString();
+                tb_updatePrice.Value = reader["preco"].ToString();
+                tb_updateSummary.Value = reader["resumo"].ToString();
+                tb_updateDescription.Value = reader["descricao"].ToString();
+                ddl_updateCategory.SelectedValue = reader["ID_Categoria"].ToString();
+                ddl_updateBrand.SelectedValue = reader["ID_Marca"].ToString();
+                check_prescription.Checked = Convert.ToBoolean(reader["precisaReceita"]);
+
+                //Melhor isto
+               if(reader["ref_generico"] == DBNull.Value)
+                {
+                    ddl_updateGenericParent.Enabled = false;
+                }
+                else
+                {
+                    ddl_updateGenericParent.SelectedValue = reader["ref_generico"].ToString();
+                }
+                check_generic.Checked = Convert.ToBoolean(reader["Activo"]);
+                tb_updateCurQty.Value = reader["Qtd"].ToString();
+                tb_updateMinQty.Value = reader["QtdMin"].ToString();
+                tb_updateMaxQty.Value = reader["QtdMax"].ToString();
+
+            }
+
+            myCommand.Parameters.AddWithValue("@ref_generico", check_generic.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
+            myCommand.Parameters.AddWithValue("@Activo", check_active.Checked);
+            myCommand.Parameters.AddWithValue("@Qtd", tb_qty.Value);
+            myCommand.Parameters.AddWithValue("@QtdMin", tb_minQty.Value);
+            myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value);
+
+
+
+
+
+
+            reader.Close();
+            Tools.myConn.Close();
+            ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "$('#modal-update-product').modal()", true);
         }
 
 
         private void deleteItem(RepeaterCommandEventArgs e)
         {
 
-            SqlCommand myCommand = Tools.SqlProcedure("usp_updateBackofficeProducts");
+            SqlCommand myCommand = Tools.SqlProcedure("usp_disableBackofficeProduct");
             myCommand.Parameters.AddWithValue("@item", e.CommandArgument.ToString());
 
             try
@@ -127,6 +178,6 @@ namespace PROJECTOFINAL
             }
         }
 
-
+       
     }
 }

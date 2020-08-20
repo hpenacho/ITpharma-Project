@@ -393,11 +393,19 @@ CREATE OR ALTER PROC usp_listBackofficeProducts AS
 SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, StockArmazem.Qtd, Produto.Activo
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
 
+-- [PROCEDURE] LIST PRODUCT DETAILS BACKOFFICE
+
+GO
+CREATE OR ALTER PROC usp_listBackofficeProductDetails(@item varchar(20)) AS
+SELECT * 
+from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
+WHERE Produto.Codreferencia = @item
+
 -- [QUERY] DELETE PRODUCT BACKOFFICE \\ Product is discontinued
 
 GO
-CREATE OR ALTER PROC usp_updateBackofficeProducts(@item varchar(20)) AS
-update produto set produto.Descontinuado = 1 where Produto.Codreferencia = @item
+CREATE OR ALTER PROC usp_disableBackofficeProduct(@item varchar(20)) AS
+update produto set produto.Descontinuado = 1, produto.Activo = 0 where Produto.Codreferencia = @item
 
 
 
