@@ -425,7 +425,7 @@
 
                                     <div class="form-group col-md-6">
                                         <label for="tb_updateReference">Reference</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference" required>
+                                        <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference" readonly required>
                                     </div>
 
                                     <div class="form-group col-md-6" style="margin-top: 2em">

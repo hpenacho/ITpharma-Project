@@ -392,7 +392,7 @@ GO
 CREATE OR ALTER PROC usp_listBackofficeProducts AS
 SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, StockArmazem.Qtd, Produto.Activo
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
-where Produto.desactivado = 0
+where Produto.Descontinuado = 0
 
 -- [PROCEDURE] LIST PRODUCT DETAILS BACKOFFICE
 
@@ -426,16 +426,18 @@ CREATE OR ALTER proc usp_updateBackofficeProducts(@Codreferencia varchar(20),
 												  @Activo bit,
 												  @Qtd int,
 												  @QtdMin int,
-												  @QtdMax int,
-												  @errorMessage varchar(200) output)
+												  @QtdMax int)
+												 -- @errorMessage varchar(200) output) A FODER ISTO TUDO
+													-- sql queixa que a usp esperava @errorMessage e
+											--diz que nao foi submetida, no entanto estava declrada como OUTPUT
 AS
 BEGIN TRY
 BEGIN TRAN
 
 	--ERRORS
-
-	IF EXISTS (SELECT '*' FROM Produto WHERE Produto.nome = @nome)
-		THROW 60002, 'A product with that name already exists', 10
+				--truque para permitir o produto actualizar-se mantendo o proprio nome
+	IF EXISTS (SELECT '*' FROM Produto WHERE Produto.nome = @nome AND Produto.Codreferencia != @Codreferencia )
+		THROW 60003, 'Another product with that name already exists', 10
 
 	--!!WARNING!! THE PDF FLYER IS CURRENTLY BEING INSERTED AS NULL
 
@@ -462,7 +464,7 @@ BEGIN TRAN
 COMMIT
 END TRY
 BEGIN CATCH
-	set @errorMessage = ERROR_MESSAGE();
+	--set @errorMessage = ERROR_MESSAGE();  ta a foder isto tudo, comentei e bombou logo bem
 	print ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH

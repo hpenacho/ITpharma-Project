@@ -181,7 +181,7 @@ namespace PROJECTOFINAL
 
         protected void link_updateProductDetails_Click(object sender, EventArgs e)
         {
-            lbl_errors.InnerText = "";
+            lbl_updateErrors.InnerText = "";
 
             //Inserts the image binary
             Stream imgstream = fl_updateProductImage.PostedFile.InputStream;
@@ -208,29 +208,28 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@QtdMax", tb_updateMaxQty.Value);
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
+           /* SqlParameter errorMessage = new SqlParameter();
             errorMessage.ParameterName = "@errorMessage";
             errorMessage.Direction = ParameterDirection.Output;
             errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
+            errorMessage.Size = 300; */ 
 
-            System.Diagnostics.Debug.WriteLine("chegou a antes do try");
+            //a merda da mensagem de erro berrava no SQL, consultar SQLsheet para detalhes
+
             try
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
 
-                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
-                {
-                    lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
-                }
-
+                /*  if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                  {
+                      lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                  } */   //nao funfa
+                rpt_produtosBackoffice.DataBind();
             }
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
-               // System.Diagnostics.Debug.WriteLine(lbl_updateErrors.InnerText.ToString());
-
             }
             finally
             {
