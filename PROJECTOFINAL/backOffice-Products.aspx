@@ -1,16 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
-     <script>
+    <script>
 
        function openModal() { $('#modal-update-product').modal('show'); }
 
-     </script>
+    </script>
 
 
 
@@ -55,11 +53,18 @@
 
     <!-- Insert Products | opens a modal with all the fields necessary to insert a product -->
 
-    <div class="container col-lg-12 mt-5">
-        <div class="form-group">
-            <button type="button" class="btn btn-warning float-lg-right" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
+ 
+
+   
+        <div class="col-lg-12 mt-5 mb-4 d-flex d-flex justify-content-end">
+
+            <button type="button" class="btn btn-dark mr-3" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-dark mr-3" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-warning mr-3" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
+        
         </div>
-    </div>
+
+
 
     <!-- /Insert Products -->
 
@@ -68,9 +73,9 @@
     <!-- PRODUCT TABLE -->
 
     <div class="container-fluid">
-        <h1 class="mt-4">Products</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item">Dashboard</li>
+        <h1>Products</h1>
+        <ol class="breadcrumb bg-dark text-white mb-4">
+            <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
             <li class="breadcrumb-item active">Products</li>
         </ol>
 
@@ -84,7 +89,8 @@
 
                     <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
 
-                        <thead> <!-- HEADER OF THE TABLE -->
+                        <thead>
+                            <!-- HEADER OF THE TABLE -->
                             <tr>
                                 <th>Cod</th>
                                 <th>Image</th>
@@ -97,7 +103,7 @@
                             </tr>
                         </thead>
 
-                        <tbody class="text-center text-md-center"> 
+                        <tbody class="text-center text-md-center">
 
                             <!-- PRODUCTS -->
 
@@ -105,48 +111,49 @@
 
                                 <ItemTemplate>
 
-                             <tr class="text-center">
-                                <td class="align-middle">
-                                    <%# Eval("Codreferencia") %>
-                                </td>
+                                    <tr class="text-center">
+                                        <td class="align-middle">
+                                            <%# Eval("Codreferencia") %>
+                                        </td>
 
-                                <td class="align-middle">
-                                    <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
-                                </td>
+                                        <td class="align-middle">
+                                            <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
+                                        </td>
 
-                                <td class="align-middle">
-                                    <%# Eval("nome") %>
-                                </td>
+                                        <td class="align-middle">
+                                            <%# Eval("nome") %>
+                                        </td>
 
-                                <td class="align-middle">
-                                    <%# Eval("preco") %> €
-                                </td>
+                                        <td class="align-middle">
+                                            <%# Eval("preco") %> €
+                                        </td>
 
-                                <td class="align-middle">
-                                    <%# Eval("Qtd") %>
-                                </td>
+                                        <td class="align-middle">
+                                            <%# Eval("Qtd") %>
+                                        </td>
 
-                                <td class="align-middle">
-                                    <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6> <!-- only for the filter -->  
-                                    <asp:CheckBox ID="check_productIsActive" style="margin-left: -9px" runat="server" Checked='<%# Eval("Activo") %>' />
-                                </td>
+                                        <td class="align-middle">
+                                            <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6>
+                                            <!-- only for the filter -->
+                                            <asp:CheckBox ID="check_productIsActive" Style="margin-left: -9px" runat="server" Checked='<%# Eval("Activo") %>' />
+                                        </td>
 
-                                <td class="align-middle">
-                                    <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
-                                </td>
+                                        <td class="align-middle">
+                                            <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
+                                        </td>
 
-                                <td class="align-middle">
-                                    <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
-                                </td>
-                            </tr>
+                                        <td class="align-middle">
+                                            <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
+                                        </td>
+                                    </tr>
 
                                 </ItemTemplate>
 
-                           
+
                             </asp:Repeater>
 
-                             <!-- //PRODUCTS -->
-                         
+                            <!-- //PRODUCTS -->
+
                         </tbody>
                     </table>
 
@@ -167,12 +174,14 @@
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Product Insertion<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Product Insertion
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </h5>
                 </div>
-                <div class="modal-body">   <!-- BEGIN MODAL BODY CONTENT -->
+                <div class="modal-body">
+                    <!-- BEGIN MODAL BODY CONTENT -->
 
 
                     <!-- INNER UPDATE PANEL -->
@@ -192,12 +201,13 @@
                         <!-- CONTENT 1 DETAILS -->
                         <div class="tab-pane fade show active" id="insert-nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
 
-                            <div class="p-4"> <!-- WINDOW PADDING -->
+                            <div class="p-4">
+                                <!-- WINDOW PADDING -->
 
                                 <!-- Name -->
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-12">                                    
+                                    <div class="form-group col-md-12">
                                         <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
                                     </div>
 
@@ -225,7 +235,9 @@
                                 <div class="form-row mt-1">
 
                                     <div class="col-lg-12">
-                                        <label for="tb_description"><p class="text-muted"> Item Description </p></label>
+                                        <label for="tb_description">
+                                            <p class="text-muted">Item Description </p>
+                                        </label>
                                         <textarea class="form-control" id="tb_description" runat="server" rows="3" required></textarea>
                                         <script type="text/javascript">
 
@@ -259,7 +271,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="inputGroupPrepend3"> <i class="fas fa-euro-sign"></i> </span>
+                                                <span class="input-group-text" id="inputGroupPrepend3"><i class="fas fa-euro-sign"></i></span>
                                             </div>
                                             <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
                                         </div>
@@ -286,15 +298,17 @@
                                             Prescription
                                         </label>
 
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                        <label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
+                                            <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
                                             Generic
                                         </label>
 
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;"><input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
+                                        <label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
+                                            <input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
                                             Active
                                         </label>
 
-                                    &nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                    </div>
 
                                     <div class="col-md-5" id="parent-product">
                                         <label for="ddl_genericParent">Parent Product</label>
@@ -354,7 +368,8 @@
 
                         <div class="form-row mt-4">
                             <div class="col text-center">
-                                <asp:LinkButton ID="link_insertProduct" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertProduct_Click">Insert</asp:LinkButton> <!-- INSERTION DRIVE -->
+                                <asp:LinkButton ID="link_insertProduct" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertProduct_Click">Insert</asp:LinkButton>
+                                <!-- INSERTION DRIVE -->
                                 <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -363,13 +378,15 @@
                             <label id="lbl_errors" runat="server"></label>
                         </div>
 
-                    </div>   <!-- //TAB SYSTEM ENDING -->
-                  
-                    
-                             <!-- END INNER UPDATE PANEL -->
+                    </div>
+                    <!-- //TAB SYSTEM ENDING -->
 
 
-                </div> <!-- END MODAL BODY CONTENT -->
+                    <!-- END INNER UPDATE PANEL -->
+
+
+                </div>
+                <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
@@ -381,16 +398,18 @@
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Update<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </button>
+                    <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Update
+                                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                     </h5>
                 </div>
-                <div class="modal-body">   <!-- BEGIN MODAL BODY CONTENT -->
+                <div class="modal-body">
+                    <!-- BEGIN MODAL BODY CONTENT -->
 
 
                     <!-- INNER UPDATE PANEL -->
-                
+
 
 
                     <!-- NAVIGATION -->
@@ -407,7 +426,8 @@
                         <!-- CONTENT 1 DETAILS -->
                         <div class="tab-pane fade show active" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
 
-                            <div class="p-4"> <!-- WINDOW PADDING -->
+                            <div class="p-4">
+                                <!-- WINDOW PADDING -->
 
                                 <!-- Name -->
                                 <div class="form-row">
@@ -449,7 +469,6 @@
 
                                         </script>
                                     </div>
-
                                 </div>
 
                                 <!-- Resumo -->
@@ -504,19 +523,19 @@
                                             Prescription
                                         </label>
 
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
+                                        <label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
                                             <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
                                             Generic
                                         </label>
 
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
+                                        <label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
                                             <input type="checkbox" name="active" class="pr-2 pl-2" id="check_updateActive" runat="server" autocomplete="off">
                                             Active
                                         </label>
-
-                                    &nbsp;&nbsp;&nbsp;&nbsp;</div>
-
-                                    <div class="col-md-5">
+                                       
+                                    </div>
+                                   
+                                    <div class="col-md-5" id="genericUpdateDiv">
                                         <label for="ddl_updateGenericParent">Parent Product</label>
                                         <asp:DropDownList ID="ddl_updateGenericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
                                     </div>
@@ -574,7 +593,8 @@
 
                         <div class="form-row mt-4">
                             <div class="col text-center">
-                                <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_updateProductDetails_Click">Update</asp:LinkButton> <!-- INSERTION DRIVE -->
+                                <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_updateProductDetails_Click">Update</asp:LinkButton>
+                                <!-- INSERTION DRIVE -->
                                 <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -585,28 +605,92 @@
                             </div>
                         </div>
 
-                    </div>   <!-- //TAB SYSTEM ENDING -->
-                  
-                    
+                    </div>
+                    <!-- //TAB SYSTEM ENDING -->
 
-            <!-- END INNER UPDATE PANEL -->
 
-                            <script>
-                                $(document).ready(function(){
-                                  $('[data-toggle="tooltip"]').tooltip();   
-                                });
-                            </script>
-                </div> <!-- END MODAL BODY CONTENT -->
+
+                    <!-- END INNER UPDATE PANEL -->
+                </div>
+                <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
-            
     <!-- /UPDATE products Modal -->
 
+    <!-- INSERT BRANDS Modal -->
+    <div class="modal fade ml-3 mt-5" id="modal-insert-brand" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
+        <div class="modal-dialog modal-md shadow-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header py-2 modal-title bg-dark rounded-top text-light">
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-brand-label">Brands
+                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                          </button>
+                    </h5>
+                </div>
+                <!-- BEGIN MODAL BODY CONTENT -->
+                <div class=" modal-body">
+
+
+                                    <div class="form-group col-md-12 d-flex form-inline">
+                                            <input type="text" class="form-control w-75" runat="server" id="tb_insertBrand" placeholder="Brand">
+                                            <asp:LinkButton ID="link_insertBrand" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3" style="padding-left: 1em; padding-right: 1em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
+                                            <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>
+                                    </div>
+
+                                     
+
+                </div>
+                <!-- END MODAL BODY CONTENT -->
+            </div>
+        </div>
+    </div>
+    <!-- /INSERT BRANDS Modal -->
 
 
 
 
+
+       <!-- INSERT CATEGORIES Modal -->
+    <div class="modal fade ml-3 mt-5" id="modal-insert-category" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
+        <div class="modal-dialog modal-md shadow-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header py-2 modal-title bg-dark rounded-top text-light">
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-category-label">Categories<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                          </button>
+                    </h5>
+                </div>
+                <!-- BEGIN MODAL BODY CONTENT -->
+                <div class=" modal-body">
+
+
+                                    <div class="form-group col-md-12 d-flex form-inline">
+                                            <input type="text" class="form-control w-75" runat="server" id="tb_insertCategory" placeholder="Category">
+                                            <asp:LinkButton ID="link_insertCategory" CommandArgument="usp_insertCategory" CommandName="category" class="btn btn-warning ml-3" style="padding-left: 1em; padding-right: 1em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
+                                            <label class="mt-2"  id="lbl_insertCategoryError" runat="server"></label>
+                                    </div>
+                                    
+                                     
+
+                </div>
+                <!-- END MODAL BODY CONTENT -->
+            </div>
+        </div>
+    </div>
+    <!-- /INSERT CATEGORIES Modal -->
+
+
+
+
+     <script type="text/javascript">
+
+         $(document).ready(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+         });
+
+     </script>
 
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->

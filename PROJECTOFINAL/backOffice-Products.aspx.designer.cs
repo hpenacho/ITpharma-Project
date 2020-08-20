@@ -330,6 +330,60 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_updateErrors;
 
         /// <summary>
+        /// tb_insertBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_insertBrand;
+
+        /// <summary>
+        /// link_insertBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_insertBrand;
+
+        /// <summary>
+        /// lbl_insertBrandError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_insertBrandError;
+
+        /// <summary>
+        /// tb_insertCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_insertCategory;
+
+        /// <summary>
+        /// link_insertCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_insertCategory;
+
+        /// <summary>
+        /// lbl_insertCategoryError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_insertCategoryError;
+
+        /// <summary>
         /// SQLcategory control.
         /// </summary>
         /// <remarks>

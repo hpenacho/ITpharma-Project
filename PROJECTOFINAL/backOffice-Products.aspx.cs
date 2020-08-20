@@ -19,9 +19,6 @@ namespace PROJECTOFINAL
         }
 
 
-
-
-
         protected void link_insertProduct_Click(object sender, EventArgs e)
         {
 
@@ -231,6 +228,55 @@ namespace PROJECTOFINAL
             }
 
 
+        }
+
+
+
+        protected void link_insertCategoryBrand(object sender, EventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure(((LinkButton)sender).CommandArgument);
+
+            if (((LinkButton)sender).CommandName == "brand")
+                myCommand.Parameters.AddWithValue("@descricao", tb_insertBrand.Value);
+            else
+                myCommand.Parameters.AddWithValue("@descricao", tb_insertCategory.Value);
+
+            //OUTPUT - ERROR MESSAGES
+            SqlParameter errorMessage = new SqlParameter();
+            errorMessage.ParameterName = "@errorMessage";
+            errorMessage.Direction = ParameterDirection.Output;
+            errorMessage.SqlDbType = SqlDbType.VarChar;
+            errorMessage.Size = 300;
+            myCommand.Parameters.Add(errorMessage);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    if (((LinkButton)sender).CommandName == "brand")
+                    {
+                        lbl_insertBrandError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    }
+                    else
+                    {
+                        lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    }
+                }
+
+                rpt_produtosBackoffice.DataBind();
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
         }
     }
 }

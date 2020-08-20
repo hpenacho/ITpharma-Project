@@ -340,6 +340,58 @@ END CATCH
 --FIM USP loginBackOffice
 
 
+create table Categoria(
+	
+	ID int identity primary key,
+	descricao varchar(100) unique not null
+)
+
+create table Marca (
+
+	ID int identity primary key,
+	descricao varchar(100) unique not null
+)
+
+
+-- [PROCEDURE] INSERT BRANDS \ CATEGORIES BACKOFFICE - FILIPE
+GO
+create or alter proc usp_insertCategory (@descricao varchar(100), @errorMessage varchar(200) output) AS
+BEGIN TRY
+BEGIN TRAN
+
+	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao)
+		THROW 60001,'The category specified already exists' ,10
+
+	insert into Categoria values(@descricao)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+
+
+GO
+create or alter proc usp_insertBrand(@descricao varchar(100), @errorMessage varchar(200) output) AS
+BEGIN TRY
+BEGIN TRAN
+
+	IF EXISTS (SELECT '*' from Marca where descricao = @descricao)
+		THROW 60001,'The brand specified already exists' ,10
+
+	insert into Marca values(@descricao)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+
+
+
+
 -- [PROCEDURE] INSERT PRODUCTS BACKOFFICE - FILIPE
 
 GO
@@ -468,5 +520,3 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 GO
-
-
