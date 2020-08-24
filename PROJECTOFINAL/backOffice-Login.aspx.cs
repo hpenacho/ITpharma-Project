@@ -27,14 +27,7 @@ namespace PROJECTOFINAL
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.CommandText = "usp_loginAdmins";
 
-
-            SqlParameter errorMessageSql = new SqlParameter();
-            errorMessageSql.ParameterName = "@errorMessage";
-            errorMessageSql.Direction = ParameterDirection.Output;
-            errorMessageSql.SqlDbType = SqlDbType.VarChar;
-            errorMessageSql.Size = 300;
-
-            myCommand.Parameters.Add(errorMessageSql);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
             myCommand.Connection = myConn;
 
                 try

@@ -46,12 +46,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@firstActivation", ((CheckBox)e.Item.FindControl("check_isFirstActivation")).Checked);
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             try
             {
@@ -92,12 +87,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@dataNascimento", Convert.ToDateTime(tb_dateofbirth.Value));
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             try
             {
