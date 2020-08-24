@@ -49,12 +49,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value);
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             try
             {
@@ -199,12 +194,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@QtdMax", tb_updateMaxQty.Value);
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             try
             {
@@ -235,19 +225,13 @@ namespace PROJECTOFINAL
         protected void link_insertCategoryBrand(object sender, EventArgs e)
         {
             SqlCommand myCommand = Tools.SqlProcedure(((LinkButton)sender).CommandArgument);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             if (((LinkButton)sender).CommandName == "brand")
                 myCommand.Parameters.AddWithValue("@descricao", tb_insertBrand.Value);
             else
                 myCommand.Parameters.AddWithValue("@descricao", tb_insertCategory.Value);
 
-            //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
 
             try
             {
@@ -314,12 +298,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@descricao", tb_updateBrand.Value);
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             try
             {
@@ -377,12 +356,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@descricao", tb_updateCategory.Value);
 
             //OUTPUT - ERROR MESSAGES
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = "@errorMessage";
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = SqlDbType.VarChar;
-            errorMessage.Size = 300;
-            myCommand.Parameters.Add(errorMessage);
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             try
             {

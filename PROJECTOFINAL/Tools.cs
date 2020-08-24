@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -26,6 +27,17 @@ namespace PROJECTOFINAL
             myCommand.Connection = myConn;
 
             return myCommand;
+        }
+
+        public static SqlParameter errorOutput(string parameterName , SqlDbType outputType, int size)
+        {
+            SqlParameter errorMessage = new SqlParameter();
+            errorMessage.ParameterName = parameterName;
+            errorMessage.Direction = ParameterDirection.Output;
+            errorMessage.SqlDbType = outputType;
+            errorMessage.Size = size;
+
+            return errorMessage;
         }
 
 
