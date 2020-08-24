@@ -296,6 +296,8 @@ begin tran
 		where Carrinho.ID_Cliente = @IDcliente
 		group by Prod_ref
 
+		DELETE FROM carrinho WHERE carrinho.ID_Cliente = @IDcliente;
+
 commit
 end try
 begin catch
