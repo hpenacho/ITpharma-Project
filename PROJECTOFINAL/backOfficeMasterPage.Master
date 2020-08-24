@@ -19,6 +19,33 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+<style>
+
+/* QUICK CSS TO STYLE SCROLLBAR */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+</style>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 
@@ -106,10 +133,17 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
                                Shop Users
                             </a>
+
                             <a class="nav-link" href="backOffice-Products.aspx">
                                 <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                                 Products
                             </a>
+
+                            <a class="nav-link" href="backoffice-encomendas.aspx">
+                                <div class="sb-nav-link-icon"><i class="fas fa-truck-loading"></i></div>
+                                Orders
+                            </a>
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">

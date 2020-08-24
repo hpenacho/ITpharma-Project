@@ -662,3 +662,6 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 GO
+
+
+select * from encomendaHistorico
