@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,5 +15,41 @@ namespace PROJECTOFINAL
         {
 
         }
+
+        protected void rpt_parent_orders_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
+            {
+
+                string orderRef = ((HiddenField)e.Item.FindControl("hidden_Order_ID")).Value;
+                Repeater childRepeater = (Repeater)e.Item.FindControl("rpt_child_orders");
+
+                Tools.myConn.Open();
+                DataSet ds = new DataSet();
+                SqlDataAdapter sda = new SqlDataAdapter();
+
+                SqlCommand myCommand = Tools.SqlProcedure("usp_returnBackofficeOrderProducts");
+                myCommand.Parameters.AddWithValue("@ID", orderRef);
+
+                sda.SelectCommand = myCommand;
+
+                sda.Fill(ds);
+                childRepeater.DataSource = ds;
+                childRepeater.DataBind();
+
+                Tools.myConn.Close();
+
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 }

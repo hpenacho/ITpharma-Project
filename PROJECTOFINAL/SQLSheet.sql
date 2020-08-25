@@ -665,3 +665,20 @@ GO
 
 
 select * from encomendaHistorico
+
+
+-- [PROC] RETURNS ORDERS TO THE BACKOFFICE 
+
+GO
+create or alter proc usp_returnBackofficeOrders as
+select enc_ref as 'Ref', datacompra, cliente.nome as 'clientName', sum(compra.Total) as 'orderTotal', id_estado, ultimaActualizacao 
+from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
+						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+group by enc_ref, datacompra, cliente.nome, id_estado, ultimaActualizacao 
+
+GO
+create or alter proc usp_returnBackofficeOrderProducts (@ID int) as
+select * from Compra inner join produto on compra.Prod_ref = Produto.Codreferencia
+where id_encomenda = @ID
+
+select * from estado
