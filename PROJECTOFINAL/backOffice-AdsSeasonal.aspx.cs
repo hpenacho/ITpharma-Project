@@ -14,7 +14,7 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //adsffff
         }
 
         protected void link_insertSeasonlAd_Click(object sender, EventArgs e)
