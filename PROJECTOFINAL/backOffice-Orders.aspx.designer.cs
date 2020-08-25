@@ -11,7 +11,7 @@ namespace PROJECTOFINAL
 {
 
 
-    public partial class backoffice_encomendas
+    public partial class backOffice_Orders
     {
 
         /// <summary>

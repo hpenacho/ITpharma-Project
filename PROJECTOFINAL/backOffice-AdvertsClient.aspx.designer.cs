@@ -11,7 +11,7 @@ namespace PROJECTOFINAL
 {
 
 
-    public partial class backOffice_AdsClient
+    public partial class backOffice_AdvertsClient
     {
     }
 }

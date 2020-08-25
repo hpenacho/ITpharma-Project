@@ -10,11 +10,11 @@ using System.Web.UI.WebControls;
 
 namespace PROJECTOFINAL
 {
-    public partial class backOffice_AdsSeasonal : System.Web.UI.Page
+    public partial class backOffice_AdvertsSeasonal : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //adsffff
+
         }
 
         protected void link_insertSeasonlAd_Click(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace PROJECTOFINAL
 
             myCommand.Parameters.AddWithValue("@imagem", imgBinaryData);
             myCommand.Parameters.AddWithValue("@id_pub_sazonal", ddl_SeasonalTypes.SelectedValue);
-            
+
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
@@ -70,6 +70,5 @@ namespace PROJECTOFINAL
         {
 
         }
-
     }
 }

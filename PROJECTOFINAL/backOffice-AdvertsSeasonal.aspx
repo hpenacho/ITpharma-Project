@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-AdsSeasonal.aspx.cs" Inherits="PROJECTOFINAL.backOffice_AdsSeasonal" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-AdvertsSeasonal.aspx.cs" Inherits="PROJECTOFINAL.backOffice_AdvertsSeasonal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="card mb-4 border-bottom-0">
+     <div class="card mb-4 border-bottom-0">
             <div class="card-header">
                 <i class="far fa-eye mr-1"></i>
                         
@@ -139,4 +139,5 @@
     <!-- SQLSOURCES AND REPEATER SOURCES -->  
 
     <asp:SqlDataSource ID="SqlSourceSeasonAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listSeasonalAds" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+
 </asp:Content>

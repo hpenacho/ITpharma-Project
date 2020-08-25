@@ -1,8 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backoffice-encomendas.aspx.cs" Inherits="PROJECTOFINAL.backoffice_encomendas" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Orders.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Orders" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-
 
     <style>
 
@@ -13,20 +10,9 @@
     </style>
 
 </asp:Content>
-
-
-
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-
-
-
-
-
-
-    <div class="container-fluid mt-5 d-flex align-items-center">
+     <div class="container-fluid mt-5 d-flex align-items-center">
 
         <div class="col-lg-12">
 

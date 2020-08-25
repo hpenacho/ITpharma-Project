@@ -99,8 +99,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="backOffice-AdsSeasonal.aspx"> Seasonal Ads </a>
-                                    <a class="nav-link" href="backOffice-AdsClient.aspx"> Client-Centric Ads </a>  
+                                    <a class="nav-link" href="backOffice-AdvertsSeasonal.aspx"> Seasonal Ads </a>
+                                    <a class="nav-link" href="backOffice-AdvertsClient.aspx"> Client-Centric Ads </a>  
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -145,7 +145,7 @@
                                 Products
                             </a>
 
-                            <a class="nav-link" href="backoffice-encomendas.aspx">
+                            <a class="nav-link" href="backOffice-Orders.aspx">
                                 <div class="sb-nav-link-icon"><i class="fas fa-truck-loading"></i></div>
                                 Orders
                             </a>

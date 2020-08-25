@@ -11,7 +11,7 @@ namespace PROJECTOFINAL
 {
 
 
-    public partial class backOffice_AdsSeasonal
+    public partial class backOffice_AdvertsSeasonal
     {
 
         /// <summary>

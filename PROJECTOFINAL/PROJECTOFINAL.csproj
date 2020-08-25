@@ -70,10 +70,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="backOffice-AdsClient.aspx" />
-    <Content Include="backOffice-AdsSeasonal.aspx" />
-    <Content Include="placeholderAD.png" />
-    <Content Include="backoffice-encomendas.aspx" />
+    <Content Include="backOffice-AdvertsClient.aspx" />
+    <Content Include="backOffice-AdvertsSeasonal.aspx" />
+    <Content Include="backOffice-Orders.aspx" />
     <Content Include="backOffice-Index.aspx" />
     <Content Include="backOffice-Login.aspx" />
     <Content Include="backOffice-Products.aspx" />
@@ -456,6 +455,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="backOffice-AdvertsClient.aspx.cs">
+      <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-AdvertsClient.aspx.designer.cs">
+      <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice-AdvertsSeasonal.aspx.cs">
+      <DependentUpon>backOffice-AdvertsSeasonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-AdvertsSeasonal.aspx.designer.cs">
+      <DependentUpon>backOffice-AdvertsSeasonal.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backOffice-Index.aspx.cs">
       <DependentUpon>backOffice-Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -469,6 +482,13 @@
     </Compile>
     <Compile Include="backOffice-Login.aspx.designer.cs">
       <DependentUpon>backOffice-Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice-Orders.aspx.cs">
+      <DependentUpon>backOffice-Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-Orders.aspx.designer.cs">
+      <DependentUpon>backOffice-Orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOffice-Products.aspx.cs">
       <DependentUpon>backOffice-Products.aspx</DependentUpon>
