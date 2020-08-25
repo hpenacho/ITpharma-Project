@@ -70,9 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="backOffice-AdsClient.aspx" />
-    <Content Include="backOffice-AdsSeasonal.aspx" />
-    <Content Include="placeholderAD.png" />
+    <Content Include="backoffice-encomendas.aspx" />
     <Content Include="backOffice-Index.aspx" />
     <Content Include="backOffice-Login.aspx" />
     <Content Include="backOffice-Products.aspx" />
@@ -455,19 +453,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="backOffice-AdsClient.aspx.cs">
-      <DependentUpon>backOffice-AdsClient.aspx</DependentUpon>
+    <Compile Include="backoffice-encomendas.aspx.cs">
+      <DependentUpon>backoffice-encomendas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="backOffice-AdsClient.aspx.designer.cs">
-      <DependentUpon>backOffice-AdsClient.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="backOffice-AdsSeasonal.aspx.cs">
-      <DependentUpon>backOffice-AdsSeasonal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="backOffice-AdsSeasonal.aspx.designer.cs">
-      <DependentUpon>backOffice-AdsSeasonal.aspx</DependentUpon>
+    <Compile Include="backoffice-encomendas.aspx.designer.cs">
+      <DependentUpon>backoffice-encomendas.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOffice-Index.aspx.cs">
       <DependentUpon>backOffice-Index.aspx</DependentUpon>

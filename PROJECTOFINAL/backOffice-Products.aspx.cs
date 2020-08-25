@@ -220,8 +220,6 @@ namespace PROJECTOFINAL
 
         }
 
-
-
         protected void link_insertCategoryBrand(object sender, EventArgs e)
         {
             SqlCommand myCommand = Tools.SqlProcedure(((LinkButton)sender).CommandArgument);

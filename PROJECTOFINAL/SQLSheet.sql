@@ -664,33 +664,21 @@ END CATCH
 GO
 
 
--- [QUERY] LISTS SEASONAL ADS //for backoffice seasonal ad management
-go
-create or ALTER PROC usp_listSeasonalAds AS
-SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Sazonal, Pub_Sazonal.Descricao, Pub_Sazonal.DataExpiracao
-from Publicidade inner join Pub_Sazonal on Publicidade.ID_Pub_Sazonal = Pub_Sazonal.id
-where Publicidade.Tipo = 1
+select * from encomendaHistorico
+
+
+-- [PROC] RETURNS ORDERS TO THE BACKOFFICE 
+
 GO
+create or alter proc usp_returnBackofficeOrders as
+select enc_ref as 'Ref', datacompra, cliente.nome as 'clientName', sum(compra.Total) as 'orderTotal', id_estado, ultimaActualizacao 
+from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
+						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+group by enc_ref, datacompra, cliente.nome, id_estado, ultimaActualizacao 
 
--- [QUERY] -CREATES SEASONAL ADS  //for backOffice seasonal ad Insertion into db
-CREATE OR ALTER proc usp_insertAdSeasonal(
-										    @imagem varbinary(max),										    
-										    @id_pub_sazonal int,										
-										    @errorMessage varchar(200) output)
-AS
-BEGIN TRY
-BEGIN TRAN
-
-	--ERRORS
-
-	INSERT INTO Publicidade VALUES (@imagem,1,@id_pub_sazonal)
-
-COMMIT
-END TRY
-BEGIN CATCH
-	set @errorMessage = ERROR_MESSAGE();
-	print ERROR_MESSAGE();
-	ROLLBACK;
-END CATCH
 GO
+create or alter proc usp_returnBackofficeOrderProducts (@ID int) as
+select * from Compra inner join produto on compra.Prod_ref = Produto.Codreferencia
+where id_encomenda = @ID
 
+select * from estado

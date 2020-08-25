@@ -55,7 +55,7 @@ namespace PROJECTOFINAL
 
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
                 {            
-                        lbl_updateError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();                    
+                   lbl_updateError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();                    
                 }
 
                 rpt_ShopUsersBackOffice.DataBind();

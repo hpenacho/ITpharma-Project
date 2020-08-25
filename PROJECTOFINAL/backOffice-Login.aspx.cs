@@ -18,7 +18,8 @@ namespace PROJECTOFINAL
         }
 
         protected void btn_login_Click(object sender, EventArgs e)
-        {            
+        {    
+            
                 SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString);
                 SqlCommand myCommand = new SqlCommand();
                 myCommand.Parameters.AddWithValue("@adminName",inputUserName.Value );
@@ -27,8 +28,8 @@ namespace PROJECTOFINAL
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.CommandText = "usp_loginAdmins";
 
-            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
-            myCommand.Connection = myConn;
+                myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
+                myCommand.Connection = myConn;
 
                 try
                 {
