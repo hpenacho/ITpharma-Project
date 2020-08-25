@@ -664,6 +664,38 @@ END CATCH
 GO
 
 
+-- [QUERY] LISTS SEASONAL ADS //for backoffice seasonal ad management
+go
+create or ALTER PROC usp_listSeasonalAds AS
+SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Sazonal, Pub_Sazonal.Descricao, Pub_Sazonal.DataExpiracao
+from Publicidade inner join Pub_Sazonal on Publicidade.ID_Pub_Sazonal = Pub_Sazonal.id
+where Publicidade.Tipo = 1
+GO
+
+-- [QUERY] -CREATES SEASONAL ADS  //for backOffice seasonal ad Insertion into db
+CREATE OR ALTER proc usp_insertAdSeasonal(
+										    @imagem varbinary(max),										    
+										    @id_pub_sazonal int,										
+										    @errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	--ERRORS
+
+	INSERT INTO Publicidade VALUES (@imagem,1,@id_pub_sazonal)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
+
+
+
 select * from encomendaHistorico
 
 

@@ -137,7 +137,7 @@
 
 
 
-    <!-- insert products Modal -->
+    <!-- insert shopUser Modal -->
     <div class="modal fade ml-3" id="modal-insert-ShopUser" tabindex="-1" role="dialog" aria-labelledby="modal-insert-ShopUser" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
