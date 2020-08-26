@@ -25,7 +25,7 @@
                                       <div class="hvrbox-layer_top">
                                           <div class="hvrbox-text">
                                         <h5>Ad Category: <%# Eval("Descricao") %></h5>
-                                        <p> Expiration Date: <%# Eval("DataExpiracao") %></p>
+                                        <p> Expiration Date: <%# DateTime.Parse(Eval("DataExpiracao").ToString()).ToString("dd-MM-yyyy") %></p>
                                            </div>
                                         <asp:LinkButton ID="link_updateAdvert" class="btn btn-sm" CommandName="link_updateAdvert" CommandArgument='<%# Eval("ID") %>' runat="server" CausesValidation="false"><i class="fas fa-pen " style="color: white;"></i></asp:LinkButton>
                                         <asp:LinkButton ID="link_deleteAdvert" class="btn btn-sm" CommandName="link_deleteAdvert" CommandArgument='<%# Eval("ID") %>' runat="server"><i class="fas fa-trash" style="color: white;"></i></asp:LinkButton>
