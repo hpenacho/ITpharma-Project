@@ -688,7 +688,7 @@ BEGIN TRAN
 
 	--ERRORS
 
-	INSERT INTO Publicidade VALUES (@imagem,1,@id_pub_sazonal)
+	INSERT INTO Publicidade VALUES (@imagem,1,@id_pub_sazonal,null)
 
 COMMIT
 END TRY
@@ -699,7 +699,37 @@ BEGIN CATCH
 END CATCH
 GO
 
---- [USP] DELETES THE SELECTED SEASONAL AD
+-- [QUERY] LISTS CLIENT CENTRIC ADS //for backoffice Client ad management
+go
+create or ALTER PROC usp_listClientCentricAds AS
+SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Cliente, Pub_Cliente.Descricao
+from Publicidade inner join Pub_Cliente on Publicidade.ID_Pub_Cliente = Pub_Cliente.ID
+where Publicidade.Tipo = 0
+GO
+
+-- [QUERY] -CREATES CLIENT CENTRIC ADS  //for backOffice Client ad Insertion into db
+CREATE OR ALTER proc usp_insertAdClient(
+										    @imagem varbinary(max),										    
+										    @id_pub_cliente int,										
+										    @errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	--ERRORS
+
+	INSERT INTO Publicidade VALUES (@imagem,0,null,@id_pub_cliente)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
+
+--- [USP] DELETES THE SELECTED ADVERTISEMENT
 GO 
 CREATE OR ALTER PROC usp_deleteAdvertisement(@id_advert int) AS
 BEGIN TRY
