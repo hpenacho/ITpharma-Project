@@ -4,11 +4,13 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.UI.WebControls;
 
 namespace PROJECTOFINAL
 {
@@ -38,6 +40,17 @@ namespace PROJECTOFINAL
             errorMessage.Size = size;
 
             return errorMessage;
+        }
+
+
+        public static byte[] imageUpload(FileUpload fileControl)
+        {
+            Stream imgstream = fileControl.PostedFile.InputStream;
+            int imgLen = fileControl.PostedFile.ContentLength;
+            byte[] imgBinaryData = new byte[imgLen];
+            imgstream.Read(imgBinaryData, 0, imgLen);
+
+            return imgBinaryData;
         }
 
 
