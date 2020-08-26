@@ -694,10 +694,19 @@ BEGIN CATCH
 END CATCH
 GO
 
+--- [USP] DELETES THE SELECTED SEASONAL AD
+GO 
+CREATE OR ALTER PROC usp_deleteAdvertisement(@id_advert int) AS
+BEGIN TRY
+BEGIN TRAN
 
+	delete from publicidade where publicidade.ID = @id_advert
 
-select * from encomendaHistorico
-
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH
 
 -- [PROC] RETURNS ORDERS TO THE BACKOFFICE 
 
