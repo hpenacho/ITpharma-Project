@@ -40,11 +40,11 @@
 
     <!-- modal insert seasonal advertisements -->
 
-    <div class="modal fade ml-3" id="modal-insert-SeasonalAd" tabindex="-1" role="dialog" aria-labelledby="modal-insert-SeasonalAd" aria-hidden="true">
+    <div class="modal fade ml-3" id="modal-insert-ClientCentricAd" tabindex="-1" role="dialog" aria-labelledby="modal-insert-ClientCentricAd" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Seasonal Advertisement Creation<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Client-Centric Advertisement Creation<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </h5>
@@ -71,7 +71,7 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-12">                                        
-                                        <asp:DropDownList ID="ddl_SeasonalTypes" CssClass="form-control" runat="server" DataSourceID="SqlSource_seasonalTypes" DataTextField="Descricao" DataValueField="ID">
+                                        <asp:DropDownList ID="ddl_ClientTypes" CssClass="form-control" runat="server" DataSourceID="SqlSource_seasonalTypes" DataTextField="Descricao" DataValueField="ID">
                                         </asp:DropDownList>
                                     </div>
 
@@ -102,7 +102,7 @@
 
                         <div class="form-row mt-4">
                             <div class="col text-center">                                
-                                <asp:LinkButton ID="link_insertSeasonalAd" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertSeasonlAd_Click"> Insert </asp:LinkButton>
+                                <asp:LinkButton ID="link_insertClientAd" class="btn btn-primary btn-dark w-25 mr-1" runat="server"> Insert </asp:LinkButton>
                                 <!-- INSERTION DRIVE -->
                                 <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
@@ -132,6 +132,6 @@
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->  
 
-    <asp:SqlDataSource ID="SqlSourceSeasonAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listSeasonalAds" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlSourceClientCentricAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listSeasonalAds" SelectCommandType="StoredProcedure" ProviderName="<%$ ConnectionStrings:ITpharmaConnectionString.ProviderName %>"></asp:SqlDataSource>
 
 </asp:Content>

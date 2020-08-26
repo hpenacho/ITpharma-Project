@@ -24,13 +24,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rpt_SeasonalAdvertsBackoffice;
 
         /// <summary>
-        /// ddl_SeasonalTypes control.
+        /// ddl_ClientTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_SeasonalTypes;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_ClientTypes;
 
         /// <summary>
         /// fl_insertAdvertisementImage control.
@@ -42,13 +42,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.FileUpload fl_insertAdvertisementImage;
 
         /// <summary>
-        /// link_insertSeasonalAd control.
+        /// link_insertClientAd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_insertSeasonalAd;
+        protected global::System.Web.UI.WebControls.LinkButton link_insertClientAd;
 
         /// <summary>
         /// lbl_errors control.
@@ -69,12 +69,12 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.SqlDataSource SqlSource_seasonalTypes;
 
         /// <summary>
-        /// SqlSourceSeasonAds control.
+        /// SqlSourceClientCentricAds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceSeasonAds;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceClientCentricAds;
     }
 }

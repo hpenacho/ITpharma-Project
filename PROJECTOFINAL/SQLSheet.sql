@@ -155,14 +155,19 @@ create table Pub_Sazonal(
 	DataExpiracao date null check(DataExpiracao > getdate()),
 )
 
+create table Pub_Cliente(
+	ID int identity primary key,
+	Descricao varchar(50) not null
+)
+
 create table Publicidade(
 
 	ID int identity primary key,
 	Imagem varbinary(MAX) not null,
 	Tipo bit, -- 0 info do cliente, 1 sazonal
-	ID_Pub_Sazonal int references Pub_Sazonal(ID)
+	ID_Pub_Sazonal int references Pub_Sazonal(ID),
+	ID_Pub_Cliente int references Pub_Cliente(ID)
 )
-
 
 -- INSERTS, UPDATES, DELETES
 
