@@ -63,8 +63,38 @@ namespace PROJECTOFINAL
 
         protected void rpt_SeasonalAdvertsBackoffice_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            switch (e.CommandName)
+            {
+                case "link_deleteAdvert": deleteItem(e); break;
+                case "link_updateAdvert": updateItem(e); break;
+            }
 
+            rpt_SeasonalAdvertsBackoffice.DataBind();
         }
+        private void updateItem(RepeaterCommandEventArgs e)
+        {
+        }
+
+        private void deleteItem(RepeaterCommandEventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_deleteAdvertisement");
+            myCommand.Parameters.AddWithValue("@id_advert", e.CommandArgument.ToString());
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+        }
+
 
         protected void rpt_SeasonalAdvertsBackoffice_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
