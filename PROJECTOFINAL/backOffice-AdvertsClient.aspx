@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-AdvertsClient.aspx.cs" Inherits="PROJECTOFINAL.backOffice_AdvertsClient" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <link rel="stylesheet" type = "text/css" href="Resources/stylesHoverBox.css">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -13,7 +16,7 @@
             
           <div class="container-xl">
 
-                        <asp:Repeater ID="rpt_SeasonalAdvertsBackoffice" runat="server" DataSourceID="SqlSourceSeasonAds" OnItemCommand="rpt_SeasonalAdvertsBackoffice_ItemCommand" OnItemDataBound="rpt_SeasonalAdvertsBackoffice_ItemDataBound">
+                        <asp:Repeater ID="rpt_ClientAdvertsBackoffice" runat="server" DataSourceID="SqlSourceClientAds" OnItemCommand="rpt_ClientAdvertsBackoffice_ItemCommand" OnItemDataBound="rpt_ClientAdvertsBackoffice_ItemDataBound">
                                 <ItemTemplate>
 
                                     <div class="hvrbox">
@@ -22,7 +25,6 @@
                                       <div class="hvrbox-layer_top">
                                           <div class="hvrbox-text">
                                         <h5>Ad Category: <%# Eval("Descricao") %></h5>
-                                        <p> Expiration Date: <%# Eval("DataExpiracao") %></p>
                                            </div>
                                         <asp:LinkButton ID="link_updateAdvert" class="btn btn-sm" CommandName="link_updateAdvert" CommandArgument='<%# Eval("ID") %>' runat="server" CausesValidation="false"><i class="fas fa-pen " style="color: white;"></i></asp:LinkButton>
                                         <asp:LinkButton ID="link_deleteAdvert" class="btn btn-sm" CommandName="link_deleteAdvert" CommandArgument='<%# Eval("ID") %>' runat="server"><i class="fas fa-trash" style="color: white;"></i></asp:LinkButton>
@@ -33,6 +35,8 @@
                                 
                                 </ItemTemplate>
                             </asp:Repeater>
+       
+                        
        
               </div>
 
@@ -71,8 +75,10 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-12">                                        
-                                        <asp:DropDownList ID="ddl_ClientTypes" CssClass="form-control" runat="server" DataSourceID="SqlSource_seasonalTypes" DataTextField="Descricao" DataValueField="ID">
+                                        <asp:DropDownList ID="ddl_ClientTypes" CssClass="form-control" runat="server" DataSourceID="SqlDataSourceClientTypes" DataTextField="Descricao" DataValueField="ID">
                                         </asp:DropDownList>
+                                        
+                                        
                                     </div>
 
                                 </div>
@@ -102,7 +108,7 @@
 
                         <div class="form-row mt-4">
                             <div class="col text-center">                                
-                                <asp:LinkButton ID="link_insertClientAd" class="btn btn-primary btn-dark w-25 mr-1" runat="server"> Insert </asp:LinkButton>
+                                <asp:LinkButton ID="link_insertClientAd" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertClientAd_Click"> Insert </asp:LinkButton>
                                 <!-- INSERTION DRIVE -->
                                 <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
@@ -125,13 +131,10 @@
         </div>
     </div>
     <!-- /Insert ads Modal -->
-
-    <!-- MODAL SQLSOURCES AND REPEATER SOURCES -->    
-      <asp:SqlDataSource ID="SqlSource_seasonalTypes" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [Descricao] FROM [Pub_Sazonal]"></asp:SqlDataSource>
+        
      </div>
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->  
-
-    <asp:SqlDataSource ID="SqlSourceClientCentricAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listSeasonalAds" SelectCommandType="StoredProcedure" ProviderName="<%$ ConnectionStrings:ITpharmaConnectionString.ProviderName %>"></asp:SqlDataSource>
-
-</asp:Content>
+    <asp:SqlDataSource ID="SqlDataSourceClientTypes" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [Descricao], [ID] FROM [Pub_Cliente]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlSourceClientAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listClientCentricAds" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    </asp:Content>

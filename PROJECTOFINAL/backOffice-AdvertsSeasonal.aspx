@@ -1,13 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-AdvertsSeasonal.aspx.cs" Inherits="PROJECTOFINAL.backOffice_AdvertsSeasonal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
     <link rel="stylesheet" type = "text/css" href="Resources/stylesHoverBox.css">
-
-    <styles>       
-        .adIconColor{
-            color: white;
-        }
-
-    </styles>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
