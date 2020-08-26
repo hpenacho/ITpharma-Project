@@ -713,4 +713,7 @@ create or alter proc usp_returnBackofficeOrderProducts (@ID int) as
 select * from Compra inner join produto on compra.Prod_ref = Produto.Codreferencia
 where id_encomenda = @ID
 
-select * from estado
+-- [PROC] UPDATES AN ORDER'S STATE
+
+GO
+create or alter proc usp_updateOrderStatus() -- MUDAR MAIS TEMPO

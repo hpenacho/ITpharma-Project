@@ -24,12 +24,6 @@ namespace PROJECTOFINAL
 
             lbl_errors.InnerText = "";
 
-            //Inserts the image binary
-            Stream imgstream = fl_insertProductImage.PostedFile.InputStream;
-            int imgLen = fl_insertProductImage.PostedFile.ContentLength;
-            byte[] imgBinaryData = new byte[imgLen];
-            imgstream.Read(imgBinaryData, 0, imgLen);
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertBackofficeProducts");
 
             myCommand.Parameters.AddWithValue("@Codreferencia", tb_reference.Value);
@@ -37,8 +31,8 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@preco", tb_price.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_summary.Value);
             myCommand.Parameters.AddWithValue("@descricao", tb_description.Value);
-            myCommand.Parameters.AddWithValue("@imagem", imgBinaryData);
-            myCommand.Parameters.AddWithValue("@pdfFolheto", imgBinaryData); // alterar no futuro
+            myCommand.Parameters.AddWithValue("@imagem", Tools.imageUpload(fl_insertProductImage));
+            myCommand.Parameters.AddWithValue("@pdfFolheto", Tools.imageUpload(fl_insertProductImage)); // alterar no futuro
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_category.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_brand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_prescription.Checked);

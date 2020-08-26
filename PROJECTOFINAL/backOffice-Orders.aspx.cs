@@ -21,6 +21,8 @@ namespace PROJECTOFINAL
 
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
             {
+                DataRowView dr = (DataRowView)e.Item.DataItem;
+                ((DropDownList)e.Item.FindControl("ddl_orderStatus")).SelectedValue = dr["id_estado"].ToString();
 
                 string orderRef = ((HiddenField)e.Item.FindControl("hidden_Order_ID")).Value;
                 Repeater childRepeater = (Repeater)e.Item.FindControl("rpt_child_orders");
@@ -43,5 +45,19 @@ namespace PROJECTOFINAL
             }
         }
 
+        protected void rpt_parent_orders_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if(e.CommandName.ToString() == "link_updateOrder")
+            {
+
+
+
+            }
+
+
+
+
+
+        }
     }
 }

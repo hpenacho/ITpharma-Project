@@ -135,7 +135,7 @@
                                         <td class="align-middle">
                                             <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6>
                                             <!-- only for the filter -->
-                                            <asp:CheckBox ID="check_productIsActive" Style="margin-left: -9px" runat="server" Checked='<%# Eval("Activo") %>' />
+                                            <asp:CheckBox ID="check_productIsActive" Enabled="false" Style="margin-left: -9px;" runat="server" Checked='<%# Eval("Activo") %>' />
                                         </td>
 
                                         <td class="align-middle">

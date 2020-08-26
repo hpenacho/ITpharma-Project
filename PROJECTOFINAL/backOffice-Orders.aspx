@@ -1,14 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Orders.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Orders" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <style>
-
-          #produpdate:hover{
-            color: orange;
-          }
-
-    </style>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -48,43 +40,43 @@
 
                             <tbody class="text-center">
 
-                                <asp:Repeater ID="rpt_parent_orders" runat="server" DataSourceID="sqlSourceOrderDetails" OnItemDataBound="rpt_parent_orders_ItemDataBound">
+                                <asp:Repeater ID="rpt_parent_orders" runat="server" DataSourceID="sqlSourceOrderDetails" OnItemDataBound="rpt_parent_orders_ItemDataBound" OnItemCommand="rpt_parent_orders_ItemCommand">
                                     <ItemTemplate>
 
                                         <!-- ORDERS -->
 
-                                        <tr class="text-center">
+                                        <tr class="text-center align-middle">
 
-                                            <td>
+                                            <td  style="vertical-align: middle">
                                                 <%# Eval("Ref") %>
                                             </td>
                                             
-                                            <td>
-                                                <%# Eval("dataCompra") %>
+                                            <td  style="vertical-align: middle">
+                                                <%#  DateTime.Parse(Eval("dataCompra").ToString()).ToString("MMMM dd, yyyy") %>
                                             </td>
                                             
-                                            <td>
+                                            <td  style="vertical-align: middle">
                                                 <%# Eval("clientName") %>
                                             </td>
                                             
-                                            <td>
+                                            <td  style="vertical-align: middle">
                                                 <%# Eval("orderTotal") %> €
                                             </td>
 
-                                            <td>
+                                            <td  style="vertical-align: middle">
                                                 <asp:DropDownList ID="ddl_orderStatus" runat="server" class="form-control border-white btn-dark" DataSourceID="sqlSourceStatus" DataTextField="Descricao" DataValueField="ID"></asp:DropDownList>
                                             </td>
                                             
-                                            <td>
-                                                <%# Eval("ultimaActualizacao") %>
+                                            <td  style="vertical-align: middle">
+                                               <%#  DateTime.Parse(Eval("ultimaActualizacao").ToString()).ToString("MMMM dd, yyyy H:mm") %>h
                                             </td>
 
-                                            <td>
+                                            <td  style="vertical-align: middle">
                                                 <button type="button" class="btn btn-warning" data-toggle="collapse" data-target='#collapseExample<%# Eval("Ref") %>' aria-expanded="false" aria-controls='collapseExample<%# Eval("Ref") %>'><i class="fas fa-sort-down"></i></button>
                                             </td>
 
-                                            <td>
-                                                <asp:LinkButton ID="link_updateOrder" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
+                                            <td  style="vertical-align: middle">
+                                                <asp:LinkButton ID="link_updateOrder" CssClass="btn btn-warning" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
                                             </td>
 
                                         </tr>
