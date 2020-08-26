@@ -451,6 +451,7 @@
     <Content Include="ckeditor\skins\moono\images\lock.png" />
     <Content Include="ckeditor\skins\moono\images\refresh.png" />
     <Content Include="ckeditor\styles.js" />
+    <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="SQLSheet.sql" />
     <Content Include="Web.config" />
   </ItemGroup>

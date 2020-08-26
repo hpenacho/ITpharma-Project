@@ -714,3 +714,79 @@ select * from Compra inner join produto on compra.Prod_ref = Produto.Codreferenc
 where id_encomenda = @ID
 
 select * from estado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- [USP] DELETES THE SELECTED SEASONAL AD
+GO 
+CREATE OR ALTER PROC usp_deleteAdvertisement(@id_advert int) AS
+BEGIN TRY
+BEGIN TRAN
+
+	delete from publicidade where publicidade.ID = @id_advert
+
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH

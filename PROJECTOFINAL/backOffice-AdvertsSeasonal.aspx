@@ -1,5 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-AdvertsSeasonal.aspx.cs" Inherits="PROJECTOFINAL.backOffice_AdvertsSeasonal" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" type = "text/css" href="Resources/stylesHoverBox.css">
+
+    <styles>       
+        .adIconColor{
+            color: white;
+        }
+
+    </styles>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -16,15 +25,18 @@
                         <asp:Repeater ID="rpt_SeasonalAdvertsBackoffice" runat="server" DataSourceID="SqlSourceSeasonAds" OnItemCommand="rpt_SeasonalAdvertsBackoffice_ItemCommand" OnItemDataBound="rpt_SeasonalAdvertsBackoffice_ItemDataBound">
                                 <ItemTemplate>
 
-                                    <div class="card bg-dark text-white mt-5 mb-5">
-                                      <img class="card-img" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Card image">
-                                      <div class="card-img-overlay">
-                                        <h5 class="card-title">Ad Category: <%# Eval("Descricao") %></h5>
-                                        <p class="card-text"> Expiration Date: <%# Eval("DataExpiracao") %></p>
-                                           
-                                        <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("ID") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("ID") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
+                                    <div class="hvrbox">
+                                    <div class="card bg-dark text-white mt-4 mb-4">
+                                      <img class="card-img hvrbox-layer_bottom" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Card image">
+                                      <div class="hvrbox-layer_top">
+                                          <div class="hvrbox-text">
+                                        <h5>Ad Category: <%# Eval("Descricao") %></h5>
+                                        <p> Expiration Date: <%# Eval("DataExpiracao") %></p>
+                                           </div>
+                                        <asp:LinkButton ID="link_updateAdvert" class="btn btn-sm" CommandName="link_updateAdvert" CommandArgument='<%# Eval("ID") %>' runat="server" CausesValidation="false"><i class="fas fa-pen " style="color: white;"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="link_deleteAdvert" class="btn btn-sm" CommandName="link_deleteAdvert" CommandArgument='<%# Eval("ID") %>' runat="server"><i class="fas fa-trash" style="color: white;"></i></asp:LinkButton>
                                                 
+                                        </div>
                                         </div>
                                         </div>
                                 
@@ -121,23 +133,15 @@
             </div>
         </div>
     </div>
-    <!-- /Insert products Modal -->
-
-     <script type="text/javascript">
-
-         $(document).ready(function () {
-             $('[data-toggle="tooltip"]').tooltip();
-         });
-
-     </script>
+    <!-- /Insert advertisements Modal -->
 
 
     <!-- MODAL SQLSOURCES AND REPEATER SOURCES -->    
-      <asp:SqlDataSource ID="SqlSource_seasonalTypes" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [Descricao] FROM [Pub_Sazonal]"></asp:SqlDataSource>
+      
      </div>
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->  
-
+    <asp:SqlDataSource ID="SqlSource_seasonalTypes" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [Descricao] FROM [Pub_Sazonal]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlSourceSeasonAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listSeasonalAds" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
 </asp:Content>
