@@ -759,5 +759,18 @@ where id_encomenda = @ID
 
 -- [PROC] UPDATES AN ORDER'S STATE
 
-GO
-create or alter proc usp_updateOrderStatus() -- MUDAR MAIS TEMPO
+GO -- MUDAR MAIS TEMPO
+create or alter proc usp_updateOrderStatus(@IDEncomenda int, @IDestado int) AS
+begin try 
+begin tran
+
+	update encomendaHistorico 
+	set EncomendaHistorico.ID_Estado = @IDestado, EncomendaHistorico.UltimaActualizacao = getdate()
+	where EncomendaHistorico.ENC_REF = @IDEncomenda
+
+
+commit
+end try 
+begin catch
+	rollback;
+end catch

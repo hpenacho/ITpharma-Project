@@ -76,7 +76,7 @@
                                             </td>
 
                                             <td  style="vertical-align: middle">
-                                                <asp:LinkButton ID="link_updateOrder" CssClass="btn btn-warning" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="link_updateOrder" CommandArgument='<%# Eval("Ref") %>' CommandName="link_updateOrder" CssClass="btn btn-warning" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
                                             </td>
 
                                         </tr>
