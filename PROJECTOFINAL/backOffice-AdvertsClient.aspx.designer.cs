@@ -15,13 +15,13 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// rpt_SeasonalAdvertsBackoffice control.
+        /// rpt_ClientAdvertsBackoffice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpt_SeasonalAdvertsBackoffice;
+        protected global::System.Web.UI.WebControls.Repeater rpt_ClientAdvertsBackoffice;
 
         /// <summary>
         /// ddl_ClientTypes control.
@@ -60,21 +60,21 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_errors;
 
         /// <summary>
-        /// SqlSource_seasonalTypes control.
+        /// SqlDataSourceClientTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlSource_seasonalTypes;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceClientTypes;
 
         /// <summary>
-        /// SqlSourceClientCentricAds control.
+        /// SqlSourceClientAds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceClientCentricAds;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceClientAds;
     }
 }
