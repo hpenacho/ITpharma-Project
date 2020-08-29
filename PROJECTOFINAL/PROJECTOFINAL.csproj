@@ -72,11 +72,13 @@
   <ItemGroup>
     <Content Include="backOffice-AdvertsClient.aspx" />
     <Content Include="backOffice-AdvertsSeasonal.aspx" />
+    <Content Include="backOffice-Analytics.aspx" />
     <Content Include="backOffice-Orders.aspx" />
     <Content Include="backOffice-Index.aspx" />
     <Content Include="backOffice-Login.aspx" />
     <Content Include="backOffice-Products.aspx" />
     <Content Include="backOffice-ShopUsers.aspx" />
+    <Content Include="backOffice-Stock.aspx" />
     <Content Include="BackOffice\BackOffice-Logins\floating-labels.css" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-area-demo.js" />
     <Content Include="BackOffice\BackOffice-Template\dist\assets\demo\chart-bar-demo.js" />
@@ -470,6 +472,13 @@
     <Compile Include="backOffice-AdvertsSeasonal.aspx.designer.cs">
       <DependentUpon>backOffice-AdvertsSeasonal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="backOffice-Analytics.aspx.cs">
+      <DependentUpon>backOffice-Analytics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-Analytics.aspx.designer.cs">
+      <DependentUpon>backOffice-Analytics.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backOffice-Index.aspx.cs">
       <DependentUpon>backOffice-Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -504,6 +513,13 @@
     </Compile>
     <Compile Include="backOffice-ShopUsers.aspx.designer.cs">
       <DependentUpon>backOffice-ShopUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice-Stock.aspx.cs">
+      <DependentUpon>backOffice-Stock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-Stock.aspx.designer.cs">
+      <DependentUpon>backOffice-Stock.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOfficeMasterPage.Master.cs">
       <DependentUpon>backOfficeMasterPage.Master</DependentUpon>
