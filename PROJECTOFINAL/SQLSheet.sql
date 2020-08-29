@@ -808,3 +808,105 @@ begin catch
 	set @errormessage = ERROR_MESSAGE()
 	rollback
 end catch
+
+-- [PROC] gathers all statistically relevant data.
+
+GO
+create or alter proc usp_gatherStatistics
+
+AS
+BEGIN TRY
+BEGIN TRAN
+
+select count(EncomendaHistorico.enc_ref) as 'Total Orders'
+from EncomendaHistorico
+--------
+select count(EncomendaHistorico.enc_ref) as 'Orders this Month'
+from EncomendaHistorico
+where Month(EncomendaHistorico.DataCompra) = Month(GetDate()) and Year(EncomendaHistorico.DataCompra) = Year(GetDate())
+--------
+select count(EncomendaHistorico.enc_ref) as 'Orders today'
+from EncomendaHistorico
+where EncomendaHistorico.DataCompra = CAST(GetDate() as date)
+------------------
+select sum(total) AS 'Total Profit' from EncomendaHistorico 
+inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+inner join Produto on Compra.Prod_ref = Produto.Codreferencia
+------------------
+select sum(total) AS 'Monthly Profit' from EncomendaHistorico 
+inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+inner join Produto on Compra.Prod_ref = Produto.Codreferencia
+where Month(EncomendaHistorico.DataCompra) = Month(GetDate()) and Year(EncomendaHistorico.DataCompra) = Year(GetDate())
+------------------
+select coalesce(sum(total),0) AS 'Daily Profit' from EncomendaHistorico 
+inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+inner join Produto on Compra.Prod_ref = Produto.Codreferencia
+where EncomendaHistorico.DataCompra = CAST(GetDate() as date)
+------------------
+select count(Produto.codReferencia) as 'Total Unique Products'
+from Produto
+------------------
+select count(Produto.codReferencia) as 'Prod Active'
+from Produto where Produto.Activo = 1
+------------------
+select count(Produto.codReferencia) as 'Prod Inactive'
+from Produto where Produto.Activo = 0
+------------------
+select count(Produto.codReferencia) as 'Prod Archived'
+from Produto where Produto.Descontinuado = 1
+------------------
+select (select sum(StockArmazem.Qtd) from StockArmazem) + (select sum(StockPickup.Qtd) from StockPickup) as 'Total Items'
+------------------
+select sum(StockArmazem.Qtd) as 'Qty Items - Warehouse'
+from StockArmazem
+------------------
+select sum(StockPickup.Qtd) as 'Qty Items - All ATMs'
+from StockPickup
+------------------
+select count(Cliente.ID) as 'Total Shoppers'
+from Cliente
+------------------
+select count(Cliente.ID) as 'Active'
+from Cliente 
+where activo = 1
+------------------
+select count(Cliente.ID) as 'Inactive'
+from Cliente 
+where activo = 0
+------------------
+select count(ExamesAnalises.id) as 'Total Exams'
+from ExamesAnalises
+------------------
+select count(ExamesAnalises.id) as 'Exams this Month'
+from ExamesAnalises
+where Month(ExamesAnalises.DataPedido) = Month(GetDate()) and Year(ExamesAnalises.DataPedido) = Year(GetDate())
+------------------
+select count(ExamesAnalises.id) as 'Exams Today'
+from ExamesAnalises
+where ExamesAnalises.DataPedido = CAST(GetDate() as date)
+------------------
+SELECT top 1 Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, count(Compra.prod_ref) as 'Most Popular'
+from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref inner join Compra on Compra.Prod_Ref = Produto.Codreferencia
+where Produto.Descontinuado = 0
+group by Produto.Codreferencia,Produto.imagem, Produto.nome, Produto.preco
+order by 'Most Popular' desc
+------------------
+select top 1 sum(Qtd) as 'Qtd total', Codreferencia as 'Ref', produto.nome as 'Name'
+from Compra inner join produto on compra.Prod_ref = produto.Codreferencia 
+group by Codreferencia, produto.nome
+order by 'Qtd total' DESC
+------------------
+Select top 1 Cliente.nome,DATEDIFF(year,datanascimento,GETDATE()) - iif(datepart(dayofyear,datanascimento) >datepart (dayofyear , getdate()),1,0) as 'age'
+from cliente
+order by Cliente.Id desc
+
+COMMIT
+END TRY
+BEGIN CATCH
+    --set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
+-------------------------
+exec usp_gatherStatistics
