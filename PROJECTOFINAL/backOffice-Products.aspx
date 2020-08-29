@@ -91,13 +91,13 @@
 
                 <li class="nav-item mb-2 w-50 text-center">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="true">
-                        <h4>Products</h4>
+                        <h5>Products</h5>
                     </a>
                 </li>
 
                 <li class="nav-item w-50 text-center">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#archived" role="tab" aria-controls="archived" aria-selected="false">
-                        <h4>Archived</h4>
+                        <h5>Archived</h5>
                     </a>
                 </li>
 
