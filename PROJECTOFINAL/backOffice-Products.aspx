@@ -14,10 +14,14 @@
 
     <style>
 
-         a.active.nav-item.nav-link{background-color: orange !important;}
-         a.active.nav-item.nav-link{color:white !important;}
+         a.active.nav-item.nav-link{background-color: orange !important;color:white !important;}
          a.nav-item.nav-link{color: #333 !important;}
 
+         #home-tab.active{background-color: orange !important;color:white !important;}
+         #home-tab{background-color: whitesmoke !important;color: #333 !important;}
+
+         #profile-tab.active{background-color: orange !important;color:white !important;}
+         #profile-tab{background-color: whitesmoke !important;color: #333 !important;}
 
         th {
 
@@ -53,119 +57,222 @@
 
     <!-- Insert Products | opens a modal with all the fields necessary to insert a product -->
 
- 
+    <div class="container mt-5">
+        <div class="d-flex justify-content-end col-lg-12 col-md-12 col-sm-12">
 
-   
-        <div class="col-lg-12 mt-5 mb-4 d-flex d-flex justify-content-end">
-
-            <button type="button" class="btn btn-dark mr-3 shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-dark mr-3 shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
-            <button type="button" class="btn btn-warning mr-3 shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
-        
-        </div>
-
-
-
-    <!-- /Insert Products -->
-
-
-
-    <!-- PRODUCT TABLE -->
-
-    <div class="container-fluid">
-        <h1>Products</h1>
-        <ol class="breadcrumb bg-dark text-white mb-4 shadow shadow-sm">
-            <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
-            <li class="breadcrumb-item active">Products</li>
-        </ol>
-
-        <div class="card mb-4 shadow shadow-sm">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Product Table
+            <div>
+                <button type="button" class="btn btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
 
-                    <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-
-                        <thead>
-                            <!-- HEADER OF THE TABLE -->
-                            <tr>
-                                <th>Cod</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Qty</th>
-                                <th>Active</th>
-                                <th class="text-hide"></th>
-                                <th class="text-hide"></th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="text-center text-md-center">
-
-                            <!-- PRODUCTS -->
-
-                            <asp:Repeater ID="rpt_produtosBackoffice" runat="server" DataSourceID="SQLrptProdutos" OnItemCommand="rpt_produtosBackoffice_ItemCommand" OnItemDataBound="rpt_produtosBackoffice_ItemDataBound">
-
-                                <ItemTemplate>
-
-                                    <tr class="text-center">
-                                        <td class="align-middle">
-                                            <%# Eval("Codreferencia") %>
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <%# Eval("nome") %>
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <%# Eval("preco") %> €
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <%# Eval("Qtd") %>
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6>
-                                            <!-- only for the filter -->
-                                            <asp:CheckBox ID="check_productIsActive" Enabled="false" Style="margin-left: -9px;" runat="server" Checked='<%# Eval("Activo") %>' />
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
-                                        </td>
-
-                                        <td class="align-middle">
-                                            <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
-                                        </td>
-                                    </tr>
-
-                                </ItemTemplate>
-                            </asp:Repeater>
-
-                            <!-- //PRODUCTS -->
-
-                        </tbody>
-                    </table>
-
-
-                </div>
+            <div>
+                <button type="button" class="btn btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
             </div>
+
+            <div>
+                <button type="button" class="btn btn-warning shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
+            </div>
+
         </div>
     </div>
 
-    <!-- /PRODUCT TABLE -->
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-3 mt-2">
+        <h1 class="mb-2">Manage Products</h1>
+        <ol class="breadcrumb bg-dark text-white mb-4 shadow shadow-sm mt-2">
+            <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
+            <li class="breadcrumb-item active">Products</li>
+        </ol>
+    </div>
+
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+            <!-- /Insert Products -->
+            <ul class="nav nav-pills" id="myTab" role="tablist">
+
+                <li class="nav-item mb-2 w-50 text-center">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="true">
+                        <h4>Products</h4>
+                    </a>
+                </li>
+
+                <li class="nav-item w-50 text-center">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#archived" role="tab" aria-controls="archived" aria-selected="false">
+                        <h4>Archived</h4>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
 
 
 
 
+    <!-- ACTIVE PRODUCT TABLE -->
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="home-tab">
+
+            <div class="container-fluid">
+                <div class="card mb-4 shadow shadow-sm">
+                    <div class="card-header text-center bg-dark text-white">
+                        <i class="fas fa-table mr-1"></i>
+                        Active Products
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+
+                                <thead>
+                                    <!-- HEADER OF THE TABLE -->
+                                    <tr>
+                                        <th>Cod</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                        <th>Active</th>
+                                        <th class="text-hide"></th>
+                                        <th class="text-hide"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="text-center text-md-center">
+
+                                    <!-- PRODUCTS -->
+
+                                    <asp:Repeater ID="rpt_produtosBackoffice" runat="server" DataSourceID="SQLrptProdutos" OnItemCommand="rpt_produtosBackoffice_ItemCommand" OnItemDataBound="rpt_produtosBackoffice_ItemDataBound">
+
+                                        <ItemTemplate>
+
+                                            <tr class="text-center">
+                                                <td class="align-middle">
+                                                    <%# Eval("Codreferencia") %>
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <%# Eval("nome") %>
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <%# Eval("preco") %> €
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <%# Eval("Qtd") %>
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <h6 class="text-hide" style="margin-bottom: -9px;"><%# Eval("activo") %></h6>
+                                                    <!-- only for the filter -->
+                                                    <asp:CheckBox ID="check_productIsActive" Enabled="false" Style="margin-left: -9px;" runat="server" Checked='<%# Eval("Activo") %>' />
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <asp:LinkButton ID="link_updateProduct" class="btn btn-sm" CommandName="link_updateProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server" CausesValidation="false"><i id="produpdate" class="fas fa-pen"></i></asp:LinkButton>
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <asp:LinkButton ID="link_deleteProduct" class="btn btn-sm" CommandName="link_deleteProduct" CommandArgument='<%# Eval("Codreferencia") %>' runat="server"><i id="prodtrash" class="fas fa-trash"></i></asp:LinkButton>
+                                                </td>
+                                            </tr>
+
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
+                                    <!-- //PRODUCTS -->
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ACTIVE PRODUCT TABLE -->
+
+        <!-- ARCHIVED PRODUCT TABLE -->
+        <div class="tab-pane fade show" id="archived" role="tabpanel" aria-labelledby="archive-tab">
+
+            <div class="container-fluid">
+                <div class="card mb-4 shadow shadow-sm">
+                    <div class="card-header text-center bg-dark text-white">
+                        <i class="fas fa-table mr-1"></i>
+                         Archived Products
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+
+                                <thead>
+                                    <!-- HEADER OF THE TABLE -->
+                                    <tr>
+                                        <th>Cod</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="text-center text-md-center">
+
+                                    <!-- PRODUCTS -->
+
+                                    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SQLrptArchived">
+
+                                        <ItemTemplate>
+
+                                            <tr class="text-center">
+                                                <td class="align-middle">
+                                                    <%# Eval("Codreferencia") %>
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <%# Eval("nome") %>
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <%# Eval("preco") %> €
+                                                </td>
+
+                                                <td class="align-middle">
+                                                    <%# Eval("Qtd") %>
+                                                </td>
+                                            </tr>
+
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
+                                    <!-- //PRODUCTS -->
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- //ARCHIVED PRODUCT TABLE -->
+
+    </div>
+
+  
 
     <!-- insert products Modal -->
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
@@ -180,9 +287,6 @@
                 </div>
                 <div class="modal-body">
                     <!-- BEGIN MODAL BODY CONTENT -->
-
-
-                    <!-- INNER UPDATE PANEL -->
 
 
                     <!-- NAVIGATION -->
@@ -224,7 +328,7 @@
                                             <asp:FileUpload ID="fl_insertProductImage" class="custom-file-input" runat="server" />
                                             <label id="custom-file-label" class="custom-file-label" for="inputGroupFile04">Choose file</label>
                                         </div>
-                                            <div class="input-group-append">
+                                        <div class="input-group-append">
                                         </div>
                                     </div>
 
@@ -260,10 +364,10 @@
 
 
                                     <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
-                                       <div class="input-group-prepend">
+                                        <div class="input-group-prepend">
                                             <label class="input-group-text" for="ddl_category">Category</label>
-                                       </div>
-                                            <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                        </div>
+                                        <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
                                     </div>
 
                                 </div>
@@ -282,11 +386,11 @@
                                         </div>
                                     </div>
 
-                                     <div class="input-group mb-3 col-md-5">
-                                       <div class="input-group-prepend">
+                                    <div class="input-group mb-3 col-md-5">
+                                        <div class="input-group-prepend">
                                             <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                       </div>
-                                            <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                        </div>
+                                        <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
                                     </div>
 
 
@@ -319,13 +423,13 @@
 
 
                                     <div class="input-group col-md-5">
-                                       <div class="input-group-prepend">
-                                          <label class="input-group-text" for="ddl_genericParent">Generic&nbsp;&nbsp;</label>
-                                       </div>
-                                            <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
-                                   </div>
+                                        <div class="input-group-prepend">
+                                            <label class="input-group-text" for="ddl_genericParent">Generic&nbsp;&nbsp;</label>
+                                        </div>
+                                        <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                                    </div>
 
-                                    
+
 
                                 </div>
 
@@ -803,6 +907,7 @@
     <asp:SqlDataSource ID="SQLbrand" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Marca]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SQLgenericParent" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * from produto where ref_generico IS NULL and produto.Descontinuado != 1"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SQLrptProdutos" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listBackofficeProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLrptArchived" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listArchivedBackofficeProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
 </asp:Content>
 

@@ -521,6 +521,14 @@ SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, Stock
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
 where Produto.Descontinuado = 0
 
+-- [PROCEDURE] LIST ARCHIVED PRODUCT BACKOFFICE REPEATER
+
+GO
+CREATE OR ALTER PROC usp_listArchivedBackofficeProducts AS
+SELECT Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, StockArmazem.Qtd, Produto.Activo
+from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref
+where Produto.Descontinuado = 1
+
 -- [PROCEDURE] LIST PRODUCT DETAILS BACKOFFICE
 
 GO
@@ -773,4 +781,30 @@ commit
 end try 
 begin catch
 	rollback;
+end catch
+
+
+-- [PROC] Retorno de informação para o backoffice-stock
+
+GO
+create or alter proc usp_infoStock AS
+select * from StockArmazem inner join Produto on StockArmazem.Prod_Ref = Produto.Codreferencia 
+where produto.activo = 1
+
+-- [PROC] Update de stock do produto  -- FALTA TRATAR DAS EXCEPÇÕES
+
+GO
+create or alter proc usp_updateStock(@prodref varchar(50), @qtd int, @qtdmin int, @qtdmax int, @errormessage varchar(200) output) AS
+begin try
+begin tran
+
+
+		update StockArmazem set qtd = @qtd,qtdmin = @qtdmin,qtdmax = @qtdmax
+		where StockArmazem.Prod_Ref = @prodref
+		
+commit
+end try
+begin catch
+	set @errormessage = ERROR_MESSAGE()
+	rollback
 end catch

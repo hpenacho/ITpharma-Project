@@ -69,13 +69,12 @@
 
 
 
-         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark shadow shadow-sm">
             <a class="navbar-brand" href="backOffice-Index.aspx">ITpharma</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link order-1 order-lg-0" id="sidebarToggle" style="margin-left:-20px;"><i class="fas fa-bars" style="font-size: 19px;"></i></button>
 
              <ul class="navbar-nav ml-auto ml-md-12">
-                
-                <asp:LinkButton ID="lbtn_logout" class="btn btn-secondary" runat="server" OnClick="lbtn_logout_Click"> <i class="fas fa-sign-out-alt"></i></asp:LinkButton>
+                <asp:LinkButton ID="lbtn_logout" class="btn btn-secondary" runat="server" OnClick="lbtn_logout_Click"><i class="fas fa-sign-out-alt"></i></asp:LinkButton>
              </ul>
              
              
