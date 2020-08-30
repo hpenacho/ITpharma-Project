@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Analytics.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Analytics" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -204,7 +206,48 @@
                                         <i class="fas fa-chart-area mr-1"></i>
                                         Area Chart Example
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body">
+
+                                        <div class="row justify-content-around">
+                                        <asp:Chart ID="Chart1" runat="server" DataSourceID="SqlDataSource1" ImageType="Jpeg">
+                                            <Series>
+                                                <asp:Series Name="Series1" ChartType="Pie" XValueMember="gender" YValueMembers="Qty Orders" YValuesPerPoint="6"></asp:Series>
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea Name="ChartArea1">
+                                                    <Area3DStyle IsRightAngleAxes="False" Perspective="45" />
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                            <BorderSkin BackColor="Transparent" BackImageWrapMode="TileFlipX" />
+                                        </asp:Chart>
+
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , IIF(cliente.sexo = 'M', 'Male','Female') as 'gender'
+from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente
+group by cliente.sexo"></asp:SqlDataSource>
+                                        <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource2">
+                                            <Series>
+                                                <asp:Series BackGradientStyle="TopBottom" BorderDashStyle="NotSet" Color="Silver" Name="Series1" Palette="BrightPastel" XValueMember="Order Status" YValueMembers="Qty Orders">
+                                                </asp:Series>
+                                            </Series>
+                                            <ChartAreas>
+                                                <asp:ChartArea BackColor="Transparent" Name="ChartArea1">
+                                                    <AxisY>
+                                                        <MajorGrid Enabled="False" />
+                                                    </AxisY>
+                                                    <AxisX>
+                                                        <MajorGrid Enabled="False" />
+                                                    </AxisX>
+                                                    <AxisX2>
+                                                        <MajorGrid Enabled="False" />
+                                                    </AxisX2>
+                                                </asp:ChartArea>
+                                            </ChartAreas>
+                                        </asp:Chart>
+                                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(encomendaHistorico.ID_Estado) as 'Qty Orders' ,estado.Descricao as 'Order Status'
+                                        from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = estado.ID
+                                        group by estado.Descricao"></asp:SqlDataSource>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                             
