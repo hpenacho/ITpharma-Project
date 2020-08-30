@@ -885,16 +885,17 @@ select count(ExamesAnalises.id) as 'Exams Today'
 from ExamesAnalises
 where ExamesAnalises.DataPedido = CAST(GetDate() as date)
 ------------------
-SELECT top 1 Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, count(Compra.prod_ref) as 'Most Popular'
+SELECT top 1 Produto.Codreferencia,Produto.nome, Produto.imagem, count(Compra.prod_ref) as 'Most Popular'
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref inner join Compra on Compra.Prod_Ref = Produto.Codreferencia
 where Produto.Descontinuado = 0
-group by Produto.Codreferencia,Produto.imagem, Produto.nome, Produto.preco
+group by Produto.Codreferencia,Produto.imagem, Produto.nome
 order by 'Most Popular' desc
 ------------------
-select top 1 sum(Qtd) as 'Qtd total', Codreferencia as 'Ref', produto.nome as 'Name'
-from Compra inner join produto on compra.Prod_ref = produto.Codreferencia 
-group by Codreferencia, produto.nome
-order by 'Qtd total' DESC
+select top 1 Codreferencia as 'Ref', produto.nome as 'Name', produto.imagem, sum(Qtd) as 'Most Sold'
+from Compra inner join produto on compra.Prod_ref = produto.Codreferencia
+where Produto.Descontinuado = 0
+group by Codreferencia, produto.nome, produto.imagem
+order by 'Most Sold' DESC
 ------------------
 Select top 1 Cliente.nome,DATEDIFF(year,datanascimento,GETDATE()) - iif(datepart(dayofyear,datanascimento) >datepart (dayofyear , getdate()),1,0) as 'age'
 from cliente

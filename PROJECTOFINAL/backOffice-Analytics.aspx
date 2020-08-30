@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
+<style>
 .card-box {
     position: relative;
     color: #fff;
@@ -13,10 +13,10 @@
     text-decoration: none;
     color: #f1f1f1;
 }
-.card-box:hover .icon i {
-    font-size: 100px !important;
-    transition: 1s !important;
-    -webkit-transition: 1s !important;
+.card-box:hover .icon {
+    font-size: 86px;
+    transition: 1.5s;
+    -webkit-transition: 1s;
 }
 .card-box .inner {
     padding: 5px 10px 0 10px;
@@ -34,7 +34,8 @@
 }
 .card-box .icon {
     position: absolute;
-    top: auto;
+    transition: 1s;
+    top: 0;
     bottom: 5px;
     right: 5px;
     z-index: 0;
@@ -79,7 +80,7 @@
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-blue">
                     <div class="inner">
-                        <h3><asp:Label ID="lbl_totalOrders" runat="server" Text="totalOrders#"></asp:Label></h3>
+                        <h3><asp:Label ID="lbl_stats0" runat="server" Text="totalOrders#"></asp:Label></h3>
                         <p> Total Orders </p>
                     </div>
                     <div class="icon">
@@ -88,8 +89,8 @@
                     <a href="#collapseOrders" class="card-box-footer" data-toggle="collapse" aria-expanded="false" aria-controls="collapseOrders">View More <i class="fa fa-arrow-circle-right"></i></a>
                      <div class="collapse" id="collapseOrders">
                         <div class="card card-footer">
-                            <p> Orders this month: <asp:Label ID="lbl_ordersMonth" runat="server" Text="ordersMonth#"></asp:Label></p>
-                            <p> Orders today: <asp:Label ID="lbl_ordersDay" runat="server" Text="ordersDay#"></asp:Label></p>                            
+                            <p> Orders this month: <asp:Label ID="lbl_stats1" runat="server" Text="ordersMonth#"></asp:Label></p>
+                            <p> Orders today: <asp:Label ID="lbl_stats2" runat="server" Text="ordersDay#"></asp:Label></p>                            
                           </div>
                         </div>   
                 <!-- -->
@@ -99,7 +100,7 @@
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-green">
                     <div class="inner">
-                        <h3> €<asp:Label ID="lbl_totalProfit" runat="server" Text="money"></asp:Label> </h3>
+                        <h3> €<asp:Label ID="lbl_stats3" runat="server" Text="Total money"></asp:Label> </h3>
                         <p> Total Profit </p>
                     </div>
                     <div class="icon">
@@ -108,8 +109,8 @@
                     <a href="#collapseProfit" class="card-box-footer" data-toggle="collapse" aria-expanded="false" aria-controls="collapseProfit">View More <i class="fa fa-arrow-circle-right"></i></a>
                      <div class="collapse" id="collapseProfit">
                         <div class="card card-footer">
-                            <p> Profit this month: €<asp:Label ID="lbl_profitMonth" runat="server" Text="money"></asp:Label></p>
-                            <p> Profit today: €<asp:Label ID="lbl_profitDay" runat="server" Text="money"></asp:Label></p>                            
+                            <p> Profit this month: €<asp:Label ID="lbl_stats4" runat="server" Text="moneyMonth"></asp:Label></p>
+                            <p> Profit today: €<asp:Label ID="lbl_stats5" runat="server" Text="moneyDay"></asp:Label></p>                            
                           </div>
                         </div>  
                 </div>
@@ -117,7 +118,7 @@
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-orange">
                     <div class="inner">
-                        <h3><asp:Label ID="lbl_totalProds" runat="server" Text="totalProds#"></asp:Label> </h3>
+                        <h3><asp:Label ID="lbl_stats6" runat="server" Text="totalProds#"></asp:Label> </h3>
                         <p> Total Unique Products </p>
                     </div>
                     <div class="icon">
@@ -125,10 +126,9 @@
                     </div>
                     <a href="#collapseProducts" class="card-box-footer" data-toggle="collapse" aria-expanded="false" aria-controls="collapseProducts">View More <i class="fa fa-arrow-circle-right"></i></a>
                      <div class="collapse" id="collapseProducts">
-                        <div class="card card-footer">
-                            <p> Active: <asp:Label ID="lbl_prodsActive" runat="server" Text="activeProds#"></asp:Label></p>
-                            <p> Inactive: <asp:Label ID="lbl_prodsInactive" runat="server" Text="inactiveProds#"></asp:Label></p>
-                            <p> Archived: <asp:Label ID="lbl_archived" runat="server" Text="archivedProds#"></asp:Label></p>
+                        <div class="card card-footer text-center">
+                            <p> Active: <asp:Label ID="lbl_stats7" runat="server" Text="activeProds#"></asp:Label> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Inactive: <asp:Label ID="lbl_stats8" runat="server" Text="inactiveProds#"></asp:Label> </p>
+                            <p> Archived: <asp:Label ID="lbl_stats9" runat="server" Text="archivedProds#"></asp:Label></p>
                           </div>
                         </div>  
                 </div>
@@ -137,7 +137,7 @@
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-info">
                     <div class="inner">
-                        <h3> <asp:Label ID="lbl_itemQty" runat="server" Text="totalItems#"></asp:Label> </h3>
+                        <h3> <asp:Label ID="lbl_stats10" runat="server" Text="totalItems#"></asp:Label> </h3>
                         <p> Total Item Qty </p>
                     </div>
                     <div class="icon">
@@ -146,8 +146,8 @@
                     <a href="#collapseQty" class="card-box-footer" data-toggle="collapse" aria-expanded="false" aria-controls="collapseQty">View More <i class="fa fa-arrow-circle-right"></i></a>
                      <div class="collapse" id="collapseQty">
                         <div class="card card-footer">
-                            <p> Warehouse: <asp:Label ID="lbl_warehouseItemQty" runat="server" Text="warehouseItems#"></asp:Label></p>
-                            <p> Pickups: <asp:Label ID="lbl_pickupQty" runat="server" Text="atmItems#"></asp:Label></p>                            
+                            <p> Warehouse: <asp:Label ID="lbl_stats11" runat="server" Text="warehouseItems#"></asp:Label></p>
+                            <p> Pickups: <asp:Label ID="lbl_stats12" runat="server" Text="atmItems#"></asp:Label></p>                            
                           </div>
                         </div>   
                 <!-- -->
@@ -157,7 +157,7 @@
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-red">
                     <div class="inner">
-                        <h3> <asp:Label ID="lbl_totalShoppers" runat="server" Text="totalShoppers#"></asp:Label> </h3>
+                        <h3> <asp:Label ID="lbl_stats13" runat="server" Text="totalShoppers#"></asp:Label> </h3>
                         <p> Total Shoppers </p>
                     </div>
                     <div class="icon">
@@ -166,9 +166,8 @@
                     <a href="#collapseShoppers" class="card-box-footer" data-toggle="collapse" aria-expanded="false" aria-controls="collapseShoppers">View More <i class="fa fa-arrow-circle-right"></i></a>
                      <div class="collapse" id="collapseShoppers">
                         <div class="card card-footer">                            
-                            <p> Active: <asp:Label ID="lbl_activeShoppers" runat="server" Text="activeShoppers#"></asp:Label></p>
-                            <p> Inactive: <asp:Label ID="lbl_inactiveShoppers" runat="server" Text="inactiveShoppers#"></asp:Label></p>
-                            <p> New Users today: <asp:Label ID="lbl_newShoppers" runat="server" Text="newShoppers#"></asp:Label></p>
+                            <p> Active: <asp:Label ID="lbl_stats14" runat="server" Text="activeShoppers#"></asp:Label></p>
+                            <p> Inactive: <asp:Label ID="lbl_stats15" runat="server" Text="inactiveShoppers#"></asp:Label></p>
                           </div>
                         </div>  
                 </div>
@@ -177,7 +176,7 @@
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-secondary">
                     <div class="inner">
-                        <h3> <asp:Label ID="lbl_totalExams" runat="server" Text="totalExams#"></asp:Label> </h3>
+                        <h3> <asp:Label ID="lbl_stats16" runat="server" Text="totalExams#"></asp:Label> </h3>
                         <p> Total Exams Outsourced </p>
                     </div>
                     <div class="icon">
@@ -186,8 +185,8 @@
                     <a href="#collapseExams" class="card-box-footer" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExams">View More <i class="fa fa-arrow-circle-right"></i></a>
                      <div class="collapse" id="collapseExams">
                         <div class="card card-footer">
-                            <p> Exams this month: <asp:Label ID="lbl_examsMonth" runat="server" Text="examsMonth#"></asp:Label></p>
-                            <p> Exams today: <asp:Label ID="lbl_examsDay" runat="server" Text="examsDay#"></asp:Label></p>                            
+                            <p> Exams this month: <asp:Label ID="lbl_stats17" runat="server" Text="examsMonth#"></asp:Label></p>
+                            <p> Exams today: <asp:Label ID="lbl_stats18" runat="server" Text="examsDay#"></asp:Label></p>                            
                           </div>
                         </div>   
                 <!-- -->
@@ -255,14 +254,70 @@
                         </div>
 
     <!-- charts END here-->
+        
+            <div class="row d-flex justify-content-around">
+                
 
-                                
+                    <div class="col-lg-4">
+
+                        <div class="card">
+                            <div class="card-header"><i class="fas fa-fire-alt"></i> Most Popular Product</div>
+                            <div class="card-body">
+                                <div class="row justify-content-around">
+                                 <asp:Image ID="img_popProd" CssClass="card-img" runat="server" Width="60" />
+                                    <p class="card-text">Ref: <asp:Label ID="lbl_PopProdRef" runat="server" Text="[PopProdRef]"></asp:Label> </p>
+                                    <p class="card-text">Name: <asp:Label ID="lbl_PopProdName" runat="server" Text="[PopProdName]"></asp:Label> </p>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5">
+
+                        <div class="card">
+                            <div class="card-header"><i class="fas fa-star"></i> Bestseller</div>
+                            <div class="card-body">
+                         <div class="row justify-content-around">
+                             <asp:Image ID="img_bsProd" CssClass="card-img" runat="server" width="60" />
+                                <p class="card-text">Ref: <asp:Label ID="lbl_bsRef" runat="server" Text="[bsRef]"></asp:Label> </p>
+                                    <p class="card-text">Name: <asp:Label ID="lbl_bsName" runat="server" Text="[bsName]"></asp:Label> </p>
+                                      <p class="card-text">Sold: <asp:Label ID="lbl_bsQty" runat="server" Text="[bsQty]"></asp:Label> </p>                                    
+                                    </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                        <div class="card">
+                            <div class="card-header"><i class="fas fa-user-check"></i> Newest Shopper</div>
+                            <div class="card-body">
+                                <div class="row justify-content-around">
+                                <p class="card-text">Name: <asp:Label ID="lbl_newShopperName" runat="server" Text="[shopper Name]"></asp:Label></p>
+                                <p class="card-text">Age: <asp:Label ID="lbl_newShopperAge" runat="server" Text="[shopper Age]"></asp:Label></p>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            
+
+
+        </div>
+
         
 
-
-        </div> <!-- end of main container -->
+     <!-- end of main container -->
 
     <!-- SQL Sources -->
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
     </asp:Content>

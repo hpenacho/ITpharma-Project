@@ -15,192 +15,255 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// lbl_totalOrders control.
+        /// lbl_stats0 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_totalOrders;
+        protected global::System.Web.UI.WebControls.Label lbl_stats0;
 
         /// <summary>
-        /// lbl_ordersMonth control.
+        /// lbl_stats1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ordersMonth;
+        protected global::System.Web.UI.WebControls.Label lbl_stats1;
 
         /// <summary>
-        /// lbl_ordersDay control.
+        /// lbl_stats2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ordersDay;
+        protected global::System.Web.UI.WebControls.Label lbl_stats2;
 
         /// <summary>
-        /// lbl_totalProfit control.
+        /// lbl_stats3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_totalProfit;
+        protected global::System.Web.UI.WebControls.Label lbl_stats3;
 
         /// <summary>
-        /// lbl_profitMonth control.
+        /// lbl_stats4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_profitMonth;
+        protected global::System.Web.UI.WebControls.Label lbl_stats4;
 
         /// <summary>
-        /// lbl_profitDay control.
+        /// lbl_stats5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_profitDay;
+        protected global::System.Web.UI.WebControls.Label lbl_stats5;
 
         /// <summary>
-        /// lbl_totalProds control.
+        /// lbl_stats6 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_totalProds;
+        protected global::System.Web.UI.WebControls.Label lbl_stats6;
 
         /// <summary>
-        /// lbl_prodsActive control.
+        /// lbl_stats7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_prodsActive;
+        protected global::System.Web.UI.WebControls.Label lbl_stats7;
 
         /// <summary>
-        /// lbl_prodsInactive control.
+        /// lbl_stats8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_prodsInactive;
+        protected global::System.Web.UI.WebControls.Label lbl_stats8;
 
         /// <summary>
-        /// lbl_archived control.
+        /// lbl_stats9 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_archived;
+        protected global::System.Web.UI.WebControls.Label lbl_stats9;
 
         /// <summary>
-        /// lbl_itemQty control.
+        /// lbl_stats10 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_itemQty;
+        protected global::System.Web.UI.WebControls.Label lbl_stats10;
 
         /// <summary>
-        /// lbl_warehouseItemQty control.
+        /// lbl_stats11 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_warehouseItemQty;
+        protected global::System.Web.UI.WebControls.Label lbl_stats11;
 
         /// <summary>
-        /// lbl_pickupQty control.
+        /// lbl_stats12 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_pickupQty;
+        protected global::System.Web.UI.WebControls.Label lbl_stats12;
 
         /// <summary>
-        /// lbl_totalShoppers control.
+        /// lbl_stats13 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_totalShoppers;
+        protected global::System.Web.UI.WebControls.Label lbl_stats13;
 
         /// <summary>
-        /// lbl_activeShoppers control.
+        /// lbl_stats14 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_activeShoppers;
+        protected global::System.Web.UI.WebControls.Label lbl_stats14;
 
         /// <summary>
-        /// lbl_inactiveShoppers control.
+        /// lbl_stats15 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_inactiveShoppers;
+        protected global::System.Web.UI.WebControls.Label lbl_stats15;
 
         /// <summary>
-        /// lbl_newShoppers control.
+        /// lbl_stats16 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_newShoppers;
+        protected global::System.Web.UI.WebControls.Label lbl_stats16;
 
         /// <summary>
-        /// lbl_totalExams control.
+        /// lbl_stats17 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_totalExams;
+        protected global::System.Web.UI.WebControls.Label lbl_stats17;
 
         /// <summary>
-        /// lbl_examsMonth control.
+        /// lbl_stats18 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_examsMonth;
+        protected global::System.Web.UI.WebControls.Label lbl_stats18;
 
         /// <summary>
-        /// lbl_examsDay control.
+        /// img_popProd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_examsDay;
+        protected global::System.Web.UI.WebControls.Image img_popProd;
 
         /// <summary>
-        /// SqlDataSource1 control.
+        /// lbl_PopProdRef control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Label lbl_PopProdRef;
+
+        /// <summary>
+        /// lbl_PopProdName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_PopProdName;
+
+        /// <summary>
+        /// img_bsProd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image img_bsProd;
+
+        /// <summary>
+        /// lbl_bsRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_bsRef;
+
+        /// <summary>
+        /// lbl_bsName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_bsName;
+
+        /// <summary>
+        /// lbl_bsQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_bsQty;
+
+        /// <summary>
+        /// lbl_newShopperName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_newShopperName;
+
+        /// <summary>
+        /// lbl_newShopperAge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_newShopperAge;
     }
 }
