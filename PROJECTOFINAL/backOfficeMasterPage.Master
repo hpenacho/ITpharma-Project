@@ -84,6 +84,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                                 Home
                             </a>
+
                             <div class="sb-sidenav-menu-heading"> Analytics </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -96,37 +97,12 @@
                                     <a class="nav-link" href="backOffice-AdvertsClient.aspx"> Client-Centric Ads </a>  
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+
+                            <a class="nav-link" href="backOffice-Analytics.aspx">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 Statistics
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">                             
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Sales
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Global</a>
-                                            <a class="nav-link" href="#">Vending Machine</a>
-                                            <a class="nav-link" href="#">Graphs & Charts</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Other
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">User Stats</a>
-                                            <a class="nav-link" href="#">Brand & Category</a>
-                                            <a class="nav-link" href="#">Graphs & Charts</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
+                            
                             <div class="sb-sidenav-menu-heading">Data Management</div>
                             <a class="nav-link" href="backOffice-ShopUsers.aspx">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
@@ -141,6 +117,11 @@
                             <a class="nav-link" href="backOffice-Orders.aspx">
                                 <div class="sb-nav-link-icon"><i class="fas fa-truck-loading"></i></div>
                                 Orders
+                            </a>
+
+                            <a class="nav-link" href="backOffice-Stock.aspx">
+                                <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                                Stock
                             </a>
 
                         </div>
