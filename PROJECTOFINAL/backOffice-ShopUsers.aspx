@@ -74,7 +74,7 @@
 
                         <tbody class="text-center text-md-center">
 
-                            <!-- PRODUCTS -->
+                            <!-- SHOP USERS -->
                          
                                 <asp:Repeater ID="rpt_ShopUsersBackOffice" runat="server" DataSourceID="SqlrptShopUsers" OnItemCommand="rpt_ShopUsersBackOffice_ItemCommand" OnItemDataBound="rpt_ShopUsersBackOffice_ItemDataBound">
                                 <ItemTemplate>

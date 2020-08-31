@@ -21,15 +21,9 @@ namespace PROJECTOFINAL
         {
             lbl_errors.InnerText = "";
 
-            //Inserts the image binary
-            Stream imgstream = fl_insertAdvertisementImage.PostedFile.InputStream;
-            int imgLen = fl_insertAdvertisementImage.PostedFile.ContentLength;
-            byte[] imgBinaryData = new byte[imgLen];
-            imgstream.Read(imgBinaryData, 0, imgLen);
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertAdSeasonal");
 
-            myCommand.Parameters.AddWithValue("@imagem", imgBinaryData);
+            myCommand.Parameters.AddWithValue("@imagem", Tools.imageUpload(fl_insertAdvertisementImage));
             myCommand.Parameters.AddWithValue("@id_pub_sazonal", ddl_SeasonalTypes.SelectedValue);
 
             //OUTPUT - ERROR MESSAGES
@@ -54,6 +48,45 @@ namespace PROJECTOFINAL
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
                 System.Diagnostics.Debug.WriteLine(lbl_errors.InnerText.ToString());
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+        }
+
+        protected void link_insertSeasonalType_Click(object sender, EventArgs e)
+        {
+            lbl_errors2.InnerText = "";
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_insertSeasonalType");
+
+            myCommand.Parameters.AddWithValue("@Description",tb_typeName.Value);
+            myCommand.Parameters.AddWithValue("@DateStart", Convert.ToDateTime(dateStart.Value));
+            myCommand.Parameters.AddWithValue("@DateExpire", Convert.ToDateTime(dateExpire.Value));
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_errors2.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+                else
+                {
+                    ddl_SeasonalTypes.DataBind();
+                }
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+                System.Diagnostics.Debug.WriteLine(lbl_errors2.InnerText.ToString());
             }
             finally
             {
@@ -100,5 +133,7 @@ namespace PROJECTOFINAL
         {
 
         }
+
+        
     }
 }

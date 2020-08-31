@@ -201,10 +201,10 @@
 
         <div class="row mt-4 justify-content-around">
                             <div class="col-xl-6">
-                                <div class="card mb-4">
+                                <div class="card mb-4 " style="padding-bottom: 0.72em;">
                                     <div class="card-header">
                                         <i class="fas fa-chart-area mr-1"></i>
-                                        Area Chart Example
+                                        Charts: Order Information
                                     </div>
                                     <div class="card-body">
 
@@ -222,8 +222,8 @@
                                         </asp:Chart>
 
                                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , IIF(cliente.sexo = 'M', 'Male','Female') as 'gender'
-from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente
-group by cliente.sexo"></asp:SqlDataSource>
+                                            from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente
+                                            group by cliente.sexo"></asp:SqlDataSource>
                                         <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource2">
                                             <Series>
                                                 <asp:Series BackGradientStyle="TopBottom" BorderDashStyle="NotSet" Color="Silver" Name="Series1" Palette="BrightPastel" XValueMember="Order Status" YValueMembers="Qty Orders">
@@ -252,46 +252,66 @@ group by cliente.sexo"></asp:SqlDataSource>
                             </div>
                             
                          <div class="col-xl-6">
-                               <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                DataTable Example
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                            </tr>                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+
+                             <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Top Buyers
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-hover" width="100%" cellspacing="0">
+
+                        <thead class="text-center text-md-center">
+                            <!-- HEADER OF THE TABLE -->
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Orders</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="text-center text-md-center">
+                         
+                                <asp:Repeater ID="rpt_topBuyers" runat="server" DataSourceID="SqlSourceTopBuyers">
+                                <ItemTemplate>
+
+                                    <tr class="text-center">
+                                        <td class="align-middle">                                          
+                                            <asp:Label ID="lbl_ID" runat="server" Text=<%# Eval("ID") %>></asp:Label>                                            
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_name" runat="server" Text=<%# Eval("nome") %>></asp:Label>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_age" runat="server" Text=<%# Eval("Age") %>></asp:Label>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_orders" runat="server" Text=<%# Eval("Orders") %>></asp:Label>
+                                        </td>
+                                    </tr>
+
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+                                                  
+                                <asp:SqlDataSource ID="SqlSourceTopBuyers" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="Select top 5 Cliente.id, Cliente.nome, DATEDIFF(year,Cliente.datanascimento,GETDATE()) - iif(datepart(dayofyear,datanascimento) &gt;datepart (dayofyear , getdate()),1,0) as 'Age', count(EncomendaHistorico.Enc_ref) as 'Orders'
+                                 From Cliente inner join EncomendaHistorico on Cliente.id = EncomendaHistorico.id_cliente
+                                    group by Cliente.id, Cliente.nome, datanascimento
+                                    Order by 'Orders' DESC"> </asp:SqlDataSource>
+                                       
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+                             
                              </div>
 
                         </div>

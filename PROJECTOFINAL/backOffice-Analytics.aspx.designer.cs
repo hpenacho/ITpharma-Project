@@ -222,6 +222,24 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
 
         /// <summary>
+        /// rpt_topBuyers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_topBuyers;
+
+        /// <summary>
+        /// SqlSourceTopBuyers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourceTopBuyers;
+
+        /// <summary>
         /// img_popProd control.
         /// </summary>
         /// <remarks>
