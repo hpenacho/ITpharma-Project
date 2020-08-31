@@ -6,10 +6,38 @@
 
  <style>
 
-     #stockupdate:hover{
+     #stockupdate:hover {
          color: orange;
      }
 
+     a.active.nav-item.nav-link {
+         background-color: orange !important;
+         color: white !important;
+     }
+
+     a.nav-item.nav-link {
+         color: #333 !important;
+     }
+
+     #home-tab.active {
+         background-color: orange !important;
+         color: white !important;
+     }
+
+     #home-tab {
+         background-color: whitesmoke !important;
+         color: #333 !important;
+     }
+
+     #profile-tab.active {
+         background-color: orange !important;
+         color: white !important;
+     }
+
+     #profile-tab {
+         background-color: whitesmoke !important;
+         color: #333 !important;
+     }
      
  </style> 
 
@@ -18,7 +46,6 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
 
 
 
@@ -31,15 +58,23 @@
 
         <div class="row">
 
-            <div class="col-lg-2">
-                <div class="nav flex-column nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+               
+                <ul class="nav nav-pills" id="myTab" role="tablist">
 
-                    <a class="nav-link navstock active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Loja</a>
-                    <a class="nav-link navstock" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Carcavelos</a>
-                    <a class="nav-link navstock" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Qualquer coisa</a>
-                    <a class="nav-link navstock" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Qualquer coisa</a>
+                    <li class="nav-item mb-2 w-50 text-center">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#store" role="tab" aria-controls="products" aria-selected="true">
+                            <h5>Store</h5>
+                        </a>
+                    </li>
 
-                </div>
+                    <li class="nav-item w-50 text-center">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#pickup" role="tab" aria-controls="archived" aria-selected="false">
+                            <h5>Pickup</h5>
+                        </a>
+                    </li>
+
+                </ul>
             </div>
 
             <div class="tab-content col-lg-10 d-inline-block ml-0" id="v-pills-tabContent">
