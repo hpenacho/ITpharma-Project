@@ -680,7 +680,7 @@ GO
 -- [QUERY] LISTS SEASONAL ADS //for backoffice seasonal ad management
 go
 create or ALTER PROC usp_listSeasonalAds AS
-SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Sazonal, Pub_Sazonal.Descricao, Pub_Sazonal.DataExpiracao
+SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Sazonal, Pub_Sazonal.Descricao,Pub_Sazonal.DataStart, Pub_Sazonal.DataExpiracao
 from Publicidade inner join Pub_Sazonal on Publicidade.ID_Pub_Sazonal = Pub_Sazonal.id
 where Publicidade.Tipo = 1
 GO
@@ -911,3 +911,31 @@ END CATCH
 GO
 -------------------------
 exec usp_gatherStatistics
+-------------------------
+
+------inserts new seasonal ad types (winter, easter, xmas, etc)
+GO
+CREATE OR ALTER proc [dbo].[usp_insertSeasonalType](
+										    @Description varchar(50),										    
+										    @DateStart date,	
+											@DateExpire date,
+										    @errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+IF EXISTS (SELECT '*' FROM Pub_Sazonal WHERE Pub_Sazonal.Descricao = @Description)
+		THROW 70003, 'A Seasonal Type with that name already exists, try with a different name.', 10
+	
+	INSERT INTO Pub_Sazonal VALUES (@Description,@DateStart,@DateExpire)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
+------------------------------
+
