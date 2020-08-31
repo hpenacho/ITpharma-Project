@@ -89,13 +89,13 @@
             <!-- /Insert Products -->
             <ul class="nav nav-pills" id="myTab" role="tablist">
 
-                <li class="nav-item mb-2 w-50 text-center">
+                <li class="nav-item w-50 text-center shadow shadow-sm">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="true">
                         <h5>Products</h5>
                     </a>
                 </li>
 
-                <li class="nav-item w-50 text-center">
+                <li class="nav-item w-50 text-center  shadow shadow-sm">
                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#archived" role="tab" aria-controls="archived" aria-selected="false">
                         <h5>Archived</h5>
                     </a>
