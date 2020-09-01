@@ -28,7 +28,6 @@ namespace PROJECTOFINAL
                 for (int i = 0; i < dataSet.Tables.Count ; i++)
                 {                    
                     dr = dataSet.Tables[i].Rows[0];
-                    System.Diagnostics.Debug.WriteLine("lbl_stats" + i);
 
                     if(((Label)Main.FindControl("lbl_stats" + i)) != null)
                     ((Label)Main.FindControl("lbl_stats" + i)).Text = dr[0].ToString();
