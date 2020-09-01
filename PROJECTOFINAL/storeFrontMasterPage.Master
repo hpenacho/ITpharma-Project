@@ -4,16 +4,88 @@
 
 <html>
 <head runat="server">
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+
+  <title>ITpharma - Health around the corner</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap core CSS -->
+  <link href="StoreFront/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="StoreFront/css/modern-business.css" rel="stylesheet">
+  <link href="StoreFront/css/store-front.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/7d8b56b46a.js" crossorigin="anonymous"></script>
+
+  <!-- CONTEUDO HEAD MASTER -->
+  <asp:ContentPlaceHolder ID="head" runat="server">
+  </asp:ContentPlaceHolder>
+  <!-- CONTEUDO HEAD MASTER -->
+
+
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+
+         <!-- //MAIN CONTAINER -->
+        <div class="container">
+
+            <nav class="navbar sticky-top mt-1 navbar-expand-lg text-dark navbar-light bg-white py-3" id="navbar-pharma">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html">IT Pharma</a>
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                        <div class="col-lg-9">
+                            <ul class="navbar-nav justify-content-center">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="services.html">Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-2 bg-dark">
+                            <ul class="navbar-nav ml-auto justify-content-lg-end">
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-primary rounded"><i class="far fa-user"></i></button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-primary rounded"><i class="fas fa-search"></i></button>
+                                </li>
+                                <li class="nav-item">
+                                    <button type="button" class="btn btn-primary rounded small"><i class="fas fa-shopping-cart"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </nav>
+
         </div>
+        <!-- //MAIN CONTAINER -->
+
+
+        <!-- CONTEUDO BODY MASTER -->
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <!-- //CONTEUDO BODY MASTER -->
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="StoreFront/vendor/jquery/jquery.min.js"></script>
+        <script src="StoreFront/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
     </form>
 </body>
 </html>

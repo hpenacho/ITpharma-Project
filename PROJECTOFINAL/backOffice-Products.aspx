@@ -737,143 +737,131 @@
 
     <!-- INSERT BRANDS Modal -->
 
-    <asp:UpdatePanel ID="updateBrands" runat="server"  UpdateMode="Conditional">
-        <ContentTemplate>
-
-
-
-
     <div class="modal fade ml-3 mt-5" id="modal-insert-brand" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-md shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-2 modal-title bg-dark rounded-top text-light">
                     <h5 class=" modal-title col-12 text-center" id="modal-insert-brand-label">Brands
                          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                          </button>
+                             <span aria-hidden="true">&times;</span>
+                         </button>
                     </h5>
                 </div>
                 <!-- BEGIN MODAL BODY CONTENT -->
                 <div class=" modal-body">
 
 
-                    <asp:UpdatePanel runat="server">
-                         <ContentTemplate>
 
+                    <div class="form-row col-md-12 d-flex form-inline">
 
-                                    <div class="form-row col-md-12 d-flex form-inline">
+                        <input type="text" class="form-control w-75" runat="server" id="tb_insertBrand" placeholder="Brand">
+                        <asp:LinkButton ID="link_insertBrand" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3 shadow shadow-sm" Style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
 
-                                            <input type="text" class="form-control w-75" runat="server" id="tb_insertBrand" placeholder="Brand">
-                                            <asp:LinkButton ID="link_insertBrand" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3 shadow shadow-sm" style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
-                                           
-                                    </div>
-                                    
-                                    <div class="form-group">
+                    </div>
 
-                                        <div class="form-row col-md-12 mt-4 d-flex form-inline">
+                    <div class="form-group">
 
-                                            <asp:DropDownList ID="ddl_allBrands" class="form-control w-75" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID" AutoPostBack="True"></asp:DropDownList>
+                        <div class="form-row col-md-12 mt-4 d-flex form-inline">
 
-                                            <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseBrandUpdate" aria-expanded="false" aria-controls="collapseExample">
-                                                <i class="fas fa-pen"></i>
-                                            </button>
+                            <asp:DropDownList ID="ddl_allBrands" class="form-control w-75" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID" AutoPostBack="True"></asp:DropDownList>
 
-                                            <asp:LinkButton ID="link_deleteBrand" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteBrand_Click">
+                            <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseBrandUpdate" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fas fa-pen"></i>
+                            </button>
+
+                            <asp:LinkButton ID="link_deleteBrand" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteBrand_Click">
                                                 <i class="fas fa-trash"></i>
-                                            </asp:LinkButton>
-                                              
-
-                                        </div>
-
-                                        <div class="collapse" id="collapseBrandUpdate">
-
-                                             <div class="form-row col-md-12 mt-4">
-                                                <input type="text" class="form-control w-75" runat="server" id="tb_updateBrand" placeholder="Update brand">
-                                                <asp:LinkButton ID="link_updateBrand" class="btn btn-dark ml-3" style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateBrand_Click">Update</asp:LinkButton>
-                                              </div>
-
-                                        </div>
-
-                                      
-
-                                    </div>
-
-                                    <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>  
+                            </asp:LinkButton>
 
 
-                               
+                        </div>
+
+                        <div class="collapse" id="collapseBrandUpdate">
+
+                            <div class="form-row col-md-12 mt-4">
+                                <input type="text" class="form-control w-75" runat="server" id="tb_updateBrand" placeholder="Update brand">
+                                <asp:LinkButton ID="link_updateBrand" class="btn btn-dark ml-3" Style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateBrand_Click">Update</asp:LinkButton>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>
+
+
+
 
 
                 </div>
 
-                              </ContentTemplate>
-                             </asp:UpdatePanel>
                 <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
     <!-- /INSERT BRANDS Modal -->
-      </ContentTemplate>
-        </asp:UpdatePanel>
 
 
 
 
-       <!-- INSERT CATEGORIES Modal -->
+    <!-- INSERT CATEGORIES Modal -->
     <div class="modal fade ml-3 mt-5" id="modal-insert-category" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-md shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-2 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-insert-category-label">Categories<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                          </button>
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-category-label">Categories
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     </h5>
                 </div>
                 <!-- BEGIN MODAL BODY CONTENT -->
                 <div class=" modal-body">
 
 
-                                    <div class="form-row col-md-12 d-flex form-inline">
-                                            <input type="text" class="form-control w-75" runat="server" id="tb_insertCategory" placeholder="Category">
-                                            <asp:LinkButton ID="link_insertCategory" CommandArgument="usp_insertCategory" CommandName="category" class="btn btn-warning ml-3 shadow shadow-sm" style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
-                                           
-                                    </div>
-                                    
-                                    <div class="form-group">
+                    <div class="form-row col-md-12 d-flex form-inline">
+                        <input type="text" class="form-control w-75" runat="server" id="tb_insertCategory" placeholder="Category">
+                        <asp:LinkButton ID="link_insertCategory" CommandArgument="usp_insertCategory" CommandName="category" class="btn btn-warning ml-3 shadow shadow-sm" Style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
 
-                                        <div class="form-row col-md-12 mt-4 d-flex form-inline">
+                    </div>
 
-                                            <asp:DropDownList ID="ddl_allCategories" class="form-control w-75" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                    <div class="form-group">
 
-                                            <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseCategoryUpdate" aria-expanded="false" aria-controls="collapseExample">
-                                                <i class="fas fa-pen"></i>
-                                            </button>
+                        <div class="form-row col-md-12 mt-4 d-flex form-inline">
 
-                                            <asp:LinkButton ID="link_deleteCategory" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteCategory_Click">
+                            <asp:DropDownList ID="ddl_allCategories" class="form-control w-75" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+
+                            <button class="btn btn-dark ml-3 shadow shadow-sm" type="button" data-toggle="collapse" data-target="#collapseCategoryUpdate" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fas fa-pen"></i>
+                            </button>
+
+                            <asp:LinkButton ID="link_deleteCategory" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteCategory_Click">
                                                 <i class="fas fa-trash"></i>
-                                            </asp:LinkButton>
-                                              
+                            </asp:LinkButton>
 
-                                        </div>
 
-                                        <div class="collapse" id="collapseCategoryUpdate">
+                        </div>
 
-                                             <div class="form-row col-md-12 mt-4">
+                        <div class="collapse" id="collapseCategoryUpdate">
 
-                                                <input type="text" class="form-control w-75" runat="server" id="tb_updateCategory" placeholder="Update category">
-                                                <asp:LinkButton ID="link_updateCategory" class="btn btn-dark ml-3" style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateCategory_Click">Update</asp:LinkButton>
+                            <div class="form-row col-md-12 mt-4">
 
-                                             </div>
+                                <input type="text" class="form-control w-75" runat="server" id="tb_updateCategory" placeholder="Update category">
+                                <asp:LinkButton ID="link_updateCategory" class="btn btn-dark ml-3" Style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateCategory_Click">Update</asp:LinkButton>
 
-                                       </div>
+                            </div>
 
-                                      
-                                    </div>
+                        </div>
 
-                                    <label class="mt-2"  id="lbl_insertCategoryError" runat="server"></label>
-                                    
-                                    
-                                     
+
+                    </div>
+
+                    <label class="mt-2" id="lbl_insertCategoryError" runat="server"></label>
+
+
+
 
                 </div>
                 <!-- END MODAL BODY CONTENT -->
@@ -885,7 +873,7 @@
 
 
 
-     <script type="text/javascript">
+    <script type="text/javascript">
 
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
