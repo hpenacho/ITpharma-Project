@@ -833,7 +833,7 @@ select sum(total) AS 'Total Profit' from EncomendaHistorico
 inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 inner join Produto on Compra.Prod_ref = Produto.Codreferencia
 ------------------
-select sum(total) AS 'Monthly Profit' from EncomendaHistorico 
+select coalesce(sum(total),0) AS 'Monthly Profit' from EncomendaHistorico 
 inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 inner join Produto on Compra.Prod_ref = Produto.Codreferencia
 where Month(EncomendaHistorico.DataCompra) = Month(GetDate()) and Year(EncomendaHistorico.DataCompra) = Year(GetDate())
