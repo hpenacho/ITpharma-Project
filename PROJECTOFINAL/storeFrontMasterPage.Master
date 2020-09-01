@@ -28,49 +28,89 @@
 <body>
     <form id="form1" runat="server">
 
-         <!-- //MAIN CONTAINER -->
+        <!-- //MAIN CONTAINER -->
         <div class="container">
 
-            <nav class="navbar sticky-top mt-1 navbar-expand-lg text-dark navbar-light bg-white py-3" id="navbar-pharma">
-                <div class="container">
-                    <a class="navbar-brand" href="index.html">IT Pharma</a>
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
+            <!-- NAVBAR -->
+            <nav class="navbar sticky-top mt-1 navbar-expand-lg text-dark navbar-light bg-white shadow shadow-sm py-3" id="navbar-pharma">
+                <a class="navbar-brand" href="index.html">IT Pharma</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-lg-around" id="navbarResponsive">
 
-                        <div class="col-lg-9">
-                            <ul class="navbar-nav justify-content-center">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="services.html">Services</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="col-lg-2 bg-dark">
-                            <ul class="navbar-nav ml-auto justify-content-lg-end">
-                                <li class="nav-item">
-                                    <button type="button" class="btn btn-primary rounded"><i class="far fa-user"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" class="btn btn-primary rounded"><i class="fas fa-search"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" class="btn btn-primary rounded small"><i class="fas fa-shopping-cart"></i></button>
-                                </li>
-                            </ul>
-                        </div>
-
-
+                    <div class="col-lg-9">
+                        <ul class="navbar-nav justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="services.html">Services</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                        </ul>
                     </div>
+
+                    <div class="col-lg-3">
+                        <ul class="navbar-nav ml-auto justify-content-lg-end">
+                            <li class="nav-item">
+                                <button type="button" class="btn nav-link"><i class="far fa-user"></i></button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn nav-link"><i class="fas fa-search"></i></button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn nav-link"><i class="fas fa-shopping-cart"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+
+
                 </div>
             </nav>
+            <!-- // NAVBAR -->
+
+            <!-- HEADER -->
+            <header>
+                <div id="carouselExampleIndicators" class="carousel slide my-5" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <!-- Slide One - Set the background image for this slide in the line below -->
+                        <div class="carousel-item active" style="background-image: url('http://placehold.it/1150x180');">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>First Slide</h3>
+                            </div>
+                        </div>
+                        <!-- Slide Two - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" style="background-image: url('http://placehold.it/1150x180')">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Second Slide</h3>
+                            </div>
+                        </div>
+                        <!-- Slide Three - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" style="background-image: url('http://placehold.it/1150x180')">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h3>Third Slide</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </header>
+            <!-- // HEADER -->
 
         </div>
         <!-- //MAIN CONTAINER -->
