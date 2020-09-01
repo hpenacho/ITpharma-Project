@@ -26,7 +26,8 @@ namespace PROJECTOFINAL
 
                 ContentPlaceHolder Main = (ContentPlaceHolder)Page.Master.FindControl("ContentPlaceHolder1");
                 for (int i = 0; i < dataSet.Tables.Count ; i++)
-                {                    
+                {         
+                    
                     dr = dataSet.Tables[i].Rows[0];
 
                     if(((Label)Main.FindControl("lbl_stats" + i)) != null)
@@ -52,6 +53,11 @@ namespace PROJECTOFINAL
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            catch(IndexOutOfRangeException x)
+            {
+                System.Diagnostics.Debug.WriteLine(x.Message);
+                Response.Redirect("backOffice-Index.aspx");
             }
             finally
             {

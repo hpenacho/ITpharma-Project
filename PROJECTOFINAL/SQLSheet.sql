@@ -184,15 +184,6 @@ DECISÕES -
 
 */
 
-SELECT * FROM Produto
-select * from Categoria
-select * from marca
-insert into Produto values('XY1', 'XOXOTA', 9898.98, 'RESUMO', 'DESCRICAO DESTA PORRA ENORMA', NULL, NULL, 2,2,0, NULL, 1 )
-insert into Produto values('XY2', 'XOXOTA GENERICA', 9898.98, 'RESUMO', 'DESCRICAO DESTA PORRA ENORMA', NULL, NULL, 3,3,0, 'ZX4', 1 )
-insert into Produto values('ZX3', 'XOXOTA GENERICA 3', 9898.98, 'RESUMO', 'DESCRICAO DESTA PORRA ENORME', NULL, NULL , 3,3,0, null, 1 )
-insert into Produto values('ZX4', 'XOXOTA GENERICA 4', 9898.98, 'RESUMO', 'DESCRICAO DESTA PORRA ENORME', NULL, NULL , 3,3,0, null, 1 )
-insert into Produto values('GEN2', 'XOXOTA GENERICA 2', 9898.98, 'RESUMO', 'DESCRICAO DESTA PORRA ENORME', NULL, NULL , 3,3,0, 'ZX4', 1 )
-
 
 -- QUERIES
 
@@ -828,7 +819,8 @@ where Month(EncomendaHistorico.DataCompra) = Month(GetDate()) and Year(Encomenda
 --------
 select count(EncomendaHistorico.enc_ref) as 'Orders today'
 from EncomendaHistorico
-where EncomendaHistorico.DataCompra = CAST(GetDate() as date)
+where Day(EncomendaHistorico.DataCompra) = Day(GetDate()) and Month(EncomendaHistorico.DataCompra) = Month(GetDate())
+and Year(EncomendaHistorico.DataCompra) = Year(GetDate())
 ------------------
 select sum(total) AS 'Total Profit' from EncomendaHistorico 
 inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
@@ -842,7 +834,8 @@ where Month(EncomendaHistorico.DataCompra) = Month(GetDate()) and Year(Encomenda
 select coalesce(sum(total),0) AS 'Daily Profit' from EncomendaHistorico 
 inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 inner join Produto on Compra.Prod_ref = Produto.Codreferencia
-where EncomendaHistorico.DataCompra = CAST(GetDate() as date)
+where Day(EncomendaHistorico.DataCompra) = Day(GetDate()) and Month(EncomendaHistorico.DataCompra) = Month(GetDate())
+and Year(EncomendaHistorico.DataCompra) = Year(GetDate())
 ------------------
 select count(Produto.codReferencia) as 'Total Unique Products'
 from Produto
@@ -884,7 +877,8 @@ where Month(ExamesAnalises.DataPedido) = Month(GetDate()) and Year(ExamesAnalise
 ------------------
 select count(ExamesAnalises.id) as 'Exams Today'
 from ExamesAnalises
-where ExamesAnalises.DataPedido = CAST(GetDate() as date)
+where Day(ExamesAnalises.DataPedido) = Day(GetDate()) and Month(ExamesAnalises.DataPedido) = Month(GetDate()) and 
+Year(ExamesAnalises.DataPedido) = Year(GetDate())
 ------------------
 SELECT top 1 Produto.Codreferencia,Produto.nome, Produto.imagem, count(Compra.prod_ref) as 'Most Popular'
 from Produto inner join StockArmazem on Produto.Codreferencia = StockArmazem.Prod_Ref inner join Compra on Compra.Prod_Ref = Produto.Codreferencia
