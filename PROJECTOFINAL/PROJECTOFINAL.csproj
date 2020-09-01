@@ -71,6 +71,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="backOffice-404.aspx" />
+    <Content Include="backOffice-405.aspx" />
     <Content Include="backOffice-AdvertsClient.aspx" />
     <Content Include="backOffice-AdvertsSeasonal.aspx" />
     <Content Include="backOffice-Analytics.aspx" />
@@ -456,9 +458,36 @@
     <Content Include="ckeditor\styles.js" />
     <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="SQLSheet.sql" />
+    <Content Include="storeFront-404.aspx" />
+    <Content Include="storeFront-405.aspx" />
+    <Content Include="storeFront-activateAcc.aspx" />
+    <Content Include="storeFront-Checkout.aspx" />
+    <Content Include="storeFront-Exams.aspx" />
+    <Content Include="storeFront-Index.aspx" />
+    <Content Include="storeFront-ItemPage.aspx" />
+    <Content Include="storeFront-News.aspx" />
+    <Content Include="storeFront-OrderSuccess.aspx" />
+    <Content Include="storeFront-Registry.aspx" />
+    <Content Include="storeFront-SocialBridge.aspx" />
+    <Content Include="storeFront-UserOrders.aspx" />
+    <Content Include="storeFront-UserPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="backOffice-404.aspx.cs">
+      <DependentUpon>backOffice-404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-404.aspx.designer.cs">
+      <DependentUpon>backOffice-404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="backOffice-405.aspx.cs">
+      <DependentUpon>backOffice-405.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="backOffice-405.aspx.designer.cs">
+      <DependentUpon>backOffice-405.aspx</DependentUpon>
+    </Compile>
     <Compile Include="backOffice-AdvertsClient.aspx.cs">
       <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -530,6 +559,104 @@
       <DependentUpon>backOfficeMasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="storeFront-404.aspx.cs">
+      <DependentUpon>storeFront-404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-404.aspx.designer.cs">
+      <DependentUpon>storeFront-404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-405.aspx.cs">
+      <DependentUpon>storeFront-405.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-405.aspx.designer.cs">
+      <DependentUpon>storeFront-405.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-activateAcc.aspx.cs">
+      <DependentUpon>storeFront-activateAcc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-activateAcc.aspx.designer.cs">
+      <DependentUpon>storeFront-activateAcc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Checkout.aspx.cs">
+      <DependentUpon>storeFront-Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Checkout.aspx.designer.cs">
+      <DependentUpon>storeFront-Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Exams.aspx.cs">
+      <DependentUpon>storeFront-Exams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Exams.aspx.designer.cs">
+      <DependentUpon>storeFront-Exams.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Index.aspx.cs">
+      <DependentUpon>storeFront-Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Index.aspx.designer.cs">
+      <DependentUpon>storeFront-Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-ItemPage.aspx.cs">
+      <DependentUpon>storeFront-ItemPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-ItemPage.aspx.designer.cs">
+      <DependentUpon>storeFront-ItemPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-News.aspx.cs">
+      <DependentUpon>storeFront-News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-News.aspx.designer.cs">
+      <DependentUpon>storeFront-News.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-OrderSuccess.aspx.cs">
+      <DependentUpon>storeFront-OrderSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-OrderSuccess.aspx.designer.cs">
+      <DependentUpon>storeFront-OrderSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Registry.aspx.cs">
+      <DependentUpon>storeFront-Registry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Registry.aspx.designer.cs">
+      <DependentUpon>storeFront-Registry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-SocialBridge.aspx.cs">
+      <DependentUpon>storeFront-SocialBridge.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-SocialBridge.aspx.designer.cs">
+      <DependentUpon>storeFront-SocialBridge.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-UserOrders.aspx.cs">
+      <DependentUpon>storeFront-UserOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-UserOrders.aspx.designer.cs">
+      <DependentUpon>storeFront-UserOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-UserPage.aspx.cs">
+      <DependentUpon>storeFront-UserPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-UserPage.aspx.designer.cs">
+      <DependentUpon>storeFront-UserPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFrontMasterPage.Master.cs">
+      <DependentUpon>storeFrontMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFrontMasterPage.Master.designer.cs">
+      <DependentUpon>storeFrontMasterPage.Master</DependentUpon>
+    </Compile>
     <Compile Include="Tools.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
@@ -583,6 +710,7 @@
     <Content Include="ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="ckeditor\skins\moono\readme.md" />
     <None Include="packages.config" />
+    <Content Include="storeFrontMasterPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
