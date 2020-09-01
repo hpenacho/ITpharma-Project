@@ -471,6 +471,23 @@
     <Content Include="storeFront-SocialBridge.aspx" />
     <Content Include="storeFront-UserOrders.aspx" />
     <Content Include="storeFront-UserPage.aspx" />
+    <Content Include="StoreFront\css\modern-business.css" />
+    <Content Include="StoreFront\js\contact_me.js" />
+    <Content Include="StoreFront\js\jqBootstrapValidation.js" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="StoreFront\vendor\jquery\jquery.js" />
+    <Content Include="StoreFront\vendor\jquery\jquery.min.js" />
+    <Content Include="StoreFront\vendor\jquery\jquery.slim.js" />
+    <Content Include="StoreFront\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -711,6 +728,18 @@
     <Content Include="ckeditor\skins\moono\readme.md" />
     <None Include="packages.config" />
     <Content Include="storeFrontMasterPage.Master" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="StoreFront\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="StoreFront\vendor\jquery\jquery.min.map" />
+    <Content Include="StoreFront\vendor\jquery\jquery.slim.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -718,9 +747,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="StoreFront\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
