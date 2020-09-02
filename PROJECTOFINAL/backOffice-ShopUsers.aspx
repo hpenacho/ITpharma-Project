@@ -236,7 +236,7 @@
                                            <div class="input-group-append">
                                              <span class="input-group-text" id="inputGroupPrepend3"><i class="fas fa-euro-sign"></i></span>
                                            </div>
-                                             <input type="date" class="form-control" runat="server" id="tb_dateofbirth" aria-describedby="inputGroupPrepend3" required>
+                                             <input type="date" class="form-control" runat="server" id="tb_dateofbirth" aria-describedby="inputGroupPrepend3" value="2000-01-01" required>
                                        </div>
                                     </div> 
                                     <!-- /DateOfBirth -->
