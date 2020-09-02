@@ -127,8 +127,8 @@ namespace PROJECTOFINAL
                     ddl_updateGenericParent.SelectedValue = reader["ref_generico"].ToString();
                     check_updateGeneric.Checked = true;
                 }
-               
-              
+
+
 
             }
 
@@ -191,8 +191,8 @@ namespace PROJECTOFINAL
 
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
                 {
-                      lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
-                } 
+                    lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
 
                 rpt_produtosBackoffice.DataBind();
             }
@@ -210,6 +210,10 @@ namespace PROJECTOFINAL
 
         protected void link_insertCategoryBrand(object sender, EventArgs e)
         {
+
+            lbl_insertBrandError.InnerText = "";
+            lbl_insertCategoryError.InnerText = "";
+
             SqlCommand myCommand = Tools.SqlProcedure(((LinkButton)sender).CommandArgument);
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
@@ -224,20 +228,19 @@ namespace PROJECTOFINAL
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
 
-                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                if (((LinkButton)sender).CommandName == "brand")
                 {
-                    if (((LinkButton)sender).CommandName == "brand")
-                    {
-                        lbl_insertBrandError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
-                        ddl_allBrands.DataBind();
-                        ddl_allBrands.SelectedIndex = 0;
-                    }
-                    else
-                    {
-                        lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
-                        ddl_allCategories.DataBind();
-                        ddl_allCategories.SelectedIndex = 0;
-                    }
+                    lbl_insertBrandError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    SQLbrand.DataBind();
+                    ddl_allBrands.DataBind();
+                    ddl_allBrands.SelectedIndex = 0;
+                }
+                else
+                {
+                    lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    SQLcategory.DataBind();
+                    ddl_allCategories.DataBind();
+                    ddl_allCategories.SelectedIndex = 0;
                 }
 
             }
@@ -297,7 +300,7 @@ namespace PROJECTOFINAL
                 }
 
                 tb_updateBrand.Value = "";
-               
+
             }
             catch (SqlException m)
             {

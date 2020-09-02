@@ -352,16 +352,17 @@ create table Marca (
 )
 
 
--- [PROCEDURE] INSERT BRANDS BACKOFFICE - FILIPE
+-- [PROCEDURE] INSERT BRANDS BACKOFFICE
 GO
 create or alter proc usp_insertCategory (@descricao varchar(100), @errorMessage varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 
 	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao)
-		THROW 60001,'The category specified already exists' ,10
+		THROW 60001,'The category specified already exists' , 10;
 
 	insert into Categoria values(@descricao)
+	set @errorMessage = 'The item was created successfully';
 
 COMMIT
 END TRY
@@ -370,7 +371,7 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 
--- [PROCEDURE] INSERT CATEGORIES BACKOFFICE - FILIPE
+-- [PROCEDURE] INSERT BRANDS BACKOFFICE
 
 GO
 create or alter proc usp_insertBrand(@descricao varchar(100), @errorMessage varchar(200) output) AS
@@ -381,6 +382,7 @@ BEGIN TRAN
 		THROW 60001,'The brand specified already exists' ,10
 
 	insert into Marca values(@descricao)
+	set @errorMessage = 'The item was created successfully';
 
 COMMIT
 END TRY

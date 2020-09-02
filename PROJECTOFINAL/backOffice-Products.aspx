@@ -3,10 +3,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-
+    
     <script>
 
-       function openModal() { $('#modal-update-product').modal('show'); }
+       //function openModal() { $('#modal-update-product').modal('show'); }
 
     </script>
 
@@ -55,38 +55,34 @@
     <!-- CK EDITOR SCRIPT -->
 
 
-    <!-- Insert Products | opens a modal with all the fields necessary to insert a product -->
+    
 
-    <div class="container mt-5">
-        <div class="d-flex justify-content-end col-lg-12 col-md-12 col-sm-12">
+    <div class="container-fluid">
+    
 
-            <div>
-                <button type="button" class="btn btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-2 mt-3 text-center">
+            <h1 class="mb-2">Manage Products</h1>
+        </div>
+
+        <div class="form-row text-center col-lg-12 mt-5 mb-3">
+
+            <div class="col-12 col-sm-12 col-md-4 align-middle mb-2">
+                <button type="button" class="btn btn-block btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
             </div>
 
-            <div>
-                <button type="button" class="btn btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
+            <div class="col-12 col-sm-12 col-md-4 align-middle mb-2">
+                <button type="button" class="btn btn-block btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
             </div>
 
-            <div>
-                <button type="button" class="btn btn-warning shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
+            <div class="col-12 col-sm-12 col-md-4 align-middle mb-2">
+                <button type="button" class="btn btn-block btn-warning shadow shadow-sm" data-toggle="modal" data-target="#modal-insert-product">Add Product <i class="fas fa-plus"></i></button>
             </div>
 
         </div>
-    </div>
-
-    <div class="col-lg-12 col-md-12 col-sm-12 mb-3 mt-2">
-        <h1 class="mb-2">Manage Products</h1>
-        <ol class="breadcrumb bg-dark text-white mb-4 shadow shadow-sm mt-2">
-            <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
-            <li class="breadcrumb-item active">Products</li>
-        </ol>
-    </div>
 
 
-
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-            <!-- /Insert Products -->
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4 mt-3">
+   
             <ul class="nav nav-pills" id="myTab" role="tablist">
 
                 <li class="nav-item w-50 text-center shadow shadow-sm">
@@ -105,10 +101,8 @@
         </div>
 
 
-
-
-    <!-- ACTIVE PRODUCT TABLE -->
     <div class="tab-content" id="myTabContent">
+       <!-- ACTIVE PRODUCT TABLE -->
 
         <div class="tab-pane fade show active" id="products" role="tabpanel" aria-labelledby="home-tab">
 
@@ -272,9 +266,11 @@
 
     </div>
 
+    </div>
+    <!-- //END CONTAINER-FLUID -->
   
 
-    <!-- insert products Modal -->
+    <!-- INSERT PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
@@ -506,27 +502,22 @@
             </div>
         </div>
     </div>
-    <!-- /Insert products Modal -->
+    <!-- //INSERT PRODUCTS MODAL -->
 
 
-    <!-- UPDATE products Modal -->
+    <!-- UPDATE PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
                     <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Update
-                                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+                      <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                       </button>
                     </h5>
                 </div>
                 <div class="modal-body">
-                    <!-- BEGIN MODAL BODY CONTENT -->
-
-
-                    <!-- INNER UPDATE PANEL -->
-
-
+                 <!-- BEGIN MODAL BODY CONTENT -->
 
                     <!-- NAVIGATION -->
 
@@ -623,11 +614,8 @@
                                         <asp:DropDownList ID="ddl_updateBrand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
                                     </div>
 
-
-
                                 </div>
                                 <!-- /Price-->
-
 
                                 <!-- Generic || Prescription || Generic-Product -->
                                 <div class="form-row mt-2 mb-2 d-flex justify-content-between">
@@ -659,8 +647,6 @@
                                 </div>
 
                                 <!-- //Brand || Prescription || Generic-Product-->
-
-
 
                             </div>
                             <!-- WINDOW PADDING -->
@@ -724,18 +710,18 @@
                     </div>
                     <!-- //TAB SYSTEM ENDING -->
 
-
-
-                    <!-- END INNER UPDATE PANEL -->
                 </div>
                 <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
-    <!-- /UPDATE products Modal -->
+    <!-- //UPDATE PRODUTCTS MODAL -->
 
 
-    <!-- INSERT BRANDS Modal -->
+    <!-- INSERT\UPDATE BRANDS Modal -->
+    <!--TESTADO ESTÁ A FUNCIONAR COMO DEVE SER -->
+    <asp:UpdatePanel ID="udtpBrands" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+        <ContentTemplate>
 
     <div class="modal fade ml-3 mt-5" id="modal-insert-brand" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-md shadow-lg" role="document">
@@ -748,14 +734,16 @@
                     </h5>
                 </div>
                 <!-- BEGIN MODAL BODY CONTENT -->
-                <div class=" modal-body">
 
-
+                <div class="modal-body">
+                    
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
 
                     <div class="form-row col-md-12 d-flex form-inline">
 
                         <input type="text" class="form-control w-75" runat="server" id="tb_insertBrand" placeholder="Brand">
-                        <asp:LinkButton ID="link_insertBrand" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3 shadow shadow-sm" Style="padding-left: 1.5em; padding-right: 1.5em;" runat="server" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
+                        <asp:LinkButton ID="link_insertBrand" runat="server" CommandArgument="usp_insertBrand" CommandName="brand" class="btn btn-warning ml-3 shadow shadow-sm" Style="padding-left: 1.5em; padding-right: 1.5em;" OnClick="link_insertCategoryBrand">Insert</asp:LinkButton>
 
                     </div>
 
@@ -769,8 +757,8 @@
                                 <i class="fas fa-pen"></i>
                             </button>
 
-                            <asp:LinkButton ID="link_deleteBrand" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteBrand_Click">
-                                                <i class="fas fa-trash"></i>
+                            <asp:LinkButton ID="link_deleteBrand" runat="server" class=" ml-2 btn btn-danger shadow shadow-sm" OnClick="link_deleteBrand_Click">
+                                 <i class="fas fa-trash"></i>
                             </asp:LinkButton>
 
 
@@ -781,32 +769,33 @@
                             <div class="form-row col-md-12 mt-4">
                                 <input type="text" class="form-control w-75" runat="server" id="tb_updateBrand" placeholder="Update brand">
                                 <asp:LinkButton ID="link_updateBrand" class="btn btn-dark ml-3" Style="padding-left: 1.2em; padding-right: 1.2em;" runat="server" OnClick="link_updateBrand_Click">Update</asp:LinkButton>
-                            </div>
+                           </div>
 
                         </div>
 
-
-
                     </div>
 
-                    <label class="mt-2" id="lbl_insertBrandError" runat="server"></label>
+                    <label class="mt-2 text-center col-12" id="lbl_insertBrandError" runat="server"></label>
 
-
-
-
-
-                </div>
-
-                <!-- END MODAL BODY CONTENT -->
+                                   </ContentTemplate>
+                        </asp:UpdatePanel>
+                
+                
+                </div> <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- /INSERT BRANDS Modal -->
 
 
 
-
-    <!-- INSERT CATEGORIES Modal -->
+       <asp:UpdatePanel ID="udptCategory" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+        <ContentTemplate>
+   
+            <!-- INSERT\UPDATE CATEGORIES Modal -->
     <div class="modal fade ml-3 mt-5" id="modal-insert-category" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-md shadow-lg" role="document">
             <div class="modal-content">
@@ -819,6 +808,9 @@
                 </div>
                 <!-- BEGIN MODAL BODY CONTENT -->
                 <div class=" modal-body">
+
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
 
 
                     <div class="form-row col-md-12 d-flex form-inline">
@@ -858,34 +850,30 @@
 
                     </div>
 
-                    <label class="mt-2" id="lbl_insertCategoryError" runat="server"></label>
+                    <label class="mt-2 text-center col-12" id="lbl_insertCategoryError" runat="server"></label>
 
 
-
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
 
                 </div>
                 <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- /INSERT CATEGORIES Modal -->
 
 
 
 
-    <script type="text/javascript">
+     <script type="text/javascript">
 
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             });
-
-            $('#fl_insertProductImage').on('change',function(){
-                //get the file name
-                var fileName = $(this).val();
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
-     
 
      </script>
 
