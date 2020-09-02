@@ -974,7 +974,8 @@ END CATCH
 Go
 create or alter PROCEDURE [dbo].[usp_activateAcc]
 	
-	@email varchar(20)
+	@email varchar(20),
+	@errorMessage varchar(200) output
 
 AS
 BEGIN TRY
@@ -983,17 +984,19 @@ BEGIN TRAN
     if exists (select '*' from Cliente where activo='true' and email=@email)    
 	throw 75001, 'This account is already activated.', 10;
 
-    else if exists (select '*' from Cliente where firstActivation='false' and email=@email)
+    else if exists (select '*' from Cliente where firstActivation= 0 and email=@email)
     throw 75002, 'This account has previously been through a first activation process.', 10;   
-        
-    else if exists (select '*' from Cliente where firstActivation='true' and email=@email)
-    begin 
-        update Cliente set activo = 'true', firstActivation = 'false' where email=@email      
+  
+    else if exists (select '*' from Cliente where firstActivation = 1 and email=@email)    
+	
+	begin 	
+        update Cliente set activo = 1, firstActivation = 0 where email=@email      
     end
  
  COMMIT
 END TRY
 BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();	
 	ROLLBACK;
 END CATCH
 GO

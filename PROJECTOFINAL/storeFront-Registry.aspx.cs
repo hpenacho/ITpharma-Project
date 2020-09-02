@@ -45,7 +45,7 @@ namespace PROJECTOFINAL
                 else
                 {
                     string subject = "ITpharma Account Activation";
-                    string activationLink = "https://localhost:44391/activateAcc.aspx?num=" + Tools.EncryptString(tb_email.Value);
+                    string activationLink = "https://localhost:44391/storeFront-activateAcc.aspx?num=" + Tools.EncryptString(tb_email.Value);
                     string body = "Thank you for creating an account on ITpharma, please click the link below to finalize your account activation. </br>" + activationLink;
                     Tools.email(tb_email.Value, body, subject);
 
