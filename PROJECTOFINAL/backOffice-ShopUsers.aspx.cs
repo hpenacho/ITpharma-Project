@@ -35,7 +35,6 @@ namespace PROJECTOFINAL
        
         private void updateUser(RepeaterCommandEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Entrou na funçao de update");
             lbl_updateError.InnerText = "";
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_updateShopUser");

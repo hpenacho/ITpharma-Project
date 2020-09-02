@@ -457,6 +457,7 @@
     <Content Include="ckeditor\skins\moono\images\lock.png" />
     <Content Include="ckeditor\skins\moono\images\refresh.png" />
     <Content Include="ckeditor\styles.js" />
+    <Content Include="Resources\images\register-nurse.jpg" />
     <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="SQLSheet.sql" />
     <Content Include="storeFront-404.aspx" />
@@ -473,6 +474,7 @@
     <Content Include="storeFront-UserOrders.aspx" />
     <Content Include="storeFront-UserPage.aspx" />
     <Content Include="StoreFront\css\modern-business.css" />
+    <Content Include="StoreFront\css\register.min.css" />
     <Content Include="StoreFront\css\store-front.css" />
     <Content Include="StoreFront\js\contact_me.js" />
     <Content Include="StoreFront\js\jqBootstrapValidation.js" />
