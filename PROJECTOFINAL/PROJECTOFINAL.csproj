@@ -679,7 +679,7 @@
       <DependentUpon>storeFrontMasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Client.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="backOfficeMasterPage.Master" />

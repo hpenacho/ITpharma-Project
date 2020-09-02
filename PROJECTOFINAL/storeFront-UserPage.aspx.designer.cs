@@ -15,49 +15,49 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// lbl_oldPassword control.
+        /// txt_oldPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lbl_oldPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_oldPassword;
 
         /// <summary>
-        /// lbl_newPassword control.
+        /// txt_newPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lbl_newPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_newPassword;
 
         /// <summary>
-        /// lbl_repeatPassword control.
+        /// txt_repeatPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText lbl_repeatPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_repeatPassword;
 
         /// <summary>
-        /// lbl_erro control.
+        /// lbl_errorPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_erro;
+        protected global::System.Web.UI.WebControls.Label lbl_errorPassword;
 
         /// <summary>
-        /// link_alterPassword control.
+        /// btn_alterPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button link_alterPassword;
+        protected global::System.Web.UI.WebControls.Button btn_alterPassword;
 
         /// <summary>
         /// txt_altername control.
@@ -105,12 +105,12 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alternif;
 
         /// <summary>
-        /// link_alterarDetails control.
+        /// btn_alterarDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button link_alterarDetails;
+        protected global::System.Web.UI.WebControls.Button btn_alterarDetails;
     }
 }

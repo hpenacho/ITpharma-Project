@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PROJECTOFINAL
 {
-    public class User
+    public class Client
     {
 
         //Utility Variables

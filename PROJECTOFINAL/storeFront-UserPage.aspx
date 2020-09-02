@@ -24,15 +24,19 @@
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
                             <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
+
                                 <li class="nav-item">
                                     <a class="nav-link show active" id="home-tab" data-toggle="tab" href="#change-details" role="tab" aria-controls="details" aria-selected="true">Users</a>
                                 </li>
+
                                 <li class="nav-item bg-light">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
                                 </li>
+
                                 <li class="nav-item bg-light">
                                     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#exams" role="tab" aria-controls="exams" aria-selected="false">Exams</a>
                                 </li>
+
                             </ul>
 
                         </div>
@@ -58,6 +62,8 @@
         <div class="tab-pane fade show active" id="change-details" role="tabpanel" aria-labelledby="details-tab">
             <div class="row">
 
+
+                <!-- Change password -->
                 <div class="col-lg-4 mb-4 my-4">
                     <div class="card shadow pb-4 bg-white" style="border-radius: 20px;">
                         <div class="card-body">
@@ -67,25 +73,25 @@
                             <div class="form-row">
 
                                 <div class="col">
-                                    <label for="lbl_oldPassword">Old Password</label>
-                                    <input type="text" id="lbl_oldPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                    <label for="txt_oldPassword"">Old Password</label>
+                                    <input type="text" id="txt_oldPassword" runat="server" class="form-control bg-light" placeholder="*******" />
                                 </div>
                             </div>
 
                             <div class="form-row">
 
                                 <div class="col mt-3">
-                                    <label for="lbl_newPassword">New Password</label>
-                                    <input type="text" id="lbl_newPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                    <label for="txt_newPassword">New Password</label>
+                                    <input type="text" id="txt_newPassword" runat="server" class="form-control bg-light" placeholder="*******" />
                                 </div>
                             </div>
 
                             <div class="form-row">
 
                                 <div class="col mt-3">
-                                    <label for="lbl_repeatPassword">Repeat Password</label>
-                                    <input type="text" id="lbl_repeatPassword" runat="server" class="form-control bg-light" placeholder="*******" />
-                                    <small id="passwordHelpBlock" class="form-text text-muted">8-20 caracteres, conter letras e numeros, um caracter especial e sem espaços
+                                    <label for="txt_repeatPassword">Repeat Password</label>
+                                        <input type="text" id="txt_repeatPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                        <small id="passwordHelpBlock" class="form-text text-muted">8-20 caracteres, conter letras e numeros, um caracter especial e sem espaços
                                     </small>
                                 </div>
 
@@ -95,10 +101,11 @@
                             <div class="form-row mt-4">
 
                                 <div class="col-md-8">
-                                    <asp:Label ID="lbl_erro" runat="server" class="form-text text-dark" Font-Size="small" Text=""></asp:Label>
+                                    <asp:Label ID="lbl_errorPassword" runat="server" class="form-text text-dark" Font-Size="small" Text=""></asp:Label>
                                 </div>
+
                                 <div class="col-md-4">
-                                    <asp:Button ID="link_alterPassword" class="btn btn-sm btn-info btn-block" runat="server" Text="Change" />
+                                    <asp:Button ID="btn_alterPassword" class="btn btn-sm btn-info btn-block" runat="server" Text="Change" OnClick="btn_alterPassword_Click" />
                                 </div>
 
                             </div>
@@ -114,8 +121,6 @@
                     <div class="card shadow bg-white pb-4" style="border-radius: 20px;">
                         <div class="card-body">
                             <h3 class="text-dark text-">User</h3>
-
-                            <!-- Alterar detalhes -->
 
                             <div class="form-row">
 
@@ -145,10 +150,12 @@
                             </div>
 
                             <div class="form-row">
+
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alterhealthnumber">Health Number</label>
                                     <input type="text" id="txt_alterhealthnumber" runat="server" class="form-control bg-light"/>
                                 </div>
+
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alternif">NIF</label>
                                     <input type="text" id="txt_alternif" runat="server" class="form-control bg-light"/>
@@ -161,11 +168,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <asp:Button ID="link_alterarDetails" class="btn btn-sm btn-info mt-5 float-right w-50" runat="server" Text="Change"/>
+                                    <asp:Button ID="btn_alterarDetails" class="btn btn-sm btn-info mt-5 float-right w-50" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/>
                                 </div>
                             </div>
-
-
 
                         </div>
                     </div>
@@ -284,7 +289,6 @@
             </div>
 
         </div>
-
     </div>
 
 
