@@ -59,7 +59,7 @@
 
             <!-- NAVBAR -->
             <nav class="navbar sticky-top mt-1 shadow shadow-sm navbar-expand-lg text-dark navbar-light bg-white py-3" id="navbar-pharma">
-                <a class="navbar-brand" href="index.html">IT Pharma</a>
+                <a class="navbar-brand" href="storeFront-Index.aspx">IT Pharma</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -87,7 +87,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <button type="button" class="btn nav-link"><i class="far fa-user"></i></button>
+                                <button type="button" class="btn nav-link"><a href="storeFront-UserPage.aspx"><i class="far fa-user"></i> </a></button> 
                             </li>
 
                             <li class="nav-item">
