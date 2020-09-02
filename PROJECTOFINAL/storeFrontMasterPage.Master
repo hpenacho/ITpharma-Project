@@ -24,6 +24,32 @@
   <!-- CONTEUDO HEAD MASTER -->
 
 
+  <style>
+
+      /* width */
+      ::-webkit-scrollbar {
+          width: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+          background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+          background: #555;
+      }
+
+
+  </style>
+
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -32,7 +58,7 @@
         <div class="container">
 
             <!-- NAVBAR -->
-            <nav class="navbar sticky-top mt-1 navbar-expand-lg text-dark navbar-light bg-white shadow shadow-sm py-3" id="navbar-pharma">
+            <nav class="navbar sticky-top mt-1 shadow shadow-sm navbar-expand-lg text-dark navbar-light bg-white py-3" id="navbar-pharma">
                 <a class="navbar-brand" href="index.html">IT Pharma</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -55,22 +81,28 @@
 
                     <div class="col-lg-3">
                         <ul class="navbar-nav ml-auto justify-content-lg-end">
+
+                            <li class="nav-item">
+                                <button type="button" id="search-button" class="btn nav-link"><i class="fas fa-search"></i></button>
+                            </li>
+
                             <li class="nav-item">
                                 <button type="button" class="btn nav-link"><i class="far fa-user"></i></button>
                             </li>
+
                             <li class="nav-item">
-                                <button type="button" class="btn nav-link"><i class="fas fa-search"></i></button>
+                                <button type="button" class="btn nav-link"><i class="fas fa-shopping-cart"></i><span class="badge badge-primary rounded" style="font-size: 10px;">2</span></button>
                             </li>
-                            <li class="nav-item">
-                                <button type="button" class="btn nav-link"><i class="fas fa-shopping-cart"></i></button>
-                            </li>
+
                         </ul>
                     </div>
-
 
                 </div>
             </nav>
             <!-- // NAVBAR -->
+
+    
+            <!-- SEARCH FIELD -->
             
 
         <!-- CONTEUDO BODY MASTER -->
