@@ -457,6 +457,9 @@
     <Content Include="ckeditor\skins\moono\images\lock.png" />
     <Content Include="ckeditor\skins\moono\images\refresh.png" />
     <Content Include="ckeditor\styles.js" />
+    <Content Include="News\news.css" />
+    <Content Include="News\news.xslt" />
+    <Content Include="News\newsUserControl.ascx" />
     <Content Include="Resources\images\register-nurse.jpg" />
     <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="SQLSheet.sql" />
@@ -578,6 +581,13 @@
     </Compile>
     <Compile Include="backOfficeMasterPage.Master.designer.cs">
       <DependentUpon>backOfficeMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="News\newsUserControl.ascx.cs">
+      <DependentUpon>newsUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="News\newsUserControl.ascx.designer.cs">
+      <DependentUpon>newsUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="storeFront-404.aspx.cs">

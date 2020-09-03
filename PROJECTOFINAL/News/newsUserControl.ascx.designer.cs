@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PROJECTOFINAL
+namespace PROJECTOFINAL.News
 {
 
 
-    public partial class storeFront_News
+    public partial class newsUserControl
     {
 
         /// <summary>
-        /// newsUserControl control.
+        /// Xml1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::PROJECTOFINAL.News.newsUserControl newsUserControl;
+        protected global::System.Web.UI.WebControls.Xml Xml1;
     }
 }
