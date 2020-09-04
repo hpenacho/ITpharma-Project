@@ -32,7 +32,7 @@ namespace PROJECTOFINAL
                 }
                 else
                 {
-                    lbl_message.ForeColor = Color.ForestGreen; lbl_message.Text = "Account Created Successfully";
+                    lbl_message.ForeColor = Color.ForestGreen; lbl_message.Text = "Account Activated Successfully";
                 }
                 }
                 catch (SqlException m)
