@@ -51,15 +51,6 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword tb_password;
 
         /// <summary>
-        /// tb_address control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_address;
-
-        /// <summary>
         /// tb_nif control.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_healthNumber;
+
+        /// <summary>
+        /// tb_address control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_address;
 
         /// <summary>
         /// tb_dateOfBirth control.

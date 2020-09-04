@@ -96,5 +96,46 @@ namespace PROJECTOFINAL
         {
 
         }
+
+        protected void link_insertClientCentricType_Click(object sender, EventArgs e)
+        {
+
+            lbl_errors2.InnerText = "";
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_insertClientAdType");
+
+            myCommand.Parameters.AddWithValue("@Description", tb_typeName.Value);
+            myCommand.Parameters.AddWithValue("@DateStart", Convert.ToDateTime(dateStart.Value));
+            myCommand.Parameters.AddWithValue("@DateExpire", Convert.ToDateTime(dateExpire.Value));
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_errors2.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+                else
+                {
+                    ddl_ClientTypes.DataBind();
+                }
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+                System.Diagnostics.Debug.WriteLine(lbl_errors2.InnerText.ToString());
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+        }
     }
 }

@@ -180,7 +180,7 @@
                                     <div class="input-group col-md-6 mt-1">
                                         <div class="col-md-12">
                                         <label for="dateStart "> Date Start </label></div>
-                                        <input type="date" id="dateStart" runat="server" class="form-control" required/>
+                                        <input type="date" id="dateStart" runat="server" class="form-control" value="2020-01-01" required/>
 
                                             <div class="input-group-append">
                                         </div>
@@ -189,7 +189,7 @@
                                     <div class="input-group col-md-6 mt-1">
                                         <div class="col-md-12">
                                         <label for="dateExpire"> Date Expire </label> </div>
-                                        <input type="date" id="dateExpire" runat="server" class="form-control" required/>
+                                        <input type="date" id="dateExpire" runat="server" class="form-control" value="2020-12-31" required/>
 
                                             <div class="input-group-append">
                                         </div>

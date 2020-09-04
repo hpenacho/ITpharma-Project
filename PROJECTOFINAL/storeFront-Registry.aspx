@@ -52,9 +52,7 @@
                     <input type="password" class="form-control form-control-user bg-light" id="tb_confirmPw" placeholder="Confirm Password" title="Password must have at least 7 characters and at least: 1 lowercase, 1 Uppercase, 1 number." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
                   </div>
                 </div>
-                  <div class="form-group">
-                  <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_address" placeholder="Address" required>
-                </div>
+
                   <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_nif" placeholder="NIF" required>
@@ -63,6 +61,16 @@
                     <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_healthNumber" placeholder="Health Number" required>
                   </div>
                 </div>
+
+                  <div class="form-group row">
+                  <div class="col-sm-9 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_address" placeholder="Address" required>
+                    </div>
+                      <div class="col-sm-3">
+                      <input id="zipcode" class="form-control form-control-user bg-light" name="zipcode" type="tel" pattern="[0-9\-]+" placeholder="Zip-code" required>
+                       </div>
+                  </div>
+                  
 
                   <div class="form-group row">
                       
@@ -74,19 +82,20 @@
                       <div class="col-sm-6 text-center">
                       <div class="btn-group btn-group-toggle" data-toggle="buttons">
                           <label class="btn btn-light active">
-                            <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server" checked> <h5> <i class="fas fa-mars text-primary"> </i>  Male </h5>
+                            <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server" checked > <h6> <i class="fas fa-mars text-primary"> </i>  Male </h6>
                           </label>
                           <label class="btn btn-light">
-                            <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server"> <h5><i class="fas fa-venus text-danger"></i>  Female </h5>
+                            <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server"> <h6><i class="fas fa-venus text-danger"></i>  Female </h6>
                           </label>
                         </div>
                       </div>
                       </div>
 
+                  <hr> 
                 <asp:Button ID="btn_register" CssClass="btn btn-info input-group btn-user btn-block" runat="server" Text="Register Account" OnClick="btn_register_Click" />
                                 
               </div>
-              <hr>              
+                           
 
                 <div class="text-center">
                     <asp:Label ID="lbl_message" runat="server" Font-Italic="False" ForeColor="#CC0000"></asp:Label>

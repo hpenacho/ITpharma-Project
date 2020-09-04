@@ -153,12 +153,15 @@ create table Pub_Sazonal(
 	
 	ID int identity primary key,
 	Descricao varchar(50) not null,
-	DataExpiracao date null check(DataExpiracao > getdate()),
+	DataStart date null,
+	DataExpiracao date null
 )
 
 create table Pub_Cliente(
 	ID int identity primary key,
-	Descricao varchar(50) not null
+	Descricao varchar(50) not null,
+	DataStart date null,
+	DataExpiracao date null
 )
 
 create table Publicidade(
@@ -610,6 +613,7 @@ CREATE OR ALTER proc usp_insertShopUser(@nome varchar(50),
 										@nrSaude varchar(20),
 										@sexo char(1),
 										@dataNascimento date,
+										@codPostal varchar(20),
 										@errorMessage varchar(200) output)
 AS
 BEGIN TRY
@@ -626,7 +630,7 @@ BEGIN TRAN
 	IF EXISTS (SELECT '*' FROM Cliente WHERE Cliente.nrSaude = @nrSaude)
 		THROW 60007, 'An account with that Health Number is already registered, please try again.', 10
 
-	INSERT INTO Cliente VALUES (@nome, @email, @password, @morada, 0, 1, @nif, @nrSaude, @sexo, @dataNascimento)
+	INSERT INTO Cliente VALUES (@nome, @email, @password, @morada, 0, 1, @nif, @nrSaude, @sexo, @dataNascimento, @codPostal)
 
 COMMIT
 END TRY
@@ -704,7 +708,7 @@ GO
 -- [QUERY] LISTS CLIENT CENTRIC ADS //for backoffice Client ad management
 go
 create or ALTER PROC usp_listClientCentricAds AS
-SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Cliente, Pub_Cliente.Descricao
+SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Cliente, Pub_Cliente.Descricao, Pub_Cliente.DataStart, Pub_Cliente.DataExpiracao
 from Publicidade inner join Pub_Cliente on Publicidade.ID_Pub_Cliente = Pub_Cliente.ID
 where Publicidade.Tipo = 0
 GO
@@ -935,7 +939,30 @@ BEGIN CATCH
 END CATCH
 GO
 ------------------------------
+------inserts new client-centric ad types (male,female,child,teenager,adult,old,etc)
+GO
+CREATE OR ALTER proc [dbo].[usp_insertClientAdType](
+										    @Description varchar(50),										    
+										    @DateStart date,	
+											@DateExpire date,
+										    @errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
 
+IF EXISTS (SELECT '*' FROM Pub_Cliente WHERE Pub_Cliente.Descricao = @Description)
+		THROW 70004, 'A Client-Centric Ad with that name already exists, try with a different name.', 10
+	
+	INSERT INTO Pub_Cliente VALUES (@Description,@DateStart,@DateExpire)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+GO
 
 
 

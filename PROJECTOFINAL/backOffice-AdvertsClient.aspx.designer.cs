@@ -60,6 +60,51 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_errors;
 
         /// <summary>
+        /// tb_typeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_typeName;
+
+        /// <summary>
+        /// dateStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dateStart;
+
+        /// <summary>
+        /// dateExpire control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl dateExpire;
+
+        /// <summary>
+        /// link_insertClientCentricType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_insertClientCentricType;
+
+        /// <summary>
+        /// lbl_errors2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_errors2;
+
+        /// <summary>
         /// SqlDataSourceClientTypes control.
         /// </summary>
         /// <remarks>
