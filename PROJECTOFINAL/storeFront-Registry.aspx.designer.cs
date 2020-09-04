@@ -78,6 +78,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_address;
 
         /// <summary>
+        /// tb_zipcode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_zipcode;
+
+        /// <summary>
         /// tb_dateOfBirth control.
         /// </summary>
         /// <remarks>

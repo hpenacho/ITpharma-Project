@@ -76,14 +76,15 @@ namespace PROJECTOFINAL
             string pwTemp = Tools.EncryptString(tb_email.Value);
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertShopUser");
 
-            myCommand.Parameters.AddWithValue("@nome", tb_name.Value);
+            myCommand.Parameters.AddWithValue("@nome", tb_name1.Value + " " + tb_name2.Value);
             myCommand.Parameters.AddWithValue("@email", tb_email.Value);
             myCommand.Parameters.AddWithValue("@password", Tools.EncryptString(pwTemp));
             myCommand.Parameters.AddWithValue("@morada", tb_address.Value);
             myCommand.Parameters.AddWithValue("@nif", tb_NIF.Value);
             myCommand.Parameters.AddWithValue("@nrSaude", tb_healthNumber.Value);
-            myCommand.Parameters.AddWithValue("@sexo", rbtn_male.Checked ? 'M' : 'F');
-            myCommand.Parameters.AddWithValue("@dataNascimento", Convert.ToDateTime(tb_dateofbirth.Value));
+            myCommand.Parameters.AddWithValue("@sexo", gender_male.Checked ? 'M' : 'F');
+            myCommand.Parameters.AddWithValue("@dataNascimento", Convert.ToDateTime(tb_dateOfBirth.Value));
+            myCommand.Parameters.AddWithValue("@codPostal", tb_zipcode.Value);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));

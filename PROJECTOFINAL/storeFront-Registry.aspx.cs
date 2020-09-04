@@ -28,6 +28,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@nrSaude", tb_healthNumber.Value);
             myCommand.Parameters.AddWithValue("@sexo", gender_male.Checked ? 'M' : 'F');
             myCommand.Parameters.AddWithValue("@dataNascimento", Convert.ToDateTime(tb_dateOfBirth.Value));
+            myCommand.Parameters.AddWithValue("@codPostal", tb_zipcode.Value);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
