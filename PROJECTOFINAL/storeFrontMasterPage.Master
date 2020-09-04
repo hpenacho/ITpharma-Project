@@ -162,15 +162,15 @@
                         <asp:UpdatePanel runat="server">
                             <ContentTemplate>
 
-                                <div class="container mt-3 justify-content-center" style="max-height: 17em; min-height: 17em;">
+                                <div class="container mt-3 justify-content-center text-center" style="max-height: 17em; min-height: 17em;">
 
-                                    <ul class="nav nav-pills mb-4" id="myTab" role="tablist">
+                                    <ul class="nav nav-pills mb-4 d-inline-blcok align-content-center" id="myTab" role="tablist">
 
-                                        <li class="nav-item">
+                                        <li class="nav-item col-6">
                                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Sign In</a>
                                         </li>
 
-                                        <li class="nav-item">
+                                        <li class="nav-item col-6">
                                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recover" role="tab" aria-controls="recover" aria-selected="false">Recover</a>
                                         </li>
 
