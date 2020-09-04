@@ -291,10 +291,10 @@ begin tran
 		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @PDF)
 
 		insert into compra
-		select (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico), Prod_ref AS 'Produto', count(Prod_ref) AS 'QTD' , sum(produto.preco) AS 'Total'
+		select (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico), Prod_ref AS 'Produto', count(Prod_ref) AS 'QTD' , sum(produto.preco) AS 'Total' , produto.preco as 'Item price at time'
 		from Carrinho inner join Produto on Carrinho.Prod_ref = Produto.Codreferencia
 		where Carrinho.ID_Cliente = @IDcliente
-		group by Prod_ref
+		group by Prod_ref, produto.preco
 
 		DELETE FROM carrinho WHERE carrinho.ID_Cliente = @IDcliente;
 
