@@ -162,49 +162,69 @@
                         <asp:UpdatePanel runat="server">
                             <ContentTemplate>
 
-                        <!-- CONTENT -->
-                                <div class="container mt-3" style="max-height: 14em; min-height:14em;">
+                                <div class="container mt-3 justify-content-center" style="max-height: 17em; min-height: 17em;">
 
-                                    <div id="modal-body-signin">
+                                    <ul class="nav nav-pills mb-4" id="myTab" role="tablist">
 
-                                        <div class="form-group">
-                                            <input type="email" class="form-control rounded-pill" id="txt_loginEmail" runat="server" aria-describedby="emailHelp" placeholder="Enter email">
-                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Sign In</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#recover" role="tab" aria-controls="recover" aria-selected="false">Recover</a>
+                                        </li>
+
+                                    </ul>
+
+
+                                    <div class="tab-content" id="myTabContent">
+
+                                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="home-tab">
+
+                                            <div class="form-group">
+                                                <input type="email" class="form-control rounded-pill" id="txt_loginEmail" runat="server" aria-describedby="emailHelp" placeholder="Enter email">
+                                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="password" class="form-control rounded-pill" runat="server" id="txt_loginPassword" placeholder="Password">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <asp:Button ID="btn_login" runat="server" CssClass="btn text-white border-0 btn-block rounded-pill" OnClick="btn_login_Click" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Login" />
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                                <label id="lbl_loginWarning" runat="server" class="col-form-label"></label>
+                                            </div>
+
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="small mb-1">Forgot your<span onclick="switchToRecovery()" style="cursor: pointer" class="small text-muted">Password?</span></label>
-                                            <input type="password" class="form-control rounded-pill" runat="server" id="txt_loginPassword" placeholder="Password">
-                                        </div>
+                                        <div class="tab-pane fade" id="recover" role="tabpanel" aria-labelledby="profile-tab">
 
-                                        <div class="form-group">
-                                            <asp:Button ID="btn_login" runat="server" CssClass="btn text-white border-0 w-50 rounded-pill" OnClick="btn_login_Click" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Login" />
-                                        </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control rounded-pill" runat="server" id="txt_recoverPassword" placeholder="Your email">
+                                            </div>
 
-                                        <div class="form-group text-center">
-                                            <label id="lbl_loginWarning" runat="server" class="col-form-label"></label>
+                                            <div class="form-group">
+                                                <asp:Button ID="btn_recoverPassword" runat="server" OnClick="btn_recoverPassword_Click" CssClass="btn text-white border-0 w-50 rounded-pill" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Recover" />
+                                            </div>
+
+                                            <div class="form-group text-center">
+                                                <label id="lbl_recoverWarning" runat="server" class="col-form-label"></label>
+                                            </div>
+
                                         </div>
 
                                     </div>
 
-                                    <div id="modal-body-recover">
-
-                                        <div class="form-group">
-                                            <label class="small mb-1">Return to <span class="small text-muted" onclick="switchToLogin()" id="retornaLogin" style="cursor: pointer">Login?</span></label>
-                                            <input type="email" class="form-control rounded-pill" runat="server" id="txt_recoverPassword" placeholder="Your email">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <asp:Button ID="btn_recoverPassword" runat="server" OnClick="btn_recoverPassword_Click" CssClass="btn text-white border-0 w-50 rounded-pill" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Recover" />
-                                        </div>
-
-                                        <div class="form-group text-center">
-                                            <label id="lbl_recoverWarning" runat="server" class="col-form-label"></label>
-                                        </div>
-
-                                    </div>
 
                                 </div>
+
+
+
+                                <!-- CONTENT -->
+                                
 
                         <!-- RECOVER PASSWORD -->
 
@@ -227,25 +247,6 @@
         </asp:UpdatePanel>
 
         <!-- LOGIN MODAL -->
-
-
-
-
-        <script>
-
-
-            function switchToRecovery() {
-                $('#modal-body-signin').fadeToggle("slow");
-                $('#modal-body-recover').fadeToggle("slow");
-            }
-
-            function switchToLogin() {
-                $('#modal-body-recover').fadeToggle("slow");
-                $('#modal-body-signin').fadeToggle("slow");
-            }
-
-
-        </script>
 
 
         <!-- Bootstrap core JavaScript -->

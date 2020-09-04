@@ -985,7 +985,7 @@ BEGIN TRY
 	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.EMAIL = @email and cliente.activo = 1)
 		throw 60002, 'This account is currently inactive' , 10
 
-	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.EMAIL = @email and cliente.firstActivation = 1)
+	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.EMAIL = @email and cliente.firstActivation = 0)
 		throw 60003, 'Please activate your account first' , 10
 
 	
@@ -996,7 +996,26 @@ BEGIN CATCH
 	set @errorMessage = ERROR_MESSAGE();
 END CATCH
 
-select * from cliente
+
+
+-- [PROC] ALTER CLIENT DETAILS
+
+GO
+create or alter proc usp_recoverLoginPassword(@email varchar(100), @password varchar(50), @errorMessage varchar(200) output ) AS
+BEGIN TRY
+BEGIN TRAN
+
+	if not exists(select '*' from cliente where cliente.email = @email)
+		throw 60001, 'Email is incorrect or is not registered' , 10
+
+	update cliente set cliente.password = @password where cliente.email = @email
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
 
 
 
@@ -1025,25 +1044,25 @@ END CATCH
 
 --[PROC] Activate user Account
 
+select * from cliente
+
 Go
 create or alter PROCEDURE [dbo].[usp_activateAcc]
 	
-	@email varchar(20),
+	@email varchar(100),
 	@errorMessage varchar(200) output
 
 AS
 BEGIN TRY
 BEGIN TRAN
 
-    if exists (select '*' from Cliente where activo= 1 and email=@email)    
+    if exists (select '*' from Cliente where activo = 1 and email = @email)    
 		throw 75001, 'This account is already activated.', 10;
 
-    if exists (select '*' from Cliente where firstActivation= 0 and email=@email)
+    if exists (select '*' from Cliente where firstActivation = 0 and email = @email)
 		throw 75002, 'This account has previously been through a first activation process.', 10;   
   
-    if exists (select '*' from Cliente where firstActivation = 1 and email=@email)    
-	
-        update Cliente set activo = 1, firstActivation = 0 where email=@email      
+   update Cliente set activo = 1, firstActivation = 0 where email = @email      
  
 COMMIT
 END TRY
@@ -1052,6 +1071,7 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 GO
+
 
 -- [PROC] ALTER CLIENT DETAILS
 

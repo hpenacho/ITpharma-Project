@@ -14,8 +14,27 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Client.isLogged)
+            {
+                fillDetails();
+            }
+            else
+            {
+                Response.Redirect("storeFront-Index.aspx");
+            }
+
+
 
         }
+
+        private void fillDetails()
+        {
+            txt_altername.Value = Client.name;
+            txt_alteremail.Value = Client.email;
+            txt_alteraddress.Value = Client.address;
+            txt_alternif.Value = Client.NIF;
+        }
+
 
         protected void btn_alterPassword_Click(object sender, EventArgs e)
         {
@@ -57,7 +76,7 @@ namespace PROJECTOFINAL
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
-            lbl_changeDetailsError.Text = "";
+            lbl_changeDetailsError.Text = "";  //FALTA O SELECT DO SQL COM O DATA READER PARA ACTUALIZAR OS DADOS DO CLIENTE
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_alterClientDetails");
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
