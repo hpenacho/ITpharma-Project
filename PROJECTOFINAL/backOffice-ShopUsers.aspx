@@ -166,82 +166,74 @@
                                 <!-- WINDOW PADDING -->
 
                                 <!-- Name -->
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-12">
-                                        <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Client Name" data-toggle="tooltip" data-placement="Top" title="Insert the Shop User's full name." required>
+                                <div class="form-group row">
+                                      <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_name1" placeholder="First Name" required>
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_name2" placeholder="Last Name" required>
+                                      </div>
                                     </div>
-
-                                </div>
                                 <!-- /Name -->
 
                                 <!-- Email -->
                                 <div class="form-row">
 
                                     <div class="form-group col-md-12">
-                                        <label for="tb_email">Email</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_email" placeholder=" Shop User's Email " data-toggle="tooltip" data-placement="top" title="Insert the Shop User's Email" required>
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_email" placeholder=" Shop User's Email " data-toggle="tooltip" data-placement="top" title="Insert the Shop User's Email" required>
                                     </div>
 
                                 </div>
                                 <!-- /Email -->
 
-                                <!-- Address -->
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-12">
-                                        <label for="tb_address">Address</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_address" placeholder=" Full Address " data-toggle="tooltip" data-placement="top" title="Insert the Full Address" required>
-                                    </div>
-
-                                </div>
-                                <!-- /Address -->
-
                                 <!-- NIF & Health Number -->
-                                <div class="form-row mt-2 d-flex justify-content-between"">
+                                <div class="form-group row">
 
-                                    <div class="form-group col-md-5">
-                                        <label for="tb_NIF">NIF</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_NIF" placeholder=" NIF " data-toggle="tooltip" data-placement="top" title="Insert NIF" required>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_NIF" placeholder=" NIF " data-toggle="tooltip" data-placement="top" title="Insert NIF" required>
                                     </div>
 
-                                    <div class="form-group col-md-5">
-                                        <label for="tb_healthNumber">Health Number</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_healthNumber" placeholder=" Health Number " data-toggle="tooltip" data-placement="top" title="Insert Health Number" required>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_healthNumber" placeholder=" Health Number " data-toggle="tooltip" data-placement="top" title="Insert Health Number" required>
                                     </div>
 
                                 </div>
                                 <!-- /NIF & Health Number -->
-                                
-                                <!-- Gender & DateOfBirth -->
-                                <div class="form-row mt-2 d-flex justify-content-between">
-               
-                                    <!-- Gender -->
-                                   
-                                    <div class="col-md-5">
-                                         
-                                      <div class="custom-control custom-radio custom-control-inline">
-                                          <asp:RadioButton ID="rbtn_male" runat="server" Checked="True" GroupName="gender" class="custom-control custom-radio custom-control-inline" Text="Male"/>                                   
-                                      </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <asp:RadioButton ID="rbtn_female" runat="server" GroupName="gender" Text="Female"/>       
-                                       </div> 
-                               
-                                        </div>
-                                    <!-- /Gender -->
 
-                                    <!-- DateOfBirth -->
-                                    <div class="col-md-5"> 
-                                       <div class="input-group">
-                                           <div class="input-group-append">
-                                             <span class="input-group-text" id="inputGroupPrepend3"><i class="fas fa-euro-sign"></i></span>
-                                           </div>
-                                             <input type="date" class="form-control" runat="server" id="tb_dateofbirth" aria-describedby="inputGroupPrepend3" value="2000-01-01" required>
+                                <!-- Address -->
+                                <div class="form-group row">
+                                  <div class="col-sm-9 mb-3 mb-sm-0">
+                                      <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_address" placeholder="Address" required>
+                                    </div>
+                                      <div class="col-sm-3">
+                                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" type="tel" pattern="[0-9\-]+" placeholder="Zip-code" required>
                                        </div>
-                                    </div> 
-                                    <!-- /DateOfBirth -->
-                                   
-                               </div>
+                                  </div>
+                                <!-- /Address -->
+
+                                
+                                
+                                <!-- DateOfBirth & Gender -->
+                                
+                                <div class="form-group row justify-content-center">
+                      
+                                  <div class="col-sm-4 mb-3 mb-sm-0">
+                                <input type="date" class="form-control form-control-user bg-light" runat="server" id="tb_dateOfBirth" placeholder="Date of Birth" value="2000-01-01">
+
+                              </div>
+
+                                  <div class="col-sm-4 text-center">
+                                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                      <label class="btn btn-light active">
+                                        <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server" checked > <h6> <i class="fas fa-mars text-primary"> </i>  Male </h6>
+                                      </label>
+                                      <label class="btn btn-light">
+                                        <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server"> <h6><i class="fas fa-venus text-danger"></i>  Female </h6>
+                                      </label>
+                                    </div>
+                                  </div>
+                                  </div>
+
                                 <!-- /Gender & DateOfBirth -->
                             <!-- WINDOW PADDING -->
 

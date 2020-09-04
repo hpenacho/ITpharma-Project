@@ -33,13 +33,22 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rpt_ShopUsersBackOffice;
 
         /// <summary>
-        /// tb_name control.
+        /// tb_name1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_name;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_name1;
+
+        /// <summary>
+        /// tb_name2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_name2;
 
         /// <summary>
         /// tb_email control.
@@ -49,15 +58,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_email;
-
-        /// <summary>
-        /// tb_address control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_address;
 
         /// <summary>
         /// tb_NIF control.
@@ -78,31 +78,49 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_healthNumber;
 
         /// <summary>
-        /// rbtn_male control.
+        /// tb_address control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtn_male;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_address;
 
         /// <summary>
-        /// rbtn_female control.
+        /// tb_zipcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtn_female;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_zipcode;
 
         /// <summary>
-        /// tb_dateofbirth control.
+        /// tb_dateOfBirth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_dateofbirth;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_dateOfBirth;
+
+        /// <summary>
+        /// gender_male control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton gender_male;
+
+        /// <summary>
+        /// gender_female control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton gender_female;
 
         /// <summary>
         /// link_insertShopUser control.
