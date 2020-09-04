@@ -973,6 +973,32 @@ GO
 
 ****************************************************/
 
+-- [PROC] LOGIN
+
+GO
+create or alter proc usp_clientLogin(@email varchar(100), @password varchar(100), @errorMessage varchar(200) output) AS
+BEGIN TRY
+
+	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE cliente.password = @password and cliente.email = @email)
+		throw 60001, 'Email or password incorrect', 10
+
+	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.EMAIL = @email and cliente.activo = 1)
+		throw 60002, 'This account is currently inactive' , 10
+
+	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.EMAIL = @email and cliente.firstActivation = 1)
+		throw 60003, 'Please activate your account first' , 10
+
+	
+	select * from cliente where cliente.email = @email
+
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+END CATCH
+
+select * from cliente
+
+
 
 -- [PROC] CHANGE USER PASSWORD 
 GO
@@ -1008,22 +1034,40 @@ AS
 BEGIN TRY
 BEGIN TRAN
 
-    if exists (select '*' from Cliente where activo='true' and email=@email)    
-	throw 75001, 'This account is already activated.', 10;
+    if exists (select '*' from Cliente where activo= 1 and email=@email)    
+		throw 75001, 'This account is already activated.', 10;
 
-    else if exists (select '*' from Cliente where firstActivation= 0 and email=@email)
-    throw 75002, 'This account has previously been through a first activation process.', 10;   
+    if exists (select '*' from Cliente where firstActivation= 0 and email=@email)
+		throw 75002, 'This account has previously been through a first activation process.', 10;   
   
-    else if exists (select '*' from Cliente where firstActivation = 1 and email=@email)    
+    if exists (select '*' from Cliente where firstActivation = 1 and email=@email)    
 	
-	begin 	
         update Cliente set activo = 1, firstActivation = 0 where email=@email      
-    end
  
- COMMIT
+COMMIT
 END TRY
 BEGIN CATCH
 	set @errorMessage = ERROR_MESSAGE();	
 	ROLLBACK;
 END CATCH
 GO
+
+-- [PROC] ALTER CLIENT DETAILS
+
+GO
+CREATE OR ALTER PROC usp_alterClientDetails(@ID int, @nome varchar(50), @email varchar(100), @morada varchar(300), @nif varchar(20), @output varchar(200) output) AS
+BEGIN TRY
+BEGIN TRAN
+	
+			update Cliente set nome =  @nome,
+							   email = @email,
+							   morada = @morada,
+							   nif = @nif
+			where cliente.ID = @ID
+
+			set @output = 'Details changed successfully';
+COMMIT	
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH

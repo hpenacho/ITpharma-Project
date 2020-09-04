@@ -165,10 +165,11 @@
                             <div class="form-row">
 
                                 <div class="col-md-6">
+                                     <asp:Label ID="lbl_changeDetailsError" runat="server" class="form-text text-dark" Font-Size="small" Text=""></asp:Label>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <asp:Button ID="btn_alterarDetails" class="btn btn-sm btn-info mt-5 float-right w-50" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/>
+                                    <asp:Button ID="btn_alterDetails" class="btn btn-sm btn-info mt-5 float-right w-50" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/>
                                 </div>
                             </div>
 
