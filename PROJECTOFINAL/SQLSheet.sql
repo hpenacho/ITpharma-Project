@@ -1022,7 +1022,8 @@ BEGIN CATCH
 	Rollback;
 END CATCH
 
----------------------------------------------------
+
+--[PROC] Activate user Account
 
 Go
 create or alter PROCEDURE [dbo].[usp_activateAcc]
