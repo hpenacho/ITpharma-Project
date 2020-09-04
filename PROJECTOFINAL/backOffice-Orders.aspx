@@ -140,7 +140,7 @@
                                                                         </div>
 
                                                                         <div class ="col-lg-1">
-                                                                             <label class="col-form-label"><%# Eval("Preco") %> €</label>
+                                                                             <label class="col-form-label"><%# Eval("PriceAtTime") %> €</label>
                                                                         </div>
 
                                                                         <div class ="col-lg-2">
