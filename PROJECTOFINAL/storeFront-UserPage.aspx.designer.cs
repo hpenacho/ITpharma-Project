@@ -105,12 +105,21 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alternif;
 
         /// <summary>
-        /// btn_alterarDetails control.
+        /// lbl_changeDetailsError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_alterarDetails;
+        protected global::System.Web.UI.WebControls.Label lbl_changeDetailsError;
+
+        /// <summary>
+        /// btn_alterDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_alterDetails;
     }
 }

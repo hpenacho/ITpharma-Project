@@ -22,7 +22,6 @@ namespace PROJECTOFINAL
 
             lbl_errorPassword.Text = "";
 
-            //(@ID int, @oldPassword varchar(100), @newPassword varchar(100), @errorMessage varchar(200) output) AS
             SqlCommand myCommand = Tools.SqlProcedure("usp_clientAlterPassword");
 
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
@@ -32,7 +31,6 @@ namespace PROJECTOFINAL
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
 
-            
             try
             {
                 Tools.myConn.Open();
@@ -59,9 +57,34 @@ namespace PROJECTOFINAL
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
+            lbl_changeDetailsError.Text = "";
 
+            SqlCommand myCommand = Tools.SqlProcedure("usp_alterClientDetails");
+            myCommand.Parameters.AddWithValue("@ID", Client.userID);
+            myCommand.Parameters.AddWithValue("@nome", txt_altername.Value);
+            myCommand.Parameters.AddWithValue("@email", txt_alteremail.Value);
+            myCommand.Parameters.AddWithValue("@morada", txt_alteraddress.Value);
+            myCommand.Parameters.AddWithValue("@nif", txt_alternif.Value);
 
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
 
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                lbl_changeDetailsError.Text = myCommand.Parameters["@output"].Value.ToString();
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
 
 
         }

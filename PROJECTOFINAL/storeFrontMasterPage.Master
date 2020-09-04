@@ -17,6 +17,8 @@
   <link href="StoreFront/css/modern-business.css" rel="stylesheet">
   <link href="StoreFront/css/store-front.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/7d8b56b46a.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
   <!-- CONTEUDO HEAD MASTER -->
   <asp:ContentPlaceHolder ID="head" runat="server">
@@ -25,6 +27,11 @@
 
 
   <style>
+
+      body{
+
+          background: #EDF6FB
+      }
 
       /* width */
       ::-webkit-scrollbar {
@@ -46,6 +53,11 @@
           background: #555;
       }
 
+      #modal-body-recover{
+
+          display:none;
+      }
+
 
   </style>
 
@@ -53,6 +65,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
 
         <!-- //MAIN CONTAINER -->
         <div class="container">
@@ -87,7 +102,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <button type="button" class="btn nav-link"><a href="storeFront-UserPage.aspx"><i class="far fa-user"></i> </a></button> 
+                                <button type="button" class="btn nav-link" data-toggle="modal" data-target="#login-modal"><i class="far fa-user"></i></button> 
                             </li>
 
                             <li class="nav-item">
@@ -101,20 +116,144 @@
             </nav>
             <!-- // NAVBAR -->
 
-    
-            <!-- SEARCH FIELD -->
-            
 
-        <!-- CONTEUDO BODY MASTER -->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-        <!-- //CONTEUDO BODY MASTER -->
-        
-        </div> <!-- //MAIN CONTAINER -->
+
+
+
+
+            <!-- CONTEUDO BODY MASTER -->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <!-- //CONTEUDO BODY MASTER -->
+
+        </div>
+        <!-- //MAIN CONTAINER -->
+
+
+        <!-- LOGIN MODAL -->
+
+        <asp:UpdatePanel ID="upd_login" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+
+         
+
+        <!-- Modal -->
+        <div class="modal fade" id="login-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-radius: 20px;">
+                    <div class="modal-header bg-white d-block" style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%); border-top-left-radius: 20px; border-top-right-radius: 20px;">
+
+
+                        <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <h3 class="text-center ml-4 text-white">Sign in</h3>
+
+                        <div class="row d-flex justify-content-center mt-4">
+                            <asp:LinkButton ID="LinkButton1" CssClass="btn text-white text-center mr-2" runat="server"><i class="fab fa-google" style="font-size: 25px;"></i></asp:LinkButton>
+                            <asp:LinkButton ID="LinkButton2" CssClass="btn text-white text-center ml-2" runat="server"><i class="fab fa-facebook-f" style="font-size: 25px;"></i></asp:LinkButton>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-body">
+
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+
+                        <!-- CONTENT -->
+                                <div class="container mt-3" style="max-height: 14em; min-height:14em;">
+
+                                    <div id="modal-body-signin">
+
+                                        <div class="form-group">
+                                            <input type="email" class="form-control rounded-pill" id="txt_loginEmail" runat="server" aria-describedby="emailHelp" placeholder="Enter email">
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="small mb-1">Forgot your<span onclick="switchToRecovery()" style="cursor: pointer" class="small text-muted">Password?</span></label>
+                                            <input type="password" class="form-control rounded-pill" runat="server" id="txt_loginPassword" placeholder="Password">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <asp:Button ID="btn_login" runat="server" CssClass="btn text-white border-0 w-50 rounded-pill" OnClick="btn_login_Click" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Login" />
+                                        </div>
+
+                                        <div class="form-group text-center">
+                                            <label id="lbl_loginWarning" runat="server" class="col-form-label"></label>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="modal-body-recover">
+
+                                        <div class="form-group">
+                                            <label class="small mb-1">Return to <span class="small text-muted" onclick="switchToLogin()" id="retornaLogin" style="cursor: pointer">Login?</span></label>
+                                            <input type="email" class="form-control rounded-pill" runat="server" id="txt_recoverPassword" placeholder="Your email">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <asp:Button ID="btn_recoverPassword" runat="server" OnClick="btn_recoverPassword_Click" CssClass="btn text-white border-0 w-50 rounded-pill" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Recover" />
+                                        </div>
+
+                                        <div class="form-group text-center">
+                                            <label id="lbl_recoverWarning" runat="server" class="col-form-label"></label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                        <!-- RECOVER PASSWORD -->
+
+                 
+                         <!-- //RECOVER PASSWORD -->
+
+
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+
+                    </div>
+                        <!-- //CONTENT -->
+
+                </div>
+            </div>
+        </div>
+        <!-- //Modal -->
+
+           </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <!-- LOGIN MODAL -->
+
+
+
+
+        <script>
+
+
+            function switchToRecovery() {
+                $('#modal-body-signin').fadeToggle("slow");
+                $('#modal-body-recover').fadeToggle("slow");
+            }
+
+            function switchToLogin() {
+                $('#modal-body-recover').fadeToggle("slow");
+                $('#modal-body-signin').fadeToggle("slow");
+            }
+
+
+        </script>
+
 
         <!-- Bootstrap core JavaScript -->
         <script src="StoreFront/vendor/jquery/jquery.min.js"></script>
         <script src="StoreFront/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 
     </form>
