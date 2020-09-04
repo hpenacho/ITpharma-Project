@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="newsUserControl.ascx.cs" Inherits="PROJECTOFINAL.News.newsUserControl" %>
+<asp:Xml ID="Xml1" runat="server" TransformSource="~/News/news.xslt"></asp:Xml>
