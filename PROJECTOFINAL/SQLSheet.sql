@@ -1032,10 +1032,10 @@ CREATE OR ALTER PROC usp_alterClientDetails(@ID int, @nome varchar(50), @email v
 BEGIN TRY
 BEGIN TRAN
 	
-			update Cliente set nome = IIF(@nome = '', nome, @nome),
-							   email =  IIF(@email = '', email, @email),
-							   morada = IIF(@morada= '', morada, @morada),
-							   nif = IIF(@nif = '', nif, @nif)
+			update Cliente set nome =  @nome,
+							   email = @email,
+							   morada = @morada,
+							   nif = @nif
 			where cliente.ID = @ID
 
 			set @output = 'Details changed successfully';
