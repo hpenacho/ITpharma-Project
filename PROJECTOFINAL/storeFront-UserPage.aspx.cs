@@ -84,6 +84,8 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@email", txt_alteremail.Value);
             myCommand.Parameters.AddWithValue("@morada", txt_alteraddress.Value);
             myCommand.Parameters.AddWithValue("@nif", txt_alternif.Value);
+            myCommand.Parameters.AddWithValue("@cod_postal", txt_zipCode.Value);
+
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));

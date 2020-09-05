@@ -143,9 +143,13 @@
                             </div>
 
                             <div class="form-row mb-3">
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <label for="txt_alteraddress">Address</label>
                                     <input type="text" id="txt_alteraddress" runat="server" class="form-control bg-light"/>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="txt_zipCode">Zip-Code</label>
+                                    <input type="text" id="txt_zipCode" runat="server" class="form-control bg-light"/>
                                 </div>
                             </div>
 

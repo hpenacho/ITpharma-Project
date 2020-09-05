@@ -1073,17 +1073,18 @@ END CATCH
 GO
 
 
--- [PROC] ALTER CLIENT DETAILS
-
+-- [PROC] ALTER CLIENT DETAILS                    //NAO ESQUECER IIF PARA QUANDO NAO MUDAMOS TODA A INFORMAÇAO, SENAO ESCREVE VAZIO EM CIMA QD CAPTA DO FRONTEND
+   
 GO
-CREATE OR ALTER PROC usp_alterClientDetails(@ID int, @nome varchar(50), @email varchar(100), @morada varchar(300), @nif varchar(20), @output varchar(200) output) AS
+CREATE OR ALTER PROC usp_alterClientDetails(@ID int, @nome varchar(50), @email varchar(100), @morada varchar(300), @nif varchar(20), @cod_postal varchar(20), @output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 	
 			update Cliente set nome =  @nome,
 							   email = @email,
 							   morada = @morada,
-							   nif = @nif
+							   nif = @nif,
+							   codpostal = @cod_postal
 			where cliente.ID = @ID
 
 			set @output = 'Details changed successfully';

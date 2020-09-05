@@ -87,6 +87,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alteraddress;
 
         /// <summary>
+        /// txt_zipCode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_zipCode;
+
+        /// <summary>
         /// txt_alterhealthnumber control.
         /// </summary>
         /// <remarks>
