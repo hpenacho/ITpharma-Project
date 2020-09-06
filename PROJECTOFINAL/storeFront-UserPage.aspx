@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/storeFrontMasterPage.Master" AutoEventWireup="true" CodeBehind="storeFront-UserPage.aspx.cs" Inherits="PROJECTOFINAL.storeFront_UserPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+
+
+
+
 </asp:Content>
 
 
@@ -74,7 +79,7 @@
 
                                 <div class="col">
                                     <label for="txt_oldPassword"">Old Password</label>
-                                    <input type="text" id="txt_oldPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                    <input type="password" id="txt_oldPassword" runat="server" class="form-control bg-light" placeholder="*******" />
                                 </div>
                             </div>
 
@@ -82,7 +87,7 @@
 
                                 <div class="col mt-3">
                                     <label for="txt_newPassword">New Password</label>
-                                    <input type="text" id="txt_newPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                    <input type="password" id="txt_newPassword" runat="server" class="form-control bg-light" placeholder="*******" />
                                 </div>
                             </div>
 
@@ -90,7 +95,7 @@
 
                                 <div class="col mt-3">
                                     <label for="txt_repeatPassword">Repeat Password</label>
-                                        <input type="text" id="txt_repeatPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                        <input type="password" id="txt_repeatPassword" runat="server" class="form-control bg-light" placeholder="*******" />
                                         <small id="passwordHelpBlock" class="form-text text-muted">8-20 caracteres, conter letras e numeros, um caracter especial e sem espaços
                                     </small>
                                 </div>
@@ -184,22 +189,53 @@
 
         </div>
 
-        <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+        <div class="tab-pane fade " id="orders" role="tabpanel" aria-labelledby="orders-tab">
 
-            <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5" style="border-radius: 20px;">
+            <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3" style="border-radius: 20px;">
                 <div class="card-body">
                     <div class="col-lg-12">
 
-                        <h3>Encomendas</h3>
+                        <h3 class="text-center my-2 bg-info py-1 text-white" style="border-radius: 20px;">Encomendas</h3>
 
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">ORDER 1</li>
-                            <li class="list-group-item">
-                            ORDER 1/li>
-                            <li class="list-group-item">ORDER 1</li>
-                            <li class="list-group-item">ORDER 1</li>
-                            <li class="list-group-item">ORDER 1</li>
-                        </ul>
+                                    <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
+
+                                    <table class="table table-borderless text-center" id="dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Invoice</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                             <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlOrderSource">
+                                                <ItemTemplate>
+
+                                            <tr>
+                                                <td style="vertical-align:middle"><%# Eval("ENC_REF") %></td>
+                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("Qty") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("Total") %> €</td>
+                                                <td style="vertical-align:middle"><span class="rounded-pill bg-info text-white p-2 pl-2 pr-2"><%# Eval("Descricao") %></span></td>
+                                                <td>
+                                                    <a class="btn btn-outline-info" style="vertical-align:middle" href="storeFront-UserOrders.aspx?order=<%# Eval("ENC_REF") %>">Details</a>
+                                                </td>
+                                            </tr>
+
+                                               </ItemTemplate>
+                                            </asp:Repeater>
+                                        
+                                        </tbody>
+                                    </table>
+
+                                    <!-- ORDER ELEMENT -->
 
                     </div>
                 </div>
@@ -299,6 +335,13 @@
         document.getElementById("navbar-pharma").classList.remove('sticky-top');
 
     </script>
+
+    <!-- SQL SOURCES -->
+    <asp:SqlDataSource ID="sqlOrderSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserPersonalOrders" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter DefaultValue="" Name="ID" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
 
 

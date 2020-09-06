@@ -21,7 +21,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_oldPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txt_oldPassword;
 
         /// <summary>
         /// txt_newPassword control.
@@ -30,7 +30,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_newPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txt_newPassword;
 
         /// <summary>
         /// txt_repeatPassword control.
@@ -39,7 +39,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_repeatPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txt_repeatPassword;
 
         /// <summary>
         /// lbl_errorPassword control.
@@ -121,5 +121,23 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_alterDetails;
+
+        /// <summary>
+        /// rpt_orders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_orders;
+
+        /// <summary>
+        /// sqlOrderSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlOrderSource;
     }
 }

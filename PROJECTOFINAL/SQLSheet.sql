@@ -1023,6 +1023,7 @@ END CATCH
 GO
 create or alter proc usp_clientAlterPassword(@ID int, @oldPassword varchar(100), @newPassword varchar(100), @errorMessage varchar(200) output) AS
 BEGIN TRY
+BEGIN TRAN
 
 		IF NOT EXISTS(select '*' from Cliente where Cliente.password = @oldPassword)
 			throw 60001, 'Inputed current password is incorrect.', 10;
@@ -1030,8 +1031,6 @@ BEGIN TRY
 		IF EXISTS (select cliente.password from cliente where cliente.password = @newPassword)
 			throw 60003, 'The new password is the same as the old one.', 10
 
-BEGIN TRAN
-	
 		update Cliente set cliente.password = @newPassword where cliente.ID = @ID
 		set @errorMessage = 'Password is changed.'
 COMMIT
@@ -1087,8 +1086,20 @@ BEGIN TRAN
 			where cliente.ID = @ID
 
 			set @output = 'Details changed successfully';
+
+			select * from cliente
 COMMIT	
 END TRY
 BEGIN CATCH
 	ROLLBACK;
 END CATCH
+
+-- [PROC] Returns the User's Orders
+
+go
+create or alter proc usp_returnUserPersonalOrders(@ID int) AS
+select ENC_REF, DataCompra, MoradaEntrega, Sum(Qtd) as 'Qty', sum(Total) as 'Total', Descricao, PDF 
+from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = Estado.ID
+						inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+where EncomendaHistorico.ID_Cliente = @ID
+group by  ENC_REF, DataCompra, MoradaEntrega, Descricao, PDF 
