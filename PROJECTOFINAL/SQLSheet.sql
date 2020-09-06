@@ -1126,9 +1126,11 @@ END CATCH
 -- [PROC] Returns the User's Orders
 
 go
-create or alter proc usp_returnUserPersonalOrders(@ID int) AS
+create or alter proc usp_returnUserPersonalOrders(@ID int, @estado int) AS
 select ENC_REF, DataCompra, MoradaEntrega, Sum(Qtd) as 'Qty', sum(Total) as 'Total', Descricao, PDF 
 from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = Estado.ID
 						inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
-where EncomendaHistorico.ID_Cliente = @ID
-group by  ENC_REF, DataCompra, MoradaEntrega, Descricao, PDF 
+where EncomendaHistorico.ID_Cliente = @ID AND EncomendaHistorico.ID_Estado = IIF(@estado = 4, 4, ID_estado)
+group by  ENC_REF, DataCompra, MoradaEntrega, Descricao, PDF
+
+select * from estado

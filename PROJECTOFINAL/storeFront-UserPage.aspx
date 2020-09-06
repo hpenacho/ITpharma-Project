@@ -30,16 +30,16 @@
 
                             <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
 
-                                <li class="nav-item">
-                                    <a class="nav-link show active" id="home-tab" data-toggle="tab" href="#change-details" role="tab" aria-controls="details" aria-selected="true">Users</a>
+                                <li class="nav-item bg-light">
+                                    <a class="nav-link" id="user-tab" data-toggle="tab" href="#change-details" role="tab" aria-controls="details" aria-selected="true">Users</a>
                                 </li>
 
                                 <li class="nav-item bg-light">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
+                                    <a class="nav-link fade show active" id="order-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
                                 </li>
 
                                 <li class="nav-item bg-light">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#exams" role="tab" aria-controls="exams" aria-selected="false">Exams</a>
+                                    <a class="nav-link" id="exam-tab" data-toggle="tab" href="#exams" role="tab" aria-controls="exams" aria-selected="false">Exams</a>
                                 </li>
 
                             </ul>
@@ -64,7 +64,7 @@
 
     <div class="tab-content" id="myTabContent">
 
-        <div class="tab-pane fade show active" id="change-details" role="tabpanel" aria-labelledby="details-tab">
+        <div class="tab-pane fade" id="change-details" role="tabpanel" aria-labelledby="details-tab">
             <div class="row">
 
 
@@ -193,17 +193,24 @@
 
         </div>
 
-        <div class="tab-pane fade " id="orders" role="tabpanel" aria-labelledby="orders-tab">
+        <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
 
             <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3" style="border-radius: 20px;">
                 <div class="card-body">
                     <div class="col-lg-12">
 
-                        <h3 class="text-center my-2 bg-info py-1 text-white" style="border-radius: 20px;">Encomendas</h3>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-info" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
+                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-info" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
+                        </div>
 
-                                    <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
 
-                                    <table class="table table-borderless text-center" id="dataTable">
+                        <h3 class="text-center my-2 bg-info py-1 text-white col-12" style="border-radius: 20px;">Encomendas</h3>
+
+                      
+                        <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
+
+                                    <table class="table table-borderless table-responsive-lg text-center" id="dataTable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">ID</th>
@@ -344,6 +351,7 @@
     <asp:SqlDataSource ID="sqlOrderSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserPersonalOrders" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter DefaultValue="" Name="ID" Type="Int32" />
+            <asp:Parameter DefaultValue="0" Name="estado" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 
