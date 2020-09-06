@@ -1073,7 +1073,8 @@ END CATCH
 GO
 
 
--- [PROC] ALTER CLIENT DETAILS                    //NAO ESQUECER IIF PARA QUANDO NAO MUDAMOS TODA A INFORMAÇAO, SENAO ESCREVE VAZIO EM CIMA QD CAPTA DO FRONTEND
+-- [PROC] ALTER CLIENT DETAILS             
+--NAO ESQUECER IIF PARA QUANDO NAO MUDAMOS TODA A INFORMAÇAO, SENAO ESCREVE VAZIO EM CIMA QD CAPTA DO FRONTEND
    
 GO
 CREATE OR ALTER PROC usp_alterClientDetails(@ID int, @nome varchar(50), @email varchar(100), @morada varchar(300), @nif varchar(20), @cod_postal varchar(20), @output varchar(200) output) AS
@@ -1093,3 +1094,33 @@ END TRY
 BEGIN CATCH
 	ROLLBACK;
 END CATCH
+
+----------------------------------------------
+
+--[PROC] RETURN SPECIFIC SELECTED ORDER DETAILS TO SPECIFIC USER
+GO
+create or alter proc usp_returnStoreFrontUserOrderDetails
+						(@ID_cliente int,
+						 @Enc_reference int,
+						 @errorMessage varchar(200) output)
+
+AS
+BEGIN TRY
+BEGIN TRAN
+
+select enc_ref as 'Ref', datacompra, cliente.nome as 'clientName', sum(compra.Total) as 'orderTotal', id_estado, ultimaActualizacao 
+from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
+						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+						inner join Estado on estado.ID = EncomendaHistorico.ID_Estado
+where EncomendaHistorico.ID_Cliente = @ID_cliente AND EncomendaHistorico.enc_ref = @Enc_reference
+group by enc_ref, datacompra, cliente.nome, id_estado, ultimaActualizacao 
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();	
+	ROLLBACK;
+END CATCH
+GO
+
+------------------------------------
