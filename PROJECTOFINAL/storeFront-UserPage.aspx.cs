@@ -33,6 +33,7 @@ namespace PROJECTOFINAL
             txt_alteremail.Value = Client.email;
             txt_alteraddress.Value = Client.address;
             txt_alternif.Value = Client.NIF;
+            sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
         }
 
 
@@ -44,8 +45,8 @@ namespace PROJECTOFINAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_clientAlterPassword");
 
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
-            myCommand.Parameters.AddWithValue("@oldPassword", txt_oldPassword.Value);
-            myCommand.Parameters.AddWithValue("@newPassword", txt_newPassword.Value);
+            myCommand.Parameters.AddWithValue("@oldPassword", Tools.EncryptString(txt_oldPassword.Value));
+            myCommand.Parameters.AddWithValue("@newPassword", Tools.EncryptString(txt_newPassword.Value));
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
@@ -76,7 +77,7 @@ namespace PROJECTOFINAL
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
-            lbl_changeDetailsError.Text = "";  //FALTA O SELECT DO SQL COM O DATA READER PARA ACTUALIZAR OS DADOS DO CLIENTE
+            lbl_changeDetailsError.Text = "";
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_alterClientDetails");
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
@@ -94,6 +95,18 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
+
+                var reader = myCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Client.name = reader["nome"].ToString();
+                    Client.email = reader["email"].ToString();
+                    Client.address = reader["morada"].ToString();
+                    Client.NIF = reader["NIF"].ToString();
+
+                    fillDetails();
+                }
 
                 lbl_changeDetailsError.Text = myCommand.Parameters["@output"].Value.ToString();
 
