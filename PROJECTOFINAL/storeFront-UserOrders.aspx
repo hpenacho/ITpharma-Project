@@ -5,32 +5,40 @@
 
     
         <div class="card shadow shadow-sm mt-3 mb-3" style="border-radius: 15px;">
-            <div class="card-header" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                Invoice
-                <strong>01/01/2020</strong>
-                <span class="float-right"> <strong>Status:</strong> Pending</span>
+            <div class="card-header text-center" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+               <div class="row">
+                <div class="col-md-4">
+                    <b>Order Reference #</b><asp:Label ID="lbl_EncRef" runat="server" Text="4743"></asp:Label>
+                </div>
+                <div class="col-md-4">
+                 <b>Date: </b> <asp:Label ID="lbl_orderDate" runat="server" Text="01-01-2020"></asp:Label>
+                </div>
+                   <div class="col-md-4">
+                     <strong>Status: </strong><asp:Label ID="lbl_orderStatus" runat="server" Text="Delivered"></asp:Label>
+                   </div>
+                   </div>
             </div>
             <div class="card-body">
                 <div class="row mb-4">
                     <div class="col-sm-6">
                         <h6 class="mb-3">From:</h6>
                         <div>
-                            <strong>DotNetTec</strong>
+                            <strong>ITpharma</strong>
                         </div>
-                        <div>Madalinskiego 8</div>
-                        <div>71-101 Szczecin, Poland</div>
-                        <div>Email: info@dotnettec.com</div>
-                        <div>Phone: +91 9800000000</div>
+                        <div>71-101 Money Street, PT</div>
+                        <div>2774-449</div>
+                        <div>Email: ITpharmaProject@outlook.com</div>
+                        <div>Phone: +351 2160789332</div>
                     </div>
                     <div class="col-sm-6">
                         <h6 class="mb-3">To:</h6>
                         <div>
-                            <strong>Robert Maxwel</strong>
+                            <strong> <asp:Label ID="lbl_customerName" runat="server" Text="Hugo Penacho"></asp:Label> </strong>
                         </div>
-                        <div>Attn: Daniel Marek</div>
-                        <div>43-190 Mikolow, Poland</div>
-                        <div>Email: robert@daniel.com</div>
-                        <div>Phone: +48 123 456 349</div>
+                        <div> <asp:Label ID="lbl_address" runat="server" Text="Rua do Fim de Linha 123"></asp:Label> </div>
+                        <div><asp:Label ID="lbl_zip" runat="server" Text="2345-765"></asp:Label></div>
+                        <div>Email: <asp:Label ID="lbl_email" runat="server" Text="example@gmail.com"></asp:Label></div>
+                        <div>NIF: <asp:Label ID="lbl_nif" runat="server" Text="Not provided."></asp:Label></div>
                     </div>
                 </div>
                 <div class="table-responsive-sm">
@@ -91,26 +99,26 @@
                                     <td class="left">
                                         <strong>Subtotal</strong>
                                     </td>
-                                    <td class="right">$8.497,00</td>
+                                    <td class="right"><asp:Label ID="lbl_subTotal" runat="server" Text="83.66"></asp:Label></td>
                                 </tr>
                                 <tr>
                                     <td class="left">
                                         <strong>Discount (20%)</strong>
                                     </td>
-                                    <td class="right">$1,699,40</td>
+                                    <td class="right"> Placeholder entry </td>
                                 </tr>
                                 <tr>
                                     <td class="left">
-                                        <strong>VAT (10%)</strong>
+                                        <strong>IVA (6%)</strong>
                                     </td>
-                                    <td class="right">$679,76</td>
+                                    <td class="right"> <asp:Label ID="lbl_tax" runat="server" Text="5.34"></asp:Label> </td>
                                 </tr>
                                 <tr>
                                     <td class="left">
-                                        <strong>Total</strong>
+                                        <strong>Total(€)</strong>
                                     </td>
                                     <td class="right">
-                                        <strong>$7.477,36</strong>
+                                        <strong> <asp:Label ID="lbl_Total" runat="server" Text="89"></asp:Label> </strong>
                                     </td>
                                 </tr>
                             </tbody>

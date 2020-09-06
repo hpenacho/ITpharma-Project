@@ -1109,12 +1109,14 @@ AS
 BEGIN TRY
 BEGIN TRAN
 
-select enc_ref as 'Ref', datacompra, cliente.nome as 'clientName', sum(compra.Total) as 'orderTotal', id_estado, ultimaActualizacao 
+select enc_ref as 'Ref', datacompra as'OrderDate',Estado.Descricao as 'Status', 
+cliente.nome as 'clientName',cliente.morada as 'Address', cliente.codPostal as 'zipCode', cliente.nif, 
+sum(compra.Total) as 'orderTotal' 
 from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
 						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 						inner join Estado on estado.ID = EncomendaHistorico.ID_Estado
 where EncomendaHistorico.ID_Cliente = @ID_cliente AND EncomendaHistorico.enc_ref = @Enc_reference
-group by enc_ref, datacompra, cliente.nome, id_estado, ultimaActualizacao 
+group by enc_ref, datacompra, cliente.nome, Estado.Descricao, cliente.morada, cliente.codPostal, cliente.nif
 
 COMMIT
 END TRY

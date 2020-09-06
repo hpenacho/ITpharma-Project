@@ -16,9 +16,9 @@ namespace PROJECTOFINAL
             //nao esquecer redirects se houver tentativa forçada de acesso à pagina sem id_cliente ou ENC_REF fornecido
              //ptencialmente podem ficar no CATCH os redirects mediante excepçao
 
-           /* SqlCommand myCommand = Tools.SqlProcedure("usp_returnStoreFrontUserOrderDetails");
+            SqlCommand myCommand = Tools.SqlProcedure("usp_returnStoreFrontUserOrderDetails");
             myCommand.Parameters.AddWithValue("@ID_cliente", Client.userID);
-            //myCommand.Parameters.AddWithValue("@Enc_reference", // captar query string );
+            myCommand.Parameters.AddWithValue("@Enc_reference", Request.QueryString["order"]);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
@@ -31,6 +31,18 @@ namespace PROJECTOFINAL
 
                 if (reader.Read())
                 {
+                    Decimal total = Convert.ToDecimal(reader["orderTotal"].ToString());
+                    Decimal tax = Decimal.Multiply(total, 0.06m);
+                    Decimal subTotal = total - tax;
+                    lbl_EncRef.Text = reader["Ref"].ToString();
+                    lbl_orderDate.Text = reader["OrderDate"].ToString();
+                    lbl_orderStatus.Text = reader["Status"].ToString();
+                    lbl_customerName.Text = reader["clientName"].ToString();
+                    lbl_address.Text = reader["Address"].ToString();
+                    lbl_zip.Text = reader["zipCode"].ToString();
+                    lbl_subTotal.Text = subTotal.ToString();
+                    lbl_tax.Text = tax.ToString();
+                    lbl_Total.Text = total.ToString();
                 }
             }
             catch (SqlException m)
@@ -40,8 +52,8 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
-            }
-           */
+            } 
+           
         }
     }
 }
