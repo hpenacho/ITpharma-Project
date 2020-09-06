@@ -122,5 +122,18 @@ namespace PROJECTOFINAL
 
 
         }
+
+
+        protected void link_activeOrders_Click(object sender, EventArgs e)
+        {
+            sqlOrderSource.SelectParameters["estado"].DefaultValue = "0";
+            rpt_orders.DataBind();
+        }
+
+        protected void link_pastOrders_Click(object sender, EventArgs e)
+        {
+            sqlOrderSource.SelectParameters["estado"].DefaultValue = "4";
+            rpt_orders.DataBind();
+        }
     }
 }
