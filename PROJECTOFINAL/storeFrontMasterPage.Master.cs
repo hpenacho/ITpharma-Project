@@ -33,6 +33,12 @@ namespace PROJECTOFINAL
             }
 
         }
+
+        public void updateCart()
+        {
+            rpt_carrinho.DataBind();
+        }
+
         protected void btn_login_Click(object sender, EventArgs e)
         {
             lbl_loginWarning.InnerText = "";
@@ -40,6 +46,7 @@ namespace PROJECTOFINAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_clientLogin");
             myCommand.Parameters.AddWithValue("@email", txt_loginEmail.Value);
             myCommand.Parameters.AddWithValue("@password", Tools.EncryptString(txt_loginPassword.Value));
+            myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
@@ -135,7 +142,7 @@ namespace PROJECTOFINAL
                 SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
 
                 myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
-                myCommand.Parameters.AddWithValue("@Prod_Ref", ((ImageButton)e.Item.FindControl("btn_removeItem")).CommandArgument);
+                myCommand.Parameters.AddWithValue("@Prod_Ref", e.CommandArgument.ToString());
 
                 //OUTPUT - ERROR MESSAGES
                 //myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
@@ -159,6 +166,7 @@ namespace PROJECTOFINAL
         }
 
         Decimal total = 0;
+
         protected void rpt_carrinho_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Decimal tax = 0;

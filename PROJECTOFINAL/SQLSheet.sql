@@ -974,9 +974,9 @@ GO
 ****************************************************/
 
 -- [PROC] LOGIN
-
+-- alteração: para introduzir conta guest 
 GO
-create or alter proc usp_clientLogin(@email varchar(100), @password varchar(100), @errorMessage varchar(200) output) AS
+create or alter proc usp_clientLogin(@email varchar(100), @password varchar(100), @cookie varchar(50), @errorMessage varchar(200) output) AS
 BEGIN TRY
 
 	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE cliente.password = @password and cliente.email = @email)
@@ -991,9 +991,17 @@ BEGIN TRY
 	
 	select * from cliente where cliente.email = @email
 
+BEGIN TRAN
+
+	UPDATE Carrinho 
+	SET Carrinho.ID_Cliente = (select cliente.ID from Cliente where cliente.email = @email)
+	WHERE Carrinho.Cookie = @cookie
+
+COMMIT
 END TRY
 BEGIN CATCH
 	set @errorMessage = ERROR_MESSAGE();
+	ROLLBACK;
 END CATCH
 
 
@@ -1149,19 +1157,28 @@ BEGIN CATCH
 END CATCH
 -------------
 
---[PROC] RETURNS CART ITEMS FROM A SPECIFIED USER
+select * from Carrinho
+
+--[PROC] RETURNS CART ITEMS FROM A SPECIFIED USER -- testar a precedência do OR
+-- Comment da alteração: num OR que por é natureza boolean a 1º instrução é avaliada e se for true não corre a segunda fazendo o que se chama short-circuit 
+
+
 go
-create or alter proc usp_returnUserCartItems(@id_cliente int) 
-
-
-AS
+create or alter proc usp_returnUserCartItems(@id_cliente int, @cookies varchar(50)) AS
 BEGIN TRY
 BEGIN TRAN
 
-select Produto.Codreferencia as 'Prod_Ref', Produto.imagem as 'ProdImage' ,Produto.nome as 'ProdName', Produto.preco as 'Unit Price', count(Carrinho.Prod_ref) as 'Qty', sum(Produto.preco) as 'itemTotalPrice' 
-					from Produto inner join carrinho on Produto.Codreferencia = Carrinho.Prod_ref
-					where Carrinho.ID_Cliente = @id_cliente
-					group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco
+	    select
+	    Produto.Codreferencia as 'Prod_Ref', 
+	    Produto.imagem as 'ProdImage',
+	    Produto.nome as 'ProdName', 
+	    Produto.preco as 'Unit Price', 
+	    count(Carrinho.Prod_ref) as 'Qty', 
+	    sum(Produto.preco) as 'itemTotalPrice' 
+
+		from Produto inner join carrinho on Produto.Codreferencia = Carrinho.Prod_ref
+		where Carrinho.ID_Cliente = IIF(@id_cliente = 0, null, @id_cliente) OR Carrinho.Cookie = @cookies 
+		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco
 
 COMMIT
 END TRY
@@ -1174,9 +1191,7 @@ END CATCH
 
 --[PROC] Delete selected Item from specific User's Cart
 go
-create or alter proc usp_DeleteSelectedCartItem(@id_cliente int, @Prod_Ref varchar(20)) 
-
-AS
+create or alter proc usp_DeleteSelectedCartItem(@id_cliente int, @Prod_Ref varchar(20)) AS
 BEGIN TRY
 BEGIN TRAN
 
@@ -1213,3 +1228,5 @@ begin catch
     rollback
 end catch
 GO
+
+select * from Carrinho

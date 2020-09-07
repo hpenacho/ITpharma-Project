@@ -306,7 +306,8 @@
 
                       <asp:SqlDataSource ID="SqlSourceCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
                           <SelectParameters>
-                              <asp:Parameter Name="id_cliente" Type="Int32" />
+                              <asp:Parameter Name="id_cliente" Type="Int32" DefaultValue="0" />
+                              <asp:CookieParameter CookieName="noLogID" Name="cookies" Type="String" />
                           </SelectParameters>
                       </asp:SqlDataSource>
 

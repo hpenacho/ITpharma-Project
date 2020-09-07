@@ -38,7 +38,7 @@ namespace PROJECTOFINAL
 
             myCommand.Parameters.AddWithValue("@ID", Client.isLogged ? Client.userID : (object) DBNull.Value);
             myCommand.Parameters.AddWithValue("@product", e.CommandArgument.ToString());
-            myCommand.Parameters.AddWithValue("@Cookie", "1234"); //ATENÇÃO COLOCAR A COOKIE DEPOIS DO MERGE FEITO
+            myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"].Value);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
@@ -58,6 +58,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                (this.Master as storeFrontMasterPage).updateCart();
             }
         }
 
