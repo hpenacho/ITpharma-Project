@@ -74,16 +74,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
 
-                    <ul class="navbar-nav ml-auto  text-success">
+                    <ul class="navbar-nav ml-auto">
+
+                         <li class="nav-item">
+                            <a href="storeFront-Shop.aspx" class="nav-link bg-transparent">Loja</a>
+                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html" data-toggle="modal" data-target="#login-modal">About</a>
+                            <button type="button" class="nav-link btn bg-transparent" data-toggle="modal" data-target="#login-modal" formnovalidate="formnovalidate"><i class="fas fa-user-circle"></i></button>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="services.html">Services</a>
+                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart"></i></button>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <button type="button" class="nav-link btn bg-transparent" id="search-product" formnovalidate="formnovalidate"><i class="fas fa-search"></i></button>
                         </li>
 
                     </ul>

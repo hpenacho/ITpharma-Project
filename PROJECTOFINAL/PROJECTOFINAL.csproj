@@ -472,6 +472,7 @@
     <Content Include="storeFront-News.aspx" />
     <Content Include="storeFront-OrderSuccess.aspx" />
     <Content Include="storeFront-Registry.aspx" />
+    <Content Include="storeFront-Shop.aspx" />
     <Content Include="storeFront-SocialBridge.aspx" />
     <Content Include="storeFront-UserOrders.aspx" />
     <Content Include="storeFront-UserPage.aspx" />
@@ -643,6 +644,13 @@
     </Compile>
     <Compile Include="storeFront-Registry.aspx.designer.cs">
       <DependentUpon>storeFront-Registry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Shop.aspx.cs">
+      <DependentUpon>storeFront-Shop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Shop.aspx.designer.cs">
+      <DependentUpon>storeFront-Shop.aspx</DependentUpon>
     </Compile>
     <Compile Include="storeFront-SocialBridge.aspx.cs">
       <DependentUpon>storeFront-SocialBridge.aspx</DependentUpon>
