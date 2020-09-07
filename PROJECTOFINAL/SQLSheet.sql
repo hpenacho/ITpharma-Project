@@ -1156,7 +1156,7 @@ create or alter proc usp_displayShopProducts AS
 select * from produto where produto.Activo = 1
 
 
--- [PROC] INSERT PRODUCT CART
+-- [PROC] INSERT PRODUCT CART -- falta erros caso haja
 go
 create or alter proc usp_addProdToCart(@ID int, @product varchar(20), @cookie varchar(50), @output varchar(200) output) AS
 begin try
