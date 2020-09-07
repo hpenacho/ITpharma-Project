@@ -1148,3 +1148,25 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 -------------
+
+
+-- [PROC] DISPLAY SHOP PRODUCTS  -- falta colocar aqui filtros e paginação
+go
+create or alter proc usp_displayShopProducts AS
+select * from produto where produto.Activo = 1
+
+
+-- [PROC] INSERT PRODUCT CART
+go
+create or alter proc usp_addProdToCart(@ID int, @product varchar(20), @cookie varchar(50), @output varchar(200) output) AS
+begin try
+begin tran
+
+	insert into Carrinho values(@ID, @product, @cookie)
+
+commit
+end try
+begin catch
+	set @output = ERROR_MESSAGE();
+	rollback
+end catch
