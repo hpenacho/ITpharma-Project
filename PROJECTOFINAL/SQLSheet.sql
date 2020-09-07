@@ -1190,3 +1190,26 @@ BEGIN CATCH
 	print ERROR_MESSAGE();	
 	ROLLBACK;
 END CATCH
+
+-- [PROC] displays products in the repeater 
+
+GO
+create  or alter proc [dbo].[usp_displayShopProducts] AS
+select * from produto where produto.Activo = 1
+
+-- [PROC] adds items to the cart
+
+GO
+create or alter proc [dbo].[usp_addProdToCart](@ID int, @product varchar(20), @cookie varchar(50), @output varchar(200) output) AS
+begin try
+begin tran
+
+    insert into Carrinho values(@ID, @product, @cookie)
+
+commit
+end try
+begin catch
+    set @output = ERROR_MESSAGE();
+    rollback
+end catch
+GO
