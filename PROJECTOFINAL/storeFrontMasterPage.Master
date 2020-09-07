@@ -13,12 +13,11 @@
   <meta name="author" content="">
 
   <!-- Bootstrap core CSS -->
-  <link href="StoreFront/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="StoreFront/css/modern-business.css" rel="stylesheet">
-  <link href="StoreFront/css/store-front.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/7d8b56b46a.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 
   <!-- CONTEUDO HEAD MASTER -->
   <asp:ContentPlaceHolder ID="head" runat="server">
@@ -28,11 +27,6 @@
 
   <style>
 
-      body{
-
-          background: #EDF6FB
-      }
-
       /* width */
       ::-webkit-scrollbar {
           width: 10px;
@@ -40,7 +34,7 @@
 
       /* Track */
       ::-webkit-scrollbar-track {
-          background: #f1f1f1;
+          background: transparent;
       }
 
       /* Handle */
@@ -68,57 +62,59 @@
 
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-
-        <!-- //MAIN CONTAINER -->
-        <div class="container">
-
-            <!-- NAVBAR -->
-            <nav class="navbar sticky-top mt-1 shadow shadow-sm navbar-expand-lg text-dark navbar-light bg-white py-3" id="navbar-pharma">
-                <a class="navbar-brand" href="storeFront-Index.aspx">IT Pharma</a>
+        <!-- Navigation -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top py-4 pb-1 bg-white">
+            <div class="container">
+                <a class="navbar-brand text-success" href="index.html">Start Bootstrap</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-lg-around" id="navbarResponsive">
-
-                    <div class="col-lg-9">
-                        <ul class="navbar-nav justify-content-center">
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="services.html">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <ul class="navbar-nav ml-auto justify-content-lg-end">
-
-                            <li class="nav-item">
-                                <button type="button" id="search-button" class="btn nav-link"><i class="fas fa-search"></i></button>
-                            </li>
-
-                            <li class="nav-item">
-                                <button type="button" class="btn nav-link" data-toggle="modal" data-target="#login-modal"><i class="far fa-user"></i></button> 
-                            </li>
-
-                            <li class="nav-item">
-                                <button type="button" class="btn nav-link"><i class="fas fa-shopping-cart"></i><span class="badge badge-primary rounded" style="font-size: 10px;">2</span></button>
-                            </li>
-
-                        </ul>
-                    </div>
-
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto  text-success">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html" data-toggle="modal" data-target="#login-modal">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Portfolio
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                                <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
+                                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
+                                <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
+                                <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
+                                <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                                <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
+                                <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
+                                <a class="dropdown-item" href="blog-post.html">Blog Post</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Other Pages
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
+                                <a class="dropdown-item" href="full-width.html">Full Width Page</a>
+                                <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
+                                <a class="dropdown-item" href="faq.html">FAQ</a>
+                                <a class="dropdown-item" href="404.html">404</a>
+                                <a class="dropdown-item" href="pricing.html">Pricing Table</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-            <!-- // NAVBAR -->
-
-
-
-
+            </div>
+        </nav>
 
 
             <!-- CONTEUDO BODY MASTER -->
@@ -126,16 +122,16 @@
             </asp:ContentPlaceHolder>
             <!-- //CONTEUDO BODY MASTER -->
 
-        </div>
-        <!-- //MAIN CONTAINER -->
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 
         <!-- LOGIN MODAL -->
-
         <asp:UpdatePanel ID="upd_login" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-
-         
 
         <!-- Modal -->
         <div class="modal fade" id="login-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -247,15 +243,6 @@
         </asp:UpdatePanel>
 
         <!-- LOGIN MODAL -->
-
-
-        <!-- Bootstrap core JavaScript -->
-        <script src="StoreFront/vendor/jquery/jquery.min.js"></script>
-        <script src="StoreFront/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 
     </form>
 </body>

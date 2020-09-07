@@ -478,7 +478,6 @@
     <Content Include="storeFront-UserPage.aspx" />
     <Content Include="StoreFront\css\modern-business.css" />
     <Content Include="StoreFront\css\register.min.css" />
-    <Content Include="StoreFront\css\store-front.css" />
     <Content Include="StoreFront\js\contact_me.js" />
     <Content Include="StoreFront\js\jqBootstrapValidation.js" />
     <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.css" />
