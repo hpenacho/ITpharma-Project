@@ -14,7 +14,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3">
+            <div class="col-lg-3" style="margin-top: 20vh;">
 
                 <h1 class="my-4">Shop Name</h1>
                 <div class="list-group">
@@ -26,106 +26,50 @@
             </div>
             <!-- /.col-lg-3 -->
 
-            <div class="col-lg-9">
-
+            <div class="col-lg-9" style="margin-top: 20vh;">
                 <div class="row">
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item One</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                        </div>
-                    </div>
+                    <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts" OnItemDataBound="rptShopProducts_ItemDataBound" OnItemCommand="rptShopProducts_ItemCommand">
+                        <ItemTemplate>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Two</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100 border-white">
+                                    <a href="#">
+                                        <img class="img-fluid card-img card-img-top" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
+                                    
+                                    <div class="card-body"> 
+                                        <!-- card body -->
+                                        <h4 class="card-title m-auto text-center">
+                                            <a href="#"><%# Eval("nome") %></a>
+                                        </h4>
+                                        <h5><%# Eval("preco") %> €</h5>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Three</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="card-footer bg-transparent">
+                                         <!-- card footer -->
+                                        <asp:LinkButton ID="link_addProduct" runat="server" CommandName="link_addProduct" CommandArgument='<%# Eval("Codreferencia") %>' CssClass="btn btn-block btn-outline-success"><i class="fas fa-plus-circle"></i></asp:LinkButton>
+                                    </div>
+                                        <!-- //card footer -->
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Four</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                                    </div>
+                                         <!-- //card body -->
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Five</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-                            </div>
-                        </div>
-                    </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="#">
-                                <img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="#">Item Six</a>
-                                </h4>
-                                <h5>$24.99</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
                 <!-- /.row -->
-
             </div>
             <!-- /.col-lg-9 -->
-
         </div>
         <!-- /.row -->
-
     </div>
     <!-- /.container -->
 
 
+    <!-- SQL SOURCES -->
+    <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_displayShopProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
 </asp:Content>
