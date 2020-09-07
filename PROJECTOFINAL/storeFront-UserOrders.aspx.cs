@@ -13,15 +13,18 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //nao esquecer redirects se houver tentativa forçada de acesso à pagina sem id_cliente ou ENC_REF fornecido
-             //ptencialmente podem ficar no CATCH os redirects mediante excepçao
+
+            if (!Client.isLogged)
+            {
+                Response.Redirect("storeFront-Index.aspx");
+            }
+
+            SqlDataSource1.SelectParameters["ID_cliente"].DefaultValue = Client.userID.ToString();
+
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_returnStoreFrontUserOrderDetails");
             myCommand.Parameters.AddWithValue("@ID_cliente", Client.userID);
             myCommand.Parameters.AddWithValue("@Enc_reference", Request.QueryString["order"]);
-
-            //OUTPUT - ERROR MESSAGES
-            myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
 
             SqlDataReader reader = null;
             try
@@ -31,29 +34,56 @@ namespace PROJECTOFINAL
 
                 if (reader.Read())
                 {
-                    Decimal total = Convert.ToDecimal(reader["orderTotal"].ToString());
-                    Decimal tax = Decimal.Multiply(total, 0.06m);
-                    Decimal subTotal = total - tax;
+                    
                     lbl_EncRef.Text = reader["Ref"].ToString();
                     lbl_orderDate.Text = reader["OrderDate"].ToString();
                     lbl_orderStatus.Text = reader["Status"].ToString();
                     lbl_customerName.Text = reader["clientName"].ToString();
+                    lbl_email.Text = reader["email"].ToString();
                     lbl_address.Text = reader["Address"].ToString();
                     lbl_zip.Text = reader["zipCode"].ToString();
-                    lbl_subTotal.Text = subTotal.ToString();
-                    lbl_tax.Text = tax.ToString();
-                    lbl_Total.Text = total.ToString();
+                    lbl_nif.Text = reader["nif"].ToString();
+                    
                 }
             }
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
             }
+            catch (IndexOutOfRangeException x)
+            {
+                System.Diagnostics.Debug.WriteLine(x.Message);
+                Response.Redirect("storeFront-UserPage.aspx");
+            }
             finally
             {
                 Tools.myConn.Close();
             } 
+
+
            
         }
+
+        Decimal total = 0;
+        protected void rpt_orderItems_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Decimal tax = 0;
+            Decimal subTotal = 0;
+
+            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
+            {
+                DataRowView dr = (DataRowView)e.Item.DataItem;
+                total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
+            }
+            
+            tax = Decimal.Multiply(total, 0.06m);
+            subTotal = total - tax;
+
+            lbl_subTotal.Text = Math.Round(subTotal, 2).ToString();
+            lbl_tax.Text = Math.Round(tax, 2).ToString();
+            lbl_Total.Text = total.ToString();
+
+        }
+
     }
 }

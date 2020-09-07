@@ -1102,37 +1102,49 @@ END CATCH
 GO
 create or alter proc usp_returnStoreFrontUserOrderDetails
 						(@ID_cliente int,
-						 @Enc_reference int,
-						 @errorMessage varchar(200) output)
+						 @Enc_reference int)
 
 AS
 BEGIN TRY
 BEGIN TRAN
 
 select enc_ref as 'Ref', datacompra as'OrderDate',Estado.Descricao as 'Status', 
-cliente.nome as 'clientName',cliente.morada as 'Address', cliente.codPostal as 'zipCode', cliente.nif, 
-sum(compra.Total) as 'orderTotal' 
+cliente.nome as 'clientName',cliente.morada as 'Address', cliente.codPostal as 'zipCode', cliente.nif, cliente.email,
+Compra.Prod_ref,Produto.nome as 'ProdName', Sum(Qtd) as 'Qty', Compra.PriceAtTime as 'Unit Price',
+sum(compra.Total) as 'itemTotalPrice' 
 from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
 						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 						inner join Estado on estado.ID = EncomendaHistorico.ID_Estado
+						inner join Produto on Produto.Codreferencia = Compra.Prod_ref
 where EncomendaHistorico.ID_Cliente = @ID_cliente AND EncomendaHistorico.enc_ref = @Enc_reference
-group by enc_ref, datacompra, cliente.nome, Estado.Descricao, cliente.morada, cliente.codPostal, cliente.nif
+group by enc_ref, datacompra, cliente.nome, Estado.Descricao, cliente.morada, cliente.codPostal, cliente.nif, Compra.Prod_ref, Produto.nome, Compra.PriceAtTime, cliente.email
 
 COMMIT
 END TRY
 BEGIN CATCH
-	set @errorMessage = ERROR_MESSAGE();	
+	print ERROR_MESSAGE();	
 	ROLLBACK;
 END CATCH
 
 -- [PROC] Returns the User's Orders
 
 go
-create or alter proc usp_returnUserPersonalOrders(@ID int, @estado int) AS
-select ENC_REF, DataCompra, MoradaEntrega, Sum(Qtd) as 'Qty', sum(Total) as 'Total', Descricao, PDF 
-from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = Estado.ID
-						inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
-where EncomendaHistorico.ID_Cliente = @ID AND EncomendaHistorico.ID_Estado = IIF(@estado = 4, 4, ID_estado)
-group by  ENC_REF, DataCompra, MoradaEntrega, Descricao, PDF
+create or alter proc usp_repeaterOrderDetails(@enc_ref int) 
 
-select * from estado
+
+AS
+BEGIN TRY
+BEGIN TRAN
+select Compra.Prod_ref,Produto.nome as 'ProdName', Sum(Qtd) as 'Qty', sum(Total) as 'Total', Compra.PriceAtTime as 'Unit Price' 
+from EncomendaHistorico inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+						inner join Produto on Produto.Codreferencia = Compra.Prod_ref
+					where Compra.ID_Encomenda = @enc_ref
+					group by Prod_ref, Compra.PriceAtTime, Produto.Nome
+
+COMMIT
+END TRY
+BEGIN CATCH
+	print ERROR_MESSAGE();	
+	ROLLBACK;
+END CATCH
+-------------
