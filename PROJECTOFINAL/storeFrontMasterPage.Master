@@ -52,6 +52,14 @@
           display:none;
       }
 
+      .resizeImg {
+        max-width:150px;
+        max-height:auto;
+      }
+      .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+        background-color: #B5EE9B;
+        transition: all 1s ease;
+      }
 
   </style>
 
@@ -85,7 +93,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart"></i></button>
+                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" data-toggle="modal" data-target="#cartModal" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart"></i></button>
                         </li>
 
                         <li class="nav-item">
@@ -225,6 +233,103 @@
 
         <!-- LOGIN MODAL -->
 
+
+        <!-- SHOPPING CART MODAL -->
+            <div class="modal fade" id="cartModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Your Cart Items</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                                                                                             
+             <asp:Repeater ID="rpt_carrinho" runat="server" DataSourceID="SqlSourceCart" OnItemCommand="rpt_carrinho_ItemCommand" OnItemDataBound="rpt_carrinho_ItemDataBound">
+                          
+        <HeaderTemplate>
+            <div class="container d-flex justify-content-center" >
+                        <div class="table-responsive-xl">
+                        <table class="table table-light table-bordered table-striped table-hover w-auto">
+                            <thead class="thead-light">
+                        <tr> 
+                            <th class="text-center"></th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-center">Item Total</th>
+                            
+                            <th></th>                           
+                        </tr>  
+                                </thead>
+        </HeaderTemplate>
+            <ItemTemplate>
+                
+                    
+                     <tr class="text-center">
+                                                                  
+                          <td class="align-middle">
+                                    <img src="<%# "data: image; base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" class="resizeImg" alt="prod_image" />
+                                </td>
+                                <td class="align-middle">
+                                    <label class="col-form-label"><%# Eval("ProdName") %></label>
+                                </td>
+                                <td class="align-middle">
+                                    <label class="col-form-label"><%# Eval("Unit Price") %> €</label>
+                                </td>
+                                <td class="align-middle">
+                                    <label class="col-form-label"><%# Eval("Qty") %></label>
+                                </td>
+                                <td class="align-middle">
+                                    <label class="col-form-label"><%# Eval("itemTotalPrice") %> €</label>
+                                </td>
+
+
+                            <td class="align-middle">
+                                <asp:ImageButton ID="btn_removeItem" CommandName="btn_removeItem" ImageURL="~/Resources/images/criss-cross.png" runat="server" formnovalidate="formnovalidate"/>
+                            </td>
+                     </tr>
+                </ItemTemplate>
+
+        <FooterTemplate>
+            
+                    </table>
+                    </div>
+                    </div>
+                </FooterTemplate>
+
+    </asp:Repeater>
+
+
+                      <asp:SqlDataSource ID="SqlSourceCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
+                          <SelectParameters>
+                              <asp:Parameter Name="id_cliente" Type="Int32" />
+                          </SelectParameters>
+                      </asp:SqlDataSource>
+
+
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer justify-content-between">
+                      <p class="text-muted">Sub-Total: <label class="col-form-label" id="lbl_SubTotal" runat="server"> [123]</label> </p>
+                      <p class="text-muted">Tax (6%): <label class="col-form-label" id="lbl_tax" runat="server"> [tax]</label> </p>
+                      <b>Final Price: <label class="col-form-label" id="lbl_Total" runat="server"> [total]</label>  </b>
+                      <asp:Button ID ="btn_checkout" class="btn btn-success" runat="server" Text="Proceed to Checkout" OnClick="btn_checkout_Click"/>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>                                            
+                  </div>
+
+                </div>
+                  </div>
+                </div>
+        <!-- /END OF CART MODAL -->
+
+
     </form>
 </body>
 </html>
+
+ 

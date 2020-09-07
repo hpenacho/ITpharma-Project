@@ -1148,3 +1148,45 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 -------------
+
+--[PROC] RETURNS CART ITEMS FROM A SPECIFIED USER
+go
+create or alter proc usp_returnUserCartItems(@id_cliente int) 
+
+
+AS
+BEGIN TRY
+BEGIN TRAN
+
+select Produto.Codreferencia as 'Prod_Ref', Produto.imagem as 'ProdImage' ,Produto.nome as 'ProdName', Produto.preco as 'Unit Price', count(Carrinho.Prod_ref) as 'Qty', sum(Produto.preco) as 'itemTotalPrice' 
+					from Produto inner join carrinho on Produto.Codreferencia = Carrinho.Prod_ref
+					where Carrinho.ID_Cliente = @id_cliente
+					group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco
+
+COMMIT
+END TRY
+BEGIN CATCH
+	print ERROR_MESSAGE();	
+	ROLLBACK;
+END CATCH
+
+-----------
+
+--[PROC] Delete selected Item from specific User's Cart
+go
+create or alter proc usp_DeleteSelectedCartItem(@id_cliente int, @Prod_Ref varchar(20)) 
+
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	Delete from carrinho 
+	where ID_Cliente = @id_cliente and
+	Prod_ref = @Prod_Ref
+
+COMMIT
+END TRY
+BEGIN CATCH
+	print ERROR_MESSAGE();	
+	ROLLBACK;
+END CATCH

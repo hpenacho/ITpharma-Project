@@ -13,9 +13,26 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            generateCookie();
 
+            if(Client.isLogged)
+                SqlSourceCart.SelectParameters["ID_cliente"].DefaultValue = Client.userID.ToString();
         }
 
+        private void generateCookie()
+        {
+
+            HttpCookie userCookie = Request.Cookies["noLogID"];
+            Random random = new Random();
+
+            if (userCookie == null)
+            {
+                userCookie = new HttpCookie("noLogID");
+                userCookie.Value = random.Next(1000).ToString();
+                Response.Cookies.Add(userCookie);
+            }
+
+        }
         protected void btn_login_Click(object sender, EventArgs e)
         {
             lbl_loginWarning.InnerText = "";
@@ -108,9 +125,64 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
 
+        }
 
+        protected void rpt_carrinho_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("btn_removeItem"))
+            {
 
+                SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
 
+                myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
+                myCommand.Parameters.AddWithValue("@Prod_Ref", ((ImageButton)e.Item.FindControl("btn_removeItem")).CommandArgument);
+
+                //OUTPUT - ERROR MESSAGES
+                //myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
+
+                try
+                {
+                    Tools.myConn.Open();
+                    myCommand.ExecuteNonQuery();
+
+                }
+                catch (SqlException m)
+                {
+                    System.Diagnostics.Debug.WriteLine(m.Message);
+                }
+                finally
+                {
+                    Tools.myConn.Close();
+                }
+
+            }
+        }
+
+        Decimal total = 0;
+        protected void rpt_carrinho_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Decimal tax = 0;
+            Decimal subTotal = 0;
+
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                DataRowView dr = (DataRowView)e.Item.DataItem;
+
+                ((ImageButton)e.Item.FindControl("btn_removeItem")).CommandArgument = dr["Prod_Ref"].ToString();
+                total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
+            }
+
+            tax = Decimal.Multiply(total, 0.06m);
+            subTotal = total - tax;
+
+            lbl_SubTotal.InnerText = Math.Round(subTotal, 2).ToString();
+            lbl_tax.InnerText = Math.Round(tax, 2).ToString();
+            lbl_Total.InnerText = total.ToString();
+        }
+
+        protected void btn_checkout_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("storeFront-Checkout.aspx");
         }
     }
 }
