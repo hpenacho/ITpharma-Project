@@ -284,11 +284,12 @@ go
 create or alter proc usp_encomenda(@IDcliente int, 
 								   @MoradaEntrega varchar(300),
 								   @Pickup int,
-								   @PDF varbinary(MAX)) as
+								   @zip_code varchar(20),
+								   @receiver varchar(50)) as
 begin try
 begin tran 
 		
-		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @PDF)
+		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, null, @Pickup, @zip_code, @receiver)
 
 		insert into compra
 		select (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico), Prod_ref AS 'Produto', count(Prod_ref) AS 'QTD' , sum(produto.preco) AS 'Total' , produto.preco as 'Item price at time'

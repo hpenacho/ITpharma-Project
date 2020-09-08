@@ -166,22 +166,22 @@ namespace PROJECTOFINAL
         }
 
         Decimal total = 0;
+        int qtdTotal = 0;
 
         protected void rpt_carrinho_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Decimal tax = 0;
             Decimal subTotal = 0;
-            int qtdTotal = 0;
-
+            
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 DataRowView dr = (DataRowView)e.Item.DataItem;
-
                 ((ImageButton)e.Item.FindControl("btn_removeItem")).CommandArgument = dr["Prod_Ref"].ToString();
                 total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
                 qtdTotal += int.Parse(dr["Qty"].ToString());
             }
 
+            System.Diagnostics.Debug.WriteLine(qtdTotal);
             tax = Decimal.Multiply(total, 0.06m);
             subTotal = total - tax;
 

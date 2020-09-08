@@ -462,6 +462,7 @@
     <Content Include="Resources\images\PHARMALOGOTEMP.png" />
     <Content Include="Resources\images\register-nurse.jpg" />
     <Content Include="Resources\stylesHoverBox.css" />
+    <Content Include="SQLSheet - HUGO.sql" />
     <Content Include="SQLSheet.sql" />
     <Content Include="storeFront-404.aspx" />
     <Content Include="storeFront-405.aspx" />
