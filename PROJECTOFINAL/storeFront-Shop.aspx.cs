@@ -27,8 +27,6 @@ namespace PROJECTOFINAL
         }
 
 
-
-
         protected void rptShopProducts_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
           
@@ -77,7 +75,37 @@ namespace PROJECTOFINAL
 
 
 
+        //FILTERING PRODUCTS
 
-     
+
+        string field = "Nome";
+        string order = "ASC";
+        string brand = "All";
+        string category = "All";
+
+        protected void rptCategory_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("linkSelectCategory"))
+            {
+                category = e.CommandArgument.ToString();
+            }
+        }
+
+        protected void rptBrands_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("linkSelectBrand"))
+            {
+                brand = e.CommandName.ToString();
+            }
+        }
+
+
+
+        private void productFiltering()
+        {
+
+        }
+
+
     }
 }

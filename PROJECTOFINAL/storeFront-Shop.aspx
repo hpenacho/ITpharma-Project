@@ -16,17 +16,51 @@
 
             <div class="col-lg-3" style="margin-top: 20vh;">
 
-                <h1 class="my-4">Shop Name</h1>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
+
+                <h6 class="my-4">Category</h6>
+
+                <div class="list-group list-group-flush">
+
+                     <asp:Repeater ID="rptCategory" runat="server" DataSourceID="sqlCategorySource" OnItemCommand="rptCategory_ItemCommand">
+                        <ItemTemplate>
+
+                            <asp:LinkButton runat="server" CommandName="linkSelectCategory" CommandArgument='<%# Eval("ID") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+                 
+                </div>
+
+                <h6 class="my-4">Brand</h6>
+
+                <div class="list-group list-group-flush">
+
+                    <asp:Repeater ID="rptBrands" runat="server" DataSourceID="sqlBrandsSource" OnItemCommand="rptBrands_ItemCommand">
+                        <ItemTemplate>
+
+                            <asp:LinkButton runat="server" CommandName="linkSelectBrand" CommandArgument='<%# Eval("ID") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+
                 </div>
 
             </div>
             <!-- /.col-lg-3 -->
 
             <div class="col-lg-9" style="margin-top: 20vh;">
+
+                <div class="row form-inline align-content-center">
+                    <div class="form-group mb-3">
+                         <button class="btn btn-dark">Filtro Z - A</button>
+                         <button class="btn btn-dark">Preco</button>
+                    </div>
+                   
+                </div>
+
+
+
                 <div class="row">
 
                     <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts" OnItemDataBound="rptShopProducts_ItemDataBound" OnItemCommand="rptShopProducts_ItemCommand">
@@ -71,11 +105,22 @@
 
     <!-- SQL SOURCES -->
     <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_displayShopProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    
     <asp:SqlDataSource ID="sqlSearchProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_searchShopProducts" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:QueryStringParameter Name="query" QueryStringField="q" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-
+    
+    <asp:SqlDataSource ID="sqlBrandsSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select Marca.ID, Marca.descricao , Count(Produto.ID_Categoria) as 'Count'
+            from Marca left join Produto on Produto.ID_Categoria = Marca.ID
+            group by Marca.ID, Marca.descricao">
+    </asp:SqlDataSource>
+    
+    <asp:SqlDataSource ID="sqlCategorySource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select Categoria.ID, Categoria.descricao , Count(Produto.ID_Categoria) as 'Count'
+            from Categoria left join Produto on Produto.ID_Categoria = Categoria.ID
+            group by Categoria.ID, Categoria.descricao">
+    </asp:SqlDataSource>
+     <!-- //SQL SOURCES -->
 
 </asp:Content>
