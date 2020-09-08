@@ -87,40 +87,49 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText lastName;
 
         /// <summary>
-        /// tb_userName control.
+        /// userName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_userName;
+        protected global::System.Web.UI.WebControls.TextBox userName;
 
         /// <summary>
-        /// tb_email control.
+        /// email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_email;
+        protected global::System.Web.UI.WebControls.TextBox email;
 
         /// <summary>
-        /// tb_morada control.
+        /// ddl_pickUp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tb_morada;
+        protected global::System.Web.UI.WebControls.DropDownList ddl_pickUp;
 
         /// <summary>
-        /// address2 control.
+        /// SqlSourcePickups control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText address2;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlSourcePickups;
+
+        /// <summary>
+        /// address control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox address;
 
         /// <summary>
         /// LocationZone control.
@@ -139,15 +148,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText zip;
-
-        /// <summary>
-        /// rbtnl_paymentType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rbtnl_paymentType;
 
         /// <summary>
         /// CreditCard control.
@@ -204,13 +204,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl ccExpiration;
 
         /// <summary>
-        /// ccCvv control.
+        /// cc_Cvv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText ccCvv;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText cc_Cvv;
 
         /// <summary>
         /// btn_finalizePurchase control.
