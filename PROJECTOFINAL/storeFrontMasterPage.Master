@@ -61,6 +61,21 @@
         transition: all 1s ease;
       }
 
+
+
+      /* SEARCH CSS */
+
+      #searchBox{
+
+          border-top: none;
+          border-right: none;
+          border-left: none;
+          border-radius: 20px;
+      }
+
+
+
+
   </style>
 
 
@@ -82,6 +97,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
 
+
+                    <div class="navbar-nav ml-auto my-2 my-lg-0">
+                        <asp:TextBox ID="searchBox" runat="server" OnTextChanged="searchBox_TextChanged" class="form-control mr-sm-2 bg-light" type="search" aria-label="Search" placeholder="Search"></asp:TextBox>
+                        <button class="nav-link btn bg-transparent my-2 my-sm-0" formnovalidate="formnovalidate"><i class="fas fa-search"></i></button>
+                    </div>
+
+
                     <ul class="navbar-nav ml-auto">
 
                          <li class="nav-item">
@@ -94,10 +116,6 @@
 
                         <li class="nav-item">
                             <button type="button" class="nav-link btn bg-transparent" id="modal-cart" data-toggle="modal" data-target="#cartModal" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart"></i></button>
-                        </li>
-
-                        <li class="nav-item">
-                            <button type="button" class="nav-link btn bg-transparent" id="search-product" formnovalidate="formnovalidate"><i class="fas fa-search"></i></button>
                         </li>
 
                     </ul>
@@ -327,6 +345,13 @@
                   </div>
                 </div>
         <!-- /END OF CART MODAL -->
+
+
+
+
+        <script>
+
+        </script>
 
 
     </form>

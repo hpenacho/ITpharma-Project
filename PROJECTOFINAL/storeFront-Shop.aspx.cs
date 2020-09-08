@@ -13,8 +13,21 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Request.QueryString["q"] != null)
+            {
+                searchProducts();
+            }
         }
+
+
+        private void searchProducts()
+        {
+            rptShopProducts.DataSourceID = sqlSearchProducts.ID;
+            rptShopProducts.DataBind();
+        }
+
+
+
 
         protected void rptShopProducts_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

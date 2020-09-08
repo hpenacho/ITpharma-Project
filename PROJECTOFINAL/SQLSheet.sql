@@ -1206,11 +1206,22 @@ BEGIN CATCH
 	ROLLBACK;
 END CATCH
 
--- [PROC] displays products in the repeater 
+-- [PROC] displays products in the repeater AND SEARCHES
 
 GO
-create  or alter proc [dbo].[usp_displayShopProducts] AS
-select * from produto where produto.Activo = 1
+create  or alter proc usp_displayShopProducts AS
+select * from produto 
+where Produto.Activo = 1
+
+-- [PROC] searches products
+
+GO
+create  or alter proc usp_searchShopProducts(@query nvarchar(50)) AS
+select * from produto 
+where Produto.Activo = 1 AND (Produto.nome like '%' + @query + '%' OR Produto.descricao like '%' + @query + '%')
+
+select * from Produto
+
 
 -- [PROC] adds items to the cart
 
@@ -1230,3 +1241,12 @@ end catch
 GO
 
 select * from Carrinho
+
+
+-- [PROC] Search Items
+
+GO
+create or alter proc usp_searchItems(@query varchar(100)) AS
+begin try
+
+	select * from Produto where

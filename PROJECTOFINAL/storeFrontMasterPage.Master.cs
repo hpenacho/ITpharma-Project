@@ -192,6 +192,11 @@ namespace PROJECTOFINAL
         {
             Response.Redirect("storeFront-Checkout.aspx");
         }
+
+        protected void searchBox_TextChanged(object sender, EventArgs e)
+        {
+            Response.Redirect("storeFront-Shop.aspx?q=" + searchBox.Text);
+        }
     }
 }
 

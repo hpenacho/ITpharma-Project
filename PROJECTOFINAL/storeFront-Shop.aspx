@@ -71,5 +71,11 @@
 
     <!-- SQL SOURCES -->
     <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_displayShopProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlSearchProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_searchShopProducts" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="query" QueryStringField="q" Type="String" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
 
 </asp:Content>
