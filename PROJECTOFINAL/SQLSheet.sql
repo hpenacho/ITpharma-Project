@@ -1283,7 +1283,10 @@ create or alter proc usp_productFiltering(@Campo varchar(50) , @Ordem varchar(50
 SELECT *
 FROM produto inner join categoria on produto.ID_Categoria = categoria.ID
 			 inner join marca on Produto.ID_Marca = Marca.ID
-WHERE categoria.descricao = IIF(@Categoria = 'All', categoria.descricao , @Categoria) AND marca.descricao = IIF(@Marca = 'All', marca.descricao , @Marca)
+WHERE categoria.descricao = IIF(@Categoria = 'All', categoria.descricao , @Categoria) 
+			 AND marca.descricao = IIF(@Marca = 'All', marca.descricao , @Marca) 
+		     AND Produto.Activo = 1 
+		     AND Produto.Descontinuado = 0
 ORDER BY CASE WHEN @Campo = 'Preco' AND @Ordem = 'ASC' THEN produto.preco END,
 		 CASE WHEN @Campo = 'Preco' AND @Ordem = 'DESC' THEN produto.preco END DESC,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'ASC' THEN produto.nome END,

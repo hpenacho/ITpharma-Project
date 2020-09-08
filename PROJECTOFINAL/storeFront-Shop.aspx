@@ -16,6 +16,21 @@
 
             <div class="col-lg-3" style="margin-top: 20vh;">
 
+                <h6 class="my-4">Filtros</h6>
+
+                <div class="list-group list-group-flush">
+
+                        <div class="form-group mb-3">
+                            <asp:DropDownList ID="ddl_filters" CssClass="form-control w-100 border-0 bg-light" runat="server" OnSelectedIndexChanged="ddl_filters_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:ListItem Value="NASC">A - Z</asp:ListItem>
+                                <asp:ListItem Value="NDESC">Z  - A</asp:ListItem>
+                                <asp:ListItem Value="PASC">Price ASC</asp:ListItem>
+                                <asp:ListItem Value="PDESC">Price DESC</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+
+                </div>
+
 
                 <h6 class="my-4">Category</h6>
 
@@ -24,7 +39,7 @@
                      <asp:Repeater ID="rptCategory" runat="server" DataSourceID="sqlCategorySource" OnItemCommand="rptCategory_ItemCommand">
                         <ItemTemplate>
 
-                            <asp:LinkButton runat="server" CommandName="linkSelectCategory" CommandArgument='<%# Eval("ID") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="linkSelectCategory" CommandArgument='<%# Eval("Descricao") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
 
                         </ItemTemplate>
                     </asp:Repeater>
@@ -38,7 +53,7 @@
                     <asp:Repeater ID="rptBrands" runat="server" DataSourceID="sqlBrandsSource" OnItemCommand="rptBrands_ItemCommand">
                         <ItemTemplate>
 
-                            <asp:LinkButton runat="server" CommandName="linkSelectBrand" CommandArgument='<%# Eval("ID") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="linkSelectBrand" CommandArgument='<%# Eval("Descricao") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
 
                         </ItemTemplate>
                     </asp:Repeater>
@@ -51,16 +66,7 @@
 
             <div class="col-lg-9" style="margin-top: 20vh;">
 
-                <div class="row form-inline align-content-center">
-                    <div class="form-group mb-3">
-                         <button class="btn btn-dark">Filtro Z - A</button>
-                         <button class="btn btn-dark">Preco</button>
-                    </div>
-                   
-                </div>
-
-
-
+  
                 <div class="row">
 
                     <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts" OnItemDataBound="rptShopProducts_ItemDataBound" OnItemCommand="rptShopProducts_ItemCommand">
@@ -104,7 +110,14 @@
 
 
     <!-- SQL SOURCES -->
-    <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_displayShopProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_productFiltering" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter DefaultValue="nome" Name="Campo" Type="String" />
+            <asp:Parameter DefaultValue="ASC" Name="Ordem" Type="String" />
+            <asp:Parameter DefaultValue="All" Name="Categoria" Type="String" />
+            <asp:Parameter DefaultValue="All" Name="Marca" Type="String" />
+        </SelectParameters>
+    </asp:SqlDataSource>
     
     <asp:SqlDataSource ID="sqlSearchProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_searchShopProducts" SelectCommandType="StoredProcedure">
         <SelectParameters>
@@ -113,12 +126,16 @@
     </asp:SqlDataSource>
     
     <asp:SqlDataSource ID="sqlBrandsSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select Marca.ID, Marca.descricao , Count(Produto.ID_Categoria) as 'Count'
-            from Marca left join Produto on Produto.ID_Categoria = Marca.ID
+            from Marca inner join Produto on Produto.ID_Categoria = Marca.ID
+            where Produto.Activo = 1 
+		    AND Produto.Descontinuado = 0
             group by Marca.ID, Marca.descricao">
     </asp:SqlDataSource>
     
     <asp:SqlDataSource ID="sqlCategorySource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select Categoria.ID, Categoria.descricao , Count(Produto.ID_Categoria) as 'Count'
-            from Categoria left join Produto on Produto.ID_Categoria = Categoria.ID
+            from Categoria inner join Produto on Produto.ID_Categoria = Categoria.ID
+            where Produto.Activo = 1 
+		    AND Produto.Descontinuado = 0
             group by Categoria.ID, Categoria.descricao">
     </asp:SqlDataSource>
      <!-- //SQL SOURCES -->
