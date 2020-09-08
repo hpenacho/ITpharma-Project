@@ -163,6 +163,7 @@ namespace PROJECTOFINAL
         {
             Decimal tax = 0;
             Decimal subTotal = 0;
+            int qtdTotal = 0;
 
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
@@ -170,6 +171,7 @@ namespace PROJECTOFINAL
 
                 ((ImageButton)e.Item.FindControl("btn_removeItem")).CommandArgument = dr["Prod_Ref"].ToString();
                 total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
+                qtdTotal += int.Parse(dr["Qty"].ToString());
             }
 
             tax = Decimal.Multiply(total, 0.06m);
@@ -178,6 +180,11 @@ namespace PROJECTOFINAL
             lbl_SubTotal.InnerText = Math.Round(subTotal, 2).ToString();
             lbl_tax.InnerText = Math.Round(tax, 2).ToString();
             lbl_Total.InnerText = total.ToString();
+            //Session variables for carrying totals to the checkout Page easily
+            Session["qtdTotal"] = qtdTotal;
+            Session["clientSubTotal"] = Math.Round(subTotal, 2).ToString();
+            Session["Taxed"] = Math.Round(tax, 2).ToString();
+            Session["finalTotal"] = total.ToString();
         }
 
         protected void btn_checkout_Click(object sender, EventArgs e)
