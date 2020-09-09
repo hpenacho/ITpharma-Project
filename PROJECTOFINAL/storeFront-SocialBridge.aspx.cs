@@ -1,6 +1,8 @@
 ﻿using Nemiro.OAuth;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -21,12 +23,52 @@ namespace PROJECTOFINAL
 
             }
         }
-
-
         private void auth_success(UserInfo user)
         {
 
-           
+            System.Diagnostics.Debug.WriteLine(user.FullName);
+            System.Diagnostics.Debug.WriteLine(user.FirstName);
+            System.Diagnostics.Debug.WriteLine(user.UserId);
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_socialLogin");
+            myCommand.Parameters.AddWithValue("@nome", user.FullName ?? "Customer");
+            myCommand.Parameters.AddWithValue("@email", user.Email);
+            myCommand.Parameters.AddWithValue("@token", Tools.EncryptString(user.UserId));
+            myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                var reader = myCommand.ExecuteReader();
+                System.Diagnostics.Debug.WriteLine("Entrei no reader");
+                
+                if(reader.Read())
+                {
+                   Client.userID = (int)reader["ID"];
+                   Client.name = reader["nome"].ToString();
+                   Client.email = reader["email"].ToString();
+
+                   Client.isLogged = true;
+                }
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                System.Diagnostics.Debug.WriteLine("cheguei ao finally");
+                Response.Redirect("storeFront-UserPage.aspx");
+            }
+
+
 
 
         }

@@ -156,11 +156,11 @@
                         <div class="row d-flex justify-content-center mt-4">
 
                                 <div> <!-- GOOGLE -->
-                                     <asp:LinkButton ID="googleLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" class="btn btn-block btn-danger shadow shadow-sm" CausesValidation="False" data-provider="google" OnClick="socialLogin" ><i class="fab fa-google"></i><span class="ml-2">Google</span></asp:LinkButton>
+                                     <asp:LinkButton ID="googleLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" CausesValidation="False" data-provider="google" OnClick="socialLogin" ><i class="fab fa-google"></i></asp:LinkButton>
                                 </div>
 
                                 <div> <!-- FACEBOOK -->
-                                     <asp:LinkButton ID="facebookLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" class="btn btn-block btn-primary shadow shadow-sm" CausesValidation="False" data-provider="facebook" OnClick="socialLogin"><i class="fab fa-facebook-f"></i><span class="ml-2">Facebook</span></asp:LinkButton>
+                                     <asp:LinkButton ID="facebookLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" CausesValidation="False" data-provider="facebook" OnClick="socialLogin"><i class="fab fa-facebook-f"></i></asp:LinkButton>
                                 </div>
 
                         </div>

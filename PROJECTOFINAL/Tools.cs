@@ -196,8 +196,8 @@ namespace PROJECTOFINAL
             OAuthManager.RegisterClient( 
 
                         "facebook",
-                        "303591377373779",
-                        "a1c351552ae7b285bd410c72b5db0524"
+                        "3362722117286494",
+                        "e499b1245aba3d83e2c54e32cc35f516"
                 );
 
             OAuthManager.RegisterClient(

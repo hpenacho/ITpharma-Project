@@ -1299,11 +1299,16 @@ ORDER BY CASE WHEN @Campo = 'Preco' AND @Ordem = 'ASC' THEN produto.preco END,
 -- [PROC] SOCIAL REGISTRY 
 
 go
-create or alter proc usp_socialLogin(@email varchar(50), @token varchar(300), @nome varchar(50), @sexo char(1), @cookie varchar(300)) AS
+create or alter proc usp_socialLogin(@email varchar(50), 
+								     @token varchar(300), 
+									 @nome varchar(50), 
+									 @cookie varchar(300),
+									 @output varchar(200) output) AS
 begin try
 begin tran
+
 		IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.email = @EMAIL)
-			INSERT INTO CLIENTE VALUES(@nome, @email, @token, null, 1 , 0 , null, null, @sexo, null, null)
+			INSERT INTO CLIENTE VALUES(@nome, @email, @token, null, 1 , 0 , null, null, null, null, null)
 
 		IF @Cookie IS NOT NULL
 		update carrinho
@@ -1313,6 +1318,6 @@ commit
 		select * from cliente where cliente.email = @email
 end try
 begin catch
-	print ERROR_MESSAGE();
+	set @output = ERROR_MESSAGE();
 	rollback
 end catch
