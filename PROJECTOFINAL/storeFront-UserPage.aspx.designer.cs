@@ -159,6 +159,42 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rpt_orders;
 
         /// <summary>
+        /// prescriptionNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText prescriptionNumber;
+
+        /// <summary>
+        /// healthNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText healthNumber;
+
+        /// <summary>
+        /// lbl_message control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_message;
+
+        /// <summary>
+        /// link_validatePrescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_validatePrescription;
+
+        /// <summary>
         /// sqlOrderSource control.
         /// </summary>
         /// <remarks>

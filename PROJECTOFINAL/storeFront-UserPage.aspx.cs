@@ -135,5 +135,45 @@ namespace PROJECTOFINAL
             sqlOrderSource.SelectParameters["estado"].DefaultValue = "4";
             rpt_orders.DataBind();
         }
+
+        protected void link_validatePrescription_Click(object sender, EventArgs e)
+        {
+            lbl_message.InnerText = "";
+
+            if (Client.nrSaude.ToString() != healthNumber.Value)
+                lbl_message.InnerText = "You can only validate prescriptions whose health number matches the health number supplied upon an ITpharma account creation.";
+
+            else
+            {
+
+                SqlCommand myCommand = Tools.SqlProcedure("usp_validatePrescription");
+                myCommand.Parameters.AddWithValue("@prescription_ref", prescriptionNumber.Value);
+                myCommand.Parameters.AddWithValue("@healthNumber", healthNumber.Value);
+
+
+                //OUTPUT - ERROR MESSAGES
+                myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
+
+                try
+                {
+                    Tools.myConn.Open();
+                    myCommand.ExecuteNonQuery();
+
+                    lbl_message.InnerText = "Prescription items were added to your cart! Proceed to checkout to finalize your purchase.";
+                }
+                catch (SqlException m)
+                {
+                    System.Diagnostics.Debug.WriteLine(m.Message);
+                    lbl_message.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+                finally
+                {
+                    Tools.myConn.Close();
+                }
+
+            }
+
+            
+        }
     }
 }

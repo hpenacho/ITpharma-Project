@@ -52,7 +52,7 @@
 
         <div class="col-lg-2 col-sm-12 text-center">
             <!-- Botão Aviar a receita -->
-            <button type="button" class="btn btn-info btn-block mt-4"><i class="fas fa-pills"></i></button>
+            <button type="button" class="btn btn-info btn-block mt-4" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"> Prescriptions</i></button>
             <!-- Botão Aviar a receita -->
             <button type="button" class="btn btn-danger btn-block mt-4">Logout</button>
         </div>
@@ -338,6 +338,82 @@
 
         </div>
     </div>
+
+    <!-- modal verify Prescription -->
+
+    <div class="modal fade ml-3" id="prescriptionModal" tabindex="-1" role="dialog" aria-labelledby="prescriptionModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg shadow-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
+                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label"> Order Prescription-Only Meds  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <!-- BEGIN MODAL BODY CONTENT -->
+
+                    <div class="tab-content" id="insert-nav-tabContent">
+
+                        <!-- CONTENT 1 DETAILS -->
+                        <div class="tab-pane fade show active" id="insert-nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+
+                            <div class="p-4">
+                                <!-- WINDOW PADDING -->
+                                
+                            <!-- WINDOW PADDING -->
+
+                                   <div class="row justify-content-center">
+                              <div class="col-md-7 mb-2">
+                                  <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"> <i class="fas fa-file-medical"></i> </span>
+                                </div>    
+                                <input type="text" id="prescriptionNumber" runat="server" class="form-control bg-light" placeholder="Prescription Reference Number" />
+                                      </div>
+                                <small class="text-muted"> Consult the prescription supplied by your Doctor to find this number. </small>
+                              </div>
+                                   </div>
+           
+                                <div class="row justify-content-center text-center mt-4">
+                              <div class="col-md-7 mb-2">
+                                  <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"> <i class="fas fa-hospital-user"></i> </span>
+                                </div>  
+                                <input type="text" id="healthNumber" runat="server" class="form-control bg-light" placeholder="Health Number" />
+                                      </div>
+                                <small class="text-muted"> Please insert your Health Number. </small>
+                              </div>
+                                    </div>
+
+
+                                <div class="form-row mt-2 justify-content-center text-center">
+                            <label id="lbl_message" class="text-warning" runat="server"></label>
+                        </div>
+
+                        </div>
+                        <!-- // CONTENT 1 DETAILS -->
+
+
+                            <hr />
+                        <div class="form-row mt-2">
+                            <div class="col text-center">                                
+                                <asp:LinkButton ID="link_validatePrescription" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_validatePrescription_Click"> Validate & Checkout </asp:LinkButton>
+                                <!-- INSERTION DRIVE -->
+                                <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+                <!-- END MODAL BODY CONTENT -->
+            </div>
+        </div>
+    </div>
+        </div>
 
 
     <script type="text/javascript">
