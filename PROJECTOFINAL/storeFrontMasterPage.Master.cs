@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nemiro.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,10 +15,37 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
             generateCookie();
+            initiateRegistry();
+            loginCheck();
 
-            if(Client.isLogged)
+        }
+
+
+        private void loginCheck()
+        {
+            if (Client.isLogged)
                 SqlSourceCart.SelectParameters["ID_cliente"].DefaultValue = Client.userID.ToString();
         }
+
+
+        private void initiateRegistry()
+        {
+            if (Tools.registry == false)
+            {
+                Tools.initiateAuth();
+                Tools.registry = true;
+            }
+        }
+
+
+        protected void socialLogin(object sender, EventArgs e)
+        {
+            string provider = ((LinkButton)sender).Attributes["data-provider"];
+            string returnUrl = new Uri(Request.Url, "storeFront-SocialBridge.aspx").AbsoluteUri;
+            OAuthWeb.RedirectToAuthorization(provider, returnUrl);
+        }
+
+
 
         private void generateCookie()
         {

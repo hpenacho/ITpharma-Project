@@ -69,22 +69,22 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.UpdatePanel upd_login;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// googleLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton googleLogin;
 
         /// <summary>
-        /// LinkButton2 control.
+        /// facebookLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+        protected global::System.Web.UI.WebControls.LinkButton facebookLogin;
 
         /// <summary>
         /// txt_loginEmail control.

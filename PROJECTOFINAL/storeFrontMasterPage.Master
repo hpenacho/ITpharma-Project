@@ -154,8 +154,15 @@
                         <h3 class="text-center ml-4 text-white">Sign in</h3>
 
                         <div class="row d-flex justify-content-center mt-4">
-                            <asp:LinkButton ID="LinkButton1" CssClass="btn text-white text-center mr-2" runat="server"><i class="fab fa-google" style="font-size: 25px;"></i></asp:LinkButton>
-                            <asp:LinkButton ID="LinkButton2" CssClass="btn text-white text-center ml-2" runat="server"><i class="fab fa-facebook-f" style="font-size: 25px;"></i></asp:LinkButton>
+
+                                <div> <!-- GOOGLE -->
+                                     <asp:LinkButton ID="googleLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" class="btn btn-block btn-danger shadow shadow-sm" CausesValidation="False" data-provider="google" OnClick="socialLogin" ><i class="fab fa-google"></i><span class="ml-2">Google</span></asp:LinkButton>
+                                </div>
+
+                                <div> <!-- FACEBOOK -->
+                                     <asp:LinkButton ID="facebookLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" class="btn btn-block btn-primary shadow shadow-sm" CausesValidation="False" data-provider="facebook" OnClick="socialLogin"><i class="fab fa-facebook-f"></i><span class="ml-2">Facebook</span></asp:LinkButton>
+                                </div>
+
                         </div>
                     </div>
 

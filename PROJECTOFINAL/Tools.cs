@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nemiro.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -176,6 +177,41 @@ namespace PROJECTOFINAL
             sc.Send(m);
             sc.Dispose();
         }
+
+
+        //AUTHENTICATION USING NEMIRO LIBRARIES
+
+        public static bool registry { get; set; } = false;
+
+        public static void initiateAuth()
+        {
+
+            OAuthManager.RegisterClient(
+
+                       "google",
+                       "471126422232-se1ig73pabld0jjjf839kkedcvhjps1s.apps.googleusercontent.com",
+                       "e974tjnTDry_lGRJWSpMOm4V"
+               );
+
+            OAuthManager.RegisterClient( 
+
+                        "facebook",
+                        "303591377373779",
+                        "a1c351552ae7b285bd410c72b5db0524"
+                );
+
+            OAuthManager.RegisterClient(
+
+                        "github",
+                        "10d3bb7da759c244e45c",
+                        "e59d4c4df61e645f3123d3ab67e6ebc45e386454"
+               );
+        }
+
+
+
+
+
 
 
     }

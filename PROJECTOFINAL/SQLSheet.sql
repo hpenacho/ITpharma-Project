@@ -1292,3 +1292,27 @@ ORDER BY CASE WHEN @Campo = 'Preco' AND @Ordem = 'ASC' THEN produto.preco END,
 		 CASE WHEN @Campo = 'Preco' AND @Ordem = 'DESC' THEN produto.preco END DESC,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'ASC' THEN produto.nome END,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'DESC' THEN produto.nome END DESC
+
+
+
+
+-- [PROC] SOCIAL REGISTRY 
+
+go
+create or alter proc usp_socialLogin(@email varchar(50), @token varchar(300), @nome varchar(50), @sexo char(1), @cookie varchar(300)) AS
+begin try
+begin tran
+		IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.email = @EMAIL)
+			INSERT INTO CLIENTE VALUES(@nome, @email, @token, null, 1 , 0 , null, null, @sexo, null, null)
+
+		IF @Cookie IS NOT NULL
+		update carrinho
+		set carrinho.ID_Cliente = (select Cliente.ID from Cliente where Cliente.email = @email)
+		where carrinho.Cookie = @Cookie
+commit
+		select * from cliente where cliente.email = @email
+end try
+begin catch
+	print ERROR_MESSAGE();
+	rollback
+end catch
