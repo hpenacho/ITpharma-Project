@@ -1,8 +1,11 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -80,6 +83,28 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
+                //---------------------------------------------------------
+
+                string localhost = WebConfigurationManager.AppSettings["localhost"];
+                string pdfpath = AppDomain.CurrentDomain.BaseDirectory + WebConfigurationManager.AppSettings["pdfpath"];
+                string pdfTemplate = pdfpath + "encomenda.pdf";
+                string newFile = pdfpath + nomePDF;
+
+                PdfReader pdfreader = new PdfReader(pdfTemplate);
+                PdfStamper pdfstamper = new PdfStamper(pdfreader, new FileStream(newFile, FileMode.Create));
+                AcroFields pdfformfields = pdfstamper.AcroFields;
+
+                pdfformfields.SetField("data", DateTime.Now.ToShortDateString());
+                pdfformfields.SetField("subtotal", lbl_subtotal.InnerText.Substring(0, 10));
+                pdfformfields.SetField("total", lbl_total.InnerText);
+                pdfformfields.SetField("produtp", produto);
+                pdfformfields.SetField("qtd", qtd);
+                pdfformfields.SetField("precounitario", preco);
+                pdfformfields.SetField("totalproduto", total);
+
+                pdfstamper.Close();
+                Response.Redirect(localhost + "PDF/" + nomePDF);
+                //---------------------------------------------------------
                 Response.Redirect("storeFront-OrderSuccess.aspx"); //tirar daqui qd se for tratar dos emails
             }
             catch (Exception m)
