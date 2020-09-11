@@ -121,7 +121,7 @@
     
     <asp:SqlDataSource ID="sqlSearchProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_searchShopProducts" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:QueryStringParameter Name="query" QueryStringField="q" Type="String" />
+            <asp:Parameter DefaultValue="" Name="query" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
     

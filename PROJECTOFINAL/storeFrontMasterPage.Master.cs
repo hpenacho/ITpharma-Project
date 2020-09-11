@@ -230,7 +230,8 @@ namespace PROJECTOFINAL
 
         protected void searchBox_TextChanged(object sender, EventArgs e)
         {
-            Response.Redirect("storeFront-Shop.aspx?q=" + searchBox.Text);
+            Session["searchQuery"] = searchBox.Text;
+            Response.Redirect("storeFront-Shop.aspx");
         }
     }
 }

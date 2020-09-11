@@ -34,6 +34,8 @@ namespace PROJECTOFINAL
             txt_alteremail.Value = Client.email;
             txt_alteraddress.Value = Client.address;
             txt_alternif.Value = Client.NIF;
+            txt_zipCode.Value = Client.codPostal;
+            txt_alterhealthnumber.Value = Client.nrSaude;
             sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
             
         }

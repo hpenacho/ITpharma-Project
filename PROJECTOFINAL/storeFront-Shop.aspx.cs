@@ -13,7 +13,7 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString["q"] != null)
+            if(Session["searchQuery"] != null)
             {
                 searchProducts();
             }
@@ -22,8 +22,10 @@ namespace PROJECTOFINAL
 
         private void searchProducts()
         {
+            sqlSearchProducts.SelectParameters["query"].DefaultValue = Session["searchQuery"].ToString(); ; 
             rptShopProducts.DataSourceID = sqlSearchProducts.ID;
             rptShopProducts.DataBind();
+            Session["searchQuery"] = null;
         }
 
 
@@ -131,11 +133,13 @@ namespace PROJECTOFINAL
 
         private void productFiltering()
         {
+
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
             sqlShopProducts.SelectParameters["Marca"].DefaultValue = brand;
 
+            rptShopProducts.DataSourceID = sqlShopProducts.ID;
             sqlShopProducts.DataBind();
             rptShopProducts.DataBind();
         }
