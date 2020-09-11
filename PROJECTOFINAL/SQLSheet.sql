@@ -284,7 +284,9 @@ create or alter proc usp_encomenda(@IDcliente int,
 								   @MoradaEntrega varchar(300),
 								   @Pickup int,
 								   @zip_code varchar(20),
-								   @receiver varchar(50)) as
+								   @receiver varchar(50),
+								   @orderNumber int OUTPUT)
+								   as
 begin try
 begin tran 
 		
@@ -311,10 +313,11 @@ begin tran
 		set Receita.Levantada = 1, Receita.InCart = 0
 		where Receita.InCart = 1 AND Receita.Levantada = 0 AND Receita.NrSaude = (select Cliente.nrSaude from Cliente where Cliente.ID = @IDcliente)
 
+		SET @orderNumber = @thisEnc
 commit
 end try
 begin catch
-	print ERROR_Message()
+	print ERROR_Message()	
 	rollback;
 end catch
 GO
@@ -1111,10 +1114,12 @@ BEGIN TRAN
 
 			set @output = 'Details changed successfully';
 
-			select * from cliente
+			select * from cliente 
+			where cliente.ID = @ID
 COMMIT	
 END TRY
 BEGIN CATCH
+	set @output = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
 

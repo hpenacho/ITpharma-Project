@@ -1,5 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/storeFrontMasterPage.Master" AutoEventWireup="true" CodeBehind="storeFront-Checkout.aspx.cs" Inherits="PROJECTOFINAL.storeFront_Checkout" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+    <style>
+        .container {
+        max-width: 960px;
+                   }
+
+        .lh-condensed { line-height: 1.25; }
+    </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- -->
@@ -26,18 +35,18 @@
 
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
-            <h6 class="my-0"> <span id="lbl_title">  <%# Eval("ProdName") %> </span></h6>
+            <h6 class="my-0"> <span id="lbl_title" runat="server">  <%# Eval("ProdName") %> </span></h6>
             <small class="text-muted" style="display: block; width: 170px;">
  
                 
-            <span id="item price"> <%# Eval("Unit Price") %> € per Unit</span>
+            <span id="itemPrice" runat="server"> <%# Eval("Unit Price") %> </span> € per Unit
                 <br>
-            <span id="lbl_itemQty"> <%# Eval("Qty") %> unit(s)</span>
+            <span id="lbl_itemQty" runat="server"> <%# Eval("Qty") %> </span> unit(s)
         </small>
               
           </div>
             <div class=" d-flex align-items-center">
-          <b><span class="text-success"> <span id="itemTotalPrice"> <%# Eval("itemTotalPrice") %> </span> € </b>       
+          <b><span class="text-success"> <span id="itemTotalPrice" runat="server"> <%# Eval("itemTotalPrice") %> </span> € </b>       
               </div>
                         
         </li>
@@ -124,7 +133,7 @@
 
         <div class="mb-3">
           <label for="address">Address</label>
-          <asp:TextBox ID="address" class="form-control" runat="server" placeholder="Address" required></asp:TextBox>
+            <input type="text" class="form-control" id="address" name="address" runat="server" placeholder="Address" required>
           <div class="invalid-feedback">
             Please Insert an Address.
           </div>
@@ -144,7 +153,7 @@
           
           <div class="col-md-3 mb-3">
             <label for="zip">Zip-Code</label>
-            <input type="text" class="form-control" id="zip" runat="server" placeholder="" required>
+            <input type="text" name="zip" class="form-control" id="zip" runat="server" placeholder="Zip-Code" required>
             <div class="invalid-feedback">
               Insert the Zip-Code.
             </div>
@@ -166,17 +175,11 @@
                           <label class="btn btn-light active">
                             <input type="radio" name="radioPaymentCard" id="CreditCard" autocomplete="off" runat="server" checked > <h6> <i class="far fa-credit-card text-success"></i>  Credit Card </h6>
                           </label>
-                            
-                          
+                                                      
                           <label class="btn btn-light">
                             <input type="radio" name="radioPaymentCard" id="DebitCard" autocomplete="off" runat="server"> <h6> <i class="fas fa-credit-card text-primary"></i>  Debit Card </h6>
                           </label>
-                             
-                          
-                          <label class="btn btn-light">
-                            <input type="radio" name="radioPaymentCard" id="PayPal" autocomplete="off" runat="server"> <h6><i class="far fa-credit-card text-warning"></i> Paypal </h6>
-                          </label>
-                              
+                                                                                    
                         </div>
                         </div>
           </div>
@@ -198,7 +201,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3 mb-3">
+          <div class="col-md-4 mb-3">
             <label for="ccExpiration">Expiration Date</label>
               <input type="date" class="form-control form-control-user bg-light" runat="server" id="ccExpiration" value="2000-01-01">
             <div class="invalid-feedback">
@@ -224,9 +227,8 @@
   
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="../vendor/jquery/jquery.slim.min.js"><\/script>')</script><script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
-        <script src="form-validation.js"></script>
-
+      <script>window.jQuery || document.write('<script src="StoreFront/vendor/jquery/jquery.slim.min.js"><\/script>')</script><script src="StoreFront/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="StoreFront/js/form-validation.js"></script>
 
     <!-- -->
     </div>

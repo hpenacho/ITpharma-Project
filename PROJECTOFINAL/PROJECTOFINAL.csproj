@@ -491,6 +491,7 @@
     <Content Include="StoreFront\css\modern-business.css" />
     <Content Include="StoreFront\css\register.min.css" />
     <Content Include="StoreFront\js\contact_me.js" />
+    <Content Include="StoreFront\js\form-validation.js" />
     <Content Include="StoreFront\js\jqBootstrapValidation.js" />
     <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="StoreFront\vendor\bootstrap\css\bootstrap-grid.min.css" />
@@ -766,7 +767,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\invoices\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

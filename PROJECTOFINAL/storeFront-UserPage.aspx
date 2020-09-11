@@ -162,7 +162,7 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alterhealthnumber">Health Number</label>
-                                    <input type="text" id="txt_alterhealthnumber" runat="server" class="form-control bg-light"/>
+                                    <input type="text" id="txt_alterhealthnumber" runat="server" class="form-control bg-light" readonly/>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
