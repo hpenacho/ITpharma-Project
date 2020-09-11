@@ -279,7 +279,6 @@ from Pickup inner join StockPickup on Pickup.ID = StockPickup.ID_Stock_Pickup
 
 
 -- Inserir uma Encomenda após compra 
-
 go
 create or alter proc usp_encomenda(@IDcliente int, 
 								   @MoradaEntrega varchar(300),
@@ -291,13 +290,26 @@ begin tran
 		
 		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, null, @Pickup, @zip_code, @receiver)
 
+		Declare @thisEnc int
+		set @thisEnc = (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico)
+		
 		insert into compra
-		select (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico), Prod_ref AS 'Produto', count(Prod_ref) AS 'QTD' , sum(produto.preco) AS 'Total' , produto.preco as 'Item price at time'
+		select @thisEnc as 'orderNumber', Prod_ref AS 'Produto', count(Prod_ref) AS 'QTD' , sum(produto.preco) AS 'Total' , produto.preco as 'Item price at time'
 		from Carrinho inner join Produto on Carrinho.Prod_ref = Produto.Codreferencia
 		where Carrinho.ID_Cliente = @IDcliente
 		group by Prod_ref, produto.preco
 
 		DELETE FROM carrinho WHERE carrinho.ID_Cliente = @IDcliente;
+
+		if exists(select Produto.precisaReceita from Produto
+				 inner join Compra on Produto.Codreferencia = Compra.Prod_ref
+				 inner join EncomendaHistorico on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+				 where EncomendaHistorico.ENC_REF = @thisEnc
+				 group by Produto.precisaReceita)
+		
+		update Receita
+		set Receita.Levantada = 1, Receita.InCart = 0
+		where Receita.InCart = 1 AND Receita.Levantada = 0 AND Receita.NrSaude = (select Cliente.nrSaude from Cliente where Cliente.ID = @IDcliente)
 
 commit
 end try
@@ -305,6 +317,7 @@ begin catch
 	print ERROR_Message()
 	rollback;
 end catch
+GO
 
 -- QUERY PARA UTILIZADOR VER A SUA ENCOMENDA NA ÁREA PESSOAL
 
