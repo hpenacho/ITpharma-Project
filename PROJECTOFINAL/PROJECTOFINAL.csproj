@@ -755,6 +755,7 @@
     <Content Include="StoreFront\vendor\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="StoreFront\vendor\jquery\jquery.min.map" />
     <Content Include="StoreFront\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Resources\ITpharmaInvoice.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

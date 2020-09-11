@@ -3,7 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
+    <style>
 
+    </style>
 
 
 </asp:Content>
@@ -13,12 +15,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-
+    <div class="container">
     <div class="row mt-5 mb-3">
-
-
         <div class="col-lg-10">
-            <div class="card shadow shadow-sm" style="border-radius: 20px;">
+            <div class="card shadow shadow-sm">
                 <div class="card-body">
                     <div class="row">
 
@@ -54,7 +54,7 @@
             <!-- Botão Aviar a receita -->
             <button type="button" class="btn btn-info btn-block mt-4" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"></i>Prescriptions</button>
             <!-- Botão Logout -->
-            <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger btn-block mt-4" OnClick="link_logout_Click"></asp:LinkButton>
+            <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger btn-block mt-4" OnClick="link_logout_Click">Logout</asp:LinkButton>
         </div>
 
 
@@ -70,7 +70,7 @@
 
                 <!-- Change password -->
                 <div class="col-lg-4 mb-4 my-4">
-                    <div class="card shadow pb-4 bg-white" style="border-radius: 20px;">
+                    <div class="card shadow pb-4 bg-white">
                         <div class="card-body">
 
                             <h3 class="text-dark text-left">Alter Password</h3>
@@ -123,7 +123,7 @@
                 <!-- Change Details -->
 
                 <div class="col-lg-8 my-4">
-                    <div class="card shadow bg-white pb-4" style="border-radius: 20px;">
+                    <div class="card shadow bg-white pb-4">
                         <div class="card-body">
                             <h3 class="text-dark text-">User</h3>
 
@@ -195,7 +195,7 @@
 
         <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
 
-            <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3" style="border-radius: 20px;">
+            <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3">
                 <div class="card-body">
                     <div class="col-lg-12">
 
@@ -205,7 +205,7 @@
                         </div>
 
 
-                        <h3 class="text-center my-2 bg-info py-1 text-white col-12" style="border-radius: 20px;">Encomendas</h3>
+                        <h3 class="text-center my-2 bg-info py-1 text-white col-12">Encomendas</h3>
 
                       
                         <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
@@ -255,7 +255,7 @@
 
         <div class="tab-pane fade" id="exams" role="tabpanel" aria-labelledby="exams-tab">
 
-            <div class="card pb-4 mt-4 shadow shadow-sm bg-white" style="border-radius: 20px;">
+            <div class="card pb-4 mt-4 shadow shadow-sm bg-white">
                 <div class="card-body">
 
                     <h3 class="text-dark">Exames</h3>
@@ -338,8 +338,15 @@
 
         </div>
     </div>
+            
+</div>
+    <!-- END CONTAINER -->
 
     <!-- modal verify Prescription -->
+
+    <asp:UpdatePanel ID="prescriptionUpdate" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+        <ContentTemplate>
+
 
     <div class="modal fade ml-3" id="prescriptionModal" tabindex="-1" role="dialog" aria-labelledby="prescriptionModal" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
@@ -350,8 +357,13 @@
                         </button>
                     </h5>
                 </div>
+
+                 <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
                 <div class="modal-body">
                     <!-- BEGIN MODAL BODY CONTENT -->
+
+                   
 
                     <div class="tab-content" id="insert-nav-tabContent">
 
@@ -409,19 +421,17 @@
 
                     </div>
                 </div>
-                <!-- END MODAL BODY CONTENT -->
-            </div>
+            </div> <!-- END MODAL BODY CONTENT --> 
+                </ContentTemplate>
+                    </asp:UpdatePanel>
         </div>
     </div>
-        </div>
+ </div>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
 
-    <script type="text/javascript">
-
-        //Para evitar ir de encontro aos detalhes do utilizador
-        document.getElementById("navbar-pharma").classList.remove('sticky-top');
-
-    </script>
 
     <!-- SQL SOURCES -->
     <asp:SqlDataSource ID="sqlOrderSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserPersonalOrders" SelectCommandType="StoredProcedure">
