@@ -73,7 +73,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@Pickup", DBNull.Value); //ddl_pickUp.SelectedValue
             //myCommand.Parameters.AddWithValue("@PDF", DBNull.Value);
             myCommand.Parameters.AddWithValue("@zip_code", zip.Value);
-            myCommand.Parameters.AddWithValue("receiver", receiverFullName);
+            myCommand.Parameters.AddWithValue("@receiver", receiverFullName);
 
 
             try
