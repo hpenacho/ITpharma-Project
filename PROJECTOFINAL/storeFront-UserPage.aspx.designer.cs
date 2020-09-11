@@ -15,6 +15,24 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
+        /// welcomeUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl welcomeUser;
+
+        /// <summary>
+        /// link_logout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_logout;
+
+        /// <summary>
         /// txt_oldPassword control.
         /// </summary>
         /// <remarks>

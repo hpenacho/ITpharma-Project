@@ -25,7 +25,7 @@
                         <div class="col-lg-12 text-center">
                             <!-- Controlos de navegação -->
 
-                            <h5 class="card-title">Benvindo Utilizador</h5>
+                            <h5 class="card-title" id="welcomeUser" runat="server"></h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
                             <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
@@ -52,9 +52,9 @@
 
         <div class="col-lg-2 col-sm-12 text-center">
             <!-- Botão Aviar a receita -->
-            <button type="button" class="btn btn-info btn-block mt-4" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"> Prescriptions</i></button>
-            <!-- Botão Aviar a receita -->
-            <button type="button" class="btn btn-danger btn-block mt-4">Logout</button>
+            <button type="button" class="btn btn-info btn-block mt-4" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"></i>Prescriptions</button>
+            <!-- Botão Logout -->
+            <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger btn-block mt-4" OnClick="link_logout_Click"></asp:LinkButton>
         </div>
 
 

@@ -22,5 +22,21 @@ namespace PROJECTOFINAL
         public static string codPostal { get; set; }
         public static DateTime birthday { get; set; }
 
+
+
+        public static void resetClient()
+        {
+            isLogged = false;
+            userID = 0;
+            name = null;
+            email = null;
+            address = null;
+            NIF = null;
+            nrSaude = null;
+            codPostal = null;
+        }
+
+
+
     }
 }

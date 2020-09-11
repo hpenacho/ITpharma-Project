@@ -52,6 +52,10 @@ namespace PROJECTOFINAL
                    Client.userID = (int)reader["ID"];
                    Client.name = reader["nome"].ToString();
                    Client.email = reader["email"].ToString();
+                   Client.address = reader["morada"].ToString();
+                   Client.codPostal = reader["codPostal"].ToString();
+                   Client.NIF = reader["nif"].ToString();
+                   Client.nrSaude = reader["nrSaude"].ToString();
 
                    Client.isLogged = true;
                 }

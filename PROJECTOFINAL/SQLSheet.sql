@@ -1251,7 +1251,7 @@ group by Categoria.ID, Categoria.descricao
 
 -- Brand
 
-select Marca.ID, Marca.descricao , Count(Produto.ID_Categoria) as 'Count'
+select Marca.ID, Marca.descricao , Count(Produto.ID_Marca) as 'Count'
 from Marca left join Produto on Produto.ID_Categoria = Marca.ID
 group by Marca.ID, Marca.descricao
 
@@ -1292,8 +1292,6 @@ ORDER BY CASE WHEN @Campo = 'Preco' AND @Ordem = 'ASC' THEN produto.preco END,
 		 CASE WHEN @Campo = 'Preco' AND @Ordem = 'DESC' THEN produto.preco END DESC,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'ASC' THEN produto.nome END,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'DESC' THEN produto.nome END DESC
-
-
 
 
 -- [PROC] SOCIAL REGISTRY 

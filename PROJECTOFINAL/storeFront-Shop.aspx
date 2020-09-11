@@ -14,7 +14,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3" style="margin-top: 20vh;">
+            <div class="col-lg-3 mb-3" style="margin-top: 20vh;">
 
                 <h6 class="my-4">Filtros</h6>
 
@@ -126,7 +126,7 @@
     </asp:SqlDataSource>
     
     <asp:SqlDataSource ID="sqlBrandsSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select Marca.ID, Marca.descricao , Count(Produto.ID_Categoria) as 'Count'
-            from Marca inner join Produto on Produto.ID_Categoria = Marca.ID
+            from Marca inner join Produto on Produto.ID_Marca = Marca.ID
             where Produto.Activo = 1 
 		    AND Produto.Descontinuado = 0
             group by Marca.ID, Marca.descricao">

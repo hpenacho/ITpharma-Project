@@ -29,11 +29,13 @@ namespace PROJECTOFINAL
 
         private void fillDetails()
         {
+            welcomeUser.InnerText = "Welcome " + Client.name;
             txt_altername.Value = Client.name;
             txt_alteremail.Value = Client.email;
             txt_alteraddress.Value = Client.address;
             txt_alternif.Value = Client.NIF;
             sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
+            
         }
 
 
@@ -173,7 +175,13 @@ namespace PROJECTOFINAL
 
             }
 
-            
+        }
+
+        protected void link_logout_Click(object sender, EventArgs e)
+        {
+            //ATENÇÃO PODE HAVER CONFLICTOS COM O CHECKOUT E A INFORMAÇÃO
+            Client.resetClient();
+            Response.Redirect("storeFront-Index.aspx");
         }
     }
 }
