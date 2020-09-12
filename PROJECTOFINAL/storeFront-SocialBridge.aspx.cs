@@ -53,6 +53,7 @@ namespace PROJECTOFINAL
                    Client.nrSaude = reader["nrSaude"].ToString();
 
                    Client.isLogged = true;
+                   Client.social = true;
                 }
 
             }

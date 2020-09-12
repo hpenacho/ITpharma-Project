@@ -10,6 +10,7 @@ namespace PROJECTOFINAL
 
         //Utility Variables
         public static bool isLogged { get; set; }
+        public static bool social { get; set; }
 
         //User Object Details
         public static int userID { get; set; } = 0;

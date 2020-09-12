@@ -16,8 +16,10 @@ namespace PROJECTOFINAL
 
             if (!Client.isLogged)
                 Response.Redirect("storeFront-Index.aspx");
-            else
+
+            if (!Page.IsPostBack)
                 fillDetails();
+
         }
 
         protected void link_logout_Click(object sender, EventArgs e)
@@ -34,7 +36,13 @@ namespace PROJECTOFINAL
             txt_alterAddress.Value = Client.address;
             txt_alternif.Value = Client.NIF;
             txt_zipCode.Value = Client.codPostal;
+
+            //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;
+            sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
+
+            //PREVENIR UTILIZADOR SOCIAL DE ALTERAR PASSWORD
+            
         }
 
 
@@ -78,25 +86,14 @@ namespace PROJECTOFINAL
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
-            string nome = txt_altername.Value;
-
-            System.Diagnostics.Debug.WriteLine("String :" + nome);
-
-            Client.name = txt_altername.Value;
-            Client.email = txt_alteremail.Value;
-            Client.address = txt_alterAddress.Value;
-            Client.NIF = txt_alternif.Value;
-            Client.codPostal = txt_zipCode.Value;
-
-            System.Diagnostics.Debug.WriteLine("Variavel :" + Client.name);
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_editClientDetails");
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
-            myCommand.Parameters.AddWithValue("@nome", Client.name);
-            myCommand.Parameters.AddWithValue("@email", Client.email);
-            myCommand.Parameters.AddWithValue("@morada", Client.address);
-            myCommand.Parameters.AddWithValue("@nif", Client.NIF);
-            myCommand.Parameters.AddWithValue("@codPostal", Client.codPostal);
+            myCommand.Parameters.AddWithValue("@nome", txt_altername.Value);
+            myCommand.Parameters.AddWithValue("@email", txt_alteremail.Value);
+            myCommand.Parameters.AddWithValue("@morada", txt_alterAddress.Value);
+            myCommand.Parameters.AddWithValue("@nif", txt_alternif.Value);
+            myCommand.Parameters.AddWithValue("@codPostal", txt_zipCode.Value);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
@@ -105,6 +102,23 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
+
+                if(myCommand.Parameters["@output"].Value.ToString() != "")
+                {
+                    Client.name = txt_altername.Value;
+                    Client.email = txt_alteremail.Value;
+                    Client.address = txt_alterAddress.Value;
+                    Client.NIF = txt_alternif.Value;
+                    Client.codPostal = txt_zipCode.Value;
+
+                    welcomeUser.InnerText = "Welcome " + Client.name;
+                    lbl_changeDetailsError.Text = "Your details were changed.";
+                }
+                else
+                {
+                    lbl_changeDetailsError.Text = myCommand.Parameters["@output"].Value.ToString();
+                }
+
             }
             catch (Exception m)
             {

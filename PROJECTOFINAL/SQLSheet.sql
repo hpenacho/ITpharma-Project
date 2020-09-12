@@ -1109,6 +1109,10 @@ CREATE OR ALTER PROC usp_editClientDetails(@ID int,
 											@output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
+			
+			IF EXISTS(select '*' from cliente where cliente.nif = @nif AND Cliente.ID != @ID)
+				THROW 60001, 'This NIF is already registered, if you think this is a mistake contact an administrator' , 10
+			
 	
 			update Cliente set Cliente.nome = IIF(@nome = '', nome, @nome),
 							   Cliente.email = IIF(@email = '', email, @email),
@@ -1123,12 +1127,6 @@ BEGIN CATCH
 	set @output = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
-
--- [PROC] RETURNS CLIENT DETAILS  (C# BUG)
-GO
-create or alter proc usp_returnUserPageDetails(@ID int) AS
-select nome,email,morada,nif,codPostal from cliente where cliente.id = @ID;
-
 
 ----------------------------------------------
 
