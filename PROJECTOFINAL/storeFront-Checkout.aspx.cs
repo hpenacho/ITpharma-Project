@@ -30,14 +30,23 @@ namespace PROJECTOFINAL
                 lbl_Tax.InnerText = Session["Taxed"].ToString();
                 lbl_finalTotal.InnerText = Session["finalTotal"].ToString();
 
-                userName.Text = Client.name;
-                email.Text = Client.email;
-                address.Value = Client.address;
-                zip.Value = Client.codPostal;
+                if(!Page.IsPostBack)
+                {
+                    fillClientInfo();
+                }
                 
                 lbl_expiryPickup.InnerText = DateTime.Now.AddDays(4).ToShortDateString(); ;
 
             }
+        }
+
+
+        private void fillClientInfo()
+        {
+            userName.Text = Client.name;
+            email.Text = Client.email;
+            address.Value = Client.address;
+            zip.Value = Client.codPostal;
         }
 
         protected void rpt_compactCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
