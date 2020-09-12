@@ -105,6 +105,33 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.TextBox email;
 
         /// <summary>
+        /// inpHide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden inpHide;
+
+        /// <summary>
+        /// address control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText address;
+
+        /// <summary>
+        /// zip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText zip;
+
+        /// <summary>
         /// ddl_pickUp control.
         /// </summary>
         /// <remarks>
@@ -123,31 +150,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.SqlDataSource SqlSourcePickups;
 
         /// <summary>
-        /// address control.
+        /// lbl_expiryPickup control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText address;
-
-        /// <summary>
-        /// LocationZone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlSelect LocationZone;
-
-        /// <summary>
-        /// zip control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText zip;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_expiryPickup;
 
         /// <summary>
         /// CreditCard control.

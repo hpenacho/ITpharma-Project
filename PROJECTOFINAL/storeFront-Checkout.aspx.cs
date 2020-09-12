@@ -18,7 +18,7 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Client.isLogged)
-                Response.Redirect("storeFront-Index.aspx");
+                Response.Redirect("storeFront-Index.aspx",false);
 
             else
             {
@@ -30,35 +30,12 @@ namespace PROJECTOFINAL
                 lbl_Tax.InnerText = Session["Taxed"].ToString();
                 lbl_finalTotal.InnerText = Session["finalTotal"].ToString();
 
-                SqlCommand myCommand = Tools.SqlProcedure("usp_ClientInfoToCheckout");
-                myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
-                SqlDataReader reader = null;
-                try
-                  {
-                        Tools.myConn.Open();
-                        myCommand.ExecuteNonQuery();
-                        reader = myCommand.ExecuteReader();
-
-                      if (reader.Read())
-                      {
-
-                        userName.Text = reader["Name"].ToString();
-                        email.Text = reader["email"].ToString();
-                        address.Value = reader["Address"].ToString();
-                        zip.Value = reader["ZipCode"].ToString();
-
-                      }
-                      reader.Close();
-
-                  }
-                  catch (Exception m)
-                  {
-                    System.Diagnostics.Debug.WriteLine(m.Message);
-                }
-                  finally
-                  {
-                      Tools.myConn.Close();
-                  } 
+                userName.Text = Client.name;
+                email.Text = Client.email;
+                address.Value = Client.address;
+                zip.Value = Client.codPostal;
+                
+                lbl_expiryPickup.InnerText = DateTime.Now.AddDays(4).ToShortDateString(); ;
 
             }
         }
@@ -87,7 +64,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
                 //---------------------------------------------------------
-               
+
             }
             catch (Exception m)
             {
@@ -112,6 +89,21 @@ namespace PROJECTOFINAL
             string encryptedPDForder = Tools.EncryptString(myCommand.Parameters["@orderNumber"].Value.ToString()) + ".pdf";
             Session["orderNumber"] = Tools.EncryptString(myCommand.Parameters["@orderNumber"].Value.ToString());
             string newFile = pdfpath + "\\invoices\\" + encryptedPDForder;
+            // string location = LocationZone.Items[LocationZone.SelectedIndex].Text;
+
+            string finalDelivery="";
+            System.Diagnostics.Debug.WriteLine(inpHide.Value);
+
+            if (inpHide.Value == "Pickup")
+            {
+                finalDelivery = ddl_pickUp.SelectedItem.Text + Environment.NewLine + "Pick up by: " + DateTime.Now.AddDays(4).ToShortDateString();
+            }
+            else
+            {
+                finalDelivery = address.Value + " " + zip.Value;
+            }
+
+             
 
             PdfReader pdfreader = new PdfReader(pdfTemplate);
             PdfStamper pdfstamper = new PdfStamper(pdfreader, new FileStream(newFile, FileMode.Create));
@@ -120,7 +112,7 @@ namespace PROJECTOFINAL
             pdfformfields.SetField("data", DateTime.Now.ToShortDateString());
             pdfformfields.SetField("invoicenr", myCommand.Parameters["@orderNumber"].Value.ToString());
             pdfformfields.SetField("name", Client.name);
-            pdfformfields.SetField("address", address.Value + " " + zip.Value);
+            pdfformfields.SetField("address", finalDelivery);
             pdfformfields.SetField("subtotal", Session["clientSubTotal"].ToString() + " €");
             pdfformfields.SetField("tax", Session["Taxed"].ToString() + " €");
             pdfformfields.SetField("total", Session["finalTotal"].ToString() + " €");
@@ -129,8 +121,6 @@ namespace PROJECTOFINAL
             pdfformfields.SetField("cardNumber", ccNumber.Value);
             pdfformfields.SetField("cardOwner", ccName.Value);
 
-
-
             for (int i = 0; i < rpt_compactCart.Items.Count; i++)
             {
                 item += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("lbl_title")).InnerText + Environment.NewLine;
@@ -138,7 +128,6 @@ namespace PROJECTOFINAL
                 qty += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("lbl_itemQty")).InnerText + Environment.NewLine;
                 total += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("itemTotalPrice")).InnerText+ " €" + Environment.NewLine;
             }
-            System.Diagnostics.Debug.WriteLine(total);
 
             pdfformfields.SetField("item", item);
             pdfformfields.SetField("Qty", qty);
@@ -148,8 +137,9 @@ namespace PROJECTOFINAL
             pdfstamper.Close();
             //Response.Redirect("\\Resources\\invoices\\" + encryptedPDForder);
             //---------------------------------------------------------
-            Response.Redirect("storeFront-OrderSuccess.aspx"); //tirar daqui qd se for tratar dos emails
+            Response.Redirect("storeFront-OrderSuccess.aspx",false); //tirar daqui qd se for tratar dos emails
 
         }
+
     }
 }
