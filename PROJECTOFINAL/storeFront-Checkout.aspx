@@ -72,17 +72,11 @@
              <p class="text-muted"><b>Tax(6%): </b><label class="form-label" id="lbl_Tax" runat="server"> [tax]</label> </p>
                 </div>
             <div class="row justify-content-center">
-            <b>Total: <label class="col-form-label text-primary" id="lbl_finalTotal" runat="server"> [total]</label></b>
+            <b>Total: <label class="col-form-label text-primary" id="lbl_finalTotal" runat="server"> [total]</label> € </b>
                 </div>
         </li>
       </ul>
-
-     
-        <form class="card p-2" >
-        <div class="input-group">
-          
-        </div>
-      </form>
+    
 
     </div>
     <div class="col-md-8 order-md-1">
@@ -92,16 +86,12 @@
           <div class="col-md-6 mb-3">
             <label for="firstName">Receiver's Name</label>
             <input type="text" class="form-control" id="firstName" runat="server" placeholder="First Name" value="" required>
-            <div class="invalid-feedback">
-              Please insert the package receiver's first name.
-            </div>
+
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" id="lastName" runat="server" placeholder="Last Name" value="" required>
-            <div class="invalid-feedback">
-              Please insert the package receiver's last name.
-            </div>
+
           </div>
         </div>
 
@@ -122,48 +112,67 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-envelope"></i> </span>
             </div>    
-            <asp:TextBox ID="email" class="form-control" runat="server" placeholder="you@example.com" ReadOnly="True"></asp:TextBox>
+            <asp:TextBox ID="email" class="form-control" runat="server" placeholder="you@example.com"  ReadOnly="True"></asp:TextBox>
           
         </div>
+         
 
-          <div class="mb-3">
-          <asp:DropDownList ID="ddl_pickUp" runat="server" DataSourceID="SqlSourcePickups" DataTextField="Descricao" DataValueField="ID"></asp:DropDownList>
-              <asp:SqlDataSource ID="SqlSourcePickups" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [Descricao] FROM [Pickup]"></asp:SqlDataSource>
-          </div>
+            <input id="inpHide" type="hidden" runat="server" />
+            
+            <ul class="nav nav-tabs justify-content-center mt-5" role="tablist">
+                
+                <li class="nav-item"><a data-toggle="tab" class="btn btn-light nav-link active" onclick="selectedAddress()" href="#tabAddress">Address</a></li>
+                <li class="nav-item"><a data-toggle="tab" class="btn btn-light" onclick="selectedPickup()" href="#tabPickup">ATM Pickup</a></li>
+                                
+            </ul>
 
-        <div class="mb-3">
+
+
+
+            <div class="tab-content">
+                <div id="tabAddress" class="tab-pane in active">
+                            <div class="form-group row mt-2 mb-2">
+            <div class="col-md-9">
           <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" name="address" runat="server" placeholder="Address" required>
-          <div class="invalid-feedback">
-            Please Insert an Address.
-          </div>
+            <input type="text" class="form-control" id="address" name="address" runat="server" placeholder="Address">
+                </div>
+            
+                <div class="col-md-3 mb-2">
+            <label for="zip">Zip-Code</label>
+            <input type="text" name="zip" class="form-control text-center" id="zip" runat="server" placeholder="Zip-Code">        
+            </div>
         </div>
-
-        <div class="row">
+                    
+                    <div class="row justify-content-center">
           <div class="col-md-5 mb-3">
             <label for="LocationZone">Location</label>
-            <select class="custom-select d-block w-100" id="LocationZone" runat="server" required>
-              <option value="">Choose...</option>
-              <option selected>Portugal Continental</option>
+            <select class="custom-select d-block w-100" id="LocationZone" required>
+              <option selected">Portugal Continental</option>
                 <option>Açores</option>
                 <option>Madeira</option>
             </select>
           </div>
-            
-          
-          <div class="col-md-3 mb-3">
-            <label for="zip">Zip-Code</label>
-            <input type="text" name="zip" class="form-control" id="zip" runat="server" placeholder="Zip-Code" required>
-            <div class="invalid-feedback">
-              Insert the Zip-Code.
-            </div>
-          </div>
+                      
         </div>
-        <hr class="mb-4">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="save-info">
-          <label class="custom-control-label" for="save-info"> Save this information for next time.</label>
-        </div>
+
+                </div>
+
+                <div id="tabPickup" class="tab-pane fade">                   
+                    <p class="text-muted mt-2 text-center">Please choose your prefered pickup point</p>
+                    <div class="row justify-content-center"> 
+                    <div class="col-md-4 mb-3">                        
+          <asp:DropDownList ID="ddl_pickUp" CssClass="btn btn-light dropdown-toggle" runat="server" DataSourceID="SqlSourcePickups" DataTextField="Descricao" DataValueField="ID"></asp:DropDownList>
+              <asp:SqlDataSource ID="SqlSourcePickups" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [Descricao] FROM [Pickup]"></asp:SqlDataSource>
+                     </div>
+                        </div>
+                    <div class="row justify-content-center"> 
+                          <p class="bg-light rounded pl-1 pr-1 font-italic"> You must conclude this order at the chosen pickup by: <label class="col-form-label text-success" id="lbl_expiryPickup" runat="server"> [date]</label> </p>  
+                            </div>
+                        <p class="text-muted text-center"> Expired Orders will be canceled and reverted.</p>
+                        </div>
+                </div>
+            </div> 
+                
         <hr class="mb-4">
 
         <h4 class="mb-3 text-center">Payment Details</h4>
@@ -189,31 +198,23 @@
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control" id="ccName" runat="server" placeholder="Name on Card" required>
             <small class="text-muted"> Your name as written on your card.</small>
-            <div class="invalid-feedback">
-              This is a mandatory field.
-            </div>
+
           </div>
           <div class="col-md-6 mb-3">
             <input type="text" class="form-control" id="ccNumber" runat="server" placeholder="Card Number" required>
-            <div class="invalid-feedback">
-              Card number necessary for payment.
-            </div>
+
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="ccExpiration">Expiration Date</label>
               <input type="date" class="form-control form-control-user bg-light" runat="server" id="ccExpiration" value="2000-01-01">
-            <div class="invalid-feedback">
-              Expiration date required.
-            </div>
+
           </div>
           <div class="col-md-3 mb-3">
             <label for="cc_Cvv">CVV</label>
             <input type="text" class="form-control" id="cc_Cvv" runat="server" placeholder="CVV" pattern="[0-9]{3}" title="CVV is composed of 3 digits" required>
-            <div class="invalid-feedback">
-              CVV number needed, this is typically at the back of your card.
-            </div>
+
           </div>
         </div>
         <hr class="mb-4">   
@@ -226,10 +227,23 @@
         
   
 </div>
+    
+    <script>
+        function selectedAddress() {
+            var hiddenControl = '<%= inpHide.ClientID %>';
+            document.getElementById(hiddenControl).value = "ClientAddress";
+        }
+
+        function selectedPickup() {
+            var hiddenControl = '<%= inpHide.ClientID %>';
+            document.getElementById(hiddenControl).value = "Pickup";
+        }
+
+    </script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="StoreFront/vendor/jquery/jquery.slim.min.js"><\/script>')</script><script src="StoreFront/vendor/bootstrap/js/bootstrap.bundle.js"></script>
         <script src="StoreFront/js/form-validation.js"></script>
 
-    <!-- -->
-    </div>
+    <!-- -->    
 </asp:Content>
