@@ -74,7 +74,7 @@
 
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100 border-white">
-                                    <a href="#">
+                                    <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
                                         <img class="img-fluid card-img card-img-top" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
                                     
                                     <div class="card-body"> 

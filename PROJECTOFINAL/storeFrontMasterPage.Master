@@ -73,7 +73,12 @@
           border-radius: 20px;
       }
 
+      /* UNDER NAV */
 
+      #undernav{
+          /*background-color: #95D426;*/
+          background-color: #8DC942;
+      }
 
 
   </style>
@@ -121,10 +126,19 @@
                     </ul>
                 </div>
             </div>
+          
+        </nav>
+
+        <nav id="undernav" class="nav pb-3 pt-3 fixed-top shadow" style="margin-top: 4.5em">
+            <div class="col-lg-2">
+
+            </div>
         </nav>
 
 
-            <!-- CONTEUDO BODY MASTER -->
+
+
+        <!-- CONTEUDO BODY MASTER -->
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             <!-- //CONTEUDO BODY MASTER -->

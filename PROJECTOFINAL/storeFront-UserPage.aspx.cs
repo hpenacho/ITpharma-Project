@@ -20,6 +20,13 @@ namespace PROJECTOFINAL
             if (!Page.IsPostBack)
                 fillDetails();
 
+            //PREVENIR UTILIZADOR SOCIAL DE ALTERAR PASSWORD
+            if (Client.social)
+            {
+                txt_oldPassword.Attributes.Add("readonly", "readonly");
+                txt_newPassword.Attributes.Add("readonly", "readonly");
+                txt_repeatPassword.Attributes.Add("readonly", "readonly");
+            }
         }
 
         protected void link_logout_Click(object sender, EventArgs e)
@@ -40,9 +47,6 @@ namespace PROJECTOFINAL
             //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;
             sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
-
-            //PREVENIR UTILIZADOR SOCIAL DE ALTERAR PASSWORD
-            
         }
 
 

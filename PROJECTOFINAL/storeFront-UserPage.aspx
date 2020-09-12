@@ -2,9 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+        <link href="BackOffice/BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <style>
-
     </style>
 
 
@@ -16,40 +18,227 @@
 
 
     <div class="container">
-    <div class="row mt-5 mb-3">
-        <div class="col-lg-10">
-            <div class="card shadow shadow-sm">
-                <div class="card-body">
-                    <div class="row">
 
-                        <div class="col-lg-12 text-center">
-                            <!-- Controlos de navegação -->
+        <div class="row mt-5 mb-3">
+            <!-- ROW -->
+            <div class="col-lg-3">
+                <div class="card shadow shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
 
-                            <h5 class="card-title" id="welcomeUser" runat="server"></h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="col-lg-12 text-center">
+                                <!-- Controlos de navegação -->
 
+                                <h5 class="card-title" id="welcomeUser" runat="server"></h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
+                                <ul class="nav nav-pills flex-column">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="home" aria-selected="true">Orders</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="schedule-tab" data-toggle="tab" href="#schedule" role="tab" aria-controls="schedule" aria-selected="true">Schedule</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="exams-tab" data-toggle="tab" href="#exams" role="tab" aria-controls="exams" aria-selected="true">Exams</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-9 col-sm-12 text-center">
+                <div class="card shadow shadow-sm">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <!-- Botão Aviar a receita -->
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"></i>Prescriptions</button>
+                            <!-- Botão Logout -->
+                            <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger" OnClick="link_logout_Click">Logout</asp:LinkButton>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="col-lg-2 col-sm-12 text-center">
-            <!-- Botão Aviar a receita -->
-            <button type="button" class="btn btn-info btn-block mt-4" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"></i>Prescriptions</button>
-            <!-- Botão Logout -->
-            <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger btn-block mt-4" OnClick="link_logout_Click">Logout</asp:LinkButton>
-        </div>
+        <!-- ./ROW-->
 
 
-    </div>
+        <div class="tab-content" id="myTabContent">
+
+            <!-- ORDERS PANE -->
+            <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                <!-- ORDERS -->
+              <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3">
+                <div class="card-body">
+                    <div class="col-lg-12">
+
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-info" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
+                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-info" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
+                        </div>
 
 
+                        <h3 class="text-center my-2 bg-info py-1 text-white col-12">Encomendas</h3>
 
-            <div class="row">
+                      
+                        <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
+                            <div class="table-responsive">
+                                    <table class="table table-borderless text-center" id="dataTable" width="100%" cellspacing="0">
 
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Invoice</th>
+                                            </tr>
+                                        </thead>
 
+                                        <tbody class="text-center text-md-center">
+
+                                             <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlOrderSource">
+                                                <ItemTemplate>
+
+                                            <tr>
+                                                <td style="vertical-align:middle"><%# Eval("ENC_REF") %></td>
+                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("Qty") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("Total") %> €</td>
+                                                <td style="vertical-align:middle"><span class="rounded-pill bg-info text-white p-2 pl-2 pr-2"><%# Eval("Descricao") %></span></td>
+                                                <td>
+                                                    <a class="btn btn-outline-info" style="vertical-align:middle" href="storeFront-UserOrders.aspx?order=<%# Eval("ENC_REF") %>">Details</a>
+                                                </td>
+                                            </tr>
+
+                                               </ItemTemplate>
+                                            </asp:Repeater>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <!-- ORDER ELEMENT -->
+                    </div>
+                </div>
+            </div>
+                <!-- //ORDERS -->
+            </div>
+            <!-- //ORDERS PANE -->
+
+            <div class="tab-pane fade" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
+
+                WIP
+
+            </div>
+
+              <!-- EXAMS PANE -->
+            <div class="tab-pane fade" id="exams" role="tabpanel" aria-labelledby="exams-tab">
+                <!-- EXAMS -->
+            <div class="card pb-4 mt-4 shadow shadow-sm bg-white">
+                <div class="card-body">
+
+                    <h3 class="text-dark">Exames</h3>
+
+                    <div class="row mt-1 card-deck">
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tipo: analises</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tipo: oncologico</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                    <a href="#" class="btn btn-info">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+                <!-- //EXAMS -->
+            </div>
+              <!-- EXAMS PANE -->
+
+              <!-- SETTINGS PANE -->
+             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <!-- SETTINGS -->
+              <div class="row">
                 <!-- Change password -->
                 <div class="col-lg-4 mb-4 my-4">
                     <div class="card shadow pb-4 bg-white">
@@ -169,156 +358,18 @@
                 </div>
 
 
-            </div>
-            <!-- //.Row -->
-
-
-
-            <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3">
-                <div class="card-body">
-                    <div class="col-lg-12">
-
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-info" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
-                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-info" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
-                        </div>
-
-
-                        <h3 class="text-center my-2 bg-info py-1 text-white col-12">Encomendas</h3>
-
-                      
-                        <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
-
-                                    <table class="table table-borderless table-responsive-lg text-center" id="dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Address</th>
-                                                <th scope="col">Qty</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Invoice</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-                                             <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlOrderSource">
-                                                <ItemTemplate>
-
-                                            <tr>
-                                                <td style="vertical-align:middle"><%# Eval("ENC_REF") %></td>
-                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
-                                                <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
-                                                <td style="vertical-align:middle"><%# Eval("Qty") %></td>
-                                                <td style="vertical-align:middle"><%# Eval("Total") %> €</td>
-                                                <td style="vertical-align:middle"><span class="rounded-pill bg-info text-white p-2 pl-2 pr-2"><%# Eval("Descricao") %></span></td>
-                                                <td>
-                                                    <a class="btn btn-outline-info" style="vertical-align:middle" href="storeFront-UserOrders.aspx?order=<%# Eval("ENC_REF") %>">Details</a>
-                                                </td>
-                                            </tr>
-
-                                               </ItemTemplate>
-                                            </asp:Repeater>
-                                        
-                                        </tbody>
-                                    </table>
-
-                                    <!-- ORDER ELEMENT -->
-
-                    </div>
                 </div>
+                <!-- //SETTINGS -->
             </div>
-    
+              <!-- //SETTINGS PANE -->
 
-
-            <div class="card pb-4 mt-4 shadow shadow-sm bg-white">
-                <div class="card-body">
-
-                    <h3 class="text-dark">Exames</h3>
-
-                    <div class="row mt-1 card-deck">
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tipo: analises</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tipo: oncologico</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        </div>
 
 
     </div>
-            
-</div>
-    <!-- END CONTAINER -->
+    <!-- END MAIN CONTAINER -->           
+
+
 
     <!-- modal verify Prescription -->
 
@@ -419,6 +470,16 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
+
+        <!-- SCRIPTS -->
+        <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+        <script src="BackOffice//BackOffice-Template/dist/assets/demo/chart-area-demo.js"></script>
+        <script src="BackOffice//BackOffice-Template/dist/assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+        <script src="BackOffice//BackOffice-Template/dist/assets/demo/datatables-demo.js"></script>
+        <!-- /SCRIPTS -->
 
 
 </asp:Content>

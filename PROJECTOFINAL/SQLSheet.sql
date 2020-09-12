@@ -1342,3 +1342,37 @@ begin catch
 	set @output = ERROR_MESSAGE();
 	rollback
 end catch
+
+
+-- [ PROC ] ITEM DETAIL PAGE
+
+GO
+create or alter proc usp_returnItemDetailPage(@Reference varchar(20)) AS
+select nome, preco, resumo, Produto.descricao, imagem, pdfFolheto, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
+from produto inner join marca on produto.ID_Marca = marca.ID
+			 inner join categoria on produto.ID_Categoria = Categoria.ID
+where Produto.Codreferencia = @Reference
+AND Produto.Activo = 1
+AND Produto.Descontinuado = 0
+
+-- [ PROC ] RELATED ITEM DETAIL PAGE
+GO
+create or alter proc usp_returnRelatedItemPage(@Reference varchar(20)) AS
+select top(5) Codreferencia, nome, preco, resumo, Produto.descricao, imagem, pdfFolheto, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
+from produto inner join marca on produto.ID_Marca = marca.ID
+			 inner join categoria on produto.ID_Categoria = Categoria.ID
+where Produto.Codreferencia != @Reference
+AND Produto.Activo = 1
+AND Produto.Descontinuado = 0
+AND Produto.ID_Categoria = (select Produto.ID_Categoria from Produto where Produto.Codreferencia = @Reference)
+
+-- [ PROC ] RELATED ITEM DETAIL PAGE
+GO
+create or alter proc usp_returnRelatedGenericItem(@Reference varchar(20)) AS
+select  Codreferencia, imagem
+from Produto
+where produto.ref_generico = @Reference
+AND Produto.Activo = 1
+AND Produto.Descontinuado = 0
+
+

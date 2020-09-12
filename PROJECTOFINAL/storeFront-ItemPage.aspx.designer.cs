@@ -15,67 +15,85 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// control_tituloProduto control.
+        /// mainImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_tituloProduto;
+        protected global::System.Web.UI.WebControls.Image mainImage;
 
         /// <summary>
-        /// control_resumoProduto control.
+        /// txt_itemTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal control_resumoProduto;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txt_itemTitle;
 
         /// <summary>
-        /// control_detalhe1 control.
+        /// txt_itemSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_detalhe1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txt_itemSummary;
 
         /// <summary>
-        /// control_detalhe2 control.
+        /// control_productCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_detalhe2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_productCategory;
 
         /// <summary>
-        /// control_categoriaProduto control.
+        /// control_productBrand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_categoriaProduto;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_productBrand;
 
         /// <summary>
-        /// control_precoProduto control.
+        /// control_itemPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_precoProduto;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl control_itemPrice;
 
         /// <summary>
-        /// link_adicionarItem control.
+        /// link_addToCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_adicionarItem;
+        protected global::System.Web.UI.WebControls.LinkButton link_addToCart;
+
+        /// <summary>
+        /// rpt_Generics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_Generics;
+
+        /// <summary>
+        /// control_description control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal control_description;
 
         /// <summary>
         /// rpt_produtoRelacionado control.
@@ -85,5 +103,23 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpt_produtoRelacionado;
+
+        /// <summary>
+        /// sqlRelatedItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlRelatedItems;
+
+        /// <summary>
+        /// sqlGenericItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlGenericItems;
     }
 }

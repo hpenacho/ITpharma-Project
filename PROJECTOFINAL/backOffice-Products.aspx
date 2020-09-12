@@ -3,6 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+
     
     <script>
 
@@ -136,7 +137,6 @@
                                     <!-- PRODUCTS -->
 
                                     <asp:Repeater ID="rpt_produtosBackoffice" runat="server" DataSourceID="SQLrptProdutos" OnItemCommand="rpt_produtosBackoffice_ItemCommand" OnItemDataBound="rpt_produtosBackoffice_ItemDataBound">
-
                                         <ItemTemplate>
 
                                             <tr class="text-center">
