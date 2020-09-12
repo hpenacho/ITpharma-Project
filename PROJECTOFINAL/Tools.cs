@@ -34,13 +34,13 @@ namespace PROJECTOFINAL
 
         public static SqlParameter errorOutput(string parameterName , SqlDbType outputType, int size)
         {
-            SqlParameter errorMessage = new SqlParameter();
-            errorMessage.ParameterName = parameterName;
-            errorMessage.Direction = ParameterDirection.Output;
-            errorMessage.SqlDbType = outputType;
-            errorMessage.Size = size;
+            SqlParameter output = new SqlParameter();
+            output.ParameterName = parameterName;
+            output.Direction = ParameterDirection.Output;
+            output.SqlDbType = outputType;
+            output.Size = size;
 
-            return errorMessage;
+            return output;
         }
 
 

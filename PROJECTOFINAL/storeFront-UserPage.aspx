@@ -28,21 +28,6 @@
                             <h5 class="card-title" id="welcomeUser" runat="server"></h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-                            <ul class="nav nav-pills nav-justified" id="myTab" role="tablist">
-
-                                <li class="nav-item bg-light">
-                                    <a class="nav-link" id="user-tab" data-toggle="tab" href="#change-details" role="tab" aria-controls="details" aria-selected="true">Users</a>
-                                </li>
-
-                                <li class="nav-item bg-light">
-                                    <a class="nav-link fade show active" id="order-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
-                                </li>
-
-                                <li class="nav-item bg-light">
-                                    <a class="nav-link" id="exam-tab" data-toggle="tab" href="#exams" role="tab" aria-controls="exams" aria-selected="false">Exams</a>
-                                </li>
-
-                            </ul>
 
                         </div>
                     </div>
@@ -62,9 +47,6 @@
 
 
 
-    <div class="tab-content" id="myTabContent">
-
-        <div class="tab-pane fade" id="change-details" role="tabpanel" aria-labelledby="details-tab">
             <div class="row">
 
 
@@ -150,7 +132,7 @@
                             <div class="form-row mb-3">
                                 <div class="col-md-8">
                                     <label for="txt_alteraddress">Address</label>
-                                    <input type="text" id="txt_alteraddress" runat="server" class="form-control bg-light"/>
+                                    <input type="text" ID="txt_alterAddress" runat="server"  class="form-control bg-light"/>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="txt_zipCode">Zip-Code</label>
@@ -174,7 +156,7 @@
                             <div class="form-row">
 
                                 <div class="col-md-6">
-                                     <asp:Label ID="lbl_changeDetailsError" runat="server" class="form-text text-dark" Font-Size="small" Text=""></asp:Label>
+                                     <asp:Label ID="lbl_changeDetailsError" runat="server" class="form-text text-dark" Font-Size="small"></asp:Label>
                                 </div>
 
                                 <div class="col-md-6">
@@ -191,9 +173,6 @@
             <!-- //.Row -->
 
 
-        </div>
-
-        <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
 
             <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3">
                 <div class="card-body">
@@ -251,9 +230,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+    
 
-        <div class="tab-pane fade" id="exams" role="tabpanel" aria-labelledby="exams-tab">
 
             <div class="card pb-4 mt-4 shadow shadow-sm bg-white">
                 <div class="card-body">
@@ -336,7 +314,7 @@
                 </div>
             </div>
 
-        </div>
+
     </div>
             
 </div>

@@ -14,30 +14,27 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Client.isLogged)
-            {
-                fillDetails();
-            }
-            else
-            {
+            if (!Client.isLogged)
                 Response.Redirect("storeFront-Index.aspx");
-            }
-
-
-
+            else
+                fillDetails();
         }
 
-        private void fillDetails()
+        protected void link_logout_Click(object sender, EventArgs e)
         {
-            welcomeUser.InnerText = "Welcome " + Client.name;
+            //ATENÇÃO PODE HAVER CONFLICTOS COM O CHECKOUT E A INFORMAÇÃO
+            Client.resetClient();
+            Response.Redirect("storeFront-Index.aspx");
+        }
+
+        public void fillDetails()
+        {
             txt_altername.Value = Client.name;
             txt_alteremail.Value = Client.email;
-            txt_alteraddress.Value = Client.address;
+            txt_alterAddress.Value = Client.address;
             txt_alternif.Value = Client.NIF;
             txt_zipCode.Value = Client.codPostal;
-            txt_alterhealthnumber.Value = Client.nrSaude;
-            sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
-            
+            welcomeUser.InnerText = "Welcome " + Client.name;
         }
 
 
@@ -81,16 +78,25 @@ namespace PROJECTOFINAL
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
-            lbl_changeDetailsError.Text = "";
+            string nome = txt_altername.Value;
 
-            SqlCommand myCommand = Tools.SqlProcedure("usp_alterClientDetails");
+            System.Diagnostics.Debug.WriteLine("String :" + nome);
+
+            Client.name = txt_altername.Value;
+            Client.email = txt_alteremail.Value;
+            Client.address = txt_alterAddress.Value;
+            Client.NIF = txt_alternif.Value;
+            Client.codPostal = txt_zipCode.Value;
+
+            System.Diagnostics.Debug.WriteLine("Variavel :" + Client.name);
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_editClientDetails");
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
-            myCommand.Parameters.AddWithValue("@nome", txt_altername.Value);
-            myCommand.Parameters.AddWithValue("@email", txt_alteremail.Value);
-            myCommand.Parameters.AddWithValue("@morada", txt_alteraddress.Value);
-            myCommand.Parameters.AddWithValue("@nif", txt_alternif.Value);
-            myCommand.Parameters.AddWithValue("@cod_postal", txt_zipCode.Value);
-
+            myCommand.Parameters.AddWithValue("@nome", Client.name);
+            myCommand.Parameters.AddWithValue("@email", Client.email);
+            myCommand.Parameters.AddWithValue("@morada", Client.address);
+            myCommand.Parameters.AddWithValue("@nif", Client.NIF);
+            myCommand.Parameters.AddWithValue("@codPostal", Client.codPostal);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
@@ -99,31 +105,16 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
-
-                var reader = myCommand.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Client.name = reader["nome"].ToString();
-                    Client.email = reader["email"].ToString();
-                    Client.address = reader["morada"].ToString();
-                    Client.NIF = reader["NIF"].ToString();
-                    Client.codPostal = reader["codPostal"].ToString();
-                    fillDetails();
-                }
-
-                lbl_changeDetailsError.Text = myCommand.Parameters["@output"].Value.ToString();
-
             }
-            catch (SqlException m)
+            catch (Exception m)
             {
-                System.Diagnostics.Debug.WriteLine(m.Message);
+                System.Diagnostics.Debug.WriteLine(m.Message.ToString());
             }
             finally
             {
                 Tools.myConn.Close();
+                fillDetails();
             }
-
 
         }
 
@@ -179,11 +170,6 @@ namespace PROJECTOFINAL
 
         }
 
-        protected void link_logout_Click(object sender, EventArgs e)
-        {
-            //ATENÇÃO PODE HAVER CONFLICTOS COM O CHECKOUT E A INFORMAÇÃO
-            Client.resetClient();
-            Response.Redirect("storeFront-Index.aspx");
-        }
+    
     }
 }

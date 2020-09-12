@@ -96,13 +96,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alteremail;
 
         /// <summary>
-        /// txt_alteraddress control.
+        /// txt_alterAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alteraddress;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alterAddress;
 
         /// <summary>
         /// txt_zipCode control.

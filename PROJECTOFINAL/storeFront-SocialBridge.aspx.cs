@@ -26,10 +26,6 @@ namespace PROJECTOFINAL
         private void auth_success(UserInfo user)
         {
 
-            System.Diagnostics.Debug.WriteLine(user.FullName);
-            System.Diagnostics.Debug.WriteLine(user.FirstName);
-            System.Diagnostics.Debug.WriteLine(user.UserId);
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_socialLogin");
             myCommand.Parameters.AddWithValue("@nome", user.FullName ?? "Customer");
             myCommand.Parameters.AddWithValue("@email", user.Email);
@@ -45,7 +41,6 @@ namespace PROJECTOFINAL
                 myCommand.ExecuteNonQuery();
 
                 var reader = myCommand.ExecuteReader();
-                System.Diagnostics.Debug.WriteLine("Entrei no reader");
                 
                 if(reader.Read())
                 {
@@ -68,12 +63,10 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
-                System.Diagnostics.Debug.WriteLine("cheguei ao finally");
-                Response.Redirect("storeFront-UserPage.aspx");
             }
 
 
-
+            Response.Redirect("storeFront-UserPage.aspx", false);
 
         }
     }

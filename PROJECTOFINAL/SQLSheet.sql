@@ -1098,30 +1098,37 @@ GO
 
 
 -- [PROC] ALTER CLIENT DETAILS             
---NAO ESQUECER IIF PARA QUANDO NAO MUDAMOS TODA A INFORMAÇAO, SENAO ESCREVE VAZIO EM CIMA QD CAPTA DO FRONTEND
    
 GO
-CREATE OR ALTER PROC usp_alterClientDetails(@ID int, @nome varchar(50), @email varchar(100), @morada varchar(300), @nif varchar(20), @cod_postal varchar(20), @output varchar(200) output) AS
+CREATE OR ALTER PROC usp_editClientDetails(@ID int, 
+										    @nome varchar(50), 
+											@email varchar(100), 
+											@morada varchar(300), 
+											@nif varchar(20), 
+											@codPostal varchar(20),
+											@output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 	
-			update Cliente set nome =  @nome,
-							   email = @email,
-							   morada = @morada,
-							   nif = @nif,
-							   codpostal = @cod_postal
+			update Cliente set Cliente.nome = IIF(@nome = '', nome, @nome),
+							   Cliente.email = IIF(@email = '', email, @email),
+							   Cliente.morada = IIF(@morada = '', morada, @morada),
+							   Cliente.nif = IIF(@nif = '', nif, @nif),
+							   Cliente.codPostal = IIF(@codPostal = '', codPostal, @codPostal)
 			where cliente.ID = @ID
 
-			set @output = 'Details changed successfully';
-
-			select * from cliente 
-			where cliente.ID = @ID
-COMMIT	
+COMMIT
 END TRY
 BEGIN CATCH
 	set @output = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
+
+-- [PROC] RETURNS CLIENT DETAILS  (C# BUG)
+GO
+create or alter proc usp_returnUserPageDetails(@ID int) AS
+select nome,email,morada,nif,codPostal from cliente where cliente.id = @ID;
+
 
 ----------------------------------------------
 
