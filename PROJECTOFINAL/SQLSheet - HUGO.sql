@@ -4,27 +4,6 @@
 				[ SQL HUGO ]
 
 ****************************************************/
-
---[PROC] return user Info to checkout
-GO
-create or alter proc usp_ClientInfoToCheckout (@ID_cliente int) 
-
-AS
-begin try
-begin tran
-
-    select cliente.nome as 'Name', cliente.email, cliente.morada as 'Address', Cliente.codPostal as 'ZipCode'
-     from Cliente
-     where Cliente.ID = @ID_cliente
-
-commit
-end try
-begin catch
-    print ERROR_MESSAGE();
-    rollback
-end catch
-GO
-
 ---------------------------------
 
 --[PROC] VALIDATES PRESCRIPTION (if valid and unlifted, places it in users cart and proceeds to checkout Page for purchase)
@@ -71,3 +50,16 @@ begin catch
     rollback
 end catch
 GO
+-------------------------------------
+
+--[PROC] For returning User Personal Orders in UserPage
+go
+create or alter proc usp_returnUserPersonalOrders(@ID int, @estado int) AS
+select ENC_REF, DataCompra, MoradaEntrega, Sum(Qtd) as 'Qty', sum(Total) as 'Total', Descricao
+from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = Estado.ID
+						inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+where EncomendaHistorico.ID_Cliente = @ID AND EncomendaHistorico.ID_Estado = IIF(@estado = 4, 4, ID_estado)
+group by  ENC_REF, DataCompra, MoradaEntrega, Descricao
+order by EncomendaHistorico.ENC_REF DESC
+
+------------------------------------

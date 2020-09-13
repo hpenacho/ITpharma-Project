@@ -7,14 +7,17 @@
         <div class="card shadow shadow-sm mt-3 mb-3" style="border-radius: 15px;">
             <div class="card-header text-center" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
                <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <b>Order Reference #</b><asp:Label ID="lbl_EncRef" runat="server" Text="[missing]"></asp:Label>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                  <b>Date: </b> <asp:Label ID="lbl_orderDate" runat="server" Text="[missing]"></asp:Label>
                 </div>
-                   <div class="col-md-4">
+                   <div class="col-md-3">
                      <strong>Status: </strong><asp:Label ID="lbl_orderStatus" runat="server" Text="[missing]"></asp:Label>
+                   </div>
+                   <div class="col-md-3">
+                       <asp:LinkButton ID="lbtn_pdf" CssClass="btn btn-danger" runat="server" OnClick="lbtn_pdf_Click"><i class="fas fa-file-pdf"></i> <label id="pdfText" runat="server">Order PDF</label> </asp:LinkButton>
                    </div>
                    </div>
             </div>

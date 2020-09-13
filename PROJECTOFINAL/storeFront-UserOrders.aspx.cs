@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,7 +18,7 @@ namespace PROJECTOFINAL
 
             if (!Client.isLogged)
             {
-                Response.Redirect("storeFront-Index.aspx");
+                Response.Redirect("storeFront-Index.aspx",false);
             }
 
             SqlDataSource1.SelectParameters["ID_cliente"].DefaultValue = Client.userID.ToString();
@@ -53,14 +55,12 @@ namespace PROJECTOFINAL
             catch (IndexOutOfRangeException x)
             {
                 System.Diagnostics.Debug.WriteLine(x.Message);
-                Response.Redirect("storeFront-UserPage.aspx");
+                Response.Redirect("storeFront-UserPage.aspx",false);
             }
             finally
             {
                 Tools.myConn.Close();
             } 
-
-
            
         }
 
@@ -85,5 +85,17 @@ namespace PROJECTOFINAL
 
         }
 
+        protected void lbtn_pdf_Click(object sender, EventArgs e)
+        {            
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\invoices\\" + Tools.EncryptString(Request.QueryString["order"]) + ".pdf"))
+                Response.Redirect("\\Resources\\invoices\\" + Tools.EncryptString(Request.QueryString["order"]) + ".pdf");
+
+            else if (lbtn_pdf.Enabled)
+            {
+                lbtn_pdf.CssClass = "btn btn-secondary";
+                pdfText.InnerText = "PDF not available";
+                lbtn_pdf.Enabled = false;
+            }    
+        }
     }
 }

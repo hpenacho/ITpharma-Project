@@ -42,6 +42,24 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Label lbl_orderStatus;
 
         /// <summary>
+        /// lbtn_pdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lbtn_pdf;
+
+        /// <summary>
+        /// pdfText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pdfText;
+
+        /// <summary>
         /// lbl_customerName control.
         /// </summary>
         /// <remarks>
