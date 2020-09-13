@@ -54,6 +54,17 @@ namespace PROJECTOFINAL
             return imgBinaryData;
         }
 
+        //Converts the file into binary data, needed for storing into DB
+        public static byte[] GetBinaryFile(string path) 
+        {
+            byte[] bytes;
+            using (FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                bytes = new byte[file.Length];
+                file.Read(bytes, 0, (int)file.Length);
+            }
+            return bytes;
+        }
 
         public static string EncryptString(string Message)
         {

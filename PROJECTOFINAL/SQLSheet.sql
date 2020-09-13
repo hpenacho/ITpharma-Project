@@ -129,7 +129,6 @@ create table EncomendaHistorico(
 	UltimaActualizacao datetime null,
 	MoradaEntrega varchar(300) null,
 	ID_Pickup int references Pickup(ID),
-	PDF varbinary(MAX)
 )
 
 create table ItemReceita(
@@ -290,7 +289,7 @@ create or alter proc usp_encomenda(@IDcliente int,
 begin try
 begin tran 
 		
-		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, null, @Pickup, @zip_code, @receiver)
+		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
 
 		Declare @thisEnc int
 		set @thisEnc = (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico)
@@ -324,12 +323,12 @@ GO
 
 -- QUERY PARA UTILIZADOR VER A SUA ENCOMENDA NA ÁREA PESSOAL
 
-select EncomendaHistorico.ENC_REF, Estado.Descricao AS 'Estado', EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, sum(Compra.Qtd) ,sum(Compra.Total) , EncomendaHistorico.PDF
+select EncomendaHistorico.ENC_REF, Estado.Descricao AS 'Estado', EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, sum(Compra.Qtd) ,sum(Compra.Total)
 from  EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compra.ID_Encomenda 
 						 inner join Estado on EncomendaHistorico.ID_Estado = Estado.ID
 						 inner join Cliente on EncomendaHistorico.ID_Cliente = Cliente.ID
 where Cliente.ID = @IDCLIENTE 
-group by EncomendaHistorico.ENC_REF, Estado.Descricao, EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, EncomendaHistorico.MoradaEntrega, EncomendaHistorico.PDF
+group by EncomendaHistorico.ENC_REF, Estado.Descricao, EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, EncomendaHistorico.MoradaEntrega
 
 
 -- STORED PROCEDURE loginBackOffice
@@ -1171,7 +1170,7 @@ select Compra.Prod_ref,Produto.nome as 'ProdName', Sum(Qtd) as 'Qty', sum(Total)
 from EncomendaHistorico inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 						inner join Produto on Produto.Codreferencia = Compra.Prod_ref
 					where Compra.ID_Encomenda = @enc_ref
-					group by Prod_ref, Compra.PriceAtTime, Produto.Nome
+					group by Prod_ref, Compra.PriceAtTime, Produto.Nome					
 
 COMMIT
 END TRY

@@ -22,7 +22,6 @@ namespace PROJECTOFINAL
 
             else
             {
-
                 SqlSmallCartDetails.SelectParameters["ID_cliente"].DefaultValue = Client.userID.ToString();
 
                 lbl_totQty.InnerText = Session["qtdTotal"].ToString();
@@ -31,12 +30,9 @@ namespace PROJECTOFINAL
                 lbl_finalTotal.InnerText = Session["finalTotal"].ToString();
 
                 if(!Page.IsPostBack)
-                {
                     fillClientInfo();
-                }
                 
                 lbl_expiryPickup.InnerText = DateTime.Now.AddDays(4).ToShortDateString(); ;
-
             }
         }
 
@@ -56,15 +52,17 @@ namespace PROJECTOFINAL
 
         protected void btn_finalizePurchase_Click(object sender, EventArgs e)
         {
-            string receiverFullName = firstName.Value + " " + lastName.Value;
 
+            string receiverFullName = firstName.Value + " " + lastName.Value;
+           
+            //------------This USP inserts the client's order into the database
             SqlCommand myCommand = Tools.SqlProcedure("usp_encomenda");
             myCommand.Parameters.AddWithValue("@IDcliente", Client.userID);
-            myCommand.Parameters.AddWithValue("@MoradaEntrega", address.Value);
-            myCommand.Parameters.AddWithValue("@Pickup", DBNull.Value); //ddl_pickUp.SelectedValue
-            //myCommand.Parameters.AddWithValue("@PDF", DBNull.Value);
-            myCommand.Parameters.AddWithValue("@zip_code", zip.Value);
+            myCommand.Parameters.AddWithValue("@MoradaEntrega", (inpHide.Value == "ClientAddress") ? address.Value : ddl_pickUp.SelectedItem.Text);
+            myCommand.Parameters.AddWithValue("@Pickup", (inpHide.Value == "Pickup") ? ddl_pickUp.SelectedValue : (object)DBNull.Value);
+            myCommand.Parameters.AddWithValue("@zip_code", (inpHide.Value == "ClientAddress") ? zip.Value : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@receiver", receiverFullName);
+           
 
             //OUTPUT - ORDER NUMBER
             myCommand.Parameters.Add(Tools.errorOutput("@orderNumber", SqlDbType.VarChar, 200));
@@ -85,34 +83,25 @@ namespace PROJECTOFINAL
             }
 
             //-----------------------------------------
+            //PDF generation starts here
 
-            string item = "";
-            string price = "";
-            string qty = "";
-            string total = "";
-
+            string item,price,qty,total;
+            item = price = qty = total = string.Empty;
 
             string localhost = WebConfigurationManager.AppSettings["localhost"];
             string pdfpath = AppDomain.CurrentDomain.BaseDirectory + WebConfigurationManager.AppSettings["pdfpath"];
             string pdfTemplate = pdfpath + "ITpharmaInvoice.pdf";
             string encryptedPDForder = Tools.EncryptString(myCommand.Parameters["@orderNumber"].Value.ToString()) + ".pdf";
-            Session["orderNumber"] = Tools.EncryptString(myCommand.Parameters["@orderNumber"].Value.ToString());
+            string orderNumber = myCommand.Parameters["@orderNumber"].Value.ToString();
+            Session["orderNumber"] = Tools.EncryptString(orderNumber);
             string newFile = pdfpath + "\\invoices\\" + encryptedPDForder;
             // string location = LocationZone.Items[LocationZone.SelectedIndex].Text;
 
-            string finalDelivery="";
-            System.Diagnostics.Debug.WriteLine(inpHide.Value);
-
+            string finalDelivery = "";
             if (inpHide.Value == "Pickup")
-            {
                 finalDelivery = ddl_pickUp.SelectedItem.Text + Environment.NewLine + "Pick up by: " + DateTime.Now.AddDays(4).ToShortDateString();
-            }
             else
-            {
                 finalDelivery = address.Value + " " + zip.Value;
-            }
-
-             
 
             PdfReader pdfreader = new PdfReader(pdfTemplate);
             PdfStamper pdfstamper = new PdfStamper(pdfreader, new FileStream(newFile, FileMode.Create));
@@ -144,8 +133,8 @@ namespace PROJECTOFINAL
             pdfformfields.SetField("totalitem", total);
 
             pdfstamper.Close();
-            //Response.Redirect("\\Resources\\invoices\\" + encryptedPDForder);
             //---------------------------------------------------------
+
             Response.Redirect("storeFront-OrderSuccess.aspx",false); //tirar daqui qd se for tratar dos emails
 
         }
