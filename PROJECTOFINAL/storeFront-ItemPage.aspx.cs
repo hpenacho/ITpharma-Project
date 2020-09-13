@@ -64,15 +64,8 @@ namespace PROJECTOFINAL
 
         }
 
-        protected void link_addToCart_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void link_addToCart_Click1(object sender, EventArgs e)
         {
-
-            System.Diagnostics.Debug.WriteLine(cartAmount.Text);
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_addDetailItemProduct");
             myCommand.Parameters.AddWithValue("@ClientID", Client.userID == 0 ? (object)DBNull.Value : Client.userID);
@@ -92,6 +85,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                (this.Master as storeFrontMasterPage).updateCart();
             }
 
         }
