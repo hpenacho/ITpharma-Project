@@ -1181,8 +1181,6 @@ BEGIN CATCH
 END CATCH
 -------------
 
-select * from Carrinho
-
 --[PROC] RETURNS CART ITEMS FROM A SPECIFIED USER -- testar a precedência do OR
 -- Comment da alteração: num OR que por é natureza boolean a 1º instrução é avaliada e se for true não corre a segunda fazendo o que se chama short-circuit 
 
@@ -1375,4 +1373,21 @@ where produto.ref_generico = @Reference
 AND Produto.Activo = 1
 AND Produto.Descontinuado = 0
 
+-- [ PROC ] ITEM PAGE INSERT INTO CART
+GO
+create or alter proc usp_addDetailItemProduct(@ClientID int, @cookie varchar(50) , @reference varchar(20), @qty int) AS
+begin try
+begin tran
 
+		WHILE(@qty> 0)
+		BEGIN
+			insert into carrinho values(@ClientID, @reference, @cookie)
+			set @qty -= 1
+		END
+
+COMMIT
+END TRY
+BEGIN CATCH
+	print ERROR_MESSAGE()
+	ROLLBACK
+END CATCH

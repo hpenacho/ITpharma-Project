@@ -18,6 +18,9 @@ namespace PROJECTOFINAL
                 Response.Redirect("storeFront-Shop.aspx");
             }
 
+            if(!Page.IsPostBack)
+                cartAmount.Text = "1";
+
             loadItem();
         }
 
@@ -47,8 +50,6 @@ namespace PROJECTOFINAL
 
                 }
 
-
-
             }
             catch(SqlException m)
             {
@@ -63,9 +64,36 @@ namespace PROJECTOFINAL
 
         }
 
+        protected void link_addToCart_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        protected void link_addToCart_Click1(object sender, EventArgs e)
+        {
 
+            System.Diagnostics.Debug.WriteLine(cartAmount.Text);
 
+            SqlCommand myCommand = Tools.SqlProcedure("usp_addDetailItemProduct");
+            myCommand.Parameters.AddWithValue("@ClientID", Client.userID == 0 ? (object)DBNull.Value : Client.userID);
+            myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
+            myCommand.Parameters.AddWithValue("@reference", Request.QueryString["ref"].ToString());
+            myCommand.Parameters.AddWithValue("@qty", Convert.ToInt32(cartAmount.Text));
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException v)
+            {
+                System.Diagnostics.Debug.WriteLine(v.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+        }
     }
 }
