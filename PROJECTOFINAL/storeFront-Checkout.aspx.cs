@@ -134,8 +134,12 @@ namespace PROJECTOFINAL
 
             pdfstamper.Close();
             //---------------------------------------------------------
-
-            Response.Redirect("storeFront-OrderSuccess.aspx",false); //tirar daqui qd se for tratar dos emails
+            string e_subject = "Your order details (#" + orderNumber.ToString() + ")";
+            string e_Body = "Thank you for your purchase! <br> You can find your order details on your personal user page, or on the PDF attached to this email. <br> Thank you for shopping at ITpharma!";
+            string e_pdfPath = "\\Resources\\invoices\\" + encryptedPDForder;
+                
+            Tools.email(Client.email, e_Body, e_subject, e_pdfPath);
+            Response.Redirect("storeFront-OrderSuccess.aspx",false);
 
         }
 

@@ -166,7 +166,7 @@ namespace PROJECTOFINAL
             @subject - subject of the email
         */
 
-        public static void email(string email, string body, string subject)
+        public static void email(string email, string body, string subject, string pdfPath = null)
         {
 
             MailMessage m = new MailMessage();
@@ -177,6 +177,12 @@ namespace PROJECTOFINAL
             m.Subject = subject;
             m.IsBodyHtml = true;
             m.Body = body; //String com link de ativacao
+
+            if(pdfPath != null || pdfPath.Length < 1) {
+                System.Net.Mail.Attachment attachment;
+                attachment = new System.Net.Mail.Attachment(AppDomain.CurrentDomain.BaseDirectory + pdfPath);
+                m.Attachments.Add(attachment);
+            }
 
             sc.Host = WebConfigurationManager.AppSettings["host"];
             sc.Port = int.Parse(WebConfigurationManager.AppSettings["port"]);
