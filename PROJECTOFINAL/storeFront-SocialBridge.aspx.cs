@@ -66,7 +66,6 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
 
-
             Response.Redirect("storeFront-UserPage.aspx", false);
 
         }

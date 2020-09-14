@@ -15,15 +15,6 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// welcomeUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl welcomeUser;
-
-        /// <summary>
         /// link_logout control.
         /// </summary>
         /// <remarks>
@@ -33,31 +24,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_logout;
 
         /// <summary>
-        /// link_activeOrders control.
+        /// welcomeUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_activeOrders;
-
-        /// <summary>
-        /// link_pastOrders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_pastOrders;
-
-        /// <summary>
-        /// rpt_orders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpt_orders;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl welcomeUser;
 
         /// <summary>
         /// txt_oldPassword control.
@@ -175,6 +148,33 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_alterDetails;
+
+        /// <summary>
+        /// link_activeOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_activeOrders;
+
+        /// <summary>
+        /// link_pastOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_pastOrders;
+
+        /// <summary>
+        /// rpt_orders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_orders;
 
         /// <summary>
         /// prescriptionUpdate control.

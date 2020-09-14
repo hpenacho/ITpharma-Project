@@ -994,6 +994,7 @@ GO
 GO
 create or alter proc usp_clientLogin(@email varchar(100), @password varchar(100), @cookie varchar(50), @errorMessage varchar(200) output) AS
 BEGIN TRY
+BEGIN TRAN
 
 	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE cliente.password = @password and cliente.email = @email)
 		throw 60001, 'Email or password incorrect', 10
@@ -1004,14 +1005,11 @@ BEGIN TRY
 	IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.EMAIL = @email and cliente.firstActivation = 0)
 		throw 60003, 'Please activate your account first' , 10
 
-	
-	select * from cliente where cliente.email = @email
-
-BEGIN TRAN
-
 	UPDATE Carrinho 
 	SET Carrinho.ID_Cliente = (select cliente.ID from Cliente where cliente.email = @email)
 	WHERE Carrinho.Cookie = @cookie
+
+	select * from cliente where cliente.email = @email
 
 COMMIT
 END TRY

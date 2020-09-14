@@ -17,6 +17,7 @@ namespace PROJECTOFINAL
             generateCookie();
             initiateRegistry();
             loginCheck();
+            switchIcons();
 
         }
 
@@ -119,6 +120,12 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
 
+        }
+
+        public void switchIcons()
+        {
+            userLogin.Visible = !Client.isLogged;
+            userPage.Visible = Client.isLogged;
         }
 
         protected void btn_recoverPassword_Click(object sender, EventArgs e)

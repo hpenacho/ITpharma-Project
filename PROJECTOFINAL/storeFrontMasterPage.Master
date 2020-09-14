@@ -94,13 +94,30 @@
         <nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top py-3 pb-1 bg-white shadow shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-dark" href="storeFront-Index.aspx">
-                    <img src="Resources/images/PHARMALOGOTEMP.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                    ITpharma
+                    <img src="Resources/images/PHARMALOGOTEMP.png" width="50" alt=""> ITpharma
                 </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                    <ul class="navbar-nav ml-auto">
+
+                          <li class="nav-item">
+                            <a href="storeFront-Shop.aspx" class="nav-link bg-transparent">Shop</a>
+                        </li>  
+                        
+                        <li class="nav-item">
+                            <a href="storeFront-News.aspx" class="nav-link bg-transparent">News</a>
+                        </li>
+
+                          <li class="nav-item">
+                            <a href="storeFront-Shop.aspx" class="nav-link bg-transparent">Pickups</a>
+                        </li>
+
+
+                    </ul>
+
 
 
                     <div class="navbar-nav ml-auto my-2 my-lg-0">
@@ -111,16 +128,16 @@
 
                     <ul class="navbar-nav ml-auto">
 
-                         <li class="nav-item">
-                            <a href="storeFront-Shop.aspx" class="nav-link bg-transparent">Loja</a>
+                        <li class="nav-item">
+                            <asp:LinkButton id="userLogin" runat="server" class="nav-link btn bg-transparent" data-toggle="modal" data-target="#login-modal" formnovalidate="formnovalidate"><i class="fas fa-user-circle" style="font-size:18px;"></i></asp:LinkButton>
                         </li>
 
                         <li class="nav-item">
-                            <button type="button" class="nav-link btn bg-transparent" data-toggle="modal" data-target="#login-modal" formnovalidate="formnovalidate"><i class="fas fa-user-circle"></i></button>
+                            <a href="storeFront-UserPage.aspx" id="userPage" runat="server" class="nav-link btn bg-transparent"><i class="fas fa-id-card" style="font-size:18px;"></i></a>
                         </li>
 
                         <li class="nav-item">
-                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" data-toggle="modal" data-target="#cartModal" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart"></i></button>
+                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" data-toggle="modal" data-target="#cartModal" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart" style="font-size:18px"></i></button>
                         </li>
 
                     </ul>
@@ -138,9 +155,7 @@
             <!-- //CONTEUDO BODY MASTER -->
 
 
-        <!-- Bootstrap core JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
 
 
 
@@ -149,10 +164,10 @@
             <ContentTemplate>
 
         <!-- Modal -->
-        <div class="modal fade" id="login-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal modal-static fade" id="login-modal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content" style="border-radius: 20px;">
-                    <div class="modal-header bg-white d-block" style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%); border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark d-block">
 
 
                         <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
@@ -164,11 +179,11 @@
                         <div class="row d-flex justify-content-center mt-4">
 
                                 <div> <!-- GOOGLE -->
-                                     <asp:LinkButton ID="googleLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" CausesValidation="False" data-provider="google" OnClick="socialLogin" ><i class="fab fa-google"></i></asp:LinkButton>
+                                     <asp:LinkButton ID="googleLogin" runat="server" CssClass="card-link btn btn-outline-light bg-transparent border-0" style="padding-left: 3em; padding-right: 3em;" CausesValidation="False" data-provider="google" OnClick="socialLogin" ><i class="fab fa-google"></i></asp:LinkButton>
                                 </div>
 
                                 <div> <!-- FACEBOOK -->
-                                     <asp:LinkButton ID="facebookLogin" runat="server" style="padding-left: 3em; padding-right: 3em;" CausesValidation="False" data-provider="facebook" OnClick="socialLogin"><i class="fab fa-facebook-f"></i></asp:LinkButton>
+                                     <asp:LinkButton ID="facebookLogin" runat="server"  CssClass="card-link btn btn-outline-light bg-transparent border-0" style="padding-left: 3em; padding-right: 3em;" CausesValidation="False" data-provider="facebook" OnClick="socialLogin"><i class="fab fa-facebook-f"></i></asp:LinkButton>
                                 </div>
 
                         </div>
@@ -180,7 +195,7 @@
                         <asp:UpdatePanel runat="server">
                             <ContentTemplate>
 
-                                <div class="container mt-3 justify-content-center text-center" style="max-height: 17em; min-height: 17em;">
+                                <div class="container mt-1 justify-content-center text-center" style="max-height: 17em; min-height: 17em;">
 
                                     <ul class="nav nav-pills mb-4 d-inline-blcok align-content-center" id="myTab" role="tablist">
 
@@ -208,28 +223,24 @@
                                                 <input type="password" class="form-control rounded-pill" runat="server" id="txt_loginPassword" placeholder="Password">
                                             </div>
 
-                                            <div class="form-group">
-                                                <asp:Button ID="btn_login" runat="server" CssClass="btn text-white border-0 btn-block rounded-pill" OnClick="btn_login_Click" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Login" />
-                                            </div>
-
-                                            <div class="form-group text-center">
-                                                <label id="lbl_loginWarning" runat="server" class="col-form-label"></label>
+                                            <div class="form-group mt-2">
+                                                <asp:Button ID="btn_login" runat="server" CssClass="btn btn-dark border-0 w-50 rounded-pill" OnClick="btn_login_Click" Text="Login" />
+                                                <a type="button" class="btn btn-danger w-25 border-0 rounded-pill" href="storeFront-Registry.aspx">Register</a>
+                                                <br /><label id="lbl_loginWarning" runat="server" class="small text-warning h6"></label>
                                             </div>
 
                                         </div>
 
                                         <div class="tab-pane fade" id="recover" role="tabpanel" aria-labelledby="profile-tab">
 
-                                            <div class="form-group">
+                                            <div class="form-group mt-5">
+                                                <h5 class="text-muted">Recover Password</h5>
                                                 <input type="email" class="form-control rounded-pill" runat="server" id="txt_recoverPassword" placeholder="Your email">
                                             </div>
 
                                             <div class="form-group">
-                                                <asp:Button ID="btn_recoverPassword" runat="server" OnClick="btn_recoverPassword_Click" CssClass="btn text-white border-0 w-50 rounded-pill" Style="background: rgb(237,246,251); background: linear-gradient(90deg, rgba(237,246,251,1) 0%, rgba(144,213,227,1) 100%);" Text="Recover" />
-                                            </div>
-
-                                            <div class="form-group text-center">
-                                                <label id="lbl_recoverWarning" runat="server" class="col-form-label"></label>
+                                                <asp:Button ID="btn_recoverPassword" runat="server" OnClick="btn_recoverPassword_Click" CssClass="btn btn-dark border-0 w-50 rounded-pill" Text="Recover" />
+                                                <label id="lbl_recoverWarning" runat="server" class="col-form-label small text-warning"></label>
                                             </div>
 
                                         </div>
@@ -264,7 +275,7 @@
            </ContentTemplate>
         </asp:UpdatePanel>
 
-        <!-- LOGIN MODAL -->
+        <!-- //LOGIN MODAL -->
 
 
         <!-- SHOPPING CART MODAL -->
@@ -362,11 +373,9 @@
         <!-- /END OF CART MODAL -->
 
 
-
-
-        <script>
-
-        </script>
+          <!-- Bootstrap core JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
     </form>

@@ -18,10 +18,22 @@
 
 
     <div class="container">
+        <div class="row mt-5">
 
-        <div class="row mt-5 mb-3">
+            <div class="col-lg-4">
+                <h1 class="mt-2">User Page</h1>
+            </div>
+
+            <div class="col-lg-8 mt-3 text-lg-right">
+                <!-- Botão Logout -->
+                <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger" OnClick="link_logout_Click">Logout</asp:LinkButton>
+            </div>
+
+        </div>
+       
+        <div class="row mt-1 mb-3 ">
             <!-- ROW -->
-            <div class="col-lg-3">
+            <div class="col-lg-3 mt-5">
                 <div class="card shadow shadow-sm">
                     <div class="card-body">
                         <div class="row">
@@ -32,44 +44,32 @@
                                 <h5 class="card-title" id="welcomeUser" runat="server"></h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-                                <ul class="nav nav-pills flex-column">
-
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="home" aria-selected="true">Orders</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="schedule-tab" data-toggle="tab" href="#schedule" role="tab" aria-controls="schedule" aria-selected="true">Schedule</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="exams-tab" data-toggle="tab" href="#exams" role="tab" aria-controls="exams" aria-selected="true">Exams</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="true">Settings</a>
-                                    </li>
-
-                                </ul>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-9 col-sm-12 text-center">
-                <div class="card shadow shadow-sm">
+            <div class="col-lg-9 col-sm-12 text-center mt-5">
+                <div class="card shadow shadow-sm py-lg-3">
                     <div class="card-body">
+                        <div class=" card-deck">
+                            <div class="card pb-2">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pedir Exames</h5>
+                                    <a href="#" class="btn btn-warning">Go somewhere</a>
+                                </div>
+                            </div>
 
-                        <div class="row">
-                            <!-- Botão Aviar a receita -->
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate"><i class="fas fa-pills"></i>Prescriptions</button>
-                            <!-- Botão Logout -->
-                            <asp:LinkButton ID="link_logout" runat="server" class="btn btn-danger" OnClick="link_logout_Click">Logout</asp:LinkButton>
-
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Aviar Receita</h5>
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate">
+                                        <i class="fas fa-pills"></i>Prescriptions
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -77,168 +77,8 @@
         <!-- ./ROW-->
 
 
-        <div class="tab-content" id="myTabContent">
-
-            <!-- ORDERS PANE -->
-            <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                <!-- ORDERS -->
-              <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3">
-                <div class="card-body">
-                    <div class="col-lg-12">
-
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-info" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
-                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-info" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
-                        </div>
-
-
-                        <h3 class="text-center my-2 bg-info py-1 text-white col-12">Encomendas</h3>
-
-                      
-                        <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
-                            <div class="table-responsive">
-                                    <table class="table table-borderless text-center" id="dataTable" width="100%" cellspacing="0">
-
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Address</th>
-                                                <th scope="col">Qty</th>
-                                                <th scope="col">Total</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Invoice</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody class="text-center text-md-center">
-
-                                             <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlOrderSource">
-                                                <ItemTemplate>
-
-                                            <tr>
-                                                <td style="vertical-align:middle"><%# Eval("ENC_REF") %></td>
-                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
-                                                <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
-                                                <td style="vertical-align:middle"><%# Eval("Qty") %></td>
-                                                <td style="vertical-align:middle"><%# Eval("Total") %> €</td>
-                                                <td style="vertical-align:middle"><span class="rounded-pill bg-info text-white p-2 pl-2 pr-2"><%# Eval("Descricao") %></span></td>
-                                                <td>
-                                                    <a class="btn btn-outline-info" style="vertical-align:middle" href="storeFront-UserOrders.aspx?order=<%# Eval("ENC_REF") %>">Details</a>
-                                                </td>
-                                            </tr>
-
-                                               </ItemTemplate>
-                                            </asp:Repeater>
-                                        
-                                        </tbody>
-                                    </table>
-                                </div>
-                                    <!-- ORDER ELEMENT -->
-                    </div>
-                </div>
-            </div>
-                <!-- //ORDERS -->
-            </div>
-            <!-- //ORDERS PANE -->
-
-            <div class="tab-pane fade" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
-
-                WIP
-
-            </div>
-
-              <!-- EXAMS PANE -->
-            <div class="tab-pane fade" id="exams" role="tabpanel" aria-labelledby="exams-tab">
-                <!-- EXAMS -->
-            <div class="card pb-4 mt-4 shadow shadow-sm bg-white">
-                <div class="card-body">
-
-                    <h3 class="text-dark">Exames</h3>
-
-                    <div class="row mt-1 card-deck">
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tipo: analises</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tipo: oncologico</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                    <a href="#" class="btn btn-info">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-                <!-- //EXAMS -->
-            </div>
-              <!-- EXAMS PANE -->
-
-              <!-- SETTINGS PANE -->
-             <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                <!-- SETTINGS -->
-              <div class="row">
+           <!-- SETTINGS -->
+           <div class="row">
                 <!-- Change password -->
                 <div class="col-lg-4 mb-4 my-4">
                     <div class="card shadow pb-4 bg-white">
@@ -281,7 +121,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <asp:Button ID="btn_alterPassword" class="btn btn-sm btn-info btn-block" runat="server" Text="Change" OnClick="btn_alterPassword_Click" />
+                                    <asp:Button ID="btn_alterPassword" class="btn btn-sm btn-dark btn-block" runat="server" Text="Change" OnClick="btn_alterPassword_Click" />
                                 </div>
 
                             </div>
@@ -291,8 +131,7 @@
                 </div>
 
 
-                <!-- Change Details -->
-
+               
                 <div class="col-lg-8 my-4">
                     <div class="card shadow bg-white pb-4">
                         <div class="card-body">
@@ -349,22 +188,74 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <asp:Button ID="btn_alterDetails" class="btn btn-sm btn-info mt-5 float-right w-50" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/>
+                                    <asp:Button ID="btn_alterDetails" class="btn btn-sm btn-dark mt-5 float-right w-50" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
-
-
                 </div>
-                <!-- //SETTINGS -->
+           <!-- //SETTINGS -->
+
+           <!-- ORDERS -->
+           <div class="card pb-4 mt-4 shadow shadow-sm bg-white pb-5 mb-3">
+                <div class="card-body">
+                    <div class="col-lg-12">
+
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-dark" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
+                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-dark" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
+                        </div>
+
+
+                        <h3 class="text-center my-2 bg-dark py-1 text-white col-12">Encomendas</h3>
+
+                      
+                        <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
+                            <div class="table-responsive">
+                                    <table class="table table-borderless text-center" id="dataTable" width="100%" cellspacing="0">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Address</th>
+                                                <th scope="col">Qty</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Invoice</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="text-center text-md-center">
+
+                                             <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlOrderSource">
+                                                <ItemTemplate>
+
+                                            <tr>
+                                                <td style="vertical-align:middle"><%# Eval("ENC_REF") %></td>
+                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("Qty") %></td>
+                                                <td style="vertical-align:middle"><%# Eval("Total") %> €</td>
+                                                <td style="vertical-align:middle"><span class="rounded-pill bg-dark text-white p-2 pl-2 pr-2"><%# Eval("Descricao") %></span></td>
+                                                <td>
+                                                    <a class="btn btn-outline-dark" style="vertical-align:middle" href="storeFront-UserOrders.aspx?order=<%# Eval("ENC_REF") %>">Details</a>
+                                                </td>
+                                            </tr>
+
+                                               </ItemTemplate>
+                                            </asp:Repeater>
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <!-- ORDER ELEMENT -->
+                    </div>
+                </div>
             </div>
-              <!-- //SETTINGS PANE -->
-
-        </div>
-
+           <!-- //ORDERS -->
 
     </div>
     <!-- END MAIN CONTAINER -->           
