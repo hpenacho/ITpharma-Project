@@ -43,6 +43,7 @@ namespace PROJECTOFINAL
             txt_alterAddress.Value = Client.address;
             txt_alternif.Value = Client.NIF;
             txt_zipCode.Value = Client.codPostal;
+            txt_alterhealthnumber.Value = Client.nrSaude;
 
             //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;
