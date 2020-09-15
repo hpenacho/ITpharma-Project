@@ -47,7 +47,7 @@ namespace PROJECTOFINAL
             //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;
             sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
-            sqlExams.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
+            sqlExams.SelectParameters["ClientID"].DefaultValue = Client.userID.ToString();
         }
 
 

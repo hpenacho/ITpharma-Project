@@ -318,7 +318,7 @@
                                             <div class="card-body">
                                                 <div class="overflow-auto">
 
-                                                    <asp:Repeater ID="rpt_exams" runat="server">
+                                                    <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
                                                         <ItemTemplate>
 
                                                             <h5 class="card-title"><%# Eval("Descricao") %></h5>
