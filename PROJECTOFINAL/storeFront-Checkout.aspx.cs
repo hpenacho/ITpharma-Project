@@ -99,7 +99,10 @@ namespace PROJECTOFINAL
 
             string finalDelivery = "";
             if (inpHide.Value == "Pickup")
+            {
                 finalDelivery = ddl_pickUp.SelectedItem.Text + Environment.NewLine + "Pick up by: " + DateTime.Now.AddDays(4).ToShortDateString();
+                Session["PickupID"] = ddl_pickUp.SelectedValue;
+            }                
             else
                 finalDelivery = address.Value + " " + zip.Value;
 

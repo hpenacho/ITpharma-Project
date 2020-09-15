@@ -11,7 +11,10 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Client.isLogged)
+                Response.Redirect("storeFront-Index.aspx");
 
+            //else if(Session)
         }
     }
 }

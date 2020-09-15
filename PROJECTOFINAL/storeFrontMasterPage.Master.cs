@@ -96,6 +96,7 @@ namespace PROJECTOFINAL
                         Client.email = reader["email"].ToString();
                         Client.address = reader["morada"].ToString();
                         Client.NIF = reader["NIF"].ToString();
+                        Client.codPostal = reader["codPostal"].ToString();
                         Client.nrSaude = reader["nrSaude"].ToString();
                         Client.gender = Convert.ToChar(reader["sexo"]);
                         Client.birthday = (DateTime)reader["dataNascimento"];
