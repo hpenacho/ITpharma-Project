@@ -315,20 +315,24 @@
 
                                     <div class="card card-body text-center">
                                         <div class="card" style="width: 13rem;">
-                                            <div class="card-body">
-                                                <div class="overflow-auto">
+                                            <div class="card-body text-center">
 
-                                                    <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
+                                                <div visible='<%# !rptRow %>'>
+                                                    <h4>No exams scheduled or received</h4>
+                                                </div>
+
+                                                <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
                                                         <ItemTemplate>
 
-                                                            <h5 class="card-title"><%# Eval("Descricao") %></h5>
-                                                            <h6 class="small text-muted"><%# Eval("DataPedido") %></h6>
-                                                            <a href="#" class="btn btn-warning">Exam</a>
+                                                            <div runat="server">
+                                                                <h5 class="card-title"><%# Eval("Descricao") %></h5>
+                                                                <h6 class="small text-muted"><%# Eval("DataPedido") %></h6>
+                                                                <a href="#" class="btn btn-warning">Exam</a>
+                                                            </div>
 
                                                         </ItemTemplate>
                                                     </asp:Repeater>
 
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

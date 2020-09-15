@@ -18,8 +18,11 @@ namespace PROJECTOFINAL
                 Response.Redirect("storeFront-Index.aspx");
 
             if (!Page.IsPostBack)
+            {
                 fillDetails();
-
+                txt_bloodSchedule.Value = DateTime.Now.ToLocalTime().ToString();
+            }
+               
             //PREVENIR UTILIZADOR SOCIAL DE ALTERAR PASSWORD
             if (Client.social)
             {
@@ -27,7 +30,13 @@ namespace PROJECTOFINAL
                 txt_newPassword.Attributes.Add("readonly", "readonly");
                 txt_repeatPassword.Attributes.Add("readonly", "readonly");
             }
+
+            rptRow = rpt_exams.Items.Count > 0;
         }
+
+
+        public static bool rptRow;
+
 
         protected void link_logout_Click(object sender, EventArgs e)
         {

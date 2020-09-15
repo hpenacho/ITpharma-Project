@@ -1398,3 +1398,18 @@ GO
 create or alter proc usp_returnExams(@ClientID int) AS
 select * from ExamesAnalises inner join Estado on ExamesAnalises.ID_Estado = Estado.ID
 where ExamesAnalises.ID_Cliente = @ClientID
+
+-- [ PROC ] SCHEDULE PERSONAL EXAMS
+
+GO
+create or alter proc usp_scheduleExam(@ClientID int, @DataPedido date) AS
+BEGIN TRY
+BEGIN TRAN
+
+	insert into ExamesAnalises values(@ClientID, null, @DataPedido, 1)
+
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH
