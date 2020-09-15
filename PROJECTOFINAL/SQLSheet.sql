@@ -1351,6 +1351,7 @@ AND Produto.Activo = 1
 AND Produto.Descontinuado = 0
 
 -- [ PROC ] RELATED ITEM DETAIL PAGE
+
 GO
 create or alter proc usp_returnRelatedItemPage(@Reference varchar(20)) AS
 select top(5) Codreferencia, nome, preco, resumo, Produto.descricao, imagem, pdfFolheto, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
@@ -1362,6 +1363,7 @@ AND Produto.Descontinuado = 0
 AND Produto.ID_Categoria = (select Produto.ID_Categoria from Produto where Produto.Codreferencia = @Reference)
 
 -- [ PROC ] RELATED ITEM DETAIL PAGE
+
 GO
 create or alter proc usp_returnRelatedGenericItem(@Reference varchar(20)) AS
 select  Codreferencia, imagem
@@ -1371,6 +1373,7 @@ AND Produto.Activo = 1
 AND Produto.Descontinuado = 0
 
 -- [ PROC ] ITEM PAGE INSERT INTO CART
+
 GO
 create or alter proc usp_addDetailItemProduct(@ClientID int, @cookie varchar(50) , @reference varchar(20), @qty int) AS
 begin try
@@ -1388,3 +1391,10 @@ BEGIN CATCH
 	print ERROR_MESSAGE()
 	ROLLBACK
 END CATCH
+
+-- [ PROC ] RETURN PERSONAL EXAMS 
+
+GO
+create or alter proc usp_returnExams(@ClientID int) AS
+select * from ExamesAnalises inner join Estado on ExamesAnalises.ID_Estado = Estado.ID
+where ExamesAnalises.ID_Cliente = @ClientID

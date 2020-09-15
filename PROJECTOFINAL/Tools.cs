@@ -179,6 +179,7 @@ namespace PROJECTOFINAL
             m.Body = body; //String com link de ativacao
 
             if(pdfPath != null || pdfPath.Length < 1) {
+
                 System.Net.Mail.Attachment attachment;
                 attachment = new System.Net.Mail.Attachment(AppDomain.CurrentDomain.BaseDirectory + pdfPath);
                 m.Attachments.Add(attachment);

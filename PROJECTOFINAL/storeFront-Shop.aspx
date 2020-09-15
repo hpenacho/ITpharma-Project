@@ -66,7 +66,6 @@
 
             <div class="col-lg-9" style="margin-top: 20vh;">
 
-  
                 <div class="row">
 
                     <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts" OnItemDataBound="rptShopProducts_ItemDataBound" OnItemCommand="rptShopProducts_ItemCommand">
@@ -107,6 +106,13 @@
         <!-- /.row -->
     </div>
     <!-- /.container -->
+
+
+
+
+
+
+
 
 
     <!-- SQL SOURCES -->

@@ -177,6 +177,60 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rpt_orders;
 
         /// <summary>
+        /// bloodSchedule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel bloodSchedule;
+
+        /// <summary>
+        /// txt_bloodHealthNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_bloodHealthNumber;
+
+        /// <summary>
+        /// txt_bloodSchedule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_bloodSchedule;
+
+        /// <summary>
+        /// ddl_bloodPartners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_bloodPartners;
+
+        /// <summary>
+        /// rpt_exams control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_exams;
+
+        /// <summary>
+        /// btn_scheduleBlood control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_scheduleBlood;
+
+        /// <summary>
         /// prescriptionUpdate control.
         /// </summary>
         /// <remarks>
@@ -229,5 +283,14 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlOrderSource;
+
+        /// <summary>
+        /// sqlExams control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlExams;
     }
 }

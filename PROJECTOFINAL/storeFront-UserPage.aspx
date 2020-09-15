@@ -56,14 +56,16 @@
                         <div class=" card-deck">
                             <div class="card pb-2">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pedir Exames</h5>
-                                    <a href="#" class="btn btn-warning">Go somewhere</a>
+                                    <h5 class="card-title">Schedule BloodWork</h5>
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bloodwork-modal" formnovalidate="formnovalidate">
+                                        Check
+                                    </button>
                                 </div>
                             </div>
 
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Aviar Receita</h5>
+                                    <h5 class="card-title">Fill Prescription</h5>
                                     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate">
                                         <i class="fas fa-pills"></i>Prescriptions
                                     </button>
@@ -262,8 +264,102 @@
 
 
 
-    <!-- modal verify Prescription -->
 
+
+
+
+
+
+    <!-- MODALS -->
+
+
+
+    <!-- Modal Schedule BloodWork -->
+    <asp:UpdatePanel ID="bloodSchedule" runat="server">
+        <ContentTemplate>
+
+
+            <div class="modal fade bd-example-modal-lg" id="bloodwork-modal" tabindex="-1" role="dialog" aria-labelledby="bloodWorkLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
+                            <h5 class=" modal-title col-12 text-center">Schedule\Check Exams 
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </h5>
+                        </div>
+
+                        <!-- MODAL BODY -->
+                        <div class="modal-body">
+
+                            <div class="container-fluid">
+
+                                <h4 class="mb-3 mt-2">Schedule or Check your Exams</h4>
+
+                                <div class="form-group mb-4">
+                                    <div class="form-row">
+                                        <div class="col-lg-6">
+                                            <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control" placeholder="Health Number" required />
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <input type="datetime-local" id="txt_bloodSchedule" runat="server" class="form-control" />
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <asp:DropDownList ID="ddl_bloodPartners" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="collapse my-5" id="collapseExams">
+
+                                    <div class="card card-body text-center">
+                                        <div class="card" style="width: 13rem;">
+                                            <div class="card-body">
+                                                <div class="overflow-auto">
+
+                                                    <asp:Repeater ID="rpt_exams" runat="server">
+                                                        <ItemTemplate>
+
+                                                            <h5 class="card-title"><%# Eval("Descricao") %></h5>
+                                                            <h6 class="small text-muted"><%# Eval("DataPedido") %></h6>
+                                                            <a href="#" class="btn btn-warning">Exam</a>
+
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row text-center my-5 d-flex justify-content-center">
+
+                                    <div class="col-lg-12">
+                                        <asp:Button ID="btn_scheduleBlood" CssClass="btn btn-dark" runat="server" Text="Schedule" />
+                                         <a class="btn btn-warning" data-toggle="collapse" href="#collapseExams" role="button" aria-expanded="false" aria-controls="collapseExams">Check Exams</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                         <!-- //MODAL BODY -->
+
+                    </div>
+                </div>
+            </div>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <!-- //Modal Schedule Bloodwork -->
+
+
+
+
+    <!-- modal verify Prescription -->
     <asp:UpdatePanel ID="prescriptionUpdate" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
         <ContentTemplate>
 
@@ -350,7 +446,7 @@
 
         </ContentTemplate>
     </asp:UpdatePanel>
-
+    <!-- //modal verify Prescription -->
 
 
     <!-- SQL SOURCES -->
@@ -358,6 +454,12 @@
         <SelectParameters>
             <asp:Parameter DefaultValue="" Name="ID" Type="Int32" />
             <asp:Parameter DefaultValue="0" Name="estado" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="sqlExams" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnExams" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Name="ClientID" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 
