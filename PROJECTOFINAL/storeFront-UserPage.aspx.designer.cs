@@ -213,6 +213,24 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.DropDownList ddl_bloodPartners;
 
         /// <summary>
+        /// lblExameWarning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblExameWarning;
+
+        /// <summary>
+        /// noExam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noExam;
+
+        /// <summary>
         /// rpt_exams control.
         /// </summary>
         /// <remarks>
@@ -292,5 +310,14 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlExams;
+
+        /// <summary>
+        /// sqlPartnerships control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlPartnerships;
     }
 }

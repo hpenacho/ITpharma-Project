@@ -124,10 +124,6 @@
 
     <script>
 
-        $(document).ready(function () {
-        });
-
-
         let amount = 1;
 
         function addAmount() {

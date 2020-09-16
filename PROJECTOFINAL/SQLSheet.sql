@@ -89,6 +89,14 @@ create table ExamesAnalises(
 	ID_Estado int references Estado(ID)
 )
 
+create table ExamesParceria(
+
+	ID int identity primary key,
+	parceria varchar(50) not null
+)
+
+
+
 create table StockArmazem(
 
 	Prod_Ref varchar(20) references Produto(Codreferencia) ON DELETE CASCADE,
@@ -1397,19 +1405,26 @@ END CATCH
 GO
 create or alter proc usp_returnExams(@ClientID int) AS
 select * from ExamesAnalises inner join Estado on ExamesAnalises.ID_Estado = Estado.ID
+							 inner join ExamesParceria on ExamesAnalises.ID_Parceria = ExamesParceria.ID
 where ExamesAnalises.ID_Cliente = @ClientID
 
 -- [ PROC ] SCHEDULE PERSONAL EXAMS
 
 GO
-create or alter proc usp_scheduleExam(@ClientID int, @DataPedido date) AS
+create or alter proc usp_scheduleExam(@ClientID int, @DataPedido datetime, @ParceiroID int, @output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 
-	insert into ExamesAnalises values(@ClientID, null, @DataPedido, 1)
+	IF EXISTS(select '*' from ExamesAnalises where ExamesAnalises.DataPedido = @DataPedido AND ExamesAnalises.ID_Parceria = @ParceiroID AND ExamesAnalises.ID_Cliente = @ClientID)
+		throw 60001, 'There is already a scheduled exam for this date at this partner lab', 10
+
+	insert into ExamesAnalises values(@ClientID, null, @DataPedido, 1, @ParceiroID)
 
 COMMIT
 END TRY
 BEGIN CATCH
+	set @output = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
+
+select * from ExamesAnalises

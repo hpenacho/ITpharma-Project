@@ -20,7 +20,7 @@ namespace PROJECTOFINAL
             if (!Page.IsPostBack)
             {
                 fillDetails();
-                txt_bloodSchedule.Value = DateTime.Now.ToLocalTime().ToString();
+                txt_bloodSchedule.Value = DateTime.Now.ToString("yyyy-MM-dd");
             }
                
             //PREVENIR UTILIZADOR SOCIAL DE ALTERAR PASSWORD
@@ -31,7 +31,7 @@ namespace PROJECTOFINAL
                 txt_repeatPassword.Attributes.Add("readonly", "readonly");
             }
 
-            rptRow = rpt_exams.Items.Count > 0;
+            noExam.Visible = rpt_exams.Items.Count > 0;
         }
 
 
@@ -199,6 +199,35 @@ namespace PROJECTOFINAL
 
         }
 
-    
+        protected void btn_scheduleBlood_Click(object sender, EventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_scheduleExam");
+            myCommand.Parameters.AddWithValue("ClientID", Client.userID);
+            myCommand.Parameters.AddWithValue("DataPedido", txt_bloodSchedule.Value);
+            myCommand.Parameters.AddWithValue("ParceiroID", ddl_bloodPartners.SelectedValue);
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
+
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                lblExameWarning.InnerText = myCommand.Parameters["@output"].Value.ToString();
+
+            }
+            catch (SqlException s)
+            {
+                System.Diagnostics.Debug.WriteLine(s.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+
+        }
     }
 }
