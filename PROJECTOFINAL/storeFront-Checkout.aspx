@@ -117,7 +117,7 @@
         </div>
          
 
-            <input id="inpHide" type="hidden" runat="server" value="ClientAddress" />
+            <input id="inpHide" type="hidden" runat="server" value="ClientAddress" /> <!-- holds type of order, pickup or home address -->           
             
             <ul class="nav nav-tabs justify-content-center mt-5" role="tablist">
                 
@@ -238,6 +238,12 @@
             var hiddenControl = '<%= inpHide.ClientID %>';
             document.getElementById(hiddenControl).value = "Pickup";
         }
+
+    </script>
+
+    <script>
+
+
 
     </script>
 
