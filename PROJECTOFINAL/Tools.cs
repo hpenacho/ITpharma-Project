@@ -109,6 +109,7 @@ namespace PROJECTOFINAL
             enc = enc.Replace("+", "KKK");
             enc = enc.Replace("/", "JJJ");
             enc = enc.Replace("\\", "III");
+            enc = enc.Replace("=", "YYY"); // workaround para os request.querystrings
             return enc;
         }
 
@@ -166,7 +167,7 @@ namespace PROJECTOFINAL
             @subject - subject of the email
         */
 
-        public static void email(string email, string body, string subject, string pdfPath = null)
+        public static void email(string email, string body, string subject, string pdfPath = "")
         {
 
             MailMessage m = new MailMessage();
@@ -178,7 +179,7 @@ namespace PROJECTOFINAL
             m.IsBodyHtml = true;
             m.Body = body; //String com link de ativacao
 
-            if(pdfPath != null || pdfPath.Length < 1) {
+            if(pdfPath != "") {
                 System.Net.Mail.Attachment attachment;
                 attachment = new System.Net.Mail.Attachment(AppDomain.CurrentDomain.BaseDirectory + pdfPath);
                 m.Attachments.Add(attachment);

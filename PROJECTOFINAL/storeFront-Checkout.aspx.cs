@@ -32,7 +32,8 @@ namespace PROJECTOFINAL
                 if(!Page.IsPostBack)
                     fillClientInfo();
                 
-                lbl_expiryPickup.InnerText = DateTime.Now.AddDays(4).ToShortDateString(); ;
+                Session["pickupExpiry"] = DateTime.Now.AddDays(4).ToShortDateString();
+                lbl_expiryPickup.InnerText = DateTime.Now.AddDays(4).ToShortDateString();
             }
         }
 
@@ -54,7 +55,7 @@ namespace PROJECTOFINAL
         {
 
             string receiverFullName = firstName.Value + " " + lastName.Value;
-           
+
             //------------This USP inserts the client's order into the database
             SqlCommand myCommand = Tools.SqlProcedure("usp_encomenda");
             myCommand.Parameters.AddWithValue("@IDcliente", Client.userID);
@@ -62,7 +63,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@Pickup", (inpHide.Value == "Pickup") ? ddl_pickUp.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@zip_code", (inpHide.Value == "ClientAddress") ? zip.Value : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@receiver", receiverFullName);
-           
+
 
             //OUTPUT - ORDER NUMBER
             myCommand.Parameters.Add(Tools.errorOutput("@orderNumber", SqlDbType.VarChar, 200));
@@ -85,7 +86,7 @@ namespace PROJECTOFINAL
             //-----------------------------------------
             //PDF generation starts here
 
-            string item,price,qty,total;
+            string item, price, qty, total;
             item = price = qty = total = string.Empty;
 
             string localhost = WebConfigurationManager.AppSettings["localhost"];
@@ -93,7 +94,7 @@ namespace PROJECTOFINAL
             string pdfTemplate = pdfpath + "ITpharmaInvoice.pdf";
             string encryptedPDForder = Tools.EncryptString(myCommand.Parameters["@orderNumber"].Value.ToString()) + ".pdf";
             string orderNumber = myCommand.Parameters["@orderNumber"].Value.ToString();
-            Session["orderNumber"] = Tools.EncryptString(orderNumber);
+            Session["orderNumber"] = orderNumber;
             string newFile = pdfpath + "\\invoices\\" + encryptedPDForder;
             // string location = LocationZone.Items[LocationZone.SelectedIndex].Text;
 
@@ -102,7 +103,7 @@ namespace PROJECTOFINAL
             {
                 finalDelivery = ddl_pickUp.SelectedItem.Text + Environment.NewLine + "Pick up by: " + DateTime.Now.AddDays(4).ToShortDateString();
                 Session["PickupID"] = ddl_pickUp.SelectedValue;
-            }                
+            }
             else
                 finalDelivery = address.Value + " " + zip.Value;
 
@@ -118,7 +119,7 @@ namespace PROJECTOFINAL
             pdfformfields.SetField("tax", Session["Taxed"].ToString() + " €");
             pdfformfields.SetField("total", Session["finalTotal"].ToString() + " €");
             pdfformfields.SetField("NIF", Client.NIF);
-            pdfformfields.SetField("paymentMethod", CreditCard.Checked ? "Credit Card" : "Debit Card");           
+            pdfformfields.SetField("paymentMethod", CreditCard.Checked ? "Credit Card" : "Debit Card");
             pdfformfields.SetField("cardNumber", ccNumber.Value);
             pdfformfields.SetField("cardOwner", ccName.Value);
 
@@ -127,7 +128,7 @@ namespace PROJECTOFINAL
                 item += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("lbl_title")).InnerText + Environment.NewLine;
                 price += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("itemPrice")).InnerText + " €" + Environment.NewLine;
                 qty += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("lbl_itemQty")).InnerText + Environment.NewLine;
-                total += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("itemTotalPrice")).InnerText+ " €" + Environment.NewLine;
+                total += ((HtmlGenericControl)rpt_compactCart.Items[i].FindControl("itemTotalPrice")).InnerText + " €" + Environment.NewLine;
             }
 
             pdfformfields.SetField("item", item);
@@ -140,10 +141,22 @@ namespace PROJECTOFINAL
             string e_subject = "Your order details (#" + orderNumber.ToString() + ")";
             string e_Body = "Thank you for your purchase! <br> You can find your order details on your personal user page, or on the PDF attached to this email. <br> Thank you for shopping at ITpharma!";
             string e_pdfPath = "\\Resources\\invoices\\" + encryptedPDForder;
-                
-            Tools.email(Client.email, e_Body, e_subject, e_pdfPath);
-            Response.Redirect("storeFront-OrderSuccess.aspx",false);
 
+            Tools.email(Client.email, e_Body, e_subject, e_pdfPath);
+            //---------------------------------------------------------Email Enviado, abaixo é cleanup final
+
+            Session["qtdTotal"] = Session["clientSubTotal"] = Session["Taxed"] = Session["finalTotal"] = null;
+
+            //--------------------------------------------------------- E depois de limpas as variaveis de sessão, redirecionamos para a pagina OrderSuccess, que será ligeiramente diferente mediante ser ordem para casa ou pickup
+            if (inpHide.Value == "Pickup")
+             Response.Redirect("storeFront-OrderSuccess.aspx?oID=" + Tools.EncryptString(orderNumber) + "&cID=" + Tools.EncryptString(Client.userID.ToString()) + "&pID=" + Tools.EncryptString(ddl_pickUp.SelectedValue.ToString()), false);
+
+            else
+            {
+                Response.Redirect("storeFront-OrderSuccess.aspx", false);
+                Session["PickupID"] = null;
+            }
+               
         }
 
     }
