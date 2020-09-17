@@ -14,9 +14,7 @@ namespace PROJECTOFINAL
         {
 
             if (Request.QueryString["ref"] == null)
-            {
-                Response.Redirect("storeFront-Shop.aspx");
-            }
+               Response.Redirect("storeFront-Shop.aspx");
 
             if(!Page.IsPostBack)
                 cartAmount.Text = "1";
