@@ -73,13 +73,13 @@
 
                 <div class="row text-center">
 
-                    <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts" OnItemDataBound="rptShopProducts_ItemDataBound" OnItemCommand="rptShopProducts_ItemCommand">
+                    <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts">
                         <ItemTemplate>
 
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100 border-white">
                                     <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
-                                        <img class="img-fluid card-img card-img-top image" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
+                                        <img class="img img-fluid" width="200" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
 
 
 
@@ -91,13 +91,6 @@
                                             </a>
                                         </h4>
                                         <h5><%# Eval("preco") %> €</h5>
-
-
-                                        <!-- //card footer -->
-                                        <div class="overlay">
-                                            <!-- card footer -->
-                                            <asp:LinkButton ID="link_addProduct" runat="server" CommandName="link_addProduct" CommandArgument='<%# Eval("Codreferencia") %>' CssClass="btn btn-block btn-outline-success"><i class="fas fa-plus-circle"></i></asp:LinkButton>
-                                        </div>
 
                                     </div>
                                     <!-- //card body -->

@@ -87,6 +87,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_addToCart;
 
         /// <summary>
+        /// rpt_availability control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_availability;
+
+        /// <summary>
         /// rpt_Generics control.
         /// </summary>
         /// <remarks>
@@ -130,5 +139,14 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlGenericItems;
+
+        /// <summary>
+        /// sqlAvailability control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlAvailability;
     }
 }

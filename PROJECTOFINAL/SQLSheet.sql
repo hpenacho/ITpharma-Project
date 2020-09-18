@@ -1428,3 +1428,32 @@ BEGIN CATCH
 END CATCH
 
 select * from ExamesAnalises
+
+-- QUERY STOCK AVAILABILITY
+
+select * from produto
+select * from StockPickup
+
+GO
+create or alter proc usp_itemPageAvailability(@reference varchar(50)) AS
+
+select 'Main Warehouse' as 'DistributionPoint', StockArmazem.Qtd as 'Qty', 
+CASE
+WHEN StockArmazem.Qtd < StockArmazem.QtdMin THEN 'Low Stock'
+WHEN StockArmazem.Qtd < 1 THEN 'Out of Stock'
+ELSE 'In Stock'
+END AS StockStatus
+from StockArmazem inner join Produto on StockArmazem.Prod_Ref = Produto.Codreferencia
+where Produto.Codreferencia = @reference
+
+UNION ALL
+
+select Pickup.Descricao  as 'DistributionPoint', StockPickup.Qtd as 'Qty', 
+CASE
+WHEN StockPickup.Qtd < StockPickup.QtdMin THEN 'Low Stock'
+WHEN StockPickup.Qtd < 1 THEN 'Out of Stock'
+ELSE 'In Stock'
+END AS StockStatus
+from Pickup inner join StockPickup on Pickup.ID = StockPickup.ID_Stock_Pickup
+			inner join Produto on Produto.Codreferencia = StockPickup.Prod_ref
+where Produto.Codreferencia = @reference

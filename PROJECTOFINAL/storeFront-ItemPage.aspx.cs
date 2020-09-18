@@ -87,5 +87,20 @@ namespace PROJECTOFINAL
             }
 
         }
+
+        protected void rpt_availability_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+            if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
+            {
+                if (((Label)e.Item.FindControl("lblStock")).Text == "Low Stock")
+                    ((Label)e.Item.FindControl("lblStock")).CssClass = "badge badge-pill badge-warning";
+                else if (((Label)e.Item.FindControl("lblStock")).Text == "Out of Stock")
+                    ((Label)e.Item.FindControl("lblStock")).CssClass = "badge badge-pill badge-danger";
+                else if (((Label)e.Item.FindControl("lblStock")).Text == "In Stock")
+                    ((Label)e.Item.FindControl("lblStock")).CssClass = "badge badge-pill badge-success";
+            }
+
+        }
     }
 }
