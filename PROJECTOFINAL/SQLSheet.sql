@@ -292,18 +292,57 @@ create or alter proc usp_encomenda(@IDcliente int,
 								   @Pickup int,
 								   @zip_code varchar(20),
 								   @receiver varchar(50),
-								   @orderNumber int OUTPUT)
+								   @orderNumber int OUTPUT,
+								   @ERROR_MESSAGE varchar(200) OUTPUT								   								   
+								   )
 								   as
 begin try
 begin tran 
-		--exception zone
 
+			DECLARE @C_prodRef as varchar(20)
+			DECLARE @C_prodQty as int
 
+			DECLARE carrinho_Cursor CURSOR FOR  
+			SELECT Carrinho.Prod_ref, count(Carrinho.Prod_ref) 
+			FROM Carrinho 			
+			WHERE Carrinho.ID_Cliente = @IDcliente
+			GROUP BY Carrinho.Prod_ref
+			OPEN carrinho_Cursor;  
+			FETCH NEXT FROM carrinho_Cursor INTO @C_prodRef, @C_prodQty;  
+			WHILE @@FETCH_STATUS = 0  
+			   BEGIN  
+				  if @Pickup is null -- then its a home delivery, affects warehouse stock
+					begin
+						if( (Select StockArmazem.Qtd from StockArmazem where StockArmazem.Prod_Ref = @C_prodRef) < @C_prodQty )
+							begin
+								insert into EncomendaHistorico values(@IDcliente, 0, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
+								set @ERROR_MESSAGE = 'NOT enough stock in warehouse, order was inserted as "Awaiting Restock"'
+								break;
+							end
+					end  
+					
+				   else -- then its a pickup order, affects pickup Stock
+					begin
+						if( (Select StockPickup.Qtd from StockPickup where StockPickup.Prod_Ref = @C_prodRef and StockPickup.ID_Stock_Pickup = @Pickup) < @C_prodQty )
+							begin
+								insert into EncomendaHistorico values(@IDcliente, 0, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
+								set @ERROR_MESSAGE =  concat('NOT enough stock in pickup of id ', @Pickup,' , order was inserted as "Awaiting Restock"')
+								break;
+							end
+					end
 
+				  FETCH NEXT FROM carrinho_Cursor INTO @C_prodRef, @C_prodQty;  
+			   END; 
 
+			   if (@@FETCH_status = -1) -- if it reached the end of cart, it means that no product was out of stock for the chosen delivery method (home delivery or pickup)
+			   begin
+					set @ERROR_MESSAGE =  'There is enough stock for this specific order'
+					insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
+				end
 
-		--exception zone
-		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
+				CLOSE carrinho_Cursor;  
+				DEALLOCATE carrinho_Cursor; 
+				
 
 		Declare @thisEnc int
 		set @thisEnc = (select Max(EncomendaHistorico.ENC_REF) from EncomendaHistorico)
@@ -330,7 +369,7 @@ begin tran
 commit
 end try
 begin catch
-	print ERROR_Message()	
+	set @ERROR_MESSAGE =  ERROR_Message()	
 	rollback;
 end catch
 GO
@@ -347,7 +386,7 @@ group by EncomendaHistorico.ENC_REF, Estado.Descricao, EncomendaHistorico.Ultima
 
 -- STORED PROCEDURE loginBackOffice
 -- esta usp simplesmente verifica se os dados introduzidos no login sao simultaneamente validos
---caso nao sejam, será devolvida msg de erro, cuja falta de presença implica login com sucesso. 
+-- caso nao sejam, será devolvida msg de erro, cuja falta de presença implica login com sucesso. 
 GO
 CREATE OR ALTER PROCEDURE [dbo].[usp_loginAdmins]
 
@@ -530,6 +569,20 @@ BEGIN TRAN
 	INSERT INTO Produto VALUES (@Codreferencia, @nome, @preco, @resumo, @descricao, @imagem, NULL, @ID_Categoria, @ID_Marca, @precisaReceita, @ref_generico, @Activo, 0)
 	INSERT INTO StockArmazem values(@Codreferencia, @Qtd, @QtdMin, @QtdMax)
 
+	DECLARE @pickupID as int
+	DECLARE pickup_Cursor CURSOR FOR
+
+	SELECT Pickup.ID FROM Pickup
+	OPEN pickup_Cursor;
+	FETCH NEXT from pickup_Cursor INTO @pickupID;
+	WHILE @@FETCH_STATUS = 0	
+		BEGIN
+			insert into StockPickup values (@Codreferencia,@pickupID,0,0,1);
+			Print @pickupID;
+			FETCH NEXT FROM pickup_Cursor INTO @pickupID;
+		END		
+	CLOSE pickup_Cursor;  
+	DEALLOCATE pickup_Cursor;  
 
 COMMIT
 END TRY
@@ -566,11 +619,25 @@ WHERE Produto.Codreferencia = @item
 
 
 -- [QUERY] DELETE PRODUCT BACKOFFICE \\ Product is discontinued
-
 GO
 CREATE OR ALTER PROC usp_disableBackofficeProduct(@item varchar(20)) AS
-update produto set produto.Descontinuado = 1, produto.Activo = 0 where Produto.Codreferencia = @item
 
+BEGIN TRY
+BEGIN TRAN
+
+	if exists(select '*' from Compra where Compra.Prod_ref = @item)
+	update produto set produto.Descontinuado = 1, produto.Activo = 0 where Produto.Codreferencia = @item
+
+	else
+		Delete from Produto where Produto.Codreferencia = @item --if product has never been ordered by anyone ever, delete it entirely
+
+	COMMIT
+END TRY
+BEGIN CATCH
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+-------------------------------------------
 
 -- [QUERY] UPDATE PRODUCT BACKOFFICE \\ For updating existing products from the backOffice
 GO

@@ -156,6 +156,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                SQLrptArchived.DataBind();
             }
         }
 
