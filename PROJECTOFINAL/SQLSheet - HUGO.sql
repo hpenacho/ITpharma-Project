@@ -63,3 +63,10 @@ group by  ENC_REF, DataCompra, MoradaEntrega, Descricao
 order by EncomendaHistorico.ENC_REF DESC
 
 ------------------------------------
+
+--[TEMP QUERY] For adjusting inserts of products from warehouse into preexisting pickups
+go
+insert into StockPickup
+select Produto.Codreferencia,3,0,0,1
+from Produto
+------------------------------------

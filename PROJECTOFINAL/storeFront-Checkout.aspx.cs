@@ -67,11 +67,13 @@ namespace PROJECTOFINAL
 
             //OUTPUT - ORDER NUMBER
             myCommand.Parameters.Add(Tools.errorOutput("@orderNumber", SqlDbType.VarChar, 200));
+            myCommand.Parameters.Add(Tools.errorOutput("@ERROR_MESSAGE", SqlDbType.VarChar, 200));
             try
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
                 //---------------------------------------------------------
+                System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@ERROR_MESSAGE"].Value.ToString());
 
             }
             catch (Exception m)
