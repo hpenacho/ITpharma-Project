@@ -296,7 +296,13 @@ create or alter proc usp_encomenda(@IDcliente int,
 								   as
 begin try
 begin tran 
-		
+		--exception zone
+
+
+
+
+
+		--exception zone
 		insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
 
 		Declare @thisEnc int
@@ -1254,7 +1260,7 @@ GO
 create or alter proc [dbo].[usp_addProdToCart](@ID int, @product varchar(20), @cookie varchar(50), @output varchar(200) output) AS
 begin try
 begin tran
-
+		
     insert into Carrinho values(@ID, @product, @cookie)
 
 commit
