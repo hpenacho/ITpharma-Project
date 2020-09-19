@@ -469,7 +469,7 @@
     <Content Include="News\news.xslt" />
     <Content Include="News\newsUserControl.ascx" />
     <Content Include="Resources\images\criss-cross.png" />
-    <Content Include="Resources\images\PHARMALOGOTEMP.png" />
+    <Content Include="Resources\images\PHARMALOGO.png" />
     <Content Include="Resources\images\register-nurse.jpg" />
     <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="SQLSheet - HUGO.sql" />

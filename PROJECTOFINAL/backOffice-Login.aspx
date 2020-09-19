@@ -14,22 +14,7 @@
     <!-- Bootstrap core CSS -->    
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
          
-      <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+      
     <!-- Custom styles for this template -->
     <link href="../BackOffice/BackOffice-Logins/floating-labels.css" rel="stylesheet">
 
@@ -37,7 +22,7 @@
   <body>
     <form class="form-signin" runat="server">
   <div class="text-center mb-4">
-    <img class="mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <img class="mb-4" src="Resources/images/PHARMALOGO.png" alt="" width="100" height="100">
     <h1 class="h3 mb-3 font-weight-normal">Administrator Login - ITpharma</h1>
     <p> Please insert your login credentials below. </p>
   </div>
