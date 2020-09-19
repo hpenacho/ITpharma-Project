@@ -42,20 +42,34 @@
  </style> 
 
 
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('table.stock').DataTable();
+        });
+
+    </script>
+
+  
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <div class="container mt-5">
 
 
-    <div class="col-lg-12 mt-5 col-md-12 col-sm-12 mb-3 mt-2">
-        <h1 class="mb-2">Manage Stock</h1>
-        <ol class="breadcrumb bg-dark text-white mb-4 shadow shadow-sm mt-2">
-            <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
-            <li class="breadcrumb-item active">Stock</li>
-        </ol>
-    </div>
+        <div class="container-fluid">
+            <div class="row mb-3">
+                <div class="col-lg-9">
+                    <h1 class="mb-2">Manage Stock</h1>
+                </div>
+
+                <div class="col-lg-3 mt-2 text-right">
+                    <button type="button" class="btn btn-dark">Restock</button>
+                </div>
+            </div>
+        </div>
 
 
     <!-- tab controls -->
@@ -92,9 +106,9 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-hover table-light rounded shadow shadow-sm" id="dataTable">
+                                <table class="table stock table-hover table-light rounded shadow shadow-sm" id="" width="100%" cellspacing="0">
 
-                                    <thead class="text-center thead-light align-middle">
+                                    <thead class="text-center text-white thead-dark align-middle">
                                         <!-- HEADER OF THE TABLE -->
                                         <tr>
                                             <th>Cod</th>
@@ -163,13 +177,13 @@
         <!-- //ACTIVE PRODUCT TABLE -->
           
         <!-- PICKUP STOCK TABLE -->
-        <div class="tab-pane fade show" id="pickup" role="tabpanel" aria-labelledby="archive-tab">
+        <div class="tab-pane fade show" id="pickup" role="tabpanel" aria-labelledby="pickup-tab">
                     
                  <div class="container-fluid">
 
                      <!-- selection of pickup atm -->
                      <div class="col-lg-12 d-flex justify-content-center">
-                        <asp:DropDownList ID="ddl_pickupstock" class="form-control mb-4 text-center w-25 shadow shadow-sm bg-light border-0" runat="server" DataSourceID="sqlPickupChooser" DataTextField="Descricao" DataValueField="ID"></asp:DropDownList>
+                        <asp:DropDownList ID="ddl_pickupstock" class="form-control mb-4 text-center w-25 shadow shadow-sm bg-light border-0" runat="server" DataSourceID="sqlPickupChooser" DataTextField="Descricao" DataValueField="ID" OnSelectedIndexChanged="ddl_pickupstock_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                      </div>
                      <!-- //selection of pickup atm -->
 
@@ -177,9 +191,9 @@
 
                             <div class="table-responsive">
 
-                                <table class="table table-hover table-light rounded shadow shadow-sm" id="dataTable2">
+                                <table class="table stock table-hover table-light rounded shadow shadow-sm" id="">
 
-                                    <thead class="text-center thead-light align-middle shadow shadow-sm">
+                                    <thead class="text-center thead-dark align-middle shadow shadow-sm">
                                         <!-- HEADER OF THE TABLE -->
                                         <tr>
                                             <th>Cod</th>
@@ -196,7 +210,7 @@
 
                                         <!-- PRODUCTS -->
 
-                                        <asp:Repeater ID="Repeater1" runat="server">
+                                        <asp:Repeater ID="rpt_pickupStock" runat="server" DataSourceID="sqlPickupStock" OnItemDataBound="rpt_pickupStock_ItemDataBound" OnItemCommand="rpt_pickupStock_ItemCommand">
                                             <ItemTemplate>
 
                                                 <tr class="text-center align-middle">
@@ -211,25 +225,25 @@
 
                                                     <td class="align-middle">
                                                         <label class="text-hide" style="display: none"><%# Eval("Qtd") %></label>
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qty" runat="server" value='<%# Eval("Qtd") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_PickupQty" runat="server" value='<%# Eval("Qtd") %>' />
                                                     </td>
 
                                                     <td class="align-middle">
                                                         <label class="text-hide" style="display: none"><%# Eval("QtdMin") %></label>
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qtymin" runat="server" value='<%# Eval("QtdMin") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_PickupQtymin" runat="server" value='<%# Eval("QtdMin") %>' />
                                                     </td>
 
                                                     <td class="align-middle">
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qtymax" runat="server" value='<%# Eval("QtdMax") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_PickupQtymax" runat="server" value='<%# Eval("QtdMax") %>' />
                                                         <label class="text-hide" style="display: none"><%# Eval("QtdMax") %></label>
                                                     </td>
 
                                                     <td class="align-middle">
-                                                        <asp:Label ID="lbl_status" runat="server" Text=""></asp:Label>
+                                                        <asp:Label ID="lbl_PickupStatus" runat="server" Text=""></asp:Label>
                                                     </td>
 
                                                     <td class="align-middle">
-                                                        <asp:LinkButton CssClass="btn bg-transparent" CommandName="link_updateStock" CommandArgument='<%# Eval("Codreferencia") %>' ID="link_updateStock" runat="server"><i id="stockupdate" class="fas fa-save"></i></asp:LinkButton>
+                                                        <asp:LinkButton CssClass="btn bg-transparent" CommandName="link_updatePickupStock" CommandArgument='<%# Eval("Codreferencia") %>' ID="link_updatePickupStock" runat="server"><i id="stockupdate" class="fas fa-save"></i></asp:LinkButton>
                                                     </td>
 
                                                 </tr>
@@ -247,13 +261,31 @@
                          </div>
         <!-- //PICKUP STOCK TABLE -->
 
-    </div>
+        </div>
     <!-- //tab content -->
+    </div>
 
 
+
+
+    <!-- MODAL AUTO-STOCK -->
+
+
+
+
+
+
+    <!-- //MODAL AUTO-STOCK -->
+
+
+    <!-- SQL SOURCES -->
     <asp:SqlDataSource ID="sqlStock" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_infoStock" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="sqlPickup" runat="server"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlPickupChooser" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Pickup]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlPickupStock" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnPickupStock" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddl_pickupstock" DefaultValue="1" Name="PickupID" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
 
 </asp:Content>

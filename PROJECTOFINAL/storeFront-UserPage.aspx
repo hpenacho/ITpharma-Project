@@ -6,8 +6,16 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <style>
-    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+
+
+    </script>
 
 
 </asp:Content>
@@ -92,7 +100,7 @@
 
                                 <div class="col">
                                     <label for="txt_oldPassword"">Old Password</label>
-                                    <input type="password" id="txt_oldPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                    <asp:TextBox ID="txt_oldPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -100,7 +108,8 @@
 
                                 <div class="col mt-3">
                                     <label for="txt_newPassword">New Password</label>
-                                    <input type="password" id="txt_newPassword" runat="server" class="form-control bg-light" placeholder="*******" />
+                                    <asp:TextBox ID="txt_newPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********"></asp:TextBox>
+
                                 </div>
                             </div>
 
@@ -108,8 +117,8 @@
 
                                 <div class="col mt-3">
                                     <label for="txt_repeatPassword">Repeat Password</label>
-                                        <input type="password" id="txt_repeatPassword" runat="server" class="form-control bg-light" placeholder="*******" />
-                                        <small id="passwordHelpBlock" class="form-text text-muted">8-20 caracteres, conter letras e numeros, um caracter especial e sem espaços
+                                    <asp:TextBox ID="txt_repeatPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********"></asp:TextBox>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">8-20 caracteres, conter letras e numeros, um caracter especial e sem espaços
                                     </small>
                                 </div>
 
@@ -123,7 +132,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <asp:Button ID="btn_alterPassword" class="btn btn-sm btn-dark btn-block" runat="server" Text="Change" OnClick="btn_alterPassword_Click" />
+                                    <asp:LinkButton ID="btn_alterPassword" ValidationGroup="alterPass" class="btn btn-sm btn-dark btn-block" runat="server" OnClick="btn_alterPassword_Click1">Change</asp:LinkButton>
                                 </div>
 
                             </div>
@@ -220,7 +229,6 @@
 
                                         <thead>
                                             <tr>
-                                                <th scope="col">ID</th>
                                                 <th scope="col">Date</th>
                                                 <th scope="col">Address</th>
                                                 <th scope="col">Qty</th>
@@ -236,7 +244,6 @@
                                                 <ItemTemplate>
 
                                             <tr>
-                                                <td style="vertical-align:middle"><%# Eval("ENC_REF") %></td>
                                                 <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
                                                 <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
                                                 <td style="vertical-align:middle"><%# Eval("Qty") %></td>

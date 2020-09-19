@@ -1,10 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Orders.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Orders" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('table.orders').DataTable();
+        });
+
+    </script>
+
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <div class="container-fluid mt-5 d-flex align-items-center">
+     <div class="container-fluid mt-5">
 
         <div class="col-lg-12">
 
@@ -20,9 +32,10 @@
                     Current Orders
                 </div>
                 <div class="card-body">
+
                     <div class="table-responsive">
 
-                        <table class="table" id="dataTable">
+                        <table class="table orders table-hover" id="">
 
                             <thead>
                                 <!-- HEADER OF THE TABLE -->
@@ -47,35 +60,35 @@
 
                                         <tr class="text-center align-middle">
 
-                                            <td  style="vertical-align: middle">
+                                            <td style="vertical-align: middle">
                                                 <%# Eval("Ref") %>
                                             </td>
-                                            
-                                            <td  style="vertical-align: middle">
+
+                                            <td style="vertical-align: middle">
                                                 <%#  DateTime.Parse(Eval("dataCompra").ToString()).ToString("MMMM dd, yyyy") %>
                                             </td>
-                                            
-                                            <td  style="vertical-align: middle">
+
+                                            <td style="vertical-align: middle">
                                                 <%# Eval("clientName") %>
                                             </td>
-                                            
-                                            <td  style="vertical-align: middle">
+
+                                            <td style="vertical-align: middle">
                                                 <%# Eval("orderTotal") %> €
                                             </td>
 
-                                            <td  style="vertical-align: middle">
+                                            <td style="vertical-align: middle">
                                                 <asp:DropDownList ID="ddl_orderStatus" runat="server" class="form-control border-white btn-dark" DataSourceID="sqlSourceStatus" DataTextField="Descricao" DataValueField="ID"></asp:DropDownList>
                                             </td>
-                                            
-                                            <td  style="vertical-align: middle">
-                                               <%#  DateTime.Parse(Eval("ultimaActualizacao").ToString()).ToString("MMMM dd, yyyy H:mm") %>h
+
+                                            <td style="vertical-align: middle">
+                                                <%#  DateTime.Parse(Eval("ultimaActualizacao").ToString()).ToString("MMMM dd, yyyy H:mm") %>h
                                             </td>
 
-                                            <td  style="vertical-align: middle">
+                                            <td style="vertical-align: middle">
                                                 <button type="button" class="btn btn-warning" data-toggle="collapse" data-target='#collapseExample<%# Eval("Ref") %>' aria-expanded="false" aria-controls='collapseExample<%# Eval("Ref") %>'><i class="fas fa-sort-down"></i></button>
                                             </td>
 
-                                            <td  style="vertical-align: middle">
+                                            <td style="vertical-align: middle">
                                                 <asp:LinkButton ID="link_updateOrder" CommandArgument='<%# Eval("Ref") %>' CommandName="link_updateOrder" CssClass="btn btn-warning" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
                                             </td>
 
@@ -87,67 +100,66 @@
                                         <tr class="collapse" id='collapseExample<%# Eval("Ref") %>'>
                                             <asp:HiddenField ID="hidden_Order_ID" Value='<%# Eval("Ref") %>' runat="server" />
 
-                                              
                                             <td colspan="8">
-                                                        
-                                                        <div class="col-lg-12 d-flex justify-content-between bg-dark pt-1 pb-1 rounded text-light mb-4">
-                                                                       
-                                                                       <div class ="col-lg-2">
-                                                                            #
-                                                                       </div>
-                                                                        
-                                                                        <div class ="col-lg-2">
-                                                                            Ref
-                                                                        </div>
 
-                                                                        <div class ="col-lg-1">
-                                                                            Qty
-                                                                        </div>
+                                                <div class="col-lg-12 d-flex justify-content-between bg-dark pt-1 pb-1 rounded text-light mb-4">
 
-                                                                        <div class ="col-lg-4">
-                                                                            Name
-                                                                        </div>
+                                                    <div class="col-lg-2">
+                                                        #
+                                                    </div>
 
-                                                                        <div class ="col-lg-1">
-                                                                            Price
-                                                                        </div>
+                                                    <div class="col-lg-2">
+                                                        Ref
+                                                    </div>
 
-                                                                        <div class ="col-lg-2">
-                                                                            Total
-                                                                        </div>
-                                                             </div>
+                                                    <div class="col-lg-1">
+                                                        Qty
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        Name
+                                                    </div>
+
+                                                    <div class="col-lg-1">
+                                                        Price
+                                                    </div>
+
+                                                    <div class="col-lg-2">
+                                                        Total
+                                                    </div>
+                                                </div>
 
                                                 <asp:Repeater ID="rpt_child_orders" runat="server">
                                                     <ItemTemplate>
 
-                                                            <div class="col-lg-12 mt-3 mb-3 d-flex justify-content-between">
+                                                        <div class="col-lg-12 mt-3 mb-3 d-flex justify-content-between">
 
-                                                                
-                                                                       <div class ="col-lg-2">
-                                                                            <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
-                                                                       </div>
-                                                                        
-                                                                        <div class ="col-lg-2">
-                                                                             <label class="col-form-label"><%# Eval("Prod_ref") %></label>
-                                                                        </div>
 
-                                                                        <div class ="col-lg-1">
-                                                                             <label class="col-form-label"><%# Eval("Qtd") %></label>
-                                                                        </div>
-
-                                                                        <div class ="col-lg-4">
-                                                                              <label class="col-form-label"><%# Eval("Nome") %></label>
-                                                                        </div>
-
-                                                                        <div class ="col-lg-1">
-                                                                             <label class="col-form-label"><%# Eval("PriceAtTime") %> €</label>
-                                                                        </div>
-
-                                                                        <div class ="col-lg-2">
-                                                                             <label class="col-form-label"><%# Eval("Total") %> €</label>
-                                                                        </div>
-
+                                                            <div class="col-lg-2">
+                                                                <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
                                                             </div>
+
+                                                            <div class="col-lg-2">
+                                                                <label class="col-form-label"><%# Eval("Prod_ref") %></label>
+                                                            </div>
+
+                                                            <div class="col-lg-1">
+                                                                <label class="col-form-label"><%# Eval("Qtd") %></label>
+                                                            </div>
+
+                                                            <div class="col-lg-4">
+                                                                <label class="col-form-label"><%# Eval("Nome") %></label>
+                                                            </div>
+
+                                                            <div class="col-lg-1">
+                                                                <label class="col-form-label"><%# Eval("PriceAtTime") %> €</label>
+                                                            </div>
+
+                                                            <div class="col-lg-2">
+                                                                <label class="col-form-label"><%# Eval("Total") %> €</label>
+                                                            </div>
+
+                                                        </div>
 
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -166,7 +178,7 @@
                 </div>
             </div>
         </div>
-    </div>
+     </div>
 
 
     <!-- Returns the order details -->

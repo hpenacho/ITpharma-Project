@@ -6,6 +6,31 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
+     
+    <script type="text/javascript">
+
+        let amount = $("input[id$='cartAmount']").val();
+
+
+        function removeAmount() {
+
+            if (amount > 1) {
+                amount = +$("input[id$='cartAmount']").val();
+                amount--;
+                $("input[id$='cartAmount']").val(amount);
+            }
+        }
+
+        function addAmount() {
+
+            amount = +$("input[id$='cartAmount']").val();
+            amount++;
+            $("input[id$='cartAmount']").val(amount);
+
+        }
+
+    </script>
+
    
 </asp:Content>
 
@@ -53,9 +78,9 @@
         <div class="row mt-3 ml-3">
          
            <div class="row">
-               <button type="button" class="btn btn-warning mr-2 btn-sm" onclick="addAmount()"><i class="fas fa-minus"></i></button>
-               <asp:TextBox id= "cartAmount" CssClass="form-control text-center bg-white" runat="server" style="width: 3.2em" ReadOnly="true"></asp:TextBox>
-               <button type="button" class="btn btn-warning mr-2 btn-sm ml-2" onclick="removeAmount()"><i class="fas fa-plus"></i></button>
+               <button type="button" class="btn btn-warning mr-2 btn-sm" onclick="removeAmount()"><i class="fas fa-minus"></i></button>
+               <asp:TextBox id= "cartAmount" CssClass="form-control text-center bg-white" runat="server" style="width: 3.2em"></asp:TextBox>
+               <button type="button" class="btn btn-warning mr-2 btn-sm ml-2" onclick="addAmount()"><i class="fas fa-plus"></i></button>
              <asp:LinkButton ID="link_addToCart" class="btn btn-warning" style="width: 5em" runat="server" OnClick="link_addToCart_Click1"><i class="fas fa-cart-plus"></i> Add</asp:LinkButton>
           </div>
         </div>
@@ -147,33 +172,6 @@
     <!-- /.row -->
   </div>
   <!-- /.container -->
-
-
-
-    <script>
-
-        let amount = 1;
-
-        function addAmount() {
-
-            if (amount > 1) {
-                amount = +$("input[id$='cartAmount']").val();
-                amount--;
-                $("input[id$='cartAmount']").val(amount);
-            }
-        }
-
-        function removeAmount() {
-
-            amount = +$("input[id$='cartAmount']").val();
-            amount++;
-            $("input[id$='cartAmount']").val(amount);
-        }
-
-    </script>
-
-
-
 
 
     <!-- SQL SOURCE -->

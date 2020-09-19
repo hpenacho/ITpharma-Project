@@ -4,15 +4,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
-    
-    <script>
-
-       //function openModal() { $('#modal-update-product').modal('show'); }
-
-    </script>
-
-
-
     <style>
 
          a.active.nav-item.nav-link{background-color: orange !important;color:white !important;}
@@ -44,6 +35,15 @@
         }
 
     </style>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('table.products').DataTable();
+        });
+
+    </script>
 
 </asp:Content>
 
@@ -116,7 +116,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
 
-                            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table products table-striped table-hover" width="100%" cellspacing="0">
 
                                 <thead>
                                     <!-- HEADER OF THE TABLE -->
@@ -204,7 +204,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
 
-                            <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table products table-striped table-hover" id="" width="100%" cellspacing="0">
 
                                 <thead>
                                     <!-- HEADER OF THE TABLE -->

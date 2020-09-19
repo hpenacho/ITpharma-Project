@@ -23,13 +23,9 @@ namespace PROJECTOFINAL
                 txt_bloodSchedule.Value = DateTime.Now.ToString("yyyy-MM-dd");
             }
                
-            //PREVENIR UTILIZADOR SOCIAL DE ALTERAR PASSWORD
-            if (Client.social)
-            {
-                txt_oldPassword.Attributes.Add("readonly", "readonly");
-                txt_newPassword.Attributes.Add("readonly", "readonly");
-                txt_repeatPassword.Attributes.Add("readonly", "readonly");
-            }
+            txt_oldPassword.ReadOnly = Client.social;
+            txt_newPassword.ReadOnly = Client.social;
+            txt_repeatPassword.ReadOnly = Client.social;
 
             noExam.Visible = rpt_exams.Items.Count > 0;
         }
@@ -60,17 +56,15 @@ namespace PROJECTOFINAL
             sqlExams.SelectParameters["ClientID"].DefaultValue = Client.userID.ToString();
         }
 
-
-        protected void btn_alterPassword_Click(object sender, EventArgs e)
+        protected void btn_alterPassword_Click1(object sender, EventArgs e)
         {
-
             lbl_errorPassword.Text = "";
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_clientAlterPassword");
 
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
-            myCommand.Parameters.AddWithValue("@oldPassword", Tools.EncryptString(txt_oldPassword.Value));
-            myCommand.Parameters.AddWithValue("@newPassword", Tools.EncryptString(txt_newPassword.Value));
+            myCommand.Parameters.AddWithValue("@oldPassword", Tools.EncryptString(txt_oldPassword.Text));
+            myCommand.Parameters.AddWithValue("@newPassword", Tools.EncryptString(txt_newPassword.Text));
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
@@ -81,9 +75,10 @@ namespace PROJECTOFINAL
                 myCommand.ExecuteNonQuery();
 
                 lbl_errorPassword.Text = myCommand.Parameters["@errorMessage"].Value.ToString();
-                txt_oldPassword.Value = "";
-                txt_repeatPassword.Value = "";
-                txt_newPassword.Value = "";
+
+                txt_oldPassword.Text = "";
+                txt_repeatPassword.Text = "";
+                txt_newPassword.Text = "";
 
             }
             catch (SqlException m)
@@ -94,10 +89,8 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
             }
-
-
-
         }
+
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
@@ -229,5 +222,7 @@ namespace PROJECTOFINAL
 
 
         }
+
+       
     }
 }

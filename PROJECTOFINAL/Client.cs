@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace PROJECTOFINAL
@@ -9,8 +10,8 @@ namespace PROJECTOFINAL
     {
 
         //Utility Variables
-        public static bool isLogged { get; set; }
-        public static bool social { get; set; }
+        public static bool isLogged { get; set; } = false;
+        public static bool social { get; set; } = false;
 
         //User Object Details
         public static int userID { get; set; } = 0;
@@ -25,16 +26,19 @@ namespace PROJECTOFINAL
 
 
 
-        public static void resetClient()
+        public static void resetClient() //Melhorar este método, talvez restruturar para usar instâncias
         {
             isLogged = false;
+            social = false;
             userID = 0;
+
             name = null;
             email = null;
             address = null;
             NIF = null;
             nrSaude = null;
             codPostal = null;
+
         }
 
 

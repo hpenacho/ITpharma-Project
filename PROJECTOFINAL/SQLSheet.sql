@@ -1289,8 +1289,8 @@ group by Marca.ID, Marca.descricao
 
 -- SORTING 
 
--- PAGINAÇÃO ATRAVÉS DO SQL [EXEMPLO]
--- Lógica: Se houver 500.000 produtos é melhor carregar apenas uma parte de cada vez do que todos e depois paginar com javascript tornando a aplicação mais leve.
+-- PAGINAÇÃO ATRAVÉS DO SQL [EXEMPLO BACARDI SURF SHOP] 
+-- Lógica: Se houver 500.000 produtos é melhor carregar apenas uma parte de cada vez do que todos.
 /*
 GO
 create or alter proc productsPaginatedFiltered(@Campo varchar(100), @Ordem varchar(100), @Categoria varchar(100), @Pagina int, @ItemsPagina int) AS
@@ -1463,3 +1463,37 @@ END AS StockStatus
 from Pickup inner join StockPickup on Pickup.ID = StockPickup.ID_Stock_Pickup
 			inner join Produto on Produto.Codreferencia = StockPickup.Prod_ref
 where Produto.Codreferencia = @reference
+
+
+
+-- [QUERY] Returns the stock of various ATMS
+
+GO
+create or alter proc usp_returnPickupStock(@PickupID int) AS
+select * 
+from StockPickup inner join Pickup on StockPickup.ID_Stock_Pickup = pickup.ID
+				 inner join Produto on Produto.Codreferencia = StockPickup.Prod_ref
+where Pickup.ID = @PickupID
+AND Produto.Activo = 1 
+AND Produto.Descontinuado = 0
+
+select * from Pickup
+
+-- [PROC] update the stock of a selected pickup atm
+GO
+create or alter proc usp_alterPickupStock (@pickupID int, @prodref varchar(50), @qtd int, @qtdmin int, @qtdmax int, @errorMessage varchar(200) output) AS
+begin try
+begin tran
+		
+		update StockPickup
+		SET Qtd = IIF(@qtd >= 0, @qtd, qtd),
+			QtdMin = IIF(@qtdmin >= 0, @qtdmin, QtdMin),
+			QtdMax = IIF(@qtdmax >= 0, @qtdmax, QtdMax)
+		WHERE StockPickup.Prod_ref = @prodref AND StockPickup.ID_Stock_Pickup = @pickupID
+
+commit
+end try
+BEGIN catch
+	set @errorMessage = ERROR_MESSAGE();
+	rollback
+END CATCH

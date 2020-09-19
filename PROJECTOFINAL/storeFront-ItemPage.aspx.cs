@@ -84,6 +84,7 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
                 (this.Master as storeFrontMasterPage).updateCart();
+                cartAmount.Text = "1";
             }
 
         }
