@@ -60,13 +60,10 @@
 
 
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-lg-9">
-                    <h1 class="mb-2">Manage Stock</h1>
-                </div>
 
-                <div class="col-lg-3 mt-2 text-right">
-                    <button type="button" class="btn btn-dark">Restock</button>
+            <div class="row mb-3">
+                <div class="col-lg-12 text-center">
+                    <h1 class="mb-2">Manage Stock</h1>
                 </div>
             </div>
         </div>
@@ -265,17 +262,6 @@
     <!-- //tab content -->
     </div>
 
-
-
-
-    <!-- MODAL AUTO-STOCK -->
-
-
-
-
-
-
-    <!-- //MODAL AUTO-STOCK -->
 
 
     <!-- SQL SOURCES -->

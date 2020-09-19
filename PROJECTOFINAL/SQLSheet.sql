@@ -1480,6 +1480,7 @@ AND Produto.Descontinuado = 0
 select * from Pickup
 
 -- [PROC] update the stock of a selected pickup atm
+
 GO
 create or alter proc usp_alterPickupStock (@pickupID int, @prodref varchar(50), @qtd int, @qtdmin int, @qtdmax int, @errorMessage varchar(200) output) AS
 begin try
