@@ -13,9 +13,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- -->
 
-    <div class="container">
+    <div class="container mt-3">
   <div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="../Resources/images/PHARMALOGOTEMP.png" alt="" width="72" height="72">
+    <img class="d-block mx-auto mb-2" src="../Resources/images/PHARMALOGO.png" alt="" width="85" height="85">
     <h2>Checkout Page</h2>
     <p class="lead"> Please fill out the details requested below to conclude your purchase!</p>
   </div>

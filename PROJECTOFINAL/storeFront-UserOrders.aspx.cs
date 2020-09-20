@@ -13,6 +13,8 @@ namespace PROJECTOFINAL
 {
     public partial class storeFront_UserOrders : System.Web.UI.Page
     {
+        string orderNumber;
+        string pickupID;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -34,10 +36,12 @@ namespace PROJECTOFINAL
                 Tools.myConn.Open();
                 reader = myCommand.ExecuteReader();
 
+                
+
                 if (reader.Read())
                 {
-                    
-                    lbl_EncRef.Text = reader["Ref"].ToString();
+                    orderNumber = reader["Ref"].ToString();
+                    lbl_EncRef.Text = orderNumber;
                     lbl_orderDate.Text = reader["OrderDate"].ToString();
                     lbl_orderStatus.Text = reader["Status"].ToString();
                     lbl_customerName.Text = reader["clientName"].ToString();
@@ -45,7 +49,12 @@ namespace PROJECTOFINAL
                     lbl_address.Text = reader["Address"].ToString();
                     lbl_zip.Text = reader["zipCode"].ToString();
                     lbl_nif.Text = reader["nif"].ToString();
-                    
+
+                if (reader["pickupID"].ToString() != null && reader["pickupID"].ToString() != "")
+                    {
+                        pickupID = reader["pickupID"].ToString();
+                        lbtn_qr.Visible = true;
+                    }
                 }
             }
             catch (SqlException m)
@@ -85,10 +94,13 @@ namespace PROJECTOFINAL
 
         }
 
+
+        //string qrLink = "https://api.qrserver.com/v1/create-qr-code/?data=" + Request.QueryString["oID"].ToString() + "_" + Request.QueryString["cID"].ToString() + "_" + Request.QueryString["pID"].ToString();
+
         protected void lbtn_pdf_Click(object sender, EventArgs e)
         {            
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\invoices\\" + Tools.EncryptString(Request.QueryString["order"]) + ".pdf"))
-                Response.Redirect("\\Resources\\invoices\\" + Tools.EncryptString(Request.QueryString["order"]) + ".pdf");
+                Response.Redirect("\\Resources\\invoices\\" + Tools.EncryptString(Request.QueryString["order"]) + ".pdf",false);
 
             else if (lbtn_pdf.Enabled)
             {
@@ -96,6 +108,11 @@ namespace PROJECTOFINAL
                 pdfText.InnerText = "PDF not available";
                 lbtn_pdf.Enabled = false;
             }    
+        }
+
+        protected void lbtn_qr_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("https://api.qrserver.com/v1/create-qr-code/?data=" + Tools.EncryptString(orderNumber) + "_" + Tools.EncryptString(Client.userID.ToString()) + "_" + Tools.EncryptString(pickupID), false);            
         }
     }
 }

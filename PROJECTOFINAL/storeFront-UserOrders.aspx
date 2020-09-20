@@ -17,7 +17,8 @@
                      <strong>Status: </strong><asp:Label ID="lbl_orderStatus" runat="server" Text="[missing]"></asp:Label>
                    </div>
                    <div class="col-md-3">
-                       <asp:LinkButton ID="lbtn_pdf" CssClass="btn btn-danger" runat="server" OnClick="lbtn_pdf_Click"><i class="fas fa-file-pdf"></i> <label id="pdfText" runat="server" style="cursor:pointer;">Order PDF</label> </asp:LinkButton>
+                       <asp:LinkButton ID="lbtn_pdf" CssClass="btn btn-danger" runat="server" OnClick="lbtn_pdf_Click"><i class="fas fa-file-pdf"></i> <label id="pdfText" runat="server" style="cursor:pointer;">Order PDF</label> </asp:LinkButton>                                           
+                       <asp:LinkButton ID="lbtn_qr" CssClass="btn btn-primary" runat="server" style="cursor:pointer;" Visible="false" OnClick="lbtn_qr_Click"><i class="fas fa-qrcode"></i> View QR Code</> </asp:LinkButton> 
                    </div>
                    </div>
             </div>
