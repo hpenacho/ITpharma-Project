@@ -48,13 +48,11 @@
 
         $(document).ready(function () {
             $('table.stock').DataTable();
-        });
-
-        $(document).ready(function () {
             $('table.restock').DataTable({
                 searching: false
             });
         });
+
 
     </script>
 
