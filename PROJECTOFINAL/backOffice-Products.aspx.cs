@@ -127,13 +127,12 @@ namespace PROJECTOFINAL
                     ddl_updateGenericParent.SelectedValue = reader["ref_generico"].ToString();
                     check_updateGeneric.Checked = true;
                 }
-
-
-
             }
 
             reader.Close();
             Tools.myConn.Close();
+
+
             ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "$('#modal-update-product').modal()", true);
         }
 

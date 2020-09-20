@@ -15,13 +15,31 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// btn_NeedsRestock control.
+        /// rpt_itemNeedsRestock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btn_NeedsRestock;
+        protected global::System.Web.UI.WebControls.Repeater rpt_itemNeedsRestock;
+
+        /// <summary>
+        /// linkRestockAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkRestockAll;
+
+        /// <summary>
+        /// linkRestockSelected control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkRestockSelected;
 
         /// <summary>
         /// rpt_infoStock control.
@@ -49,24 +67,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpt_pickupStock;
-
-        /// <summary>
-        /// upd_restock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upd_restock;
-
-        /// <summary>
-        /// rpt_itemNeedsRestock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpt_itemNeedsRestock;
 
         /// <summary>
         /// sqlStock control.
