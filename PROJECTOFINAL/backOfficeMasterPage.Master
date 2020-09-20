@@ -167,11 +167,10 @@
 
 
        
-    <!-- SCRIPTS -->
-    <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
-    <!-- /SCRIPTS -->
-
-
+        <!-- SCRIPTS -->
+        <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- /SCRIPTS -->
 
     </form>
 </body>

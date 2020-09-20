@@ -36,12 +36,18 @@
 
     </style>
 
+    <!-- TESTE -->
 
     <script type="text/javascript">
 
         $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
             $('table.products').DataTable();
         });
+
+        function openModal() {
+            $('#myModal').modal('show');
+        }
 
     </script>
 
@@ -791,8 +797,9 @@
     <!-- /INSERT BRANDS Modal -->
 
 
-
-       <asp:UpdatePanel ID="udptCategory" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+    <!-- INSERT CATEGORIES Modal -->
+    <!--TESTADO ESTÁ A FUNCIONAR COMO DEVE SER -->
+    <asp:UpdatePanel ID="udptCategory" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
         <ContentTemplate>
    
             <!-- INSERT\UPDATE CATEGORIES Modal -->
@@ -864,18 +871,11 @@
 
         </ContentTemplate>
     </asp:UpdatePanel>
-    <!-- /INSERT CATEGORIES Modal -->
+    <!-- //INSERT CATEGORIES Modal -->
 
 
+      
 
-
-     <script type="text/javascript">
-
-            $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip();
-            });
-
-     </script>
 
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->

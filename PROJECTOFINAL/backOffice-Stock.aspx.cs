@@ -130,5 +130,38 @@ namespace PROJECTOFINAL
 
             rpt_pickupStock.DataBind();
         }
+
+
+        //RESTOCK 
+
+        protected void linkRestockAll_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void linkRestockSelected_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void restockItems()
+        {
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }
