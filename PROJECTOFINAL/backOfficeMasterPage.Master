@@ -1,10 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="backOfficeMasterPage.master.cs" Inherits="PROJECTOFINAL.backOfficeMasterPage" %>
 
 <!DOCTYPE html>
-
 <html>
-
-
 <head runat="server">
 
     <meta charset="utf-8" />
@@ -12,26 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>ITpharma - BackOffice</title>
 
+
     <!-- NORMAL CSS -->
-    <link rel="stylesheet" href="BackOffice/BackOffice-Template/dist/css/styles.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+    <link href="BackOffice/BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- DATA TABLES -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.22/af-2.3.5/b-1.6.4/b-html5-1.6.4/b-print-1.6.4/r-2.2.6/rg-1.1.2/rr-1.2.7/sc-2.0.3/sp-1.2.0/datatables.min.css" />
-
-    <!-- SCRIPTS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+     <!-- DATA TABLES -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-    <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.22/af-2.3.5/b-1.6.4/b-html5-1.6.4/b-print-1.6.4/r-2.2.6/rg-1.1.2/rr-1.2.7/sc-2.0.3/sp-1.2.0/datatables.min.js"></script>
-    <!-- /SCRIPTS -->
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+    <!-- jQuery Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.js"></script>
+
+  
 
 <style>
 
@@ -156,8 +148,6 @@
                <!-- / MAIN CONTENT -->
              </main>
 
-       
-
 
 
                 <footer class="py-4 bg-white mt-auto">
@@ -175,6 +165,11 @@
             </div>
         </div>
 
+
+       
+    <!-- SCRIPTS -->
+    <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
+    <!-- /SCRIPTS -->
 
 
 

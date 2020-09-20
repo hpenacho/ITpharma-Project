@@ -374,6 +374,60 @@ begin catch
 end catch
 GO
 
+
+-- [ TRIGGER ] ON ORDER STATUS CHANGE TO ..., UPDATE QUANTITIES
+
+GO
+create or alter trigger t_updateStocks on EncomendaHistorico after insert, update as
+BEGIN TRY
+BEGIN TRAN
+
+	-- quando mudamos o estado da encomenda para 1 (in processing) vamos ver quais são os items e as quantidades 
+	-- e vamos reduzir essa quantidade do stock do pickup ou do armazém consoante.
+
+	-- se houve uma mudança ou seja um registo foi rescrito, houve um delete e um insert do novo registo portanto 
+	-- sabemos que um estado passou de algo para 1 e aqui queremos reduzir consoante o armazém ou pickup.
+
+	-- caso 1 update do armazém, onde é que está a quantidade..na compra
+	-- CURSOR PARA PERCORRER TABELA COMPRA
+
+	IF EXISTS (select '*' from deleted inner join inserted on deleted.ENC_REF = inserted.ENC_REF where inserted.ID_Estado = 1 ) 
+		BEGIN
+
+			DECLARE @compraProdRef as varchar(20)
+			DECLARE @compraProdQtd as int
+
+			DECLARE compraCursor CURSOR FOR  
+			SELECT Compra.Prod_ref, Compra.Qtd
+			FROM Compra inner join inserted on inserted.ENC_REF = Compra.ID_Encomenda
+			WHERE Compra.ID_Encomenda = inserted.ENC_REF
+			OPEN compraCursor;  
+			FETCH NEXT FROM compraCursor INTO @compraProdRef, @compraProdQtd;  
+			WHILE @@FETCH_STATUS = 0  
+			BEGIN
+				IF
+				update StockArmazem set Qtd -= (select compra.qtd from Compra where  )
+				where compra.ID_Encomenda = inserted.ENC_REF
+
+		END
+	END
+
+
+COMMIT
+END TRY
+BEGIN CATCH
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
+
+
+
+
+
+
+
+
+
 -- QUERY PARA UTILIZADOR VER A SUA ENCOMENDA NA ÁREA PESSOAL
 
 select EncomendaHistorico.ENC_REF, Estado.Descricao AS 'Estado', EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, sum(Compra.Qtd) ,sum(Compra.Total)

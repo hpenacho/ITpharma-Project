@@ -38,7 +38,9 @@
          background-color: whitesmoke !important;
          color: #333 !important;
      }
-     
+
+
+
  </style> 
 
 
@@ -46,6 +48,13 @@
 
         $(document).ready(function () {
             $('table.stock').DataTable();
+        });
+
+        $(document).ready(function () {
+            $('table.restock').DataTable({
+                scrollY: 500,
+                searching: false
+            });
         });
 
     </script>
@@ -67,6 +76,14 @@
                 </div>
             </div>
         </div>
+
+         <!-- RESTOCK BUTTON -->
+        <div class="row my-3 text-center">
+            <div class="container">
+                 <button id="btn_NeedsRestock" runat="server" type="button" class="btn btn-dark" data-toggle="modal" data-target="#restock-products">RESTOCK ALL</button>
+            </div>
+        </div>
+        <!-- //RESTOCK BUTTON -->
 
 
     <!-- tab controls -->
@@ -260,7 +277,109 @@
 
         </div>
     <!-- //tab content -->
+
     </div>
+
+
+
+    <!-- RESTOCK MODAL -->
+    <asp:UpdatePanel ID="upd_restock" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+        <ContentTemplate>
+
+            <div class="modal fade my-5 mb-5" id="restock-products" tabindex="-1" role="dialog" aria-labelledby="restock-products" aria-hidden="true">
+                <div class="modal-dialog modal-xl shadow-lg" role="document">
+                    <div class="modal-content" style="margin-bottom: 10em;">
+                        <div class="modal-header py-2 modal-title bg-dark rounded-top text-light">
+                            <h5 class="modal-title col-12 text-center" id="modal-insert-brand-label">Restock
+                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                            </h5>
+                        </div>
+                        <!-- BEGIN MODAL BODY CONTENT -->
+
+                        <div class="modal-body">
+
+                            <asp:UpdatePanel runat="server">
+                                <ContentTemplate>
+
+
+                                    <table class="table table-borderless restock">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Restock</th>
+                                                <th >Warehouse</th>
+                                                <th>Product Ref</th>
+                                                <th>Product Name</th>
+                                                <th>Qtd</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            <!-- item in need of restocking both in warehouse and pickup -->
+
+                                            <asp:Repeater ID="rpt_itemNeedsRestock" runat="server" DataSourceID="sqlNeedsRestock">
+                                                <ItemTemplate>
+
+
+                                                    <tr>
+
+                                                        <th>
+                                                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                                <label class="btn btn-primary">
+                                                                    <asp:CheckBox ID="ck_needsRestock" runat="server" autocomplete="off"/>
+                                                                    Restock
+                                                                </label>
+                                                            </div>
+                                                        </th>
+
+                                                        <td>
+                                                            <asp:Label ID="lbl_warehouse" runat="server" Text='<%# Eval("Warehouse") %>'></asp:Label>
+                                                        </td>
+
+                                                        <td>
+                                                            <asp:Label ID="lbl_ProductRef" runat="server" Text='<%# Eval("ProductRef") %>'></asp:Label>
+                                                        </td>
+
+                                                        <td>
+                                                            <%# Eval("ProductName") %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%# Eval("Qtd") %>
+                                                        </td>
+
+                                                    </tr>
+
+
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+
+                                        </tbody>
+                                    </table>
+
+
+                                    <!-- //item in need of restocking both in warehouse and pickup -->
+
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+
+                        </div>
+                        <!-- END MODAL BODY CONTENT -->
+                    </div>
+                </div>
+            </div>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <!-- /INSERT BRANDS Modal -->
+
+
+    <!-- //RESTOCK MODAL -->
+
+
 
 
 
@@ -272,6 +391,6 @@
             <asp:ControlParameter ControlID="ddl_pickupstock" DefaultValue="1" Name="PickupID" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
-
+    <asp:SqlDataSource ID="sqlNeedsRestock" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_ItemsNeedingRestock" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
 </asp:Content>

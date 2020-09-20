@@ -15,6 +15,15 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
+        /// btn_NeedsRestock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_NeedsRestock;
+
+        /// <summary>
         /// rpt_infoStock control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,24 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rpt_pickupStock;
 
         /// <summary>
+        /// upd_restock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upd_restock;
+
+        /// <summary>
+        /// rpt_itemNeedsRestock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_itemNeedsRestock;
+
+        /// <summary>
         /// sqlStock control.
         /// </summary>
         /// <remarks>
@@ -67,5 +94,14 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sqlPickupStock;
+
+        /// <summary>
+        /// sqlNeedsRestock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlNeedsRestock;
     }
 }
