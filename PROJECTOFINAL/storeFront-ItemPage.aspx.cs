@@ -45,6 +45,13 @@ namespace PROJECTOFINAL
                     control_productBrand.InnerText = dr["Marca"].ToString();
                     control_description.Text = dr["descricao"].ToString();
                     txt_itemSummary.InnerText = dr["resumo"].ToString();
+                    if((bool)dr["precisaReceita"])
+                        {
+                        link_addToCart.Text = "Prescription Item";
+                        link_addToCart.CssClass = "btn btn-secondary";
+                        link_addToCart.Enabled = false;
+                        link_addToCart.ToolTip = "Prescription Items can only be purchased via your personal user page, under the Prescriptions section.";
+                        }
 
                 }
 
