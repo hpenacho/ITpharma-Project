@@ -140,7 +140,7 @@ namespace PROJECTOFINAL
             Message = Message.Replace("KKK", "+");
             Message = Message.Replace("JJJ", "/");
             Message = Message.Replace("III", "\\");
-
+            Message = Message.Replace("YYY", "=");
 
             // Step 5. Attempt to decrypt the string
             try

@@ -137,16 +137,16 @@
 
                                                     <td class="align-middle">
                                                         <label class="text-hide" style="display: none"><%# Eval("Qtd") %></label>
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qty" runat="server" value='<%# Eval("Qtd") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qty" runat="server" min="0" value='<%# Eval("Qtd") %>' />
                                                     </td>
 
                                                     <td class="align-middle">
                                                         <label class="text-hide" style="display: none"><%# Eval("QtdMin") %></label>
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qtymin" runat="server" value='<%# Eval("QtdMin") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qtymin" runat="server" min="0" value='<%# Eval("QtdMin") %>' />
                                                     </td>
 
                                                     <td class="align-middle">
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qtymax" runat="server" value='<%# Eval("QtdMax") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qtymax" runat="server" min="1" value='<%# Eval("QtdMax") %>' />
                                                         <label class="text-hide" style="display: none"><%# Eval("QtdMax") %></label>
                                                     </td>
 

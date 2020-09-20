@@ -1219,7 +1219,7 @@ BEGIN TRY
 BEGIN TRAN
 
 select enc_ref as 'Ref', datacompra as'OrderDate',Estado.Descricao as 'Status', 
-cliente.nome as 'clientName',cliente.morada as 'Address', cliente.codPostal as 'zipCode', cliente.nif, cliente.email,
+cliente.nome as 'clientName',cliente.morada as 'Address',EncomendaHistorico.ID_Pickup as 'pickupID', cliente.codPostal as 'zipCode', cliente.nif, cliente.email,
 Compra.Prod_ref,Produto.nome as 'ProdName', Sum(Qtd) as 'Qty', Compra.PriceAtTime as 'Unit Price',
 sum(compra.Total) as 'itemTotalPrice' 
 from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
@@ -1227,7 +1227,7 @@ from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID
 						inner join Estado on estado.ID = EncomendaHistorico.ID_Estado
 						inner join Produto on Produto.Codreferencia = Compra.Prod_ref
 where EncomendaHistorico.ID_Cliente = @ID_cliente AND EncomendaHistorico.enc_ref = @Enc_reference
-group by enc_ref, datacompra, cliente.nome, Estado.Descricao, cliente.morada, cliente.codPostal, cliente.nif, Compra.Prod_ref, Produto.nome, Compra.PriceAtTime, cliente.email
+group by enc_ref, datacompra, cliente.nome, Estado.Descricao, cliente.morada,EncomendaHistorico.ID_Pickup, cliente.codPostal, cliente.nif, Compra.Prod_ref, Produto.nome, Compra.PriceAtTime, cliente.email
 
 COMMIT
 END TRY
