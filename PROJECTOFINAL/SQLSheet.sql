@@ -337,7 +337,7 @@ begin tran
 			   if (@@FETCH_status = -1) -- if it reached the end of cart, it means that no product was out of stock for the chosen delivery method (home delivery or pickup)
 			   begin
 					set @ERROR_MESSAGE =  'There is enough stock for this specific order'
-					insert into EncomendaHistorico values(@IDcliente, 1, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
+					insert into EncomendaHistorico values(@IDcliente, 0, getdate(), getdate(), @MoradaEntrega, @Pickup, @zip_code, @receiver)
 				end
 
 				CLOSE carrinho_Cursor;  
@@ -352,6 +352,11 @@ begin tran
 		from Carrinho inner join Produto on Carrinho.Prod_ref = Produto.Codreferencia
 		where Carrinho.ID_Cliente = @IDcliente
 		group by Prod_ref, produto.preco
+
+		if (@ERROR_MESSAGE = 'There is enough stock for this specific order')
+			begin
+				update EncomendaHistorico set EncomendaHistorico.ID_Estado = 1 where EncomendaHistorico.ENC_REF = @thisEnc
+			end
 
 		DELETE FROM carrinho WHERE carrinho.ID_Cliente = @IDcliente;
 
