@@ -27,6 +27,7 @@ namespace PROJECTOFINAL
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_returnItemDetailPage");
             myCommand.Parameters.AddWithValue("@Reference", Request.QueryString["ref"].ToString());
+            lbl_codRef.InnerHtml = "Reference Code: " + Request.QueryString["ref"].ToString();
 
             try
             {

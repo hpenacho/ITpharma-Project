@@ -50,12 +50,12 @@
     <div class="row">
 
       <div class="col-lg-8 col-md-12 col-sm-12">
-          <asp:Image lass="img-fluid" Width="600" id="mainImage" runat="server" />
+          <asp:Image lass="img-fluid" Width="500" id="mainImage" runat="server" />
       </div>
-
+       
       <div class="col-lg-4 mt-5">
         <h3 id="txt_itemTitle" runat="server" class="my-3 text-dark"></h3>
-        
+        <small> <label id="lbl_codRef" runat="server" class="text-muted"></label> </small>
         <h6 id="txt_itemSummary" runat="server" class="my-3 "></h6>
           
       
@@ -161,7 +161,7 @@
                     <a href="storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>">
                         <img class="img img-fluid" width="200" src='<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>' alt="">
                    </a>
-                 &nbsp;&nbsp;&nbsp;<h5 class="my-3 text-dark"><%# Eval("nome") %></h5>
+                 &nbsp;&nbsp;&nbsp;&nbsp;<h5 class="my-3 text-dark"><%# Eval("nome") %></h5>
                   <h6 class="my-3 text-dark"><%# Eval("preco") %>€</h6>
                 </div>
 

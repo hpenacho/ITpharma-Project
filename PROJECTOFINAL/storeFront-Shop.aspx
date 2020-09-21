@@ -19,7 +19,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3 mb-3" style="margin-top: 20vh;">
+            <div class="col-lg-3 mb-3" style="margin-top: 10vh;">
 
                 <h6 class="my-4">Filtros</h6>
 
@@ -69,28 +69,31 @@
             </div>
             <!-- /.col-lg-3 -->
 
-            <div class="col-lg-9" style="margin-top: 20vh;">
+            <div class="col-lg-9" style="margin-top: 10vh;">
 
-                <div class="row text-center">
+                <div class="row">
 
                     <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts">
                         <ItemTemplate>
 
                             <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="card h-100 border-white">
-                                    <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
-                                        <img class="img" width="200" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
-
+                                <div class="card h-100 border-white">                                                                        
+                                       <center> <div class="text-center" style="height:215px; width:215px">
+                                            <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
+                                        <img style='height: 100%; width: 100%; object-fit: contain' src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
+                                        </div> </center>
+                                    
 
 
                                     <div class="card-body">
                                         <!-- card body -->
-                                        <h4 class="card-title m-auto text-center">
-                                            <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>' class="text-decoration-none text-dark">
+                                        <h4 class="card-title text-center">
+                                            <h5 class="text-center text-success"><%# Eval("preco") %> €</h5>
+                                        </h4>
+                                        <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>' class="text-decoration-none text-dark text-center">
                                                 <h5><%# Eval("nome") %></h5>
                                             </a>
-                                        </h4>
-                                        <h5><%# Eval("preco") %> €</h5>
+                                        
 
                                     </div>
                                     <!-- //card body -->
