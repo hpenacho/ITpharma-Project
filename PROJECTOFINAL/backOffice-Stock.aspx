@@ -85,6 +85,11 @@
 
         <div class="container">
             <div class="collapse my-4" id="collapseExample">
+
+                <h4 class="muted small text-center">you can update all with max restock qty using the restock all button, or individually using the restock selected and 
+                    setting the quantity you want in the qty textbox
+                       </h4>
+
                 <div class="card card-body">
                     <table class="table table-hover table-borderless restock">
                         <thead class="text-center">
@@ -113,11 +118,11 @@
                                         </th>
 
                                         <td style="vertical-align: middle">
-                                            <asp:Label ID="lbl_warehouse" runat="server" Text='<%# Eval("Warehouse") %>'></asp:Label>
+                                            <asp:Label ID="lbl_RestockWarehouse" runat="server" Text='<%# Eval("Warehouse") %>'></asp:Label>
                                         </td>
 
                                         <td style="vertical-align: middle">
-                                            <asp:Label ID="lbl_ProductRef" runat="server" Text='<%# Eval("ProductRef") %>'></asp:Label>
+                                            <asp:Label ID="lbl_restockProductRef" runat="server" Text='<%# Eval("ProductRef") %>'></asp:Label>
                                         </td>
 
                                         <td style="vertical-align: middle">
@@ -125,7 +130,7 @@
                                         </td>
 
                                         <td style="vertical-align: middle">
-                                            <%# Eval("Qtd") %>
+                                            <asp:TextBox ID="txt_restockQty" CssClass="form-control rounded-pill bg-light text-center" TextMode="Number" runat="server" Text='<%# Eval("Qtd") %>'></asp:TextBox>
                                         </td>
 
                                         <td style="vertical-align: middle">
@@ -133,6 +138,9 @@
                                         </td>
 
                                     </tr>
+
+                                    <asp:Label ID="lbl_warehouseID" runat="server" CssClass="text-hide" Text='<%# Eval("warehouseID") %>'></asp:Label>
+                                    <asp:Label ID="lbl_restockQtdMax" runat="server" CssClass="text-hide" Text='<%# Eval("QtdMax") %>'></asp:Label>
 
                                 </ItemTemplate>
                             </asp:Repeater>

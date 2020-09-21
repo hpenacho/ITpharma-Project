@@ -17,6 +17,9 @@ namespace PROJECTOFINAL
 
         }
 
+
+        bool restockIsNeeded;
+
         protected void rpt_infoStock_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.AlternatingItem || e.Item.ItemType == ListItemType.Item)
@@ -136,21 +139,78 @@ namespace PROJECTOFINAL
 
         protected void linkRestockAll_Click(object sender, EventArgs e)
         {
+            int restockQty;
+            int warehouseID;
+            string prodRef;
+           
+            foreach(RepeaterItem item in rpt_itemNeedsRestock.Items)
+            {
+                restockQty = Convert.ToInt32(((Label)item.FindControl("lbl_restockQtdMax")).Text);
+                warehouseID = Convert.ToInt32(((Label)item.FindControl("lbl_warehouseID")).Text);
+                prodRef = ((Label)item.FindControl("lbl_restockProductRef")).Text;
 
+                restockItems(prodRef, restockQty, warehouseID);
+            }
+
+            updateRpt();
+        }
+
+        private void updateRpt()
+        {
+            sqlNeedsRestock.DataBind();
+            rpt_itemNeedsRestock.DataBind();
+            rpt_pickupStock.DataBind();
+            rpt_infoStock.DataBind();
         }
 
         protected void linkRestockSelected_Click(object sender, EventArgs e)
         {
+            int restockQty;
+            int warehouseID;
+            string prodRef;
 
+            foreach (RepeaterItem item in rpt_itemNeedsRestock.Items)
+            {
+                if (((CheckBox)item.FindControl("ck_needsRestock")).Checked)
+                {
+                    restockQty = Convert.ToInt32(((TextBox)item.FindControl("txt_restockQty")).Text);
+                    warehouseID = Convert.ToInt32(((Label)item.FindControl("lbl_warehouseID")).Text);
+                    prodRef = ((Label)item.FindControl("lbl_restockProductRef")).Text;
+
+                    restockItems(prodRef, restockQty, warehouseID);
+                }
+            }
+
+            updateRpt();
         }
 
 
-        private void restockItems()
+        private void restockItems(string productRef, int quantity, int warehouseID)
         {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_restockItems");
 
+            myCommand.Parameters.AddWithValue("@reference", productRef);
+            myCommand.Parameters.AddWithValue("@Qty", quantity);
+            myCommand.Parameters.AddWithValue("@IDpickup", warehouseID);
 
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@warning", SqlDbType.VarChar, 200));
 
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
 
+                System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@warning"].Value.ToString());
+            }
+            catch(SqlException x)
+            {
+                System.Diagnostics.Debug.WriteLine(x.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
 
 
         }
