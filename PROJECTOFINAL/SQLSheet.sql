@@ -1619,3 +1619,129 @@ BEGIN catch
 	set @errorMessage = ERROR_MESSAGE();
 	rollback
 END CATCH
+
+
+/* LOG: TRIGGER */
+
+-- 1º se existir algum registo modificado em que o produto final da mudança seja estado = 1 temos de procurar quais o items e quantidades
+-- para fazer update no stock.
+
+-- //Isto leva-nos a outro problema, porque preciso de saber se foi o stockarmazem ou o stockpickup -> resolvido no if com o ID.Pickup a null
+-- //portanto preciso agora de saber quais as quantidades e os items da tabela, como é a tabela encomenda tenho de fazer o inner join com a compra
+-- //e percorrer para saber que items e quantidades necessito de fazer update
+
+-- Preciso de acrescentar segurança contra o administrador alterar o estado para 1 mesmo que não haja quantidade suficiente no stock para enviar
+-- como fazer chegar-lhe este erro ? isto é um trigger 
+-- preciso de fazer o caso em que é ATM
+-- preciso de acrescentar o bit para que o trigger só corra se o estado só tenha sido alterado 1 vez
+
+
+-- TESTING OUTCOME
+
+--  1 encomenda, 1 item - funciona
+--  1 encomenda, 1 item, mais de que 1 quantidade - funciona
+--  1 encomenda, vários items, mais do que 1 quantidade - funciona
+
+
+/* TESTE DE CASOS */
+
+select * from EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compra.ID_Encomenda order by DataCompra DESC
+select * from StockArmazem where Prod_Ref = 'G43434LO' -- QTD É 10 DE MOMENTO
+
+
+select * from compra order by Compra.ID_Encomenda DESC
+
+-- TESTE
+UPDATE EncomendaHistorico SET ID_Estado = 1 WHERE ENC_REF = 63
+
+
+
+-- TRIGGER PARA QUANTIDADES v1.0 (só está prepardo para update ainda não se tratou do insert)
+GO
+Alter trigger t_updateStockQts on EncomendaHistorico after insert, update AS 
+begin TRY
+begin TRAN
+
+        -- VARIAVEIS
+            DECLARE
+                @cItem varchar(50),
+                @cItemQty int;
+
+        -- CASO 1 | retirar quantidades do armazém principal caso haja uma mudança de 0 para 1 numa compra do armazém principal
+        IF EXISTS (select '*' from inserted inner join deleted on inserted.ENC_REF = deleted.ENC_REF where inserted.ID_Estado = 1 AND inserted.ID_Pickup is null)
+        BEGIN
+
+            -- DEBUGGING
+            SELECT * from inserted inner join deleted on inserted.ENC_REF = deleted.ENC_REF where inserted.ID_Estado = 1 AND inserted.ID_Pickup is null
+
+            -- CURSOR
+            DECLARE CURSOR_COMPRA CURSOR
+            FOR SELECT
+                COMPRA.Prod_ref,
+                COMPRA.Qtd
+            FROM COMPRA INNER JOIN inserted ON COMPRA.ID_Encomenda = inserted.ENC_REF   -- porque precisamos de saber qual é a compra afecta
+
+            -- percorrer a tabela compra para verificar os items e quantidades, relacionar com a inserted para obter o quê... a ENC_REF
+            OPEN CURSOR_COMPRA;
+            FETCH NEXT FROM CURSOR_COMPRA INTO
+                @cItem,  -- O produto na compra
+                @cItemQty; -- a quantidade do produto na compra
+            
+            WHILE @@FETCH_STATUS = 0
+                BEGIN
+                    update StockArmazem set StockArmazem.Qtd -= @cItemQty where StockArmazem.Prod_Ref = @cItem -- para retirar o stock do armazém do produto apropriado
+                    FETCH NEXT FROM CURSOR_COMPRA INTO -- continuar a apanhar rows
+                    @cItem,  -- O produto na compra
+                    @cItemQty; -- a quantidade do produto na compra
+                END
+
+            CLOSE CURSOR_COMPRA;
+            DEALLOCATE CURSOR_COMPRA;
+        END
+
+COMMIT
+end TRY
+begin CATCH
+    PRINT ERROR_MESSAGE();
+    PRINT ERROR_LINE();
+    ROLLBACK;
+END CATCH
+
+
+-- [QUERY] returns all restock items
+
+GO
+alter proc usp_ItemsNeedingRestock AS
+select 'Main Warehouse' as 'Warehouse', 0 AS 'warehouseID' , Produto.Codreferencia as 'ProductRef', Produto.nome as 'ProductName', StockArmazem.Qtd, StockArmazem.QtdMin, StockArmazem.QtdMax
+from StockArmazem inner join Produto on StockArmazem.Prod_Ref = Produto.Codreferencia
+where StockArmazem.Qtd <= StockArmazem.QtdMin
+UNION ALL
+select Pickup.Descricao as 'ATM', StockPickup.ID_Stock_Pickup AS 'warehouseID', Produto.Codreferencia as 'ProductRef', Produto.nome as 'ProductName', StockPickup.Qtd, StockPickup.QtdMin, StockPickup.QtdMax
+from Pickup inner join StockPickup on  StockPickup.ID_Stock_Pickup = Pickup.ID
+            inner join Produto on Produto.Codreferencia = StockPickup.Prod_ref
+where StockPickup.Qtd <= StockPickup.QtdMin
+order by Produto.nome -- determinar qual é a melhor coluna para se ordernar
+
+
+-- [ PROC ] restock items, either all or just a selected few
+
+GO
+ALTER PROC usp_restockItems(@reference varchar(20), @Qty int, @IDpickup int, @warning varchar(200) output) AS
+begin TRY
+BEGIN TRAN
+
+
+        IF @Qty < 0
+            THROW 60001, 'Inserted quantity below 0, update failed' , 10
+
+        IF @IDpickup > 0
+            update StockPickup set StockPickup.Qtd = @Qty where StockPickup.Prod_ref = @reference AND StockPickup.ID_Stock_Pickup = @IDpickup
+        ELSE 
+            update StockArmazem set StockArmazem.Qtd = @Qty where StockArmazem.Prod_Ref = @reference
+
+COMMIT
+END TRY
+BEGIN CATCH
+    set @warning = ERROR_MESSAGE();
+    ROLLBACK;
+END CATCH

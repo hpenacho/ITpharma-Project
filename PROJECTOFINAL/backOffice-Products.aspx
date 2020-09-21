@@ -51,6 +51,12 @@
 
     </script>
 
+    <!-- TESTE -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->  
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </asp:Content>
 
 
@@ -874,9 +880,12 @@
     <!-- //INSERT CATEGORIES Modal -->
 
 
-      
+
     <!-- TESTE -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->  
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->
