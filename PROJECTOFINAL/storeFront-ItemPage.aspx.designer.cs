@@ -33,6 +33,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl txt_itemTitle;
 
         /// <summary>
+        /// lbl_codRef control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_codRef;
+
+        /// <summary>
         /// txt_itemSummary control.
         /// </summary>
         /// <remarks>
