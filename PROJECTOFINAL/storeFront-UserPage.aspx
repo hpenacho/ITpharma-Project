@@ -295,76 +295,74 @@
                             </h5>
                         </div>
 
-                     
+                         <!-- MODAL BODY -->
+                            <div class="modal-body">
 
-                        <!-- MODAL BODY -->
-                        <div class="modal-body">
+                                <asp:UpdatePanel runat="server">
+                                    <ContentTemplate>
 
-                               <asp:UpdatePanel runat="server">
-                            <ContentTemplate>
+                                        <div class="container-fluid">
 
-                            <div class="container-fluid">
+                                            <h4 class="mb-3 mt-2">Schedule or Check your Exams</h4>
 
-                                <h4 class="mb-3 mt-2">Schedule or Check your Exams</h4>
-
-                                <div class="form-group mb-4">
-                                    <div class="form-row">
-                                        <div class="col-lg-5">
-                                            <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control" placeholder="Health Number" required />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <input type="date" id="txt_bloodSchedule" runat="server" class="form-control" />
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <asp:DropDownList ID="ddl_bloodPartners" runat="server" CssClass="form-control" DataSourceID="sqlPartnerships" DataValueField="ID" DataTextField="Parceria"></asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <label id="lblExameWarning" class="text-center text-warning" runat="server"></label>
-                                </div>
-
-                                <div class="collapse my-5" id="collapseExams">
-
-                                    <div class="card card-body text-center">
-                                        <div class="card" style="width: 13rem;">
-                                            <div class="card-body text-center">
-
-                                                <div id="noExam" runat="server">
-                                                    <h4>No exams scheduled or received</h4>
+                                            <div class="form-group mb-4">
+                                                <div class="form-row">
+                                                    <div class="col-lg-5">
+                                                        <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control" placeholder="Health Number" required="required" />
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <input type="date" id="txt_bloodSchedule" runat="server" class="form-control" />
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <asp:DropDownList ID="ddl_bloodPartners" runat="server" CssClass="form-control" DataSourceID="sqlPartnerships" DataValueField="ID" DataTextField="Parceria"></asp:DropDownList>
+                                                    </div>
                                                 </div>
+                                                <label id="lblExameWarning" class="text-center text-warning" runat="server"></label>
+                                            </div>
 
-                                                <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
-                                                        <ItemTemplate>
+                                            <div class="collapse my-5" id="collapseExams">
 
-                                                            <div runat="server">
-                                                                <h4 class="card-title"><%# Eval("parceria") %></h4>
-                                                                <h5 class="card-text"><%# Eval("Descricao") %></h5>
-                                                                <h6 class="small text-muted">Pedido: <%# Eval("DataPedido", "{0:dd/M/yyyy}") %></h6>
-                                                                <a href="#" class="btn btn-warning">Exam</a>
+                                                <div class="card card-body text-center">
+                                                    <div class="card" style="width: 13rem;">
+                                                        <div class="card-body text-center">
+
+                                                            <div id="noExam" runat="server">
+                                                                <h4>No exams scheduled or received</h4>
                                                             </div>
 
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
+                                                            <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
+                                                                <ItemTemplate>
+
+                                                                    <div runat="server">
+                                                                        <h4 class="card-title"><%# Eval("parceria") %></h4>
+                                                                        <h5 class="card-text"><%# Eval("Descricao") %></h5>
+                                                                        <h6 class="small text-muted">Pedido: <%# Eval("DataPedido", "{0:dd/M/yyyy}") %></h6>
+                                                                        <a href="#" class="btn btn-warning">Exam</a>
+                                                                    </div>
+
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-row text-center my-5 d-flex justify-content-center">
+
+                                                <div class="col-lg-12">
+                                                    <asp:Button ID="btn_scheduleBlood" CssClass="btn btn-dark" runat="server" Text="Schedule" OnClick="btn_scheduleBlood_Click" />
+                                                    <a class="btn btn-warning" data-toggle="collapse" href="#collapseExams" role="button" aria-expanded="false" aria-controls="collapseExams">Check Exams</a>
+                                                </div>
 
                                             </div>
                                         </div>
-                                    </div>
 
-                                </div>
-
-                                <div class="form-row text-center my-5 d-flex justify-content-center">
-
-                                    <div class="col-lg-12">
-                                        <asp:Button ID="btn_scheduleBlood" CssClass="btn btn-dark" runat="server" Text="Schedule" OnClick="btn_scheduleBlood_Click" />
-                                         <a class="btn btn-warning" data-toggle="collapse" href="#collapseExams" role="button" aria-expanded="false" aria-controls="collapseExams">Check Exams</a>
-                                    </div>
-
-                                </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
-
-                             </ContentTemplate>
-                        </asp:UpdatePanel>
-                        </div>
-                         <!-- //MODAL BODY -->
+                        <!-- //MODAL BODY -->
 
                           
 

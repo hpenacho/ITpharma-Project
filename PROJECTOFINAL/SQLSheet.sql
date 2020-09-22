@@ -380,59 +380,6 @@ end catch
 GO
 
 
--- [ TRIGGER ] ON ORDER STATUS CHANGE TO ..., UPDATE QUANTITIES
-
-GO
-create or alter trigger t_updateStocks on EncomendaHistorico after insert, update as
-BEGIN TRY
-BEGIN TRAN
-
-	-- quando mudamos o estado da encomenda para 1 (in processing) vamos ver quais são os items e as quantidades 
-	-- e vamos reduzir essa quantidade do stock do pickup ou do armazém consoante.
-
-	-- se houve uma mudança ou seja um registo foi rescrito, houve um delete e um insert do novo registo portanto 
-	-- sabemos que um estado passou de algo para 1 e aqui queremos reduzir consoante o armazém ou pickup.
-
-	-- caso 1 update do armazém, onde é que está a quantidade..na compra
-	-- CURSOR PARA PERCORRER TABELA COMPRA
-
-	IF EXISTS (select '*' from deleted inner join inserted on deleted.ENC_REF = inserted.ENC_REF where inserted.ID_Estado = 1 ) 
-		BEGIN
-
-			DECLARE @compraProdRef as varchar(20)
-			DECLARE @compraProdQtd as int
-
-			DECLARE compraCursor CURSOR FOR  
-			SELECT Compra.Prod_ref, Compra.Qtd
-			FROM Compra inner join inserted on inserted.ENC_REF = Compra.ID_Encomenda
-			WHERE Compra.ID_Encomenda = inserted.ENC_REF
-			OPEN compraCursor;  
-			FETCH NEXT FROM compraCursor INTO @compraProdRef, @compraProdQtd;  
-			WHILE @@FETCH_STATUS = 0  
-			BEGIN
-				IF
-				update StockArmazem set Qtd -= (select compra.qtd from Compra where  )
-				where compra.ID_Encomenda = inserted.ENC_REF
-
-		END
-	END
-
-
-COMMIT
-END TRY
-BEGIN CATCH
-	print ERROR_MESSAGE();
-	ROLLBACK;
-END CATCH
-
-
-
-
-
-
-
-
-
 -- QUERY PARA UTILIZADOR VER A SUA ENCOMENDA NA ÁREA PESSOAL
 
 select EncomendaHistorico.ENC_REF, Estado.Descricao AS 'Estado', EncomendaHistorico.UltimaActualizacao, EncomendaHistorico.DataCompra, sum(Compra.Qtd) ,sum(Compra.Total)
@@ -914,6 +861,18 @@ from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID
 						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 group by enc_ref, datacompra, cliente.nome, id_estado, ultimaActualizacao 
 
+
+-- [PROC] RETURNS ORDER DETAILS
+
+GO
+CREATE PROC usp_returnBackofficeOrderDetails (@EncRef int) as
+select Produto.imagem, Produto.nome, Compra.Qtd, Compra.PriceAtTime, Compra.Total
+from Produto inner join Compra on Compra.Prod_ref = Produto.Codreferencia
+             inner join EncomendaHistorico on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
+where EncomendaHistorico.ENC_REF = @EncRef
+
+
+
 GO
 create or alter proc usp_returnBackofficeOrderProducts (@ID int) as
 select * from Compra inner join produto on compra.Prod_ref = Produto.Codreferencia
@@ -1329,6 +1288,8 @@ BEGIN TRAN
 
 	    select
 	    Produto.Codreferencia as 'Prod_Ref', 
+		Produto.resumo as 'ProdSummary',
+		Categoria.descricao as 'Category',
 	    Produto.imagem as 'ProdImage',
 	    Produto.nome as 'ProdName', 
 	    Produto.preco as 'Unit Price', 
@@ -1336,8 +1297,9 @@ BEGIN TRAN
 	    sum(Produto.preco) as 'itemTotalPrice' 
 
 		from Produto inner join carrinho on Produto.Codreferencia = Carrinho.Prod_ref
+					 inner join Categoria on Produto.ID_Categoria = Categoria.ID
 		where Carrinho.ID_Cliente = IIF(@id_cliente = 0, null, @id_cliente) OR Carrinho.Cookie = @cookies 
-		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco
+		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, produto.resumo, Categoria.descricao
 
 COMMIT
 END TRY
@@ -1350,18 +1312,19 @@ END CATCH
 
 --[PROC] Delete selected Item from specific User's Cart
 go
-create or alter proc usp_DeleteSelectedCartItem(@id_cliente int, @Prod_Ref varchar(20)) AS
+create or alter proc usp_DeleteSelectedCartItem(@id_cliente int, @Prod_Ref varchar(20), @Cookie varchar(50), @warning varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 
-	Delete from carrinho 
-	where ID_Cliente = @id_cliente and
-	Prod_ref = @Prod_Ref
+	IF(@id_cliente = 0)
+		Delete from carrinho where Prod_ref = @Prod_Ref AND Carrinho.Cookie = @Cookie
+	ELSE
+		Delete from carrinho where Prod_ref = @Prod_Ref AND Carrinho.ID_Cliente = @id_cliente 
 
 COMMIT
 END TRY
 BEGIN CATCH
-	print ERROR_MESSAGE();	
+	set @warning = ERROR_MESSAGE();	
 	ROLLBACK;
 END CATCH
 
