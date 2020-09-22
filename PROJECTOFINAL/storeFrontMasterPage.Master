@@ -280,28 +280,26 @@
 
                 <div class="modal fade" id="modal-cart-ii" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
+
                         <div class="modal-content">
 
-                            <div class="modal-body">
-
-                                <asp:UpdatePanel runat="server">
-                                    <ContentTemplate>
+                                    <div class="modal-body">
 
                                         <!-- Shopping cart table -->
                                         <div class="table-responsive">
                                             <table class="table">
-                                                <thead class="thead-dark text-center rounded">
+                                                <thead class="thead-light text-white text-center">
                                                     <tr>
-                                                        <th scope="col" class="border-0 bg-dark text-center text-white">
+                                                        <th scope="col" class="rounded-left text-center">
                                                             <div class="p-1 px-2 text-capitalize">Product</div>
                                                         </th>
-                                                        <th scope="col" class="border-0 bg-dark text-center text-white">
+                                                        <th scope="col" class="text-center">
                                                             <div class="py-1 px-2 text-capitalize">Price</div>
                                                         </th>
-                                                        <th scope="col" class="border-0 bg-dark text-center text-white">
+                                                        <th scope="col" class="text-center">
                                                             <div class="py-1 px-2 text-capitalize">Qty</div>
                                                         </th>
-                                                        <th scope="col" class="border-0 rounded-right bg-dark text-center text-white">
+                                                        <th scope="col" class="rounded-right text-center">
                                                             <div class="py-1 px-2 text-capitalize">Remove</div>
                                                         </th>
                                                     </tr>
@@ -310,6 +308,7 @@
                                                 <!-- FIM CABEÇALHO -->
 
                                                 <tbody>
+
                                                     <asp:Repeater ID="rptModalCart" runat="server" DataSourceID="SqlSourceCart" OnItemDataBound="rptModalCart_ItemDataBound" OnItemCommand="rptModalCart_ItemCommand">
                                                         <ItemTemplate>
 
@@ -341,56 +340,48 @@
 
                                                         </ItemTemplate>
                                                     </asp:Repeater>
+
                                                 </tbody>
                                             </table>
                                         </div>
 
+                                    <!-- MODAL FOOTER -->
+                                    <div class="modal-footer">
 
-                                      </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
+                                        <div class="col-lg-4">
+                                            <ul class="list-unstyled mb-4">
 
-                            <!-- MODAL FOOTER -->
-                            <div class="modal-footer">
-                                  
-                                   <div class="col-lg-4">
-                                    <ul class="list-unstyled mb-4">
+                                                    <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
+                                                        <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
+                                                    </li>
 
-                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
-                                            <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
-                                        </li>
+                                                    <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
+                                                        <label id="lbl_SubTotal" class="text-black font-italic" runat="server"></label>
+                                                    </li>
 
-                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
-                                            <label id="lbl_SubTotal" class="text-black font-italic" runat="server"></label>
-                                        </li>
-
-                                        <li class="d-flex justify-content-between py-1 border-bottom"><strong class="text-black">Order&nbspTotal</strong>
-                                            <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
-                                        </li>
+                                                    <li class="d-flex justify-content-between py-1 border-bottom"><strong class="text-black">Order&nbspTotal</strong>
+                                                        <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
+                                                    </li>
 
                                         <li class="mt-2">
                                             <asp:Button ID="btn_checkout" class="btn btn-success" runat="server" formnovalidate="formnovalidate" Text="Proceed to Checkout" OnClick="btn_checkout_Click" />
                                         </li>
 
-                                    </ul>
-                                </div>
+                                                </ul>
+                                            </div>
 
-                                    <div class="col-lg-12">
-                                        <label id="lbl_erros" class="text-danger small" style="margin-left: 6em" runat="server"></label>
-                                    </div>
-                            </div>
-                            <!-- //MODAL FOOTER -->
+                                            <div class="col-lg-12">
+                                                <label id="lbl_erros" class="text-danger small" runat="server"></label>
+                                            </div>
+                                        </div>
+                                        <!-- //MODAL FOOTER -->
+                            </div><!-- MODLA BODY -->
                         </div>
                     </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
         <!-- //GET A LOAD OF THIS SHOPPING CART -->
-
-
-
-
-
 
 
 
