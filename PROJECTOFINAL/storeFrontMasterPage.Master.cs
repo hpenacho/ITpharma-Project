@@ -222,7 +222,7 @@ namespace PROJECTOFINAL
                 SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
 
                 myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
-                myCommand.Parameters.AddWithValue("@Prod_Ref", Convert.ToInt32(e.CommandArgument));
+                myCommand.Parameters.AddWithValue("@Prod_Ref", e.CommandArgument.ToString());
                 myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"].Value);
 
                 //OUTPUT - ERROR MESSAGES
