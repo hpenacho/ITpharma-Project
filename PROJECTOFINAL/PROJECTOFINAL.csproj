@@ -469,8 +469,12 @@
     <Content Include="News\news.xslt" />
     <Content Include="News\newsUserControl.ascx" />
     <Content Include="Resources\images\criss-cross.png" />
+    <Content Include="Resources\images\fallAd1.png" />
     <Content Include="Resources\images\PHARMALOGO.png" />
     <Content Include="Resources\images\register-nurse.jpg" />
+    <Content Include="Resources\images\summerAd.png" />
+    <Content Include="Resources\images\winterAd1.png" />
+    <Content Include="Resources\images\winterAd2.png" />
     <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="SQLSheet - HUGO.sql" />
     <Content Include="SQLSheet.sql" />

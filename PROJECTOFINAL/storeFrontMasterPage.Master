@@ -87,7 +87,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
         <!-- Navigation -->
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top py-3 pb-1 bg-white shadow shadow-sm">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top py-2 pb-1 bg-white shadow shadow-sm mb-3">
             <div class="container">
                 <a class="navbar-brand text-dark" href="storeFront-Index.aspx">
                     <img src="Resources/images/PHARMALOGO.png" width="50" alt=""> ITpharma
