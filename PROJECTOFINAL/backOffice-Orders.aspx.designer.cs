@@ -15,13 +15,31 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// rpt_parent_orders control.
+        /// rpt_orders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpt_parent_orders;
+        protected global::System.Web.UI.WebControls.Repeater rpt_orders;
+
+        /// <summary>
+        /// rpt_orderDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_orderDetails;
+
+        /// <summary>
+        /// sqlSourceOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlSourceOrders;
 
         /// <summary>
         /// sqlSourceOrderDetails control.

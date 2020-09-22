@@ -62,7 +62,6 @@
       }
 
 
-
       /* SEARCH CSS */
 
       #searchBox{
@@ -73,11 +72,9 @@
           border-radius: 20px;
       }
 
-      /* UNDER NAV */
-
-      #undernav{
-          /*background-color: #95D426;*/
-          background-color: #8DC942;
+      /* OVERFLOW CART */
+      .table-responsive {
+            max-height:400px;
       }
       
   </style>
@@ -136,7 +133,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" data-toggle="modal" data-target="#cartModal" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart" style="font-size:18px"></i></button>
+                            <button type="button" class="nav-link btn bg-transparent" id="modal-cart" data-toggle="modal" data-target="#modal-cart-ii" formnovalidate="formnovalidate"><i class="fas fa-shopping-cart" style="font-size:18px"></i></button>
                         </li>
 
                     </ul>
@@ -277,104 +274,137 @@
         <!-- //LOGIN MODAL -->
 
 
-        <!-- SHOPPING CART MODAL -->
-            <div class="modal fade" id="cartModal">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+        <!-- GET A LOAD OF THIS SHOPPING CART -->
+        <asp:UpdatePanel ID="updateModalCart" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+            <ContentTemplate>
 
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">Your Cart Items</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
+                <div class="modal fade" id="modal-cart-ii" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
 
-                  <!-- Modal body -->
-                  <div class="modal-body">
-                                                                                             
-             <asp:Repeater ID="rpt_carrinho" runat="server" DataSourceID="SqlSourceCart" OnItemCommand="rpt_carrinho_ItemCommand" OnItemDataBound="rpt_carrinho_ItemDataBound">
-                          
-        <HeaderTemplate>
-            <div class="container d-flex justify-content-center" >
-                        <div class="table-responsive-xl">
-                        <table class="table table-light table-bordered table-striped table-hover w-auto">
-                            <thead class="thead-light">
-                        <tr> 
-                            <th class="text-center"></th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Qty</th>
-                            <th class="text-center">Item Total</th>
-                            
-                            <th></th>                           
-                        </tr>  
-                                </thead>
-        </HeaderTemplate>
-            <ItemTemplate>
-                
-                    
-                     <tr class="text-center">
-                                                                  
-                          <td class="align-middle">
-                                    <img src="<%# "data: image; base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" class="resizeImg" alt="prod_image" />
-                                </td>
-                                <td class="align-middle">
-                                    <label class="col-form-label"><%# Eval("ProdName") %></label>
-                                </td>
-                                <td class="align-middle">
-                                    <label class="col-form-label"><%# Eval("Unit Price") %> €</label>
-                                </td>
-                                <td class="align-middle">
-                                    <label class="col-form-label"><%# Eval("Qty") %></label>
-                                </td>
-                                <td class="align-middle">
-                                    <label class="col-form-label"><%# Eval("itemTotalPrice") %> €</label>
-                                </td>
+                            <div class="modal-body">
+
+                                <asp:UpdatePanel runat="server">
+                                    <ContentTemplate>
+
+                                        <!-- Shopping cart table -->
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="thead-dark text-center rounded">
+                                                    <tr>
+                                                        <th scope="col" class="border-0 bg-dark text-center text-white">
+                                                            <div class="p-1 px-2 text-capitalize">Product</div>
+                                                        </th>
+                                                        <th scope="col" class="border-0 bg-dark text-center text-white">
+                                                            <div class="py-1 px-2 text-capitalize">Price</div>
+                                                        </th>
+                                                        <th scope="col" class="border-0 bg-dark text-center text-white">
+                                                            <div class="py-1 px-2 text-capitalize">Qty</div>
+                                                        </th>
+                                                        <th scope="col" class="border-0 rounded-right bg-dark text-center text-white">
+                                                            <div class="py-1 px-2 text-capitalize">Remove</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <!-- FIM CABEÇALHO -->
+
+                                                <tbody>
+                                                    <asp:Repeater ID="rptModalCart" runat="server" DataSourceID="SqlSourceCart" OnItemDataBound="rptModalCart_ItemDataBound" OnItemCommand="rptModalCart_ItemCommand">
+                                                        <ItemTemplate>
+
+                                                            <tr>
+                                                                <td class="row justify-content-between" style="vertical-align:middle">
+                                                                    <div class="col">
+                                                                        <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="" width="80" class="align-middle" style="vertical-align:middle">
+                                                                    </div>
+                                                                    <div class="col ml-3 d-inline-block align-content-end" style="vertical-align:middle">
+                                                                        <h5 class="mb-0"><a href="storeFront-itemPage.aspx?prod=<%# Eval("Prod_Ref") %>" class="text-dark d-inline-block"><%# Eval("ProdName") %></a></h5>
+                                                                        <h6 class="small text-muted"><%# Eval("ProdSummary") %></h6>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td class="align-middle text-center">
+                                                                    <asp:Label ID="lb_total" runat="server" Font-Bold="true" Text=""><%# Eval("Unit Price") %> €</asp:Label>
+                                                                </td>
+
+                                                                <td class="align-middle text-center">
+                                                                    <asp:LinkButton ID="link_diminuirQtd" CommandName="link_diminuirQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small p-2 mr-1 rounded" runat="server"><i class="fas fa-minus"></i></i></asp:LinkButton>
+                                                                    <asp:Label ID="lb_Qtd" runat="server" Font-Bold="true" Text='<%# Eval("Qty") %>'></asp:Label>
+                                                                    <asp:LinkButton ID="link_AumentarQtd" CommandName="link_AumentarQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small ml-1 p-2 rounded" runat="server"><i class="fas fa-plus"></i></asp:LinkButton>
+                                                                </td>
+
+                                                                <td class="align-middle text-center">
+                                                                    <asp:LinkButton ID="linkDeleteCartItem" class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
+                                                                </td>
+                                                            </tr>
+
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
 
-                            <td class="align-middle">
-                                <asp:ImageButton ID="btn_removeItem" CommandName="btn_removeItem" ImageURL="~/Resources/images/criss-cross.png" runat="server" formnovalidate="formnovalidate"/>
-                            </td>
-                     </tr>
-                </ItemTemplate>
+                                      </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
 
-        <FooterTemplate>
-            
-                    </table>
+                            <!-- MODAL FOOTER -->
+                            <div class="modal-footer">
+                                  
+                                   <div class="col-lg-4">
+                                    <ul class="list-unstyled mb-4">
+
+                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
+                                            <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
+                                        </li>
+
+                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
+                                            <label id="lbl_SubTotal" class="text-black font-italic" runat="server"></label>
+                                        </li>
+
+                                        <li class="d-flex justify-content-between py-1 border-bottom"><strong class="text-black">Order&nbspTotal</strong>
+                                            <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
+                                        </li>
+
+                                        <li class="mt-2">
+                                            <asp:Button ID="btn_checkout" class="btn btn-success" runat="server" Text="Proceed to Checkout" OnClick="btn_checkout_Click" />
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                    <div class="col-lg-12">
+                                        <label id="lbl_erros" class="text-danger small" style="margin-left: 6em" runat="server"></label>
+                                    </div>
+                            </div>
+                            <!-- //MODAL FOOTER -->
+                        </div>
                     </div>
-                    </div>
-                </FooterTemplate>
-
-    </asp:Repeater>
-
-
-                      <asp:SqlDataSource ID="SqlSourceCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
-                          <SelectParameters>
-                              <asp:Parameter Name="id_cliente" Type="Int32" DefaultValue="0" />
-                              <asp:CookieParameter CookieName="noLogID" Name="cookies" Type="String" />
-                          </SelectParameters>
-                      </asp:SqlDataSource>
-
-
-                  </div>
-
-                  <!-- Modal footer -->
-                  <div class="modal-footer justify-content-between">
-                      <p class="text-muted">Sub-Total: <label class="col-form-label" id="lbl_SubTotal" runat="server"> [123]</label> </p>
-                      <p class="text-muted">Tax (6%): <label class="col-form-label" id="lbl_tax" runat="server"> [tax]</label> </p>
-                      <b>Final Price: <label class="col-form-label" id="lbl_Total" runat="server"> [total]</label>  </b>
-                      <asp:Button ID ="btn_checkout" class="btn btn-success" runat="server" Text="Proceed to Checkout" OnClick="btn_checkout_Click"/>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>                                            
-                  </div>
-
                 </div>
-                  </div>
-                </div>
-        <!-- /END OF CART MODAL -->
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <!-- //GET A LOAD OF THIS SHOPPING CART -->
 
 
-          <!-- Bootstrap core JavaScript -->
+
+
+
+
+
+
+        <!-- Bootstrap core JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <!-- Sql Source -->
+        <asp:SqlDataSource ID="SqlSourceCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
+            <SelectParameters>
+                <asp:Parameter Name="id_cliente" Type="Int32" DefaultValue="0" />
+                <asp:CookieParameter CookieName="noLogID" Name="cookies" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
 
 
     </form>

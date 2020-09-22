@@ -11,6 +11,22 @@
 
     </script>
 
+    <style>
+
+        table{
+            text-align:center;
+            vertical-align: middle;
+        }
+
+    </style>
+
+
+    <!-- TESTE -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->  
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 
 </asp:Content>
@@ -34,9 +50,7 @@
                 <div class="card-body">
 
                     <div class="table-responsive">
-
                         <table class="table orders table-hover" id="">
-
                             <thead>
                                 <!-- HEADER OF THE TABLE -->
                                 <tr class="text-muted text-center">
@@ -53,7 +67,7 @@
 
                             <tbody class="text-center">
 
-                                <asp:Repeater ID="rpt_parent_orders" runat="server" DataSourceID="sqlSourceOrderDetails" OnItemDataBound="rpt_parent_orders_ItemDataBound" OnItemCommand="rpt_parent_orders_ItemCommand">
+                                <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlSourceOrderDetails" OnItemCommand="rpt_parent_orders_ItemCommand">
                                     <ItemTemplate>
 
                                         <!-- ORDERS -->
@@ -85,7 +99,7 @@
                                             </td>
 
                                             <td style="vertical-align: middle">
-                                                <button type="button" class="btn btn-warning" data-toggle="collapse" data-target='#collapseExample<%# Eval("Ref") %>' aria-expanded="false" aria-controls='collapseExample<%# Eval("Ref") %>'><i class="fas fa-sort-down"></i></button>
+                                                <asp:LinkButton ID="link_orderDetails" CommandName="link_orderDetails" CommandArgument='<%# Eval("Ref") %>' CssClass="btn btn-warning" runat="server"><i class="fas fa-info"></i></asp:LinkButton>
                                             </td>
 
                                             <td style="vertical-align: middle">
@@ -95,85 +109,10 @@
                                         </tr>
 
                                         <!-- //ORDERS -->
-
-                                        <!-- ORDER PRODUCT -->
-                                        <tr class="collapse" id='collapseExample<%# Eval("Ref") %>'>
-                                            <asp:HiddenField ID="hidden_Order_ID" Value='<%# Eval("Ref") %>' runat="server" />
-
-                                            <td colspan="8">
-
-                                                <div class="col-lg-12 d-flex justify-content-between bg-dark pt-1 pb-1 rounded text-light mb-4">
-
-                                                    <div class="col-lg-2">
-                                                        #
-                                                    </div>
-
-                                                    <div class="col-lg-2">
-                                                        Ref
-                                                    </div>
-
-                                                    <div class="col-lg-1">
-                                                        Qty
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        Name
-                                                    </div>
-
-                                                    <div class="col-lg-1">
-                                                        Price
-                                                    </div>
-
-                                                    <div class="col-lg-2">
-                                                        Total
-                                                    </div>
-                                                </div>
-
-                                                <asp:Repeater ID="rpt_child_orders" runat="server">
-                                                    <ItemTemplate>
-
-                                                        <div class="col-lg-12 mt-3 mb-3 d-flex justify-content-between">
-
-
-                                                            <div class="col-lg-2">
-                                                                <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
-                                                            </div>
-
-                                                            <div class="col-lg-2">
-                                                                <label class="col-form-label"><%# Eval("Prod_ref") %></label>
-                                                            </div>
-
-                                                            <div class="col-lg-1">
-                                                                <label class="col-form-label"><%# Eval("Qtd") %></label>
-                                                            </div>
-
-                                                            <div class="col-lg-4">
-                                                                <label class="col-form-label"><%# Eval("Nome") %></label>
-                                                            </div>
-
-                                                            <div class="col-lg-1">
-                                                                <label class="col-form-label"><%# Eval("PriceAtTime") %> €</label>
-                                                            </div>
-
-                                                            <div class="col-lg-2">
-                                                                <label class="col-form-label"><%# Eval("Total") %> €</label>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-
-                                            </td>
-                                        </tr>
-                                        <!-- //ORDER PRODUCT -->
-
                                     </ItemTemplate>
                                 </asp:Repeater>
-
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -181,7 +120,73 @@
      </div>
 
 
-    <!-- Returns the order details -->
+    <!-- ORDER MODAL -->
+    <div class="modal fade ml-2" id="order-contents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-light text-center">
+                    <h5 class="modal-title">Order Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="table-responsive">
+                    <table class="table table-borderless" width="100">
+
+                        <tbody>
+                            <asp:Repeater ID="rpt_orderDetails" runat="server" DataSourceID="sqlSourceOrders">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td style="vertical-align: middle;">
+                                            <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="80" class="img-fluid rounded align-middle">
+                                        </td>
+
+                                        <td style="vertical-align: middle;">
+                                            <%# Eval("nome") %>
+                                        </td>
+
+                                        <td style="vertical-align: middle;">
+                                            <%# Eval("Qtd") %>
+                                        </td>
+
+                                        <td style="vertical-align: middle;">
+                                            <%# Eval("PriceAtTime") %> €
+                                        </td>
+
+                                        <td style="vertical-align: middle;">
+                                            <%# Eval("Total") %> €
+                                        </td>
+
+                                    </tr>
+
+                                </ItemTemplate>
+                            </asp:Repeater>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- //ORDER MODAL -->
+
+
+
+
+    <!-- Returns the orders -->
+    <asp:SqlDataSource ID="sqlSourceOrders" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnBackofficeOrderDetails" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Name="EncRef" Type="Int32" />
+        </SelectParameters>
+     </asp:SqlDataSource>
+
+    <!-- Returns order's details -->
     <asp:SqlDataSource ID="sqlSourceOrderDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnBackofficeOrders" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
     <!-- Order Status  -->

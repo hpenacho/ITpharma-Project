@@ -21,6 +21,12 @@ namespace PROJECTOFINAL
 
         }
 
+        protected void searchBox_TextChanged(object sender, EventArgs e)
+        {
+            Session["searchQuery"] = searchBox.Text;
+            Response.Redirect("storeFront-Shop.aspx");
+        }
+
 
         private void loginCheck()
         {
@@ -65,7 +71,7 @@ namespace PROJECTOFINAL
 
         public void updateCart()
         {
-            rpt_carrinho.DataBind();
+            rptModalCart.DataBind();
         }
 
         protected void btn_login_Click(object sender, EventArgs e)
@@ -153,6 +159,7 @@ namespace PROJECTOFINAL
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() == "")
                 {
                     Tools.email(txt_recoverPassword.Value, body + pass, subject);
+                    lbl_recoverWarning.InnerText = "You'll receive a recovery email soon.";
                 }
                 else
                 {
@@ -170,49 +177,26 @@ namespace PROJECTOFINAL
 
         }
 
-        protected void rpt_carrinho_ItemCommand(object source, RepeaterCommandEventArgs e)
+
+
+        // CART
+
+        protected void btn_checkout_Click(object sender, EventArgs e)
         {
-            if (e.CommandName.Equals("btn_removeItem"))
-            {
-
-                SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
-
-                myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
-                myCommand.Parameters.AddWithValue("@Prod_Ref", e.CommandArgument.ToString());
-
-                //OUTPUT - ERROR MESSAGES
-                //myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
-
-                try
-                {
-                    Tools.myConn.Open();
-                    myCommand.ExecuteNonQuery();
-
-                }
-                catch (SqlException m)
-                {
-                    System.Diagnostics.Debug.WriteLine(m.Message);
-                }
-                finally
-                {
-                    Tools.myConn.Close();
-                }
-
-            }
+            Response.Redirect("storeFront-Checkout.aspx");
         }
 
         Decimal total = 0;
         int qtdTotal = 0;
 
-        protected void rpt_carrinho_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void rptModalCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Decimal tax = 0;
             Decimal subTotal = 0;
-            
+
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 DataRowView dr = (DataRowView)e.Item.DataItem;
-                ((ImageButton)e.Item.FindControl("btn_removeItem")).CommandArgument = dr["Prod_Ref"].ToString();
                 total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
                 qtdTotal += int.Parse(dr["Qty"].ToString());
             }
@@ -221,9 +205,9 @@ namespace PROJECTOFINAL
             tax = Decimal.Multiply(total, 0.06m);
             subTotal = total - tax;
 
-            lbl_SubTotal.InnerText = Math.Round(subTotal, 2).ToString();
-            lbl_tax.InnerText = Math.Round(tax, 2).ToString();
-            lbl_Total.InnerText = total.ToString();
+            lbl_SubTotal.InnerText = Math.Round(subTotal, 2).ToString() + " €";
+            lbl_tax.InnerText = Math.Round(tax, 2).ToString() + " €";
+            lbl_Total.InnerText = total.ToString() + " €";
             //Session variables for carrying totals to the checkout Page easily
             Session["qtdTotal"] = qtdTotal;
             Session["clientSubTotal"] = Math.Round(subTotal, 2).ToString();
@@ -231,15 +215,36 @@ namespace PROJECTOFINAL
             Session["finalTotal"] = total.ToString();
         }
 
-        protected void btn_checkout_Click(object sender, EventArgs e)
+        protected void rptModalCart_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("storeFront-Checkout.aspx");
-        }
+            if (e.CommandName.Equals("linkDeleteCartItem"))
+            {
+                SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
 
-        protected void searchBox_TextChanged(object sender, EventArgs e)
-        {
-            Session["searchQuery"] = searchBox.Text;
-            Response.Redirect("storeFront-Shop.aspx");
+                myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
+                myCommand.Parameters.AddWithValue("@Prod_Ref", Convert.ToInt32(e.CommandArgument));
+                myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"].Value);
+
+                //OUTPUT - ERROR MESSAGES
+                myCommand.Parameters.Add(Tools.errorOutput("@warning", SqlDbType.VarChar, 200));
+
+                try
+                {
+                    Tools.myConn.Open();
+                    myCommand.ExecuteNonQuery();
+                    System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@warning"].Value.ToString());
+                }
+                catch (SqlException m)
+                {
+                    System.Diagnostics.Debug.WriteLine(m.Message);
+                }
+                finally
+                {
+                    Tools.myConn.Close();
+                    updateCart();
+                }
+
+            }
         }
     }
 }
