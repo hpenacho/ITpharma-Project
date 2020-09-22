@@ -369,7 +369,7 @@
                                         </li>
 
                                         <li class="mt-2">
-                                            <asp:Button ID="btn_checkout" class="btn btn-success" runat="server" Text="Proceed to Checkout" OnClick="btn_checkout_Click" />
+                                            <asp:Button ID="btn_checkout" class="btn btn-success" runat="server" formnovalidate="formnovalidate" Text="Proceed to Checkout" OnClick="btn_checkout_Click" />
                                         </li>
 
                                     </ul>
