@@ -11,15 +11,6 @@ body {
   margin-bottom: 30px;
 }
 
-.carousel-item {
-    min-height: 360px;
-    background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cpver;
-}
-
 .portfolio-item {
     margin-bottom: 30px;
 }

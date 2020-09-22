@@ -22,7 +22,7 @@ namespace PROJECTOFINAL
         public static string nrSaude { get; set; }
         public static char gender { get; set; }
         public static string codPostal { get; set; }
-        public static DateTime birthday { get; set; }
+        public static DateTime? birthday { get; set; } = null;
 
 
 
