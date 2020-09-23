@@ -18,10 +18,13 @@ namespace PROJECTOFINAL
 
         private void bannerAds()
         {
-        
+            bool hasGender = false;
+            if (Client.gender == 'M' || Client.gender == 'F')
+                hasGender = true;
+
             SqlCommand myCommand = Tools.SqlProcedure("usp_getRelevantAds");
 
-            myCommand.Parameters.AddWithValue("@clientGender", Client.gender != 'M' || Client.gender != 'F' ? (object)DBNull.Value : Client.gender);
+            myCommand.Parameters.AddWithValue("@clientGender", hasGender ? Client.gender : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@clientBirthday", Client.birthday == null ? (object)DBNull.Value : Convert.ToDateTime(Client.birthday));
 
             
@@ -40,6 +43,7 @@ namespace PROJECTOFINAL
 
                     ad.binaryImg = (byte[])reader["imagem"];
                     ad.Description = reader["descricao"].ToString();
+                    ad.type = (bool)reader["adType"];
                     advertList.Add(ad);
                     System.Diagnostics.Debug.WriteLine(ad.Description.ToString()) ;
                 }
@@ -54,6 +58,11 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
             }
+
+            imgSlotSeasonal.Src = advertList.Where(x => x.Description == )
+
+
+
         }
     
     
@@ -64,6 +73,7 @@ namespace PROJECTOFINAL
     {
         public byte[] binaryImg { get; set; }
         public string Description { get; set; }
+        public bool type { get; set; }
 
     }
 }
