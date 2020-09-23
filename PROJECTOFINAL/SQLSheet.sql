@@ -1713,3 +1713,49 @@ BEGIN CATCH
     set @warning = ERROR_MESSAGE();
     ROLLBACK;
 END CATCH
+
+
+-- [QUERY] returns focused ads depending on the type of client shopping at the moment. [INCOMPLETE] needs to account for future client types
+
+GO
+ALTER PROC usp_getRelevantAds(@clientGender char(1), @clientBirthday date) AS
+BEGIN TRY
+BEGIN TRAN
+
+    declare @clientAge int
+    declare @clientType varchar(20) -- inicialização a nulo
+
+    if(@clientBirthday is not null)
+    BEGIN
+        set @clientAge = DATEDIFF(year, @clientBirthday, GETDATE()) - iif(datepart(dayofyear, @clientBirthday) > datepart (dayofyear , getdate()), 1, 0)
+
+        set @clientType = case 
+            when @clientAge < 25 then 'Young'
+            when @clientAge between 25 and 60 then 'Adult'
+            when @clientAge > 60 then 'Old'
+        end
+    END
+
+    SELECT Publicidade.Imagem, Pub_Sazonal.Descricao 
+    FROM Publicidade inner join Pub_Sazonal on Publicidade.ID_Pub_Sazonal = Pub_Sazonal.ID
+    WHERE getdate() between Pub_Sazonal.DataStart and Pub_Sazonal.DataExpiracao 
+
+    UNION
+
+    Select Publicidade.Imagem, Pub_Cliente.Descricao 
+    FROM Publicidade inner join Pub_Cliente on Publicidade.ID_Pub_Cliente = Pub_cliente.ID
+    WHERE Pub_Cliente.Descricao LIKE IIF(@clientType IS NULL, '[^MF]%', @clientType) OR LEFT(Pub_Cliente.Descricao, 1) LIKE IIF(@clientGender IS NULL, '[MF]%', @clientGender)
+    
+    COMMIT
+    END TRY
+    begin catch
+        print error_message();
+        rollback;
+    end catch
+
+
+    -- 1º teste nulo, nulo deve aparecer tudo check
+    -- 2º teste genero, nulo deve aparecer tudo e apenas 1 genero check
+    -- 3º teste nulo, idade deve aparecer todos os generos e apenas aquela idade check
+
+    exec usp_getRelevantAds 'M', '1989-01-01'
