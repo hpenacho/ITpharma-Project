@@ -51,7 +51,8 @@ namespace PROJECTOFINAL
                    Client.codPostal = reader["codPostal"].ToString();
                    Client.NIF = reader["nif"].ToString();
                    Client.nrSaude = reader["nrSaude"].ToString();
-
+                   Client.birthday = Convert.ToDateTime(reader["dataNascimento"].ToString());
+                   Client.gender = Convert.ToChar(reader["sexo"].ToString());
                    Client.isLogged = true;
                    Client.social = true;
                 }

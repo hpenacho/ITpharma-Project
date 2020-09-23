@@ -20,7 +20,7 @@ namespace PROJECTOFINAL
         public static string address { get; set; }
         public static string NIF { get; set; }
         public static string nrSaude { get; set; }
-        public static char gender { get; set; }
+        public static char? gender { get; set; }
         public static string codPostal { get; set; }
         public static DateTime? birthday { get; set; } = null;
 
@@ -38,10 +38,9 @@ namespace PROJECTOFINAL
             NIF = null;
             nrSaude = null;
             codPostal = null;
-
+            gender = null;
+            birthday = null;           
         }
-
-
 
     }
 }
