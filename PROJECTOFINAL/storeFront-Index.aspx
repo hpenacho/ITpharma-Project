@@ -17,7 +17,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <header>
-        <div class="container mt-5">
+        <div class="container mt-5 pl-5 pr-5">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

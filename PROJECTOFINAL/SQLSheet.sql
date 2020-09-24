@@ -1759,3 +1759,38 @@ BEGIN TRAN
     -- 3º teste nulo, idade deve aparecer todos os generos e apenas aquela idade check
 
     exec usp_getRelevantAds 'M', '1989-01-01'
+
+
+	-- [ QUERY ] directed ads
+GO
+CREATE OR ALTER PROC [dbo].[usp_PersonalizedAds] (@ClienteID int, @Cookie varchar(100)) AS 
+BEGIN TRY
+BEGIN TRAN
+
+DECLARE @interest table(
+    cName varchar(100) null,
+    cTimes int null
+)
+
+insert into @interest
+select top 3 Categoria.descricao as 'Category', Count(Categoria.ID) as 'Category#'
+from  EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compra.ID_Encomenda
+                         inner join Cliente on EncomendaHistorico.ID_Cliente = Cliente.ID
+                         inner join Produto on Compra.Prod_ref = Produto.Codreferencia
+                         inner join Categoria on Produto.ID_Categoria = Categoria.ID
+                         inner join Carrinho on Carrinho.Prod_ref = Produto.Codreferencia
+where Carrinho.Cookie = @Cookie or EncomendaHistorico.ID_Cliente = IIF(@ClienteID = 0, null, @ClienteID)
+GROUP by Categoria.descricao
+ORDER BY 'Category#' desc
+
+
+select Produto.imagem, Produto.nome, Produto.preco 
+from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
+where Categoria.descricao in (select cName from @interest)
+ORDER BY Produto.nome
+
+COMMIT
+END TRY
+BEGIN CATCH
+    ROLLBACK;
+END CATCH
