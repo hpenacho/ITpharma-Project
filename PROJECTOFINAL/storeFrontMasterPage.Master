@@ -73,9 +73,9 @@
       }
 
       /* OVERFLOW CART */
-      .table-responsive {
-            max-height:400px;
-      }
+      /*.table-responsive {
+            max-height:600px;
+      } */
       
   </style>
 
@@ -313,11 +313,11 @@
                                                         <ItemTemplate>
 
                                                             <tr>
-                                                                <td class="row justify-content-between" style="vertical-align:middle">
-                                                                    <div class="col">
-                                                                        <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="" width="80" class="align-middle" style="vertical-align:middle">
+                                                                <td class="row justify-content-around" style="vertical-align:middle">
+                                                                    <div class="col" style="max-width:110px; height:110px; min-width:110px;">
+                                                                        <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="" class="align-middle" style="vertical-align:middle; height: 100%; width: 100%; object-fit: contain; overflow:hidden">
                                                                     </div>
-                                                                    <div class="col ml-3 d-inline-block align-content-end" style="vertical-align:middle">
+                                                                    <div class="col ml-2 d-inline-block align-content-end align-self-center">
                                                                         <h5 class="mb-0"><a href="storeFront-itemPage.aspx?prod=<%# Eval("Prod_Ref") %>" class="text-dark d-inline-block"><%# Eval("ProdName") %></a></h5>
                                                                         <h6 class="small text-muted"><%# Eval("ProdSummary") %></h6>
                                                                     </div>
@@ -327,10 +327,12 @@
                                                                     <asp:Label ID="lb_total" runat="server" Font-Bold="true" Text=""><%# Eval("Unit Price") %> €</asp:Label>
                                                                 </td>
 
-                                                                <td class="align-middle text-center">
-                                                                    <asp:LinkButton ID="link_diminuirQtd" CommandName="link_diminuirQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small p-2 mr-1 rounded" runat="server"><i class="fas fa-minus"></i></i></asp:LinkButton>
-                                                                    <asp:Label ID="lb_Qtd" runat="server" Font-Bold="true" Text='<%# Eval("Qty") %>'></asp:Label>
-                                                                    <asp:LinkButton ID="link_AumentarQtd" CommandName="link_AumentarQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small ml-1 p-2 rounded" runat="server"><i class="fas fa-plus"></i></asp:LinkButton>
+                                                                <td class="text-center">
+                                                                    <div>                                                           
+                                                                        <asp:LinkButton ID="link_diminuirQtd" CommandName="link_diminuirQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small p-2 mr-1 rounded" runat="server"><i class="fas fa-minus"></i></i></asp:LinkButton>
+                                                                        <asp:Label ID="lb_Qtd" runat="server" Font-Bold="true" Text='<%# Eval("Qty") %>'></asp:Label>   
+                                                                        <asp:LinkButton ID="link_AumentarQtd" CommandName="link_AumentarQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small ml-1 p-2 rounded" runat="server"><i class="fas fa-plus"></i></asp:LinkButton>
+                                                                                    </div>
                                                                 </td>
 
                                                                 <td class="align-middle text-center">

@@ -437,10 +437,10 @@ BEGIN TRY
 BEGIN TRAN
 
 	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao)
-		THROW 60001,'The category specified already exists' , 10;
+		THROW 60001,'The Category specified already exists' , 10;
 
 	insert into Categoria values(@descricao)
-	set @errorMessage = 'The item was created successfully';
+	set @errorMessage = 'The Category was created successfully';
 
 COMMIT
 END TRY
@@ -457,10 +457,10 @@ BEGIN TRY
 BEGIN TRAN
 
 	IF EXISTS (SELECT '*' from Marca where descricao = @descricao)
-		THROW 60001,'The brand specified already exists' ,10
+		THROW 60001,'The Brand specified already exists' ,10
 
 	insert into Marca values(@descricao)
-	set @errorMessage = 'The item was created successfully';
+	set @errorMessage = 'The Brand was created successfully';
 
 COMMIT
 END TRY
@@ -477,9 +477,13 @@ BEGIN TRY
 BEGIN TRAN
 
 	IF EXISTS (SELECT '*' from Marca where descricao = @descricao AND Marca.ID != @ID)
-		THROW 60001,'The brand specified already exists' , 10
+		THROW 60001,'This Brand name is already in use, try again.' , 10
 
-	update Marca set Marca.descricao = @descricao where Marca.ID = @ID
+	declare @oldBrand varchar (50);
+	set @oldBrand = (SELECT Marca.descricao from Marca where Marca.ID = @ID);
+
+	update Marca set Marca.descricao = @descricao where Marca.ID = @ID	
+	set @errorMessage = CONCAT('The Brand designation was changed from ', @oldBrand , ' to ', @descricao, '.');
 
 COMMIT
 END TRY
@@ -491,15 +495,20 @@ END CATCH
 -- [PROCEDURE] DELETE BRAND
 
 GO 
-CREATE OR ALTER PROC usp_deleteBrand(@ID int) AS
+CREATE OR ALTER PROC usp_deleteBrand(@ID int, @errorMessage varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 
+	declare @oldBrand varchar (50);
+	set @oldBrand = (SELECT Marca.descricao from Marca where Marca.ID = @ID);
+	
 	delete from Marca where Marca.ID = @ID
+	set @errorMessage = Concat('The ',@oldBrand, ' Brand is now deleted.');
 
 COMMIT
 END TRY
 BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
 
@@ -511,9 +520,13 @@ BEGIN TRY
 BEGIN TRAN
 
 	IF EXISTS (SELECT '*' from Categoria where descricao = @descricao AND Categoria.ID != @ID)
-		THROW 60001,'The category specified already exists' , 10
+		THROW 60001,'The Category name is already in use, try again.' , 10
 
-	update Categoria set Categoria.descricao = @descricao where Categoria.ID = @ID
+	declare @oldCat varchar (50);
+	set @oldCat = (SELECT Categoria.descricao from Categoria where Categoria.ID = @ID);
+
+	update Categoria set Categoria.descricao = @descricao where Categoria.ID = @ID	
+	set @errorMessage = CONCAT('The Category designation was changed from ', @oldCat , ' to ', @descricao, '.');
 
 COMMIT
 END TRY
@@ -525,15 +538,20 @@ END CATCH
 -- [PROCEDURE] DELETE CATEGORY
 
 GO 
-CREATE OR ALTER PROC usp_deleteCategory(@ID int) AS
+CREATE OR ALTER PROC usp_deleteCategory(@ID int, @errorMessage varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 
+	declare @oldCat varchar (30);
+	set @oldCat = (SELECT Categoria.descricao from Categoria where Categoria.ID = @ID);
+
 	delete from Categoria where Categoria.ID = @ID
+	set @errorMessage = Concat('The ',@oldCat, ' Category is now deleted.');
 
 COMMIT
 END TRY
 BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
 
@@ -1534,7 +1552,7 @@ create or alter proc usp_itemPageAvailability(@reference varchar(50)) AS
 
 select 'Main Warehouse' as 'DistributionPoint', StockArmazem.Qtd as 'Qty', 
 CASE
-WHEN StockArmazem.Qtd < StockArmazem.QtdMin THEN 'Low Stock'
+WHEN StockArmazem.Qtd between 1 and StockArmazem.QtdMin THEN 'Low Stock'
 WHEN StockArmazem.Qtd < 1 THEN 'Out of Stock'
 ELSE 'In Stock'
 END AS StockStatus
@@ -1545,7 +1563,7 @@ UNION ALL
 
 select Pickup.Descricao  as 'DistributionPoint', StockPickup.Qtd as 'Qty', 
 CASE
-WHEN StockPickup.Qtd < StockPickup.QtdMin THEN 'Low Stock'
+WHEN StockPickup.Qtd between 1 and StockPickup.QtdMin THEN 'Low Stock'
 WHEN StockPickup.Qtd < 1 THEN 'Out of Stock'
 ELSE 'In Stock'
 END AS StockStatus

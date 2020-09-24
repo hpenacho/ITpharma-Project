@@ -38,8 +38,7 @@ namespace PROJECTOFINAL
 
                 if (dr.Read())
                 {
-
-                    mainImage.ImageUrl = "data:image;base64," + Convert.ToBase64String((byte[])dr["imagem"]);
+                    productImg.Src = "data:image;base64," + Convert.ToBase64String((byte[])dr["imagem"]);
                     txt_itemTitle.InnerText = dr["nome"].ToString();
                     control_itemPrice.InnerText = dr["preco"].ToString() + "€";
                     control_productCategory.InnerText = dr["Categoria"].ToString();

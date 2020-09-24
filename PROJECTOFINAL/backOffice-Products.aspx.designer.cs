@@ -402,13 +402,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_updateBrand;
 
         /// <summary>
-        /// lbl_insertBrandError control.
+        /// lbl_BrandMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_insertBrandError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_BrandMessage;
 
         /// <summary>
         /// udptCategory control.
@@ -474,13 +474,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_updateCategory;
 
         /// <summary>
-        /// lbl_insertCategoryError control.
+        /// lbl_CategoryMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_insertCategoryError;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_CategoryMessage;
 
         /// <summary>
         /// SQLcategory control.
