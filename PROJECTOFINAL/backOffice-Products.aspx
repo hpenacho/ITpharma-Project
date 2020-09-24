@@ -787,7 +787,7 @@
 
                     </div>
 
-                    <label class="mt-2 text-center col-12" id="lbl_insertBrandError" runat="server"></label>
+                    <label class="mt-2 text-center col-12" id="lbl_BrandMessage" runat="server"></label>
 
                                    </ContentTemplate>
                         </asp:UpdatePanel>
@@ -863,7 +863,7 @@
 
                     </div>
 
-                    <label class="mt-2 text-center col-12" id="lbl_insertCategoryError" runat="server"></label>
+                    <label class="mt-2 text-center col-12" id="lbl_CategoryMessage" runat="server"></label>
 
 
                         </ContentTemplate>

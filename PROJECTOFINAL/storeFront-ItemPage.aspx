@@ -44,13 +44,16 @@
   <div class="container  mt-5">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">Detalhe do Produto</h1>
+    <h1 class="mt-3 mb-3 text-center">Product Details</h1>
 
     <!-- Portfolio Item Row -->
     <div class="row">
 
-      <div class="col-lg-8 col-md-12 col-sm-12">
-          <asp:Image lass="img-fluid" Width="500" id="mainImage" runat="server" />
+      <div class="col-lg-8 col-md-12 col-sm-12 align-self-center">
+
+          <div class="text-center" style="max-width:500px; height:600px">
+          <img style='height: 100%; width: 100%; object-fit: contain; overflow:hidden' src="#" runat="server" id="productImg"/>
+          </div> 
       </div>
        
       <div class="col-lg-4 mt-5">
@@ -149,7 +152,7 @@
       </div>
 
     <!-- Related Projects Row -->
-    <h3 class="my-4">Produtos Relacionados</h3>
+    <h3 class="my-4">Related Items</h3>
 
     <div class="row">
 
@@ -158,9 +161,10 @@
 
                  <div class="col-md-3 col-sm-6 mb-4 text-center">
                   
+                   <center>  <div class="text-center" style="height:200px; width:200px">
                     <a href="storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>">
-                        <img class="img img-fluid" width="200" src='<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>' alt="">
-                   </a>
+                        <img style='height: 100%; width: 100%; object-fit: contain' src='<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>' alt="">
+                   </a> </div> </center>
                  &nbsp;&nbsp;&nbsp;&nbsp;<h5 class="my-3 text-dark"><%# Eval("nome") %></h5>
                   <h6 class="my-3 text-dark"><%# Eval("preco") %>€</h6>
                 </div>
