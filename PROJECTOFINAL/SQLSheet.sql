@@ -1736,13 +1736,13 @@ BEGIN TRAN
         end
     END
 
-    SELECT Publicidade.Imagem, Pub_Sazonal.Descricao 
+    SELECT Publicidade.Imagem, Pub_Sazonal.Descricao, Publicidade.Tipo as 'adType'
     FROM Publicidade inner join Pub_Sazonal on Publicidade.ID_Pub_Sazonal = Pub_Sazonal.ID
     WHERE getdate() between Pub_Sazonal.DataStart and Pub_Sazonal.DataExpiracao 
 
     UNION
 
-    Select Publicidade.Imagem, Pub_Cliente.Descricao 
+    Select Publicidade.Imagem, Pub_Cliente.Descricao, Publicidade.Tipo as 'adType'
     FROM Publicidade inner join Pub_Cliente on Publicidade.ID_Pub_Cliente = Pub_cliente.ID
     WHERE Pub_Cliente.Descricao LIKE IIF(@clientType IS NULL, '[^MF]%', @clientType) OR LEFT(Pub_Cliente.Descricao, 1) LIKE IIF(@clientGender IS NULL, '[MF]%', @clientGender)
     

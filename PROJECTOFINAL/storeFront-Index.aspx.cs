@@ -59,9 +59,17 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
 
-            imgSlotSeasonal.Src = advertList.Where(x => x.Description == )
+            Random random = new Random();
 
+            List<Advertisements> seasonalAds = advertList.Where(x => x.type == true).ToList();
+            imgSlotSeasonal.Src = "data:image;base64," + Convert.ToBase64String(seasonalAds[random.Next(0,seasonalAds.Count())].binaryImg);
 
+            List<Advertisements> genderAds = advertList.Where(x => x.type == false && (x.Description.Equals("Male") || x.Description.Equals("Female"))).ToList();
+            imgSlotGender.Src = "data:image;base64," + Convert.ToBase64String(genderAds[random.Next(0, genderAds.Count())].binaryImg);
+
+            List<Advertisements> ageAds = advertList.Where(x => x.type == false).ToList();
+            ageAds = ageAds.Except(genderAds).ToList();
+            imgSlotAge.Src = "data:image;base64," + Convert.ToBase64String(ageAds[random.Next(0, ageAds.Count())].binaryImg);
 
         }
     

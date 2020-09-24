@@ -28,13 +28,13 @@
           </ol>
           <div class="carousel-inner" style="border-radius:20px;" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" id="imgSlotSeasonal" runat="server" src="Resources/images/summerAd.png" alt="First slide">
+              <img class="d-block img-fluid" id="imgSlotSeasonal" runat="server" src="#" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" id="imgSlotGender" runat="server" src="Resources/images/winterAd1.png" alt="Second slide">
+              <img class="d-block img-fluid" id="imgSlotGender" runat="server" src="#" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" id="imgSlotAge" runat="server" src="Resources/images/fallAd1.png" alt="Third slide">
+              <img class="d-block img-fluid" id="imgSlotAge" runat="server" src="#" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
