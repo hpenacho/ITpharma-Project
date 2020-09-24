@@ -178,13 +178,13 @@
             color: #ffc000;
         }
 
-
-
         @media only screen and (max-width: 961px) {
             #targetAds {
                 display: none;
             }
         }
+
+
     </style>
 
    
