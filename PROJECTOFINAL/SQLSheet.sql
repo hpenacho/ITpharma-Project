@@ -1031,7 +1031,7 @@ where Produto.Descontinuado = 0
 group by Codreferencia, produto.nome, produto.imagem
 order by 'Most Sold' DESC
 ------------------
-Select top 1 Cliente.nome,DATEDIFF(year,datanascimento,GETDATE()) - iif(datepart(dayofyear,datanascimento) >datepart (dayofyear , getdate()),1,0) as 'age'
+Select top 3 Cliente.nome,DATEDIFF(year,datanascimento,GETDATE()) - iif(datepart(dayofyear,datanascimento) >datepart (dayofyear , getdate()),1,0) as 'age', Cliente.sexo
 from cliente
 order by Cliente.Id desc
 

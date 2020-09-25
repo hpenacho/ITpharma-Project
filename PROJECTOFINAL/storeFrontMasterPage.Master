@@ -108,7 +108,7 @@
                         </li>
 
                           <li class="nav-item">
-                            <a href="storeFront-Shop.aspx" class="nav-link bg-transparent">Pickups</a>
+                            <a href="storeFront-Contacts.aspx" class="nav-link bg-transparent">Contacts</a>
                         </li>
 
 
@@ -144,7 +144,7 @@
 
 
 
-
+        <br />
         <!-- CONTEUDO BODY MASTER -->
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

@@ -469,6 +469,9 @@
     <Content Include="News\news.xslt" />
     <Content Include="News\newsUserControl.ascx" />
     <Content Include="Resources\images\criss-cross.png" />
+    <Content Include="Resources\images\femaleSign.png" />
+    <Content Include="Resources\images\genericUserIcon.png" />
+    <Content Include="Resources\images\maleSign.png" />
     <Content Include="Resources\images\PHARMALOGO.png" />
     <Content Include="Resources\images\register-nurse.jpg" />
     <Content Include="Resources\stylesHoverBox.css" />
@@ -478,6 +481,7 @@
     <Content Include="storeFront-405.aspx" />
     <Content Include="storeFront-activateAcc.aspx" />
     <Content Include="storeFront-Checkout.aspx" />
+    <Content Include="storeFront-Contacts.aspx" />
     <Content Include="storeFront-Exams.aspx" />
     <Content Include="storeFront-Index.aspx" />
     <Content Include="storeFront-ItemPage.aspx" />
@@ -614,6 +618,13 @@
     </Compile>
     <Compile Include="storeFront-Checkout.aspx.designer.cs">
       <DependentUpon>storeFront-Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Contacts.aspx.cs">
+      <DependentUpon>storeFront-Contacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Contacts.aspx.designer.cs">
+      <DependentUpon>storeFront-Contacts.aspx</DependentUpon>
     </Compile>
     <Compile Include="storeFront-Exams.aspx.cs">
       <DependentUpon>storeFront-Exams.aspx</DependentUpon>

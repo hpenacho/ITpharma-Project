@@ -246,7 +246,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img_popProd;
+        protected global::System.Web.UI.HtmlControls.HtmlImage img_popProd;
 
         /// <summary>
         /// lbl_PopProdRef control.
@@ -273,7 +273,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img_bsProd;
+        protected global::System.Web.UI.HtmlControls.HtmlImage img_bsProd;
 
         /// <summary>
         /// lbl_bsRef control.
@@ -301,6 +301,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_bsQty;
+
+        /// <summary>
+        /// userGenderSymbol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage userGenderSymbol;
 
         /// <summary>
         /// lbl_newShopperName control.

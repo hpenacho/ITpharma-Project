@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item active"><i class="fas fa-map-marked-alt"></i> &nbsp Active ITpharma Pickup Locations</li>
                             </ol>
                                                                
-                                <div class="text-center align-middle"">
+                                <div class="text-center align-middle">
                              <iframe src="https://www.google.com/maps/d/embed?mid=1pd2yxKy1XfgzgootzzgzU2qJKYlEq-R3" frameborder="0" width=75% height="640"></iframe>
                                 </div>
                                                       
