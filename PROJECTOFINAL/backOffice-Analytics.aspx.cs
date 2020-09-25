@@ -37,17 +37,23 @@ namespace PROJECTOFINAL
                 
                 dr = dataSet.Tables[19].Rows[0]; lbl_PopProdRef.Text = dr[0].ToString();
                 dr = dataSet.Tables[19].Rows[0]; lbl_PopProdName.Text = dr[1].ToString();
-                dr = dataSet.Tables[19].Rows[0]; img_popProd.ImageUrl = "data:image;base64," + Convert.ToBase64String((byte[])dr[2]);
+                dr = dataSet.Tables[19].Rows[0]; img_popProd.Src = "data:image;base64," + Convert.ToBase64String((byte[])dr[2]);
                 //----------
                 dr = dataSet.Tables[20].Rows[0]; lbl_bsRef.Text = dr[0].ToString();
                 dr = dataSet.Tables[20].Rows[0]; lbl_bsName.Text = dr[1].ToString();
-                dr = dataSet.Tables[20].Rows[0]; img_bsProd.ImageUrl = "data:image;base64," + Convert.ToBase64String((byte[])dr[2]);
+                dr = dataSet.Tables[20].Rows[0]; img_bsProd.Src = "data:image;base64," + Convert.ToBase64String((byte[])dr[2]);
                 dr = dataSet.Tables[20].Rows[0]; lbl_bsQty.Text = dr[3].ToString();
                 //----------
                 dr = dataSet.Tables[21].Rows[0]; lbl_newShopperName.Text = dr[0].ToString();
-                dr = dataSet.Tables[21].Rows[0]; lbl_newShopperAge.Text = dr[1].ToString();
+                dr = dataSet.Tables[21].Rows[0]; lbl_newShopperAge.Text = dr[1].ToString() != "" ? dr[1].ToString() : "Unknown";
+                dr = dataSet.Tables[21].Rows[0]; string genderSymbol = dr[2].ToString();
 
-
+                if (genderSymbol == "M")
+                    userGenderSymbol.Src = "Resources/images/maleSign.png";
+                else if (genderSymbol == "F")
+                    userGenderSymbol.Src = "Resources/images/femaleSign.png";
+                else
+                    userGenderSymbol.Src = "Resources/images/genericUserIcon.png";
 
             }
             catch (SqlException m)

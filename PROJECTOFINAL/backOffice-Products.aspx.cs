@@ -210,17 +210,33 @@ namespace PROJECTOFINAL
 
         protected void link_insertCategoryBrand(object sender, EventArgs e)
         {
-
-            lbl_insertBrandError.InnerText = "";
-            lbl_insertCategoryError.InnerText = "";
-
+            lbl_BrandMessage.InnerText = "";
+            lbl_CategoryMessage.InnerText = "";
+            
             SqlCommand myCommand = Tools.SqlProcedure(((LinkButton)sender).CommandArgument);
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
 
             if (((LinkButton)sender).CommandName == "brand")
+            {
+                if(tb_insertBrand.Value.Trim() == "")
+                {
+                    lbl_BrandMessage.InnerText = "You need to write something";
+                    return;
+                }
+
                 myCommand.Parameters.AddWithValue("@descricao", tb_insertBrand.Value);
+            }
             else
+            {
+
+                if (tb_insertCategory.Value.Trim() == "")
+                {
+                    lbl_CategoryMessage.InnerText = "You need to write something";
+                    return;
+                }
                 myCommand.Parameters.AddWithValue("@descricao", tb_insertCategory.Value);
+            }
+               
 
 
             try
@@ -230,14 +246,14 @@ namespace PROJECTOFINAL
 
                 if (((LinkButton)sender).CommandName == "brand")
                 {
-                    lbl_insertBrandError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    lbl_BrandMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                     SQLbrand.DataBind();
                     ddl_allBrands.DataBind();
                     ddl_allBrands.SelectedIndex = 0;
                 }
                 else
                 {
-                    lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    lbl_CategoryMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                     SQLcategory.DataBind();
                     ddl_allCategories.DataBind();
                     ddl_allCategories.SelectedIndex = 0;
@@ -262,10 +278,16 @@ namespace PROJECTOFINAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_deleteBrand");
             myCommand.Parameters.AddWithValue("@ID", ddl_allBrands.SelectedValue);
 
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
             try
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_BrandMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
             }
             catch (SqlException m)
             {
@@ -296,11 +318,11 @@ namespace PROJECTOFINAL
 
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
                 {
-                    lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    lbl_BrandMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
 
                 tb_updateBrand.Value = "";
-
+                ddl_allBrands.DataBind();
             }
             catch (SqlException m)
             {
@@ -308,9 +330,7 @@ namespace PROJECTOFINAL
             }
             finally
             {
-                Tools.myConn.Close();
-                ddl_allBrands.DataBind();
-                ddl_allBrands.SelectedIndex = 0;
+                Tools.myConn.Close();                
             }
 
         }
@@ -322,11 +342,18 @@ namespace PROJECTOFINAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_deleteCategory");
             myCommand.Parameters.AddWithValue("@ID", ddl_allCategories.SelectedValue);
 
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
             try
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
                 ddl_allCategories.DataBind();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_CategoryMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+
             }
             catch (SqlException m)
             {
@@ -354,7 +381,7 @@ namespace PROJECTOFINAL
 
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
                 {
-                    lbl_insertCategoryError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    lbl_CategoryMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
 
                 tb_updateCategory.Value = "";

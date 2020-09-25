@@ -77,7 +77,7 @@
 
     <div class="container-fluid">
         
-          <div class="mt-4">
+          <div>
         <div class="row justify-content-center">
             <div class="col-lg-2 col-sm-6">
                 <div class="card-box rounded bg-blue">
@@ -221,9 +221,7 @@
                                             <BorderSkin BackColor="Transparent" BackImageWrapMode="TileFlipX" />
                                         </asp:Chart>
 
-                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , IIF(cliente.sexo = 'M', 'Male','Female') as 'gender'
-                                            from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente
-                                            group by cliente.sexo"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , case when cliente.sexo = 'M' then 'Male' when cliente.sexo = 'F' then 'Female' else 'Other' end as 'Gender' from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente group by cliente.sexo"></asp:SqlDataSource>
                                         <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource2">
                                             <Series>
                                                 <asp:Series BackGradientStyle="TopBottom" BorderDashStyle="NotSet" Color="Silver" Name="Series1" Palette="BrightPastel" XValueMember="Order Status" YValueMembers="Qty Orders">
@@ -288,7 +286,7 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <asp:Label ID="lbl_age" runat="server" Text=<%# Eval("Age") %>></asp:Label>
+                                            <asp:Label ID="lbl_age" runat="server" Text=<%# Eval("Age").ToString() != "" ? Eval("Age") : "Unknown" %>></asp:Label>
                                         </td>
 
                                         <td class="align-middle">
@@ -321,15 +319,15 @@
             <div class="row d-flex justify-content-around">
                 
 
-                    <div class="col-lg-4">
+                    <div class="col-xl-4 col-lg-12 mb-3">
 
                         <div class="card border-danger">
                             <div class="card-header bg-danger text-white font-weight-bold font-italic"><i class="fas fa-fire-alt"></i> Most Popular Product</div>
                             <div class="card-body">
-                                <div class="row justify-content-around">
-                                 <asp:Image ID="img_popProd" CssClass="card-img" runat="server" Width="60" />
-                                    <p class="card-text">Ref: <asp:Label ID="lbl_PopProdRef" runat="server" Text="[PopProdRef]"></asp:Label> </p>
-                                    <p class="card-text">Name: <asp:Label ID="lbl_PopProdName" runat="server" Text="[PopProdName]"></asp:Label> </p>
+                                <div class="row justify-content-around align-items-center">
+                                    <div class="card-image" style="max-width:60px; height:60px;"> <img style='height: 100%; width: 100%; object-fit: contain; overflow:hidden' runat="server" id="img_popProd" src="#"/> </div>
+                                    <span class="card-text">Ref: <asp:Label ID="lbl_PopProdRef" runat="server" Text="[PopProdRef]"></asp:Label> </span>
+                                    <span class="card-text">Name: <asp:Label ID="lbl_PopProdName" runat="server" Text="[PopProdName]"></asp:Label> </span>
                                     
                                     </div>
                             </div>
@@ -337,16 +335,16 @@
 
                     </div>
 
-                    <div class="col-lg-5">
+                    <div class="col-xl-5 col-lg-12 mb-3">
 
                         <div class="card border-warning">
                             <div class="card-header bg-warning text-white font-weight-bold font-italic"><i class="fas fa-star"></i> Bestseller</div>
                             <div class="card-body">
-                         <div class="row justify-content-around">
-                             <asp:Image ID="img_bsProd" CssClass="card-img" runat="server" width="60" />
-                                <p class="card-text">Ref: <asp:Label ID="lbl_bsRef" runat="server" Text="[bsRef]"></asp:Label> </p>
-                                    <p class="card-text">Name: <asp:Label ID="lbl_bsName" runat="server" Text="[bsName]"></asp:Label> </p>
-                                      <p class="card-text">Sold: <asp:Label ID="lbl_bsQty" runat="server" Text="[bsQty]"></asp:Label> </p>                                    
+                         <div class="row justify-content-around align-items-center">
+                             <div class="card-image" style="max-width:60px; height:60px;"> <img style='height: 100%; width: 100%; object-fit: contain; overflow:hidden' runat="server" id="img_bsProd" src="#"/> </div>
+                                <span class="card-text">Ref: <asp:Label ID="lbl_bsRef" runat="server" Text="[bsRef]"></asp:Label> </span>
+                                    <span class="card-text">Name: <asp:Label ID="lbl_bsName" runat="server" Text="[bsName]"></asp:Label> </span>
+                                      <span class="card-text">Sold: <asp:Label ID="lbl_bsQty" runat="server" Text="[bsQty]"></asp:Label> </span>                                    
                                     </div>
 
                             </div>
@@ -354,14 +352,15 @@
 
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-xl-3 col-lg-12 mb-1">
 
                         <div class="card border-success">
                             <div class="card-header text-white bg-success font-weight-bold font-italic"><i class="fas fa-user-check"></i> Newest Shopper</div>
                             <div class="card-body">
-                                <div class="row justify-content-around">
-                                <p class="card-text">Name: <asp:Label ID="lbl_newShopperName" runat="server" Text="[shopper Name]"></asp:Label></p>
-                                <p class="card-text">Age: <asp:Label ID="lbl_newShopperAge" runat="server" Text="[shopper Age]"></asp:Label></p>
+                                <div class="row justify-content-around align-items-center">
+                                 <div class="card-image" style="max-width:60px; height:60px;"> <img style='height: 80%; width: 80%; object-fit: contain; overflow:hidden' src="#" runat="server" id="userGenderSymbol"/> </div>
+                                <span class="card-text"><asp:Label ID="lbl_newShopperName" runat="server" Text="[shopper Name]"></asp:Label></span>
+                                <span class="card-text">Age: <asp:Label ID="lbl_newShopperAge" runat="server" Text="[shopper Age]"></asp:Label></span>
                                     </div>
                             </div>
                         </div>
