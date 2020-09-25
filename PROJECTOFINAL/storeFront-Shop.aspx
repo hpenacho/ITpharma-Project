@@ -319,12 +319,12 @@
                                 <div class="col-sm-3">
                                     <div class="thumb-wrapper">
                                         <div class="img-box">
-                                            <img id="adImage7" runat="server" src="#" class="img-fluid" alt="">
+                                            <a href="#" id="A7" runat="server">
+                                                <img id="adImage7" runat="server" src="#" class="img-fluid" alt="">
+                                            </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="#" id="A7" runat="server">
                                                 <h4 id="adTitle7" runat="server"></h4>
-                                            </a>
                                             <p class="item-price"><span id="adPrice7" runat="server"></span></p>
                                         </div>
                                     </div>
@@ -399,7 +399,6 @@
 
             </div>
             <!-- /.col-lg-3 -->
-
             <div class="col-lg-9" style="margin-top: 10vh;">
 
                 <div class="row">

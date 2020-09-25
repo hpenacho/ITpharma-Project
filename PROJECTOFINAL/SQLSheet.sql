@@ -1762,35 +1762,47 @@ BEGIN TRAN
 
 
 	-- [ QUERY ] directed ads
-GO
-CREATE OR ALTER PROC [dbo].[usp_PersonalizedAds] (@ClienteID int, @Cookie varchar(100)) AS 
-BEGIN TRY
-BEGIN TRAN
+	GO
+	ALTER PROC [dbo].[usp_PersonalizedAds] (@ClienteID int, @Cookie varchar(100)) AS 
+	BEGIN TRY
+	BEGIN TRAN
 
-DECLARE @interest table(
-    cName varchar(100) null,
-    cTimes int null
-)
+	DECLARE @interest table(
+		cName varchar(100) null,
+		cTimes int null
+	)
 
-insert into @interest
-select top 3 Categoria.descricao as 'Category', Count(Categoria.ID) as 'Category#'
-from  EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compra.ID_Encomenda
-                         inner join Cliente on EncomendaHistorico.ID_Cliente = Cliente.ID
-                         inner join Produto on Compra.Prod_ref = Produto.Codreferencia
-                         inner join Categoria on Produto.ID_Categoria = Categoria.ID
-                         inner join Carrinho on Carrinho.Prod_ref = Produto.Codreferencia
-where Carrinho.Cookie = @Cookie or EncomendaHistorico.ID_Cliente = IIF(@ClienteID = 0, null, @ClienteID)
-GROUP by Categoria.descricao
-ORDER BY 'Category#' desc
+	insert into @interest
+	select top 3 Categoria.descricao as 'Category', Count(Categoria.ID) as 'Category#'
+	from  EncomendaHistorico inner join Compra on EncomendaHistorico.ENC_REF = Compra.ID_Encomenda
+							 inner join Cliente on EncomendaHistorico.ID_Cliente = Cliente.ID
+							 inner join Produto on Compra.Prod_ref = Produto.Codreferencia
+							 inner join Categoria on Produto.ID_Categoria = Categoria.ID
+							 inner join Carrinho on Carrinho.Prod_ref = Produto.Codreferencia
+	where Carrinho.Cookie = @Cookie or EncomendaHistorico.ID_Cliente = @ClienteID
+	GROUP by Categoria.descricao
+	ORDER BY 'Category#' desc
 
+	IF(@ClienteID != 0 OR @Cookie = '')
+	BEGIN
+		select Produto.Codreferencia,Produto.imagem, Produto.nome, Produto.preco 
+		from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
+		where Categoria.descricao in (select cName from @interest) AND Produto.Activo = 1 AND Produto.Descontinuado = 0
+		ORDER BY Produto.nome
+	END
+	ELSE
+	BEGIN
+		select Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco 
+		from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
+		where Produto.Activo = 1 AND Produto.Descontinuado = 0
+		ORDER BY Produto.nome
+	END
 
-select Produto.imagem, Produto.nome, Produto.preco 
-from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
-where Categoria.descricao in (select cName from @interest)
-ORDER BY Produto.nome
+	COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+	END CATCH
+	GO
 
-COMMIT
-END TRY
-BEGIN CATCH
-    ROLLBACK;
-END CATCH
+exec usp_PersonalizedAds 0, ''

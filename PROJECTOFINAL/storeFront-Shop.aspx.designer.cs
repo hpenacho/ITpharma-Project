@@ -267,15 +267,6 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl adPrice6;
 
         /// <summary>
-        /// adImage7 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage adImage7;
-
-        /// <summary>
         /// A7 control.
         /// </summary>
         /// <remarks>
@@ -283,6 +274,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor A7;
+
+        /// <summary>
+        /// adImage7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage adImage7;
 
         /// <summary>
         /// adTitle7 control.

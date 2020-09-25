@@ -27,7 +27,7 @@ namespace PROJECTOFINAL
         {
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_socialLogin");
-            myCommand.Parameters.AddWithValue("@nome", user.FullName ?? "Customer");
+            myCommand.Parameters.AddWithValue("@nome", user.UserName ?? "Customer");
             myCommand.Parameters.AddWithValue("@email", user.Email);
             myCommand.Parameters.AddWithValue("@token", Tools.EncryptString(user.UserId));
             myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
