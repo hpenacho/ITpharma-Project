@@ -65,7 +65,7 @@
                             <div class="card pb-2">
                                 <div class="card-body">
                                     <h5 class="card-title">Schedule BloodWork</h5>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bloodwork-modal" formnovalidate="formnovalidate">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bloodwork-modal">
                                         Check
                                     </button>
                                 </div>
@@ -74,7 +74,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Fill Prescription</h5>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#prescriptionModal" formnovalidate="formnovalidate">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#prescriptionModal">
                                         <i class="fas fa-pills"></i>Prescriptions
                                     </button>
                                 </div>
@@ -183,12 +183,12 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alterhealthnumber">Health Number</label>
-                                    <input type="text" id="txt_alterhealthnumber" runat="server" class="form-control bg-light" readonly/>
+                                    <asp:TextBox ID="txt_alterhealthnumber" runat="server" class="form-control bg-light" ReadOnly="true" title="Please insert your 9 digit HealthNumber" pattern="^\d{9}$"></asp:TextBox>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alternif">NIF</label>
-                                    <input type="text" id="txt_alternif" runat="server" class="form-control bg-light"/>
+                                    <input type="text" id="txt_alternif" runat="server" class="form-control bg-light" title="Please insert your 9 digit NIF" pattern="^\d{9}$"/>
                                 </div>
                             </div>
 
@@ -331,7 +331,7 @@
                                             <div class="form-group mb-4">
                                                 <div class="form-row">
                                                     <div class="col-lg-5">
-                                                        <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control" placeholder="Health Number" required="required" />
+                                                        <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control" placeholder="Health Number"/>
                                                     </div>
                                                     <div class="col-lg-3">
                                                         <input type="date" id="txt_bloodSchedule" runat="server" class="form-control" />
