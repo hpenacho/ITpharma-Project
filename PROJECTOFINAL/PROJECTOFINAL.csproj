@@ -470,6 +470,7 @@
     <Content Include="News\newsUserControl.ascx" />
     <Content Include="Resources\images\criss-cross.png" />
     <Content Include="Resources\images\femaleSign.png" />
+    <Content Include="Resources\images\founder1.JPG" />
     <Content Include="Resources\images\genericUserIcon.png" />
     <Content Include="Resources\images\maleSign.png" />
     <Content Include="Resources\images\PHARMALOGO.png" />
