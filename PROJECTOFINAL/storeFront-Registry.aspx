@@ -55,10 +55,10 @@
 
                   <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_nif" placeholder="NIF" required>
+                    <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_nif" placeholder="NIF" title="Please insert you 9 digit NIF" pattern="^\d{9}$" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_healthNumber" placeholder="Health Number" required>
+                    <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_healthNumber" placeholder="Health Number" title="Please insert you 9 digit health number" pattern="^\d{9}$" required>
                   </div>
                 </div>
 
@@ -67,7 +67,7 @@
                       <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_address" placeholder="Address" required>
                     </div>
                       <div class="col-sm-3">
-                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" type="tel" pattern="[0-9\-]+" placeholder="Zip-code" required>
+                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" type="tel" title="Please insert a valid zip code. (xxxx-yyy)" pattern="[0-9\-]+" placeholder="Zip-code" required>
                        </div>
                   </div>
                   
