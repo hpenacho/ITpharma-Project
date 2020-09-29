@@ -288,9 +288,7 @@
                                         </h4>
                                         <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>' class="text-decoration-none text-dark text-center">
                                                 <h5><%# Eval("nome") %></h5>
-                                            </a>
-                                        
-
+                                       </a>
                                     </div>
                                     <!-- //card body -->
                                 </div>
@@ -316,7 +314,7 @@
 
 
     
-    <!-- <uc1:TargetedAds runat="server" ID="TargetedAds" /> -->
+    <uc1:TargetedAds runat="server" ID="TargetedAds" />
     
 
 

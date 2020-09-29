@@ -16,121 +16,56 @@
             <div class="carousel-inner">
 
                 <div class="carousel-item active">
+
                     <div class="row">
 
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A0" runat="server">
-                                        <img id="adImage0" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
-                                </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle0" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice0" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
+                        <asp:Repeater ID="rptCarouselOne" runat="server" DataSourceID="sqlTargetedAds">
+                            <ItemTemplate>
 
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A1" runat="server">
-                                        <img id="adImage1" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <a href="storeFront-itemPage.aspx?ref=<%# Eval("Codreferencia") %>">
+                                                <img id="adImage0" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4><%# Eval("Nome") %></h4>
+                                            <p class="item-price"><span id="adPrice0" runat="server"><%# Eval("preco") %> €</span></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle1" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice1" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A2" runat="server">
-                                        <img id="adImage2" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
-                                </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle2" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice2" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A3" runat="server">
-                                        <img id="adImage3" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
-                                </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle3" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice3" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
 
                     </div>
                 </div>
 
                 <div class="carousel-item">
                     <div class="row">
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A4" runat="server">
-                                        <img id="adImage4" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
+
+                        <asp:Repeater ID="rptCarouselTwo" runat="server" DataSourceID="sqlTargetedAds2">
+                            <ItemTemplate>
+
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <a href="storeFront-itemPage.aspx?ref=<%# Eval("Codreferencia") %>">
+                                                <img id="adImage4" src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4><%# Eval("Nome") %></h4>
+                                            <p class="item-price"><span id="adPrice4" runat="server"><%# Eval("preco") %> €</span></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle4" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice4" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A5" runat="server">
-                                        <img id="adImage5" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
-                                </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle5" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice5" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A6" runat="server">
-                                        <img id="adImage6" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
-                                </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle6" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice6" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="thumb-wrapper">
-                                <div class="img-box">
-                                    <a href="#" id="A7" runat="server">
-                                        <img id="adImage7" runat="server" src="#" class="img-fluid" alt="">
-                                    </a>
-                                </div>
-                                <div class="thumb-content">
-                                    <h4 id="adTitle7" runat="server"></h4>
-                                    <p class="item-price"><span id="adPrice7" runat="server"></span></p>
-                                </div>
-                            </div>
-                        </div>
+
+
+                            </ItemTemplate>
+                        </asp:Repeater>
+
                     </div>
                 </div>
 
@@ -146,3 +81,17 @@
     </div>
 </div>
 <!-- //item ads-->
+
+<asp:SqlDataSource ID="sqlTargetedAds" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_PersonalizedAds" SelectCommandType="StoredProcedure">
+    <SelectParameters>
+        <asp:Parameter Name="ClienteID" Type="Int32" />
+        <asp:Parameter Name="Cookie" Type="String" />
+    </SelectParameters>
+</asp:SqlDataSource>
+
+<asp:SqlDataSource ID="sqlTargetedAds2" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_PersonalizedAds2" SelectCommandType="StoredProcedure">
+    <SelectParameters>
+        <asp:Parameter Name="ClienteID" Type="Int32" />
+        <asp:Parameter Name="Cookie" Type="String" />
+    </SelectParameters>
+</asp:SqlDataSource>
