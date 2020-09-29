@@ -511,6 +511,7 @@
     <Content Include="StoreFront\vendor\jquery\jquery.min.js" />
     <Content Include="StoreFront\vendor\jquery\jquery.slim.js" />
     <Content Include="StoreFront\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="TargetedAds.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -703,6 +704,13 @@
     </Compile>
     <Compile Include="storeFrontMasterPage.Master.designer.cs">
       <DependentUpon>storeFrontMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TargetedAds.ascx.cs">
+      <DependentUpon>TargetedAds.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TargetedAds.ascx.designer.cs">
+      <DependentUpon>TargetedAds.ascx</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
     <Compile Include="Client.cs" />

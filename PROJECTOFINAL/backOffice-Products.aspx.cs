@@ -38,9 +38,9 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@precisaReceita", check_prescription.Checked);
             myCommand.Parameters.AddWithValue("@ref_generico", check_generic.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@Activo", check_active.Checked);
-            myCommand.Parameters.AddWithValue("@Qtd", tb_qty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMin", tb_minQty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value);
+            myCommand.Parameters.AddWithValue("@Qtd", 0);
+            myCommand.Parameters.AddWithValue("@QtdMin", 0);
+            myCommand.Parameters.AddWithValue("@QtdMax", 1);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
@@ -109,9 +109,6 @@ namespace PROJECTOFINAL
                 tb_updateDescription.Value = reader["descricao"].ToString();
                 ddl_updateCategory.SelectedValue = reader["ID_Categoria"].ToString();
                 ddl_updateBrand.SelectedValue = reader["ID_Marca"].ToString();
-                tb_updateCurQty.Value = reader["Qtd"].ToString();
-                tb_updateMinQty.Value = reader["QtdMin"].ToString();
-                tb_updateMaxQty.Value = reader["QtdMax"].ToString();
 
                 //OPTIONS
                 check_updatePrescription.Checked = Convert.ToBoolean(reader["precisaReceita"]);
@@ -177,9 +174,9 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@precisaReceita", check_updatePrescription.Checked);
             myCommand.Parameters.AddWithValue("@ref_generico", check_updateGeneric.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@Activo", check_updateActive.Checked);
-            myCommand.Parameters.AddWithValue("@Qtd", tb_updateCurQty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMin", tb_updateMinQty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMax", tb_updateMaxQty.Value);
+            myCommand.Parameters.AddWithValue("@Qtd", 0);
+            myCommand.Parameters.AddWithValue("@QtdMin", 0);
+            myCommand.Parameters.AddWithValue("@QtdMax", 1);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));

@@ -17,50 +17,18 @@ namespace PROJECTOFINAL
             if(Session["searchQuery"] != null)
             {
                 searchProducts();
+                return;
             }
 
-            targetedSource();
+            if (!Page.IsPostBack)
+            {
+                currentPage = 1;
+                category = "All";
+                brand = "All";
+            }
+
             productFiltering();
         }
-
-        private void targetedSource()
-        {
-            SqlCommand myCommand = Tools.SqlProcedure("usp_PersonalizedAds");
-
-            myCommand.Parameters.AddWithValue("@ClienteID", Client.userID);
-            myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"] != null ? Request.Cookies["noLogID"].Value : "");
-
-            try
-            {
-                Tools.myConn.Open();
-                myCommand.ExecuteNonQuery();
-
-                SqlDataReader dr = myCommand.ExecuteReader();
-
-                for (int i = 0; dr.Read(); i++)
-                {
-                    if (i < 8)
-                    {
-                        ((HtmlGenericControl)this.Page.Master.FindControl("ContentPlaceHolder1").FindControl("adTitle" + i)).InnerText = dr["nome"].ToString();
-                        ((HtmlAnchor)this.Page.Master.FindControl("ContentPlaceHolder1").FindControl("A" + i)).HRef = "storeFront-itemPage.aspx?ref=" + dr["Codreferencia"].ToString();
-                        ((HtmlGenericControl)this.Page.Master.FindControl("ContentPlaceHolder1").FindControl("adPrice" + i)).InnerText = dr["preco"].ToString() + "€";
-                        ((HtmlImage)this.Page.Master.FindControl("ContentPlaceHolder1").FindControl("adImage" + i)).Src = "data:image;base64," + Convert.ToBase64String((byte[])dr["imagem"]);
-                    }
-                }
-
-            }
-            catch (SqlException x)
-            {
-                System.Diagnostics.Debug.WriteLine(x.Message);
-            }
-            finally
-            {
-                Tools.myConn.Close();
-            }
-
-        }
-
-
 
         private void searchProducts()
         {
@@ -129,13 +97,6 @@ namespace PROJECTOFINAL
         {
             rptShopProducts.DataSourceID = sqlShopProducts.ID;
 
-            DataView dv = (DataView)sqlShopProducts.Select(DataSourceSelectArguments.Empty);
-            double totalItems = (int)dv.Table.Rows[0][0];
-
-            System.Diagnostics.Debug.WriteLine(totalItems);
-
-            //(int)Math.Ceiling((double)items / (double)ItemsPagina);
-
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
@@ -145,7 +106,13 @@ namespace PROJECTOFINAL
 
             sqlShopProducts.DataBind();
             rptShopProducts.DataBind();
-            pageButtonTemplate((int)Math.Ceiling(totalItems/numberOfItems));
+
+            //Pagination 
+
+            DataView dv = (DataView)sqlShopProducts.Select(DataSourceSelectArguments.Empty);
+            int totalItems = (int)dv.Table.Rows[0][0];
+            pageButtonTemplate((int)Math.Ceiling((double)totalItems / (double)numberOfItems));
+            System.Diagnostics.Debug.WriteLine(totalItems);
         }
 
 
