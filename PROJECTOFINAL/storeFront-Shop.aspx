@@ -437,6 +437,11 @@
 
                 </div>
                 <!-- /.row -->
+
+                <!-- PAGINATION -->
+                 <asp:Panel ID="pagePanel" class="col-lg-12 text-center mb-5" runat="server"></asp:Panel>
+              <!-- //PAGINATION -->
+
             </div>
             <!-- /.col-lg-9 -->
         </div>
@@ -453,6 +458,8 @@
             <asp:Parameter DefaultValue="ASC" Name="Ordem" Type="String" />
             <asp:Parameter DefaultValue="All" Name="Categoria" Type="String" />
             <asp:Parameter DefaultValue="All" Name="Marca" Type="String" />
+            <asp:Parameter DefaultValue="1" Name="Pagina" Type="Int32" />
+            <asp:Parameter DefaultValue="9" Name="ItemsPagina" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     

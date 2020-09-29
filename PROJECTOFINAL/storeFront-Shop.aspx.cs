@@ -20,18 +20,15 @@ namespace PROJECTOFINAL
             }
 
             targetedSource();
-
+            productFiltering();
         }
 
         private void targetedSource()
         {
-
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_PersonalizedAds");
 
             myCommand.Parameters.AddWithValue("@ClienteID", Client.userID);
             myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"] != null ? Request.Cookies["noLogID"].Value : "");
-
 
             try
             {
@@ -40,7 +37,7 @@ namespace PROJECTOFINAL
 
                 SqlDataReader dr = myCommand.ExecuteReader();
 
-                for(int i = 0; dr.Read(); i++)
+                for (int i = 0; dr.Read(); i++)
                 {
                     if (i < 8)
                     {
@@ -50,8 +47,6 @@ namespace PROJECTOFINAL
                         ((HtmlImage)this.Page.Master.FindControl("ContentPlaceHolder1").FindControl("adImage" + i)).Src = "data:image;base64," + Convert.ToBase64String((byte[])dr["imagem"]);
                     }
                 }
-
-
 
             }
             catch (SqlException x)
@@ -63,12 +58,8 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
 
-
-
-
-
         }
-  
+
 
 
         private void searchProducts()
@@ -85,6 +76,9 @@ namespace PROJECTOFINAL
         static string order = "ASC";
         static string brand = "All";
         static string category = "All";
+        static int currentPage = 1;
+        const double numberOfItems = 9;
+
 
         protected void rptCategory_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -93,7 +87,6 @@ namespace PROJECTOFINAL
                 category = e.CommandArgument.ToString();
                 brand = "All";
                 productFiltering();
-               
             }
         }
 
@@ -104,7 +97,6 @@ namespace PROJECTOFINAL
                 brand = e.CommandArgument.ToString();
                 category = "All";
                 productFiltering();
-                
             }
         }
 
@@ -135,17 +127,109 @@ namespace PROJECTOFINAL
 
         private void productFiltering()
         {
+            rptShopProducts.DataSourceID = sqlShopProducts.ID;
+
+            DataView dv = (DataView)sqlShopProducts.Select(DataSourceSelectArguments.Empty);
+            double totalItems = (int)dv.Table.Rows[0][0];
+
+            System.Diagnostics.Debug.WriteLine(totalItems);
+
+            //(int)Math.Ceiling((double)items / (double)ItemsPagina);
 
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
             sqlShopProducts.SelectParameters["Marca"].DefaultValue = brand;
+            sqlShopProducts.SelectParameters["Pagina"].DefaultValue = currentPage.ToString();
+            sqlShopProducts.SelectParameters["ItemsPagina"].DefaultValue = numberOfItems.ToString();
 
-            rptShopProducts.DataSourceID = sqlShopProducts.ID;
             sqlShopProducts.DataBind();
             rptShopProducts.DataBind();
+            pageButtonTemplate((int)Math.Ceiling(totalItems/numberOfItems));
         }
 
-      
+
+
+        // PAGINATION
+
+        private void pageButtonTemplate(int nrPages)
+        {
+            pagePanel.Controls.Clear();
+
+            LinkButton pageBefore = new LinkButton();
+            pageBefore.Click += new EventHandler(mudarBefore);
+            pageBefore.CssClass = "btn btn-dark ml-2 mr-2";
+            pageBefore.Text = "«";
+
+
+            pagePanel.Controls.Add(pageBefore);
+
+            for (int i = 1; i <= nrPages; i++)
+            {
+                LinkButton pageButton = new LinkButton();
+                pageButton.Click += new EventHandler(mudarPagina);
+                pageButton.CssClass = "btn btn-outline-dark border-white ml-2 mr-2";
+                pageButton.Text = i.ToString();
+
+                if (currentPage == 1 && i == 1)
+                    pageButton.CssClass = "btn btn-dark border-white ml-2 mr-2";
+
+                pagePanel.Controls.Add(pageButton);
+            }
+
+            LinkButton pageAfter = new LinkButton();
+            pageAfter.Click += new EventHandler(mudarAfter);
+            pageAfter.CssClass = "btn btn-dark ml-2 mr-2";
+            pageAfter.Text = "»";
+
+            pagePanel.Controls.Add(pageAfter);
+        }
+
+        private void activePage(LinkButton button)
+        {
+            foreach (LinkButton control in pagePanel.Controls)
+            {
+
+                if (control != button)
+                    control.CssClass = "btn btn-outline-dark border-white ml-2 mr-2";
+                if (control.Text == "»" || control.Text == "«" || button == control)
+                    control.CssClass = "btn btn-dark ml-2 mr-2";
+                if (control.Text == currentPage.ToString())
+                    control.CssClass = "btn btn-dark ml-2 mr-2";
+            }
+        }
+
+        protected void mudarPagina(object sender, EventArgs e)
+        {
+            currentPage = Convert.ToInt32(((LinkButton)sender).Text);
+            activePage(((LinkButton)sender));
+            productFiltering();
+        }
+
+        protected void mudarBefore(object sender, EventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                activePage((LinkButton)sender);
+                productFiltering();
+            }
+
+        }
+
+        protected void mudarAfter(object sender, EventArgs e)
+        {
+            if (currentPage < pagePanel.Controls.Count - 2)
+            {
+                currentPage++;
+                activePage((LinkButton)sender);
+                productFiltering();
+            }
+
+        }
+
+
+
+
     }
 }
