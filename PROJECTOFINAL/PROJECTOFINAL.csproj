@@ -468,7 +468,6 @@
     <Content Include="News\news.css" />
     <Content Include="News\news.xslt" />
     <Content Include="News\newsUserControl.ascx" />
-    <Content Include="Resources\images\27-05-08_1509.jpg" />
     <Content Include="Resources\images\criss-cross.png" />
     <Content Include="Resources\images\femaleSign.png" />
     <Content Include="Resources\images\founder1.JPG" />
