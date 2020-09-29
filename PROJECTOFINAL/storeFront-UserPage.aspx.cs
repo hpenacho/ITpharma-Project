@@ -51,13 +51,13 @@ namespace PROJECTOFINAL
             txt_alterhealthnumber.Value = Client.nrSaude;
             txt_alterBirth.Value = Convert.ToDateTime(Client.birthday).ToString("dd/MM/yyyy");
             if (Client.birthday == null || Client.birthday.ToString() == "")
-            {
-             txt_alterBirth.Visible = false; txt_alterBirth2.Disabled = false; txt_alterBirth2.Visible = true;
-            }
+                {txt_alterBirth.Visible = false; txt_alterBirth2.Disabled = false; txt_alterBirth2.Visible = true;}
             if (Client.gender.ToString() == "M")
                 gender_male.Checked = true;
             else if (Client.gender.ToString() == "F")
                 gender_female.Checked = true;
+            if (Client.nrSaude != null || Client.nrSaude.ToString() != "")
+                txt_alterhealthnumber.Attributes.Add("readonly", "readonly");
 
             //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;
@@ -103,6 +103,12 @@ namespace PROJECTOFINAL
 
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
+            DateTime birthdate = Client.birthday.ToString() != "" ? Convert.ToDateTime(txt_alterBirth.Value) : Convert.ToDateTime(txt_alterBirth2.Value);
+            char gender = ' ';
+            if (gender_male.Checked)
+                gender = 'M';
+            else if (gender_female.Checked)
+                gender = 'F';
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_editClientDetails");
             myCommand.Parameters.AddWithValue("@ID", Client.userID);
@@ -110,7 +116,10 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@email", txt_alteremail.Value);
             myCommand.Parameters.AddWithValue("@morada", txt_alterAddress.Value);
             myCommand.Parameters.AddWithValue("@nif", txt_alternif.Value);
+            myCommand.Parameters.AddWithValue("@healthNumber", txt_alterhealthnumber.Value);
             myCommand.Parameters.AddWithValue("@codPostal", txt_zipCode.Value);
+            myCommand.Parameters.AddWithValue("@birthDate", birthdate);
+            myCommand.Parameters.AddWithValue("@gender", !gender_male.Checked && !gender_female.Checked ? (object)DBNull.Value : gender );
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@output", SqlDbType.VarChar, 200));
@@ -126,7 +135,15 @@ namespace PROJECTOFINAL
                     Client.email = txt_alteremail.Value;
                     Client.address = txt_alterAddress.Value;
                     Client.NIF = txt_alternif.Value;
+                    Client.nrSaude = txt_alterhealthnumber.Value;
                     Client.codPostal = txt_zipCode.Value;
+                    Client.birthday = birthdate;
+                    /* if (gender_male.Checked)
+                         Client.gender = 'M';
+                     else if (gender_female.Checked)
+                         Client.gender = 'F'; */
+                    if (gender != ' ')
+                        Client.gender = gender;
 
                     welcomeUser.InnerText = "Welcome " + Client.name;
                     lbl_changeDetailsError.Text = "Your details were changed.";

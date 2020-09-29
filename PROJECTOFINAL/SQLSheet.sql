@@ -1220,6 +1220,9 @@ CREATE OR ALTER PROC usp_editClientDetails(@ID int,
 											@morada varchar(300), 
 											@nif varchar(20), 
 											@codPostal varchar(20),
+											@birthDate date,
+											@healthNumber varchar(20),
+											@gender char(1),
 											@output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
@@ -1227,12 +1230,16 @@ BEGIN TRAN
 			IF EXISTS(select '*' from cliente where cliente.nif = @nif AND Cliente.ID != @ID)
 				THROW 60001, 'This NIF is already registered, if you think this is a mistake contact an administrator' , 10
 			
-	
+			IF EXISTS(select '*' from cliente where cliente.nrSaude = @healthNumber AND Cliente.ID != @ID)
+				THROW 60002, 'This NIF is already registered, if you think this is a mistake contact an administrator' , 10
 			update Cliente set Cliente.nome = IIF(@nome = '', nome, @nome),
 							   Cliente.email = IIF(@email = '', email, @email),
 							   Cliente.morada = IIF(@morada = '', morada, @morada),
 							   Cliente.nif = IIF(@nif = '', nif, @nif),
-							   Cliente.codPostal = IIF(@codPostal = '', codPostal, @codPostal)
+							   Cliente.codPostal = IIF(@codPostal = '', codPostal, @codPostal),
+							   Cliente.nrSaude = IIF(@healthNumber = '', nrSaude, @healthNumber),
+							   Cliente.dataNascimento = IIF(@birthdate = '', dataNascimento, @birthDate),
+							   Cliente.sexo = IIF(@gender = '', sexo, @gender)
 			where cliente.ID = @ID
 
 COMMIT

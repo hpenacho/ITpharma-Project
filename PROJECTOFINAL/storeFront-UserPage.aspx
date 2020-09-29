@@ -197,7 +197,7 @@
                                 <div class="col-md-4 mb-3 align-self-center">
                                     <label for="txt_alterBirth">Date Of Birth</label>
                                     <input type="text" id="txt_alterBirth" runat="server" class="form-control bg-light" readonly/>
-                                    <input type="date" class="form-control form-control-user bg-light" runat="server" id="txt_alterBirth2" disabled visible="false" placeholder="Date of Birth">
+                                    <input type="date" class="form-control form-control-user bg-light" runat="server" id="txt_alterBirth2" disabled visible="false" placeholder="Date of Birth" value="2000-01-01">
                                 </div>
 
 
