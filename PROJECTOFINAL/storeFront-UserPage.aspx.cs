@@ -49,6 +49,15 @@ namespace PROJECTOFINAL
             txt_alternif.Value = Client.NIF;
             txt_zipCode.Value = Client.codPostal;
             txt_alterhealthnumber.Value = Client.nrSaude;
+            txt_alterBirth.Value = Convert.ToDateTime(Client.birthday).ToString("dd/MM/yyyy");
+            if (Client.birthday == null || Client.birthday.ToString() == "")
+            {
+             txt_alterBirth.Visible = false; txt_alterBirth2.Disabled = false; txt_alterBirth2.Visible = true;
+            }
+            if (Client.gender.ToString() == "M")
+                gender_male.Checked = true;
+            else if (Client.gender.ToString() == "F")
+                gender_female.Checked = true;
 
             //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;

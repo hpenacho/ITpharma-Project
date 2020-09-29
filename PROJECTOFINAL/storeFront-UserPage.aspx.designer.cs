@@ -132,13 +132,40 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alternif;
 
         /// <summary>
-        /// lbl_changeDetailsError control.
+        /// txt_alterBirth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_changeDetailsError;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txt_alterBirth;
+
+        /// <summary>
+        /// txt_alterBirth2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txt_alterBirth2;
+
+        /// <summary>
+        /// gender_male control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton gender_male;
+
+        /// <summary>
+        /// gender_female control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton gender_female;
 
         /// <summary>
         /// btn_alterDetails control.
@@ -148,6 +175,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_alterDetails;
+
+        /// <summary>
+        /// lbl_changeDetailsError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_changeDetailsError;
 
         /// <summary>
         /// link_activeOrders control.
