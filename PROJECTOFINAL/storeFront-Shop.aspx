@@ -205,6 +205,112 @@
 
         <!-- Recommended item carousel -->
 
+       
+
+        <!-- // recommended item carousel -->
+
+
+
+        <div class="row">
+
+            <div class="col-lg-3 mb-3" style="margin-top: 10vh;">
+
+                <h6 class="my-4">Filtros</h6>
+
+                <div class="list-group list-group-flush">
+
+                        <div class="form-group mb-3">
+                            <asp:DropDownList ID="ddl_filters" CssClass="form-control w-100 border-0 bg-light" runat="server" OnSelectedIndexChanged="ddl_filters_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:ListItem Value="NASC">A - Z</asp:ListItem>
+                                <asp:ListItem Value="NDESC">Z  - A</asp:ListItem>
+                                <asp:ListItem Value="PASC">Price ASC</asp:ListItem>
+                                <asp:ListItem Value="PDESC">Price DESC</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+
+                </div>
+
+
+                <h6 class="my-4">Category</h6>
+
+                <div class="list-group list-group-flush">
+
+                     <asp:Repeater ID="rptCategory" runat="server" DataSourceID="sqlCategorySource" OnItemCommand="rptCategory_ItemCommand">
+                        <ItemTemplate>
+
+                            <asp:LinkButton runat="server" CommandName="linkSelectCategory" CommandArgument='<%# Eval("Descricao") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+                 
+                </div>
+
+                <h6 class="my-4">Brand</h6>
+
+                <div class="list-group list-group-flush">
+
+                    <asp:Repeater ID="rptBrands" runat="server" DataSourceID="sqlBrandsSource" OnItemCommand="rptBrands_ItemCommand">
+                        <ItemTemplate>
+
+                            <asp:LinkButton runat="server" CommandName="linkSelectBrand" CommandArgument='<%# Eval("Descricao") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+
+                </div>
+
+            </div>
+            <!-- /.col-lg-3 -->
+            <div class="col-lg-9" style="margin-top: 10vh;">
+
+                <div class="row">
+
+                    <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts">
+                        <ItemTemplate>
+
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100 border-white">                                                                        
+                                       <center> <div class="text-center" style="height:215px; width:215px">
+                                            <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
+                                        <img style='height: 100%; width: 100%; object-fit: contain' src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
+                                        </div> </center>
+                                    
+
+
+                                    <div class="card-body">
+                                        <!-- card body -->
+                                        <h4 class="card-title text-center">
+                                            <h5 class="text-center text-success"><%# Eval("preco") %> €</h5>
+                                        </h4>
+                                        <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>' class="text-decoration-none text-dark text-center">
+                                                <h5><%# Eval("nome") %></h5>
+                                            </a>
+                                        
+
+                                    </div>
+                                    <!-- //card body -->
+                                </div>
+                            </div>
+
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+
+                </div>
+                <!-- /.row -->
+
+                <!-- PAGINATION -->
+                 <asp:Panel ID="pagePanel" class="col-lg-12 text-center mb-5" runat="server"></asp:Panel>
+              <!-- //PAGINATION -->
+
+            </div>
+            <!-- /.col-lg-9 -->
+        </div>
+        <!-- /.row -->
+
+
+        <!-- item ads -->
         <div class="row" id="targetAds">
             <div class="col-lg-12">
                 <h2>Based on your<b>&nbspShopping Experience</b></h2>
@@ -343,111 +449,18 @@
                 </div>
             </div>
         </div>
+        <!-- //item ads-->
 
-        <!-- // recommended item carousel -->
-
-
-
-        <div class="row">
-
-            <div class="col-lg-3 mb-3" style="margin-top: 10vh;">
-
-                <h6 class="my-4">Filtros</h6>
-
-                <div class="list-group list-group-flush">
-
-                        <div class="form-group mb-3">
-                            <asp:DropDownList ID="ddl_filters" CssClass="form-control w-100 border-0 bg-light" runat="server" OnSelectedIndexChanged="ddl_filters_SelectedIndexChanged" AutoPostBack="True">
-                                <asp:ListItem Value="NASC">A - Z</asp:ListItem>
-                                <asp:ListItem Value="NDESC">Z  - A</asp:ListItem>
-                                <asp:ListItem Value="PASC">Price ASC</asp:ListItem>
-                                <asp:ListItem Value="PDESC">Price DESC</asp:ListItem>
-                            </asp:DropDownList>
-                        </div>
-
-                </div>
-
-
-                <h6 class="my-4">Category</h6>
-
-                <div class="list-group list-group-flush">
-
-                     <asp:Repeater ID="rptCategory" runat="server" DataSourceID="sqlCategorySource" OnItemCommand="rptCategory_ItemCommand">
-                        <ItemTemplate>
-
-                            <asp:LinkButton runat="server" CommandName="linkSelectCategory" CommandArgument='<%# Eval("Descricao") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
-
-                        </ItemTemplate>
-                    </asp:Repeater>
-                 
-                </div>
-
-                <h6 class="my-4">Brand</h6>
-
-                <div class="list-group list-group-flush">
-
-                    <asp:Repeater ID="rptBrands" runat="server" DataSourceID="sqlBrandsSource" OnItemCommand="rptBrands_ItemCommand">
-                        <ItemTemplate>
-
-                            <asp:LinkButton runat="server" CommandName="linkSelectBrand" CommandArgument='<%# Eval("Descricao") %>' CssClass="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><%# Eval("descricao") %><span class="badge badge-light badge-pill"><%# Eval("Count") %></span></asp:LinkButton>
-
-                        </ItemTemplate>
-                    </asp:Repeater>
-
-
-                </div>
-
-            </div>
-            <!-- /.col-lg-3 -->
-            <div class="col-lg-9" style="margin-top: 10vh;">
-
-                <div class="row">
-
-                    <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts">
-                        <ItemTemplate>
-
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="card h-100 border-white">                                                                        
-                                       <center> <div class="text-center" style="height:215px; width:215px">
-                                            <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
-                                        <img style='height: 100%; width: 100%; object-fit: contain' src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
-                                        </div> </center>
-                                    
-
-
-                                    <div class="card-body">
-                                        <!-- card body -->
-                                        <h4 class="card-title text-center">
-                                            <h5 class="text-center text-success"><%# Eval("preco") %> €</h5>
-                                        </h4>
-                                        <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>' class="text-decoration-none text-dark text-center">
-                                                <h5><%# Eval("nome") %></h5>
-                                            </a>
-                                        
-
-                                    </div>
-                                    <!-- //card body -->
-                                </div>
-                            </div>
-
-                        </ItemTemplate>
-                    </asp:Repeater>
-
-
-                </div>
-                <!-- /.row -->
-
-                <!-- PAGINATION -->
-                 <asp:Panel ID="pagePanel" class="col-lg-12 text-center mb-5" runat="server"></asp:Panel>
-              <!-- //PAGINATION -->
-
-            </div>
-            <!-- /.col-lg-9 -->
-        </div>
-        <!-- /.row -->
     </div>
     <!-- /.container -->
 
+
+    
+
+    
+
+
+    
 
 
     <!-- SQL SOURCES -->
