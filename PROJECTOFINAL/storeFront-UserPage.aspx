@@ -194,13 +194,36 @@
 
                             <div class="form-row">
 
+                                <div class="col-md-4 mb-3 align-self-center">
+                                    <label for="txt_alterBirth">Date Of Birth</label>
+                                    <input type="text" id="txt_alterBirth" runat="server" class="form-control bg-light" readonly/>
+                                    <input type="date" class="form-control form-control-user bg-light" runat="server" id="txt_alterBirth2" disabled visible="false" placeholder="Date of Birth">
+                                </div>
+
+
+                                <div class="col-sm-4 text-center align-self-center">
+                      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                          <label class="btn btn-light">
+                            <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server" > <h6> <i class="fas fa-mars text-primary"> </i>  Male </h6>
+                          </label>
+                          <label class="btn btn-light">
+                            <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server"> <h6><i class="fas fa-venus text-danger"></i>  Female </h6>
+                          </label>
+                        </div>
+                      </div>
+                                 <div class="col-md-4 align-self-center">
+                                  <center>  <asp:Button ID="btn_alterDetails" class="btn btn-dark mt-2" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/> </center>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
                                 <div class="col-md-6">
                                      <asp:Label ID="lbl_changeDetailsError" runat="server" class="form-text text-dark" Font-Size="small"></asp:Label>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <asp:Button ID="btn_alterDetails" class="btn btn-sm btn-dark mt-5 float-right w-50" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/>
-                                </div>
+                               
                             </div>
 
                         </div>
