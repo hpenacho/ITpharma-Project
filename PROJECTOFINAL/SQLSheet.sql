@@ -1394,33 +1394,16 @@ select Marca.ID, Marca.descricao , Count(Produto.ID_Marca) as 'Count'
 from Marca left join Produto on Produto.ID_Categoria = Marca.ID
 group by Marca.ID, Marca.descricao
 
--- SORTING 
-
--- PAGINAÇÃO ATRAVÉS DO SQL [EXEMPLO BACARDI SURF SHOP] 
--- Lógica: Se houver 500.000 produtos é melhor carregar apenas uma parte de cada vez do que todos.
-/*
-GO
-create or alter proc productsPaginatedFiltered(@Campo varchar(100), @Ordem varchar(100), @Categoria varchar(100), @Pagina int, @ItemsPagina int) AS
-SELECT produto.ID, 
-	   produto.imagem, 
-	   produto.titulo, 
-	   produto.resumo, 
-	   produto.preco, 
-	   categoria.descricao 
-FROM produto inner join categoria on produto.idCategoria = categoria.ID
-WHERE categoria.descricao = IIF(@Categoria = 'Todos', categoria.descricao , @Categoria)
-ORDER BY CASE WHEN @Campo = 'Preco' AND @Ordem = 'ASC' THEN produto.preco END,
-		 CASE WHEN @Campo = 'Preco' AND @Ordem = 'DESC' THEN produto.preco END DESC,
-		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'ASC' THEN produto.titulo END,
-		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'DESC' THEN produto.titulo END DESC
-OFFSET (@Pagina - 1) * @ItemsPagina ROWS
-FETCH NEXT @ItemsPagina ROWS ONLY
-*/
--- SORTING - AINDA SEM PAGINAÇÃO
+-- FILTERING AND SORTING
 
 GO
-create or alter proc usp_productFiltering(@Campo varchar(50) , @Ordem varchar(50), @Categoria varchar(50), @Marca varchar(50)) AS
-SELECT *
+create or alter proc usp_productFiltering(@Campo varchar(50) , @Ordem varchar(50), @Categoria varchar(50), @Marca varchar(50), @Pagina int, @ItemsPagina int) AS
+SELECT (select Count('*') from Produto inner join categoria on produto.ID_Categoria = categoria.ID
+									   inner join marca on Produto.ID_Marca = Marca.ID
+WHERE categoria.descricao = IIF(@Categoria = 'All', categoria.descricao , @Categoria) 
+			 AND marca.descricao = IIF(@Marca = 'All', marca.descricao , @Marca) 
+		     AND Produto.Activo = 1 
+		     AND Produto.Descontinuado = 0), *
 FROM produto inner join categoria on produto.ID_Categoria = categoria.ID
 			 inner join marca on Produto.ID_Marca = Marca.ID
 WHERE categoria.descricao = IIF(@Categoria = 'All', categoria.descricao , @Categoria) 
@@ -1431,7 +1414,12 @@ ORDER BY CASE WHEN @Campo = 'Preco' AND @Ordem = 'ASC' THEN produto.preco END,
 		 CASE WHEN @Campo = 'Preco' AND @Ordem = 'DESC' THEN produto.preco END DESC,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'ASC' THEN produto.nome END,
 		 CASE WHEN @Campo = 'Nome' AND @Ordem = 'DESC' THEN produto.nome END DESC
+OFFSET (@Pagina - 1) * @ItemsPagina ROWS
+FETCH NEXT @ItemsPagina ROWS ONLY
 
+
+exec usp_productFiltering 'Nome', 'ASC', 'All', 'All', 1, 9
+select * from produto
 
 -- [PROC] SOCIAL REGISTRY 
 
