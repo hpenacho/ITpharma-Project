@@ -32,5 +32,5 @@ jobs:
       with:
         app-name: 'itpharmashop'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_fc147dfbd2d74be4b7fda512b282466a }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a6100a38d24c46928588fc62d7d00f7e }}
         package: ./published/
