@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -19,10 +21,16 @@ namespace PROJECTOFINAL
         private void bannerAds()
         {
             bool hasGender = false;
+
             if (Client.gender == 'M' || Client.gender == 'F')
                 hasGender = true;
 
-            SqlCommand myCommand = Tools.SqlProcedure("usp_getRelevantAds");
+            SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString);
+            SqlCommand myCommand = new SqlCommand();
+        
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.CommandText = "usp_getRelevantAds";
+            myCommand.Connection = myConn;
 
             myCommand.Parameters.AddWithValue("@clientGender", hasGender ? Client.gender : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@clientBirthday", Client.birthday == null ? (object)DBNull.Value : Convert.ToDateTime(Client.birthday));
@@ -32,7 +40,7 @@ namespace PROJECTOFINAL
             
             try
             {
-                Tools.myConn.Open();
+                myConn.Open();
                 myCommand.ExecuteNonQuery();
 
                 var reader = myCommand.ExecuteReader();
@@ -56,7 +64,7 @@ namespace PROJECTOFINAL
             }
             finally
             {
-                Tools.myConn.Close();
+                myConn.Close();
             }
 
             Random random = new Random();
