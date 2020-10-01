@@ -1410,7 +1410,7 @@ SELECT (select Count('*') from Produto inner join categoria on produto.ID_Catego
 WHERE categoria.descricao = IIF(@Categoria = 'All', categoria.descricao , @Categoria) 
 			 AND marca.descricao = IIF(@Marca = 'All', marca.descricao , @Marca) 
 		     AND Produto.Activo = 1 
-		     AND Produto.Descontinuado = 0), *
+		     AND Produto.Descontinuado = 0) AS 'TotalItem', *
 FROM produto inner join categoria on produto.ID_Categoria = categoria.ID
 			 inner join marca on Produto.ID_Marca = Marca.ID
 WHERE categoria.descricao = IIF(@Categoria = 'All', categoria.descricao , @Categoria) 

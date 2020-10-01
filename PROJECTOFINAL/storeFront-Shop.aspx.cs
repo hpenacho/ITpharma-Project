@@ -54,6 +54,7 @@ namespace PROJECTOFINAL
             {
                 category = e.CommandArgument.ToString();
                 brand = "All";
+                currentPage = 1;
                 productFiltering();
             }
         }
@@ -64,6 +65,7 @@ namespace PROJECTOFINAL
             {
                 brand = e.CommandArgument.ToString();
                 category = "All";
+                currentPage = 1;
                 productFiltering();
             }
         }
@@ -107,12 +109,19 @@ namespace PROJECTOFINAL
             sqlShopProducts.DataBind();
             rptShopProducts.DataBind();
 
+
             //Pagination 
 
-            DataView dv = (DataView)sqlShopProducts.Select(DataSourceSelectArguments.Empty);
-            int totalItems = (int)dv.Table.Rows[0][0];
+            DataView dv = (DataView)sqlShopProducts.Select(new DataSourceSelectArguments());
+            DataTable groupsTable = dv.ToTable();
+            int totalItems = 1;
+
+            foreach (DataRow dr in groupsTable.Rows)
+            {
+                totalItems = Convert.ToInt32(dr[0].ToString());
+            }
+
             pageButtonTemplate((int)Math.Ceiling((double)totalItems / (double)numberOfItems));
-            System.Diagnostics.Debug.WriteLine(totalItems);
         }
 
 
@@ -128,7 +137,6 @@ namespace PROJECTOFINAL
             pageBefore.CssClass = "btn btn-dark ml-2 mr-2";
             pageBefore.Text = "«";
 
-
             pagePanel.Controls.Add(pageBefore);
 
             for (int i = 1; i <= nrPages; i++)
@@ -138,7 +146,7 @@ namespace PROJECTOFINAL
                 pageButton.CssClass = "btn btn-outline-dark border-white ml-2 mr-2";
                 pageButton.Text = i.ToString();
 
-                if (currentPage == 1 && i == 1)
+                if (i == currentPage)
                     pageButton.CssClass = "btn btn-dark border-white ml-2 mr-2";
 
                 pagePanel.Controls.Add(pageButton);
@@ -152,24 +160,10 @@ namespace PROJECTOFINAL
             pagePanel.Controls.Add(pageAfter);
         }
 
-        private void activePage(LinkButton button)
-        {
-            foreach (LinkButton control in pagePanel.Controls)
-            {
-
-                if (control != button)
-                    control.CssClass = "btn btn-outline-dark border-white ml-2 mr-2";
-                if (control.Text == "»" || control.Text == "«" || button == control)
-                    control.CssClass = "btn btn-dark ml-2 mr-2";
-                if (control.Text == currentPage.ToString())
-                    control.CssClass = "btn btn-dark ml-2 mr-2";
-            }
-        }
 
         protected void mudarPagina(object sender, EventArgs e)
         {
             currentPage = Convert.ToInt32(((LinkButton)sender).Text);
-            activePage(((LinkButton)sender));
             productFiltering();
         }
 
@@ -178,7 +172,6 @@ namespace PROJECTOFINAL
             if (currentPage > 1)
             {
                 currentPage--;
-                activePage((LinkButton)sender);
                 productFiltering();
             }
 
@@ -189,7 +182,6 @@ namespace PROJECTOFINAL
             if (currentPage < pagePanel.Controls.Count - 2)
             {
                 currentPage++;
-                activePage((LinkButton)sender);
                 productFiltering();
             }
 
