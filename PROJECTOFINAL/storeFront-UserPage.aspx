@@ -48,10 +48,8 @@
 
                             <div class="col-lg-12 text-center">
                                 <!-- Controlos de navegação -->
-
-                                <h5 class="card-title" id="welcomeUser" runat="server"></h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+                                    <h5 class="card-title" id="welcomeUser" runat="server"></h5>
+                                    <p class="text-muted"> Here you can change account info, check current and past orders, schedule exams and consume prescriptions.</p>                               
                             </div>
                         </div>
                     </div>
@@ -108,8 +106,7 @@
 
                                 <div class="col mt-3">
                                     <label for="txt_newPassword">New Password</label>
-                                    <asp:TextBox ID="txt_newPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********"></asp:TextBox>
-
+                                    <asp:TextBox ID="txt_newPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********" title="Password must have at least 7 characters and at least: 1 lowercase, 1 Uppercase, 1 number." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -117,8 +114,8 @@
 
                                 <div class="col mt-3">
                                     <label for="txt_repeatPassword">Repeat Password</label>
-                                    <asp:TextBox ID="txt_repeatPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********"></asp:TextBox>
-                                    <small id="passwordHelpBlock" class="form-text text-muted">8-20 caracteres, conter letras e numeros, um caracter especial e sem espaços
+                                    <asp:TextBox ID="txt_repeatPassword" TextMode="Password" class="form-control bg-light text-center" ValidationGroup="alterPass" runat="server" placeholder="***********" title="Password must have at least 7 characters and at least: 1 lowercase, 1 Uppercase, 1 number." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></asp:TextBox>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">Password must have at least 7 characters and at least: 1 lowercase, 1 Uppercase, 1 number.
                                     </small>
                                 </div>
 
