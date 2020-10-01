@@ -275,14 +275,13 @@
 
 
         <!-- GET A LOAD OF THIS SHOPPING CART -->
-        <asp:UpdatePanel ID="updateModalCart" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+        <asp:UpdatePanel ID="udpModalCart" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
 
                 <div class="modal fade" id="modal-cart-ii" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
-
-                        <div class="modal-content">
-
+                                 
+                            <div class="modal-content">
                                     <div class="modal-body">
 
                                         <!-- Shopping cart table -->
@@ -332,10 +331,11 @@
                                                                         <asp:LinkButton ID="link_diminuirQtd" CommandName="link_diminuirQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small p-2 mr-1 rounded" runat="server"><i class="fas fa-minus"></i></i></asp:LinkButton>
                                                                         <asp:Label ID="lb_Qtd" runat="server" Font-Bold="true" Text='<%# Eval("Qty") %>'></asp:Label>   
                                                                         <asp:LinkButton ID="link_AumentarQtd" CommandName="link_AumentarQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small ml-1 p-2 rounded" runat="server"><i class="fas fa-plus"></i></asp:LinkButton>
-                                                                                    </div>
+                                                                    </div>
                                                                 </td>
 
                                                                 <td class="align-middle text-center">
+                                                                    
                                                                     <asp:LinkButton ID="linkDeleteCartItem" class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
                                                                 </td>
                                                             </tr>
@@ -346,38 +346,39 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                    </div>
+                            <!-- MODLA BODY -->
 
-                                    <!-- MODAL FOOTER -->
-                                    <div class="modal-footer">
+                            <!-- MODAL FOOTER -->
+                            <div class="modal-footer">
 
-                                        <div class="col-lg-4">
-                                            <ul class="list-unstyled mb-4">
+                                <div class="col-lg-4">
+                                    <ul class="list-unstyled mb-4">
 
-                                                    <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
-                                                        <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
-                                                    </li>
+                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
+                                            <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
+                                        </li>
 
-                                                    <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
-                                                        <label id="lbl_SubTotal" class="text-black font-italic" runat="server"></label>
-                                                    </li>
+                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
+                                            <label id="lbl_SubTotal" class="text-black font-italic" runat="server"></label>
+                                        </li>
 
-                                                    <li class="d-flex justify-content-between py-1 border-bottom"><strong class="text-black">Order&nbspTotal</strong>
-                                                        <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
-                                                    </li>
+                                        <li class="d-flex justify-content-between py-1 border-bottom"><strong class="text-black">Order&nbspTotal</strong>
+                                            <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
+                                        </li>
 
                                         <li class="mt-2">
                                             <asp:Button ID="btn_checkout" class="btn btn-success" runat="server" formnovalidate="formnovalidate" Text="Proceed to Checkout" OnClick="btn_checkout_Click" />
                                         </li>
 
-                                                </ul>
-                                            </div>
+                                    </ul>
+                                </div>
 
-                                            <div class="col-lg-12">
-                                                <label id="lbl_erros" class="text-danger small" runat="server"></label>
-                                            </div>
-                                        </div>
-                                        <!-- //MODAL FOOTER -->
-                            </div><!-- MODLA BODY -->
+                                <div class="col-lg-12">
+                                    <label id="lbl_erros" class="text-danger small" runat="server"></label>
+                                </div>
+                            </div>
+                            <!-- //MODAL FOOTER -->
                         </div>
                     </div>
                 </div>

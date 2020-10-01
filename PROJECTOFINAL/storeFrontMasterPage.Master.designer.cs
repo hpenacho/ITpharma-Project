@@ -168,13 +168,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_recoverWarning;
 
         /// <summary>
-        /// updateModalCart control.
+        /// udpModalCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateModalCart;
+        protected global::System.Web.UI.UpdatePanel udpModalCart;
 
         /// <summary>
         /// rptModalCart control.

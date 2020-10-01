@@ -285,7 +285,7 @@
 
 
 
-    <asp:UpdatePanel ID="updInsertPanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+    <asp:UpdatePanel ID="updInsertPanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
         <ContentTemplate>
     <!-- INSERT PRODUCTS MODAL -->
             <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
