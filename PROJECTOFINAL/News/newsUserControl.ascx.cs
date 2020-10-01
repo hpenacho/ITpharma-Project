@@ -14,9 +14,9 @@ namespace PROJECTOFINAL.News
         {
             Xml1.TransformSource = "news.xslt";
             XmlDocument xmldoc = new XmlDocument();
-            xmldoc.Load("https://www.noticiasaominuto.com/rss/lifestyle");
+            xmldoc.Load("https://news.un.org/feed/subscribe/en/news/topic/health/feed/rss.xml"); 
             //xmldoc.Load("https://www.medpagetoday.com/rss/headlines.xml");
-            
+
 
             Xml1.Document = xmldoc;
         }

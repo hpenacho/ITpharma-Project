@@ -38,9 +38,9 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@precisaReceita", check_prescription.Checked);
             myCommand.Parameters.AddWithValue("@ref_generico", check_generic.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@Activo", check_active.Checked);
-            myCommand.Parameters.AddWithValue("@Qtd", tb_qty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMin", tb_minQty.Value);
-            myCommand.Parameters.AddWithValue("@QtdMax", tb_maxQty.Value);
+            myCommand.Parameters.AddWithValue("@Qtd", 0);
+            myCommand.Parameters.AddWithValue("@QtdMin", 0);
+            myCommand.Parameters.AddWithValue("@QtdMax", 1);
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));

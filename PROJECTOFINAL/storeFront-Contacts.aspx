@@ -27,10 +27,10 @@
     <div class="row justify-content-center align text-center mt-5">
       <div class="col-lg-3 mb-4">
         <div class="card h-100 text-center border-0">
-        <center>  <div class="card-img-top" style="max-width:310px; height:310px;"> <img class="rounded-circle" style='height: 100%; width: 100%; object-fit: contain;' src="Resources/images/founder1.JPG"/> </div> </center>
+        <center>  <div class="card-img-top " style="max-width:160px; height:160px;"> <img style='height: 100%; width: 100%; object-fit: contain; border-radius:30px' src="Resources/images/founder_H.JPG"/> </div> </center>
           <div class="card-body">
             <h4 class="card-title">Hugo Penacho</h4>
-            <h6 class="card-subtitle mb-2 text-muted">CEO,Lead Programmer, DBA, Q&A Lead</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Lead Programmer, DBA, Q&A Lead</h6>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
           </div>
           <div class="card-footer">
@@ -38,12 +38,12 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 mb-4 mt-5">
+      <div class="col-lg-3 mb-4">
         <div class="card h-100 text-center border-0">
-           <center> <div class="card-img-top" style="max-width:310px; height:310px;"> <img class="rounded-circle" style='height: 100%; width: 100%; object-fit: contain;' src="Resources/images/27-05-08_1509.jpg"/> </div> </center>
+           <center> <div class="card-img-top" style="max-width:160px; height:160px;"> <img style='height: 100%; width: 100%; object-fit: contain; border-radius:30px' src="Resources/images/founder_F.JPG"/> </div> </center>
           <div class="card-body">
-            <h4 class="card-title">Team Member</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Janitor, Bringer Of Coffees, funny guy, Professional Bull Prepper, truth is I dont know what this nigga does</h6>
+            <h4 class="card-title">Filipe Cancelinha</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Lead Programmer, DBA, Q&A Lead</h6>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus aut mollitia eum ipsum fugiat odio officiis odit.</p>
           </div>
           <div class="card-footer">
