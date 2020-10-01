@@ -141,6 +141,33 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.DropDownList ddl_genericParent;
 
         /// <summary>
+        /// tb_qty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_qty;
+
+        /// <summary>
+        /// tb_minQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_minQty;
+
+        /// <summary>
+        /// tb_maxQty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_maxQty;
+
+        /// <summary>
         /// link_insertProduct control.
         /// </summary>
         /// <remarks>

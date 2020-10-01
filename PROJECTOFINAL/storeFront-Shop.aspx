@@ -205,15 +205,6 @@
     <!-- Page Content -->
     <div class="container">
 
-
-        <!-- Recommended item carousel -->
-
-       
-
-        <!-- // recommended item carousel -->
-
-
-
         <div class="row">
 
             <div class="col-lg-3 mb-3" style="margin-top: 10vh;">
@@ -313,18 +304,15 @@
     <!-- /.container -->
 
 
-    
+    <!-- Recommended Item -->
     <uc1:TargetedAds runat="server" ID="TargetedAds" />
+    <!-- //Recommended Item -->
     
-
-
-    
-
 
     <!-- SQL SOURCES -->
     <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_productFiltering" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:Parameter DefaultValue="nome" Name="Campo" Type="String" />
+            <asp:Parameter DefaultValue="Nome" Name="Campo" Type="String" />
             <asp:Parameter DefaultValue="ASC" Name="Ordem" Type="String" />
             <asp:Parameter DefaultValue="All" Name="Categoria" Type="String" />
             <asp:Parameter DefaultValue="All" Name="Marca" Type="String" />

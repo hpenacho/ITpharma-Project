@@ -14,6 +14,7 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if(Session["searchQuery"] != null)
             {
                 searchProducts();
@@ -40,11 +41,11 @@ namespace PROJECTOFINAL
 
 
         //FILTERING PRODUCTS
-        static string field = "Nome";
-        static string order = "ASC";
-        static string brand = "All";
-        static string category = "All";
-        static int currentPage = 1;
+        string field = "Nome";
+        string order = "ASC";
+        string brand = "All";
+        string category = "All";
+        int currentPage = 1;
         const double numberOfItems = 9;
 
 
@@ -99,6 +100,8 @@ namespace PROJECTOFINAL
         {
             rptShopProducts.DataSourceID = sqlShopProducts.ID;
 
+            System.Diagnostics.Debug.WriteLine("Product Filtering current Page " + currentPage);
+
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
@@ -106,12 +109,15 @@ namespace PROJECTOFINAL
             sqlShopProducts.SelectParameters["Pagina"].DefaultValue = currentPage.ToString();
             sqlShopProducts.SelectParameters["ItemsPagina"].DefaultValue = numberOfItems.ToString();
 
-            sqlShopProducts.DataBind();
-            rptShopProducts.DataBind();
+            generatePaging();
+        }
 
 
-            //Pagination 
 
+        // PAGINATION
+
+        private void generatePaging()
+        {
             DataView dv = (DataView)sqlShopProducts.Select(new DataSourceSelectArguments());
             DataTable groupsTable = dv.ToTable();
             int totalItems = 1;
@@ -122,19 +128,18 @@ namespace PROJECTOFINAL
             }
 
             pageButtonTemplate((int)Math.Ceiling((double)totalItems / (double)numberOfItems));
+
+            sqlShopProducts.DataBind();
+            rptShopProducts.DataBind();
         }
-
-
-
-        // PAGINATION
 
         private void pageButtonTemplate(int nrPages)
         {
             pagePanel.Controls.Clear();
 
             LinkButton pageBefore = new LinkButton();
-            pageBefore.Click += new EventHandler(mudarBefore);
-            pageBefore.CssClass = "btn btn-dark ml-2 mr-2";
+            pageBefore.Click += new EventHandler(pageBackwards);
+            pageBefore.CssClass = "btn btn-light ml-2 mr-2";
             pageBefore.Text = "«";
 
             pagePanel.Controls.Add(pageBefore);
@@ -143,18 +148,18 @@ namespace PROJECTOFINAL
             {
                 LinkButton pageButton = new LinkButton();
                 pageButton.Click += new EventHandler(mudarPagina);
-                pageButton.CssClass = "btn btn-outline-dark border-white ml-2 mr-2";
+                pageButton.CssClass = "btn btn-outline-light border-white ml-2 mr-2";
                 pageButton.Text = i.ToString();
 
                 if (i == currentPage)
-                    pageButton.CssClass = "btn btn-dark border-white ml-2 mr-2";
+                    pageButton.CssClass = "btn btn-light border-white ml-2 mr-2";
 
                 pagePanel.Controls.Add(pageButton);
             }
 
             LinkButton pageAfter = new LinkButton();
-            pageAfter.Click += new EventHandler(mudarAfter);
-            pageAfter.CssClass = "btn btn-dark ml-2 mr-2";
+            pageAfter.Click += new EventHandler(pageForward);
+            pageAfter.CssClass = "btn btn-light ml-2 mr-2";
             pageAfter.Text = "»";
 
             pagePanel.Controls.Add(pageAfter);
@@ -167,24 +172,23 @@ namespace PROJECTOFINAL
             productFiltering();
         }
 
-        protected void mudarBefore(object sender, EventArgs e)
+        protected void pageBackwards(object sender, EventArgs e)
         {
-            if (currentPage > 1)
+            if (currentPage > 0)
             {
-                currentPage--;
-                productFiltering();
+                currentPage -= 1;
             }
-
         }
 
-        protected void mudarAfter(object sender, EventArgs e)
+
+        protected void pageForward(object sender, EventArgs e)
         {
+
             if (currentPage < pagePanel.Controls.Count - 2)
             {
-                currentPage++;
+                currentPage = currentPage + 1;
                 productFiltering();
             }
-
         }
 
 
