@@ -281,6 +281,8 @@
     </div>
     <!-- //END CONTAINER-FLUID -->
   
+    <asp:UpdatePanel ID="udpInsertProduct" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
 
     <!-- INSERT PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
@@ -294,6 +296,10 @@
                     </h5>
                 </div>
                 <div class="modal-body">
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+
+                    
                     <!-- BEGIN MODAL BODY CONTENT -->
 
                     <div class="p-4">
@@ -439,11 +445,20 @@
                     <!-- END INNER UPDATE PANEL -->
                 </div>
                 <!-- END MODAL BODY CONTENT -->
-            </div>
+            
+                       </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
         </div>
     </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
     <!-- //INSERT PRODUCTS MODAL -->
 
+
+        <asp:UpdatePanel ID="udpUpdateProduct" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
 
     <!-- UPDATE PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
@@ -458,6 +473,8 @@
                 </div>
                 <div class="modal-body">
                  <!-- BEGIN MODAL BODY CONTENT -->
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
 
                             <div class="p-4">
                                 <!-- WINDOW PADDING -->
@@ -591,11 +608,22 @@
                             </div>
                         </div>
                 </div>
-                <!-- END MODAL BODY CONTENT -->
+
+                       </ContentTemplate>
+                    </asp:UpdatePanel>
             </div>
+                <!-- END MODAL BODY CONTENT -->
         </div>
     </div>
     <!-- //UPDATE PRODUTCTS MODAL -->
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
+
+
+
+
+
 
 
     <!-- INSERT\UPDATE BRANDS Modal -->
