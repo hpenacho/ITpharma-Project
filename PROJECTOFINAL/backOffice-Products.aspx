@@ -367,76 +367,85 @@
 
                                 <!-- Resumo -->
 
-                                <div class="form-row mt-4 d-flex justify-content-between">
-
-                                    <div class="col-lg-6">
-                                        <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
-                                    </div>
-
-
-                                    <div class="form-group mb-3 col-sm-12 col-md-5 col-lg-5">
-                                            <label>Category</label>
-                                        <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                                    </div>
-
+                                                       
+                        <div class="form-row mt-4 d-flex justify-content-between">
+                            <div class="col-lg-6 mb-2">
+                                <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
+                            </div>
+                            <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ddl_category">Category</label>
                                 </div>
+                                <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                            </div>
 
-                                <!-- /Resumo -->
+                        </div>
+                        <!-- /Resumo -->
+                        <!-- Price || Brand-->
+                        <div class="form-row mt-1 d-flex justify-content-between">
 
-                                <!-- Price || Brand-->
-                                <div class="form-row mt-1 d-flex justify-content-between">
-
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="inputGroupPrepend3"><i class="fas fa-euro-sign"></i></span>
-                                            </div>
-                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend3" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
-                                        </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="inputGroupPrepend4"><i class="fas fa-euro-sign"></i></span>
                                     </div>
-
-                                    <div class="form-group mb-3 col-md-5">
-                                            <label>Brand</label>
-                                        <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                                    </div>
-
-
-
+                                    <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
                                 </div>
-                                <!-- /Price-->
-
-
-                                <!-- Generic || Prescription || Generic-Product -->
-                                <div class="form-row mt-2 mb-2 d-flex justify-content-between">
-
-                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-between" data-toggle="buttons">
-
-                                        <label class="btn btn-outline-warning rounded-left" style="padding-left: 1em; padding-right: 1em;">
-                                            <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
-                                            Prescription
-                                        </label>
-
-                                        <label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
-                                            <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
-                                            Generic
-                                        </label>
-
-                                        <label class="btn btn-outline-dark rounded-right" style="padding-left: 2em; padding-right: 2em;">
-                                            <input type="checkbox" name="active" class="pr-2 pl-2" id="check_active" runat="server" autocomplete="off">
-                                            Active
-                                        </label>
-
-                                    </div>
-
-
-                                    <div class="form-group col-md-5">
-                                            <label>Generic&nbsp;&nbsp;</label>
-                                        <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
-                                    </div>
-
-
-
+                            </div>
+                            <div class="input-group mb-3 col-md-5 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 </div>
+                                <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                            </div>
+                        </div>
+                        <!-- /Price-->
+                        <!-- Generic || Prescription || Generic-Product -->
+                        <div class="form-row mt-2 mb-2 d-flex justify-content-between">
+
+                            <div class="btn-group-toggle col-md-6 d-flex justify-content-around mb-3" data-toggle="buttons">
+
+                               
+                                <label class="btn btn-outline-dark rounded-right">
+                                    <input type="checkbox" name="active" id="check_active" runat="server" autocomplete="off">
+                                    Active
+                                </label>
+                                    
+
+                               
+                                <label class="btn btn-outline-warning rounded-left">
+                                    <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
+                                    Prescription
+                                </label>
+                                                      
+                               
+                                <label class="btn btn-outline-warning rounded-left" onclick="showHideGenParents()">
+                                    <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                    Generic
+                                </label>                                                     
+
+                            </div>
+                         
+                            <div class="input-group mb-3 col-md-5 col-sm-12" id="genericParentsDiv" style="display:none;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ddl_genericParent">Generic&nbsp;&nbsp;</label>
+                                </div>
+                                <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                            </div>
+                        </div>
+
+                        <script>
+                            function showHideGenParents() {
+                                let genDiv = document.getElementById("genericParentsDiv");
+
+                                if (genDiv.style.display === "none") {
+                                    genDiv.style.display = "";
+
+                                } else {
+                                    genDiv.style.display = "none";
+                                }
+                            }
+                        </script>
 
                                 <!-- //Brand || Prescription || Generic-Product-->
 
