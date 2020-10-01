@@ -105,6 +105,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.DropDownList ddl_brand;
 
         /// <summary>
+        /// check_active control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_active;
+
+        /// <summary>
         /// check_prescription control.
         /// </summary>
         /// <remarks>
@@ -121,15 +130,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_generic;
-
-        /// <summary>
-        /// check_active control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_active;
 
         /// <summary>
         /// ddl_genericParent control.
