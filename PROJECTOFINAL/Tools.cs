@@ -43,9 +43,8 @@ namespace PROJECTOFINAL
             return output;
         }
 
-
-        public static byte[] imageUpload(System.Web.UI.HtmlControls.HtmlInputFile fileControl)
-        {            
+        public static byte[] imageUpload(AjaxControlToolkit.AsyncFileUpload fileControl)
+        {
             Stream imgstream = fileControl.PostedFile.InputStream;
             int imgLen = fileControl.PostedFile.ContentLength;
             byte[] imgBinaryData = new byte[imgLen];

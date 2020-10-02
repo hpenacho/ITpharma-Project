@@ -65,7 +65,7 @@
 
 <body class="sb-nav-fixed">
 
-    <form id="masterForm" runat="server">
+    <form id="masterForm" enctype="multipart/form-data" runat="server">
 
         <!-- ScriptManager -->
         <asp:ScriptManager ID="backOfficeScriptManager" runat="server" EnablePartialRendering="true" ></asp:ScriptManager>

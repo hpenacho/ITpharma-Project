@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AjaxControlToolkit;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,18 +17,21 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
+         
         }
 
+        static byte[] uploadedFile;
 
         protected void link_insertProduct_Click(object sender, EventArgs e)
         {
 
             lbl_errors.InnerText = "";
-          /* if(fl_insertProductImage.PostedFile == null)
+
+            if (uploadedFile == null)
             {
                 lbl_errors.InnerText = "Please upload an image before product insertion.";
                 return;
-            } */
+            }
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertBackofficeProducts");
 
@@ -36,8 +40,8 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@preco", tb_price.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_summary.Value);
             myCommand.Parameters.AddWithValue("@descricao", tb_description.Value);
-            myCommand.Parameters.AddWithValue("@imagem", Tools.imageUpload(fl_insertProductImage));
-            myCommand.Parameters.AddWithValue("@pdfFolheto", Tools.imageUpload(fl_insertProductImage)); // alterar no futuro
+            myCommand.Parameters.AddWithValue("@imagem", uploadedFile);
+            myCommand.Parameters.AddWithValue("@pdfFolheto", uploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_category.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_brand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_prescription.Checked);
@@ -73,9 +77,17 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                fl_insertProductImage.ClearAllFilesFromPersistedStore();
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
 
+        }
 
+
+        protected void fl_insertProductImage_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
+        {
+            uploadedFile = null;
+            uploadedFile = Tools.imageUpload(fl_insertProductImage);
         }
 
         protected void rpt_produtosBackoffice_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -398,5 +410,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
         }
+
+       
     }
 }

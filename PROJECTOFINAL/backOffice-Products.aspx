@@ -114,6 +114,8 @@
         </div>
 
 
+
+
     <div class="tab-content" id="myTabContent">
        <!-- ACTIVE PRODUCT TABLE -->
 
@@ -281,8 +283,6 @@
     </div>
     <!-- //END CONTAINER-FLUID -->
   
-    <asp:UpdatePanel ID="udpInsertProduct" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
 
     <!-- INSERT PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
@@ -297,7 +297,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- BEGIN MODAL BODY CONTENT -->
-                    <asp:UpdatePanel runat="server">
+                    <asp:UpdatePanel runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
                         <ContentTemplate>
 
                     <!-- NAVIGATION -->
@@ -336,9 +336,8 @@
 
                                     <div class="input-group col-md-6 mt-1">
                                         <div class="custom-file">
-                                            <!--<asp:FileUpload ID="fl_insertProductImage1" class="custom-file-input" runat="server"  accept=".png,.jpg,.jpeg"/> -->
-                                            <input type="file" name="file" class="custom-file-input" id="fl_insertProductImage" aria-describedby="inputGroupFileAddon01" runat="server" accept=".png,.jpg,.jpeg"/>
-                                            <label id="custom-file-label" class="custom-file-label" for="fl_insertProductImage"> Choose File Samir.... </label>
+                                            <ajaxToolkit:AsyncFileUpload ID="fl_insertProductImage" OnUploadedComplete="fl_insertProductImage_UploadedComplete" class="custom-file-input" aria-describedby="fl_insertProductImage" runat="server" accept=".png,.jpg,.jpeg" />
+                                            <label id="custom-file-label" class="custom-file-label" for="fl_insertProductImage"> Choose File </label>
                                         </div>
                                         <div class="input-group-append">
                                         </div>
@@ -512,14 +511,20 @@
                     <!-- //TAB SYSTEM ENDING -->
                     <!-- END INNER UPDATE PANEL -->
                        </ContentTemplate>
+
+
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="link_insertProduct" />
+                        </Triggers>
+
+
                     </asp:UpdatePanel>
                 </div>
                 <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
     </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+
     
     <!-- //INSERT PRODUCTS MODAL -->
 
