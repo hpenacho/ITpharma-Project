@@ -275,115 +275,134 @@
 
 
         <!-- GET A LOAD OF THIS SHOPPING CART -->
-        <asp:UpdatePanel ID="udpModalCart" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
+        <div class="modal fade" id="modal-cart-ii" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
 
-                <div class="modal fade" id="modal-cart-ii" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                                 
-                            <div class="modal-content">
-                                    <div class="modal-body">
 
-                                        <!-- Shopping cart table -->
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="thead-light text-white text-center">
+                <asp:UpdatePanel ID="updshoppingcart" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                    <ContentTemplate>
+
+                        <div class="modal-content">
+                            <div class="modal-body">
+
+
+                                <!-- Shopping cart table -->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="thead-dark text-white text-center">
+                                            <tr>
+                                                <th scope="col" class="rounded-left text-center">
+                                                    <div class="px-2 text-capitalize">Product</div>
+                                                </th>
+                                                <th scope="col" class="text-center">
+                                                    <div class="px-2 text-capitalize">Price</div>
+                                                </th>
+                                                <th scope="col" class="text-center">
+                                                    <div class="px-2 text-capitalize">Qty</div>
+                                                </th>
+                                                <th scope="col" class="rounded-right text-center">
+                                                    <div class="px-2 text-capitalize">Remove</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <!-- FIM CABEÇALHO -->
+
+                                        <tbody>
+
+                                            <asp:Repeater ID="rptModalCart" runat="server" DataSourceID="SqlSourceCart" OnItemDataBound="rptModalCart_ItemDataBound" OnItemCommand="rptModalCart_ItemCommand">
+                                                <ItemTemplate>
+
                                                     <tr>
-                                                        <th scope="col" class="rounded-left text-center">
-                                                            <div class="p-1 px-2 text-capitalize">Product</div>
-                                                        </th>
-                                                        <th scope="col" class="text-center">
-                                                            <div class="py-1 px-2 text-capitalize">Price</div>
-                                                        </th>
-                                                        <th scope="col" class="text-center">
-                                                            <div class="py-1 px-2 text-capitalize">Qty</div>
-                                                        </th>
-                                                        <th scope="col" class="rounded-right text-center">
-                                                            <div class="py-1 px-2 text-capitalize">Remove</div>
-                                                        </th>
+
+                                                        <td class="row justify-content-around" style="vertical-align: middle">
+
+                                                            <div class="col" style="max-width: 110px; height: 110px; min-width: 110px;">
+                                                                <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="" class="align-middle" style="vertical-align: middle; height: 100%; width: 100%; object-fit: contain; overflow: hidden">
+                                                            </div>
+
+                                                            <div class="col ml-2 d-inline-block align-content-end align-self-center">
+                                                                <h5 class="mb-0"><a href="storeFront-itemPage.aspx?prod=<%# Eval("Prod_Ref") %>" class="text-dark d-inline-block"><%# Eval("ProdName") %></a></h5>
+                                                                <h6 class="small text-muted"><%# Eval("ProdSummary") %></h6>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td class="align-middle text-center">
+                                                            <asp:Label ID="lb_total" runat="server" Font-Bold="true" Text=""><%# Eval("Unit Price") %> €</asp:Label>
+                                                        </td>
+
+                                                        <td class="align-middle text-center">
+
+                                                            <div class="justify-content-around">
+                                                                <button type="button" id="decrease-cart-qty" class="btn btn-warning btn-sm mr-1 rounded"><i class="fas fa-minus"></i></button>
+                                                                <asp:Label ID="lb_Qtd" runat="server" Font-Bold="true" CssClass="form-check-label" Width="25" Text='<%# Eval("Qty") %>'></asp:Label>
+                                                                <button type="button" id="increase-cart-qty" class="btn btn-warning btn-sm mr-1 rounded"><i class="fas fa-plus"></i></button>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td class="align-middle text-center">
+                                                            <asp:LinkButton ID="linkDeleteCartItem" class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
+                                                        </td>
+
                                                     </tr>
-                                                </thead>
 
-                                                <!-- FIM CABEÇALHO -->
+                                                </ItemTemplate>
+                                            </asp:Repeater>
 
-                                                <tbody>
-
-                                                    <asp:Repeater ID="rptModalCart" runat="server" DataSourceID="SqlSourceCart" OnItemDataBound="rptModalCart_ItemDataBound" OnItemCommand="rptModalCart_ItemCommand">
-                                                        <ItemTemplate>
-
-                                                            <tr>
-                                                                <td class="row justify-content-around" style="vertical-align:middle">
-                                                                    <div class="col" style="max-width:110px; height:110px; min-width:110px;">
-                                                                        <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="" class="align-middle" style="vertical-align:middle; height: 100%; width: 100%; object-fit: contain; overflow:hidden">
-                                                                    </div>
-                                                                    <div class="col ml-2 d-inline-block align-content-end align-self-center">
-                                                                        <h5 class="mb-0"><a href="storeFront-itemPage.aspx?prod=<%# Eval("Prod_Ref") %>" class="text-dark d-inline-block"><%# Eval("ProdName") %></a></h5>
-                                                                        <h6 class="small text-muted"><%# Eval("ProdSummary") %></h6>
-                                                                    </div>
-                                                                </td>
-
-                                                                <td class="align-middle text-center">
-                                                                    <asp:Label ID="lb_total" runat="server" Font-Bold="true" Text=""><%# Eval("Unit Price") %> €</asp:Label>
-                                                                </td>
-
-                                                                <td class="text-center">
-                                                                    <div>                                                           
-                                                                        <asp:LinkButton ID="link_diminuirQtd" CommandName="link_diminuirQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small p-2 mr-1 rounded" runat="server"><i class="fas fa-minus"></i></i></asp:LinkButton>
-                                                                        <asp:Label ID="lb_Qtd" runat="server" Font-Bold="true" Text='<%# Eval("Qty") %>'></asp:Label>   
-                                                                        <asp:LinkButton ID="link_AumentarQtd" CommandName="link_AumentarQtd" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn-warning small ml-1 p-2 rounded" runat="server"><i class="fas fa-plus"></i></asp:LinkButton>
-                                                                    </div>
-                                                                </td>
-
-                                                                <td class="align-middle text-center">
-                                                                    
-                                                                    <asp:LinkButton ID="linkDeleteCartItem" class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
-                                                                </td>
-                                                            </tr>
-
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <!-- MODLA BODY -->
 
                             <!-- MODAL FOOTER -->
-                            <div class="modal-footer">
+                            <div class="container">
 
-                                <div class="col-lg-4">
-                                    <ul class="list-unstyled mb-4">
+                                <div class="row justify-content-around">
 
-                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
-                                            <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
-                                        </li>
+                                    <div class="col-lg-7 text-left">
 
-                                        <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
-                                            <label id="lbl_SubTotal" class="text-black font-italic" runat="server"></label>
-                                        </li>
+                                        <div class="col-lg-12 mb-2">
+                                            <a href="storeFront-Checkout.aspx" class="btn btn-warning w-75 rounded rounded-pill">Checkout</a>
+                                        </div>
 
-                                        <li class="d-flex justify-content-between py-1 border-bottom"><strong class="text-black">Order&nbspTotal</strong>
-                                            <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
-                                        </li>
+                                        <div class="col-lg-12">
+                                            <asp:Button ID="bt_updateCart" class="btn btn-secondary w-75 rounded rounded-pill" runat="server" formnovalidate="formnovalidate" Text="Update Cart" />
+                                        </div>
 
-                                        <li class="mt-2">
-                                            <asp:Button ID="btn_checkout" class="btn btn-success" runat="server" formnovalidate="formnovalidate" Text="Proceed to Checkout" OnClick="btn_checkout_Click" />
-                                        </li>
+                                    </div>
 
-                                    </ul>
-                                </div>
+                                    <div class="col-lg-5 text-right">
 
-                                <div class="col-lg-12">
-                                    <label id="lbl_erros" class="text-danger small" runat="server"></label>
+                                        <h5 class="bg-dark rounded rounded-pill py-1 text-white text-center">Summary</h5>
+
+                                        <ul class="list-unstyled mb-4">
+
+                                            <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">Tax (6%)</strong>
+                                                <label id="lbl_tax" class="text-black font-weight-bold" runat="server"></label>
+                                            </li>
+
+                                            <li class="d-flex justify-content-between py-1 border-bottom small"><strong class="text-dark">SubTotal</strong>
+                                                <label id="lbl_SubTotal" class="text-black" runat="server"></label>
+                                            </li>
+
+                                            <li class="d-flex justify-content-between py-1"><strong class="text-black">Order&nbspTotal</strong>
+                                                <label id="lbl_Total" class="font-weight-bold text-black" runat="server"></label>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- //MODAL FOOTER -->
                         </div>
-                    </div>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
         <!-- //GET A LOAD OF THIS SHOPPING CART -->
 
 

@@ -811,7 +811,7 @@
                             </button>
 
                             <asp:LinkButton ID="link_deleteCategory" class=" ml-2 btn btn-danger shadow shadow-sm" runat="server" OnClick="link_deleteCategory_Click">
-                                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash"></i>
                             </asp:LinkButton>
 
 

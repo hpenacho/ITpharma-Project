@@ -179,12 +179,12 @@ namespace PROJECTOFINAL
 
 
 
-        // CART
+        //// CART
 
-        protected void btn_checkout_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("storeFront-Checkout.aspx");
-        }
+        //protected void btn_checkout_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("storeFront-Checkout.aspx");
+        //}
 
         Decimal total = 0;
         int qtdTotal = 0;

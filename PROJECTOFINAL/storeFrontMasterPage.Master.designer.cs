@@ -168,13 +168,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_recoverWarning;
 
         /// <summary>
-        /// udpModalCart control.
+        /// updshoppingcart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel udpModalCart;
+        protected global::System.Web.UI.UpdatePanel updshoppingcart;
 
         /// <summary>
         /// rptModalCart control.
@@ -184,6 +184,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptModalCart;
+
+        /// <summary>
+        /// bt_updateCart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bt_updateCart;
 
         /// <summary>
         /// lbl_tax control.
@@ -211,24 +220,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_Total;
-
-        /// <summary>
-        /// btn_checkout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_checkout;
-
-        /// <summary>
-        /// lbl_erros control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_erros;
 
         /// <summary>
         /// SqlSourceCart control.
