@@ -23,6 +23,11 @@ namespace PROJECTOFINAL
         {
 
             lbl_errors.InnerText = "";
+          /* if(fl_insertProductImage.PostedFile == null)
+            {
+                lbl_errors.InnerText = "Please upload an image before product insertion.";
+                return;
+            } */
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertBackofficeProducts");
 

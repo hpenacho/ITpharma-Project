@@ -60,13 +60,22 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputText tb_reference;
 
         /// <summary>
+        /// fl_insertProductImage1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fl_insertProductImage1;
+
+        /// <summary>
         /// fl_insertProductImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fl_insertProductImage;
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile fl_insertProductImage;
 
         /// <summary>
         /// tb_description control.

@@ -336,8 +336,9 @@
 
                                     <div class="input-group col-md-6 mt-1">
                                         <div class="custom-file">
-                                            <asp:FileUpload ID="fl_insertProductImage" class="custom-file-input" runat="server" />
-                                            <label id="custom-file-label" class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                            <!--<asp:FileUpload ID="fl_insertProductImage1" class="custom-file-input" runat="server"  accept=".png,.jpg,.jpeg"/> -->
+                                            <input type="file" name="file" class="custom-file-input" id="fl_insertProductImage" aria-describedby="inputGroupFileAddon01" runat="server" accept=".png,.jpg,.jpeg"/>
+                                            <label id="custom-file-label" class="custom-file-label" for="fl_insertProductImage"> Choose File Samir.... </label>
                                         </div>
                                         <div class="input-group-append">
                                         </div>
@@ -504,8 +505,8 @@
                             </div>
                         </div>
 
-                        <div class="form-row mt-2">
-                            <label id="lbl_errors" runat="server"></label>
+                        <div class="form-row mt-2 justify-content-center">
+                            <label id="lbl_errors" class="text-danger" runat="server"></label>
                         </div>
                     </div>
                     <!-- //TAB SYSTEM ENDING -->

@@ -44,6 +44,16 @@ namespace PROJECTOFINAL
         }
 
 
+        public static byte[] imageUpload(System.Web.UI.HtmlControls.HtmlInputFile fileControl)
+        {            
+            Stream imgstream = fileControl.PostedFile.InputStream;
+            int imgLen = fileControl.PostedFile.ContentLength;
+            byte[] imgBinaryData = new byte[imgLen];
+            imgstream.Read(imgBinaryData, 0, imgLen);
+
+            return imgBinaryData;
+        }
+
         public static byte[] imageUpload(FileUpload fileControl)
         {
             Stream imgstream = fileControl.PostedFile.InputStream;
