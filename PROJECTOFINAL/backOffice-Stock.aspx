@@ -4,6 +4,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
+
+ 
+
  <style>
 
      #stockupdate:hover {
@@ -46,12 +49,58 @@
 
     <script type="text/javascript">
 
+
+
         $(document).ready(function () {
+
+
             $('table.stock').DataTable();
+
             $('table.restock').DataTable({
                 searching: false
             });
+
+
+            //ideia, depois melhorar esta função para ser dinâmica
+
+            const cookieValue = document.cookie.split('; ').find(element => element.startsWith('activeTab')).split('=')[1];
+
+            switch (cookieValue) {
+
+                case '#pickup':
+                    document.getElementById('pickup').className += ' active';
+                    document.getElementById('stock').classList.remove('active');
+                    document.getElementById('home-tab').classList.remove('active');
+                    document.getElementById('profile-tab').className += ' active';
+                    break;
+
+                case '#stock':
+                    document.getElementById('stock').className += " active";
+                    document.getElementById('pickup').classList.remove('active');
+                    document.getElementById('profile-tab').classList.remove('active');
+                    document.getElementById('home-tab').className += ' active';
+                    break;
+
+                default:
+                    document.getElementById('stock').classList = "tab-pane fade show active";
+                    break;
+
+            }
+
+            console.log(cookieValue);
         });
+
+
+        function clickedStock() {
+
+            document.cookie = "activeTab=#stock";
+        }
+
+        function clickedPickup() {
+
+            document.cookie = "activeTab=#pickup";
+        }
+        
 
 
     </script>
@@ -86,7 +135,8 @@
         <div class="container">
             <div class="collapse my-4" id="collapseExample">
 
-                <h4 class="muted small text-center">you can update all with max restock qty using the restock all button, or individually using the restock selected and 
+                <h4 class="muted small text-center">
+                    you can update all with max restock qty using the restock all button, or individually using the restock selected and 
                     setting the quantity you want in the qty textbox
                        </h4>
 
@@ -158,20 +208,19 @@
 
 
 
-
         <!-- tab controls -->
         <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
             <!-- /Insert Products -->
             <ul class="nav nav-pills" id="myTab" role="tablist">
 
                 <li class="nav-item w-50 text-center shadow shadow-sm">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#stock" role="tab" aria-controls="products" aria-selected="true">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" onclick="clickedStock()" href="#stock" role="tab" aria-controls="products" aria-selected="true">
                         <h5>Stock</h5>
                     </a>
                 </li>
 
                 <li class="nav-item w-50 text-center shadow shadow-sm">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#pickup" role="tab" aria-controls="archived" aria-selected="false">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" onclick="clickedPickup()" href="#pickup" role="tab" aria-controls="archived" aria-selected="false">
                         <h5>Pickup</h5>
                     </a>
                 </li>
@@ -181,7 +230,7 @@
      <!-- //tab controls -->
 
 
-
+    
     <!-- tab content -->
     <div class="tab-content" id="myTabContent">
                 
@@ -343,20 +392,13 @@
                                     </tbody>
                                 </table>
 
-                                </div>
+                               </div>
                             </div>
                          </div>
         <!-- //PICKUP STOCK TABLE -->
-
-        </div>
+                    </div>
     <!-- //tab content -->
-
-    </div>
-
-
-
-
-
+                </div>
 
 
     <!-- SQL SOURCES -->
