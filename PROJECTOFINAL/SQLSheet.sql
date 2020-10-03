@@ -1896,3 +1896,22 @@ GO
 	begin catch
 		rollback
 	end catch
+
+
+/****************************************************
+
+					[ ATM ]
+
+****************************************************/
+
+GO
+CREATE OR ALTER PROC usp_atmcategories AS 
+select MAX(Produto.imagem) as 'imagem', Categoria.descricao, Categoria.ID
+from produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
+group by Categoria.descricao, Categoria.ID
+
+GO
+create or alter proc usp_atmProductCategory(@ID int) AS
+select produto.Codreferencia, produto.nome, produto.imagem 
+from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
+where Categoria.ID = @ID AND Produto.Descontinuado = 0 AND Produto.Activo = 1 AND Produto.precisaReceita = 0

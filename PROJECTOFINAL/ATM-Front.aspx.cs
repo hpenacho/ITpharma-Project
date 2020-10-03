@@ -11,7 +11,10 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lbl_chosenATM_title.InnerText = Session["ChosenATM_name"].ToString();
+            //lbl_chosenATM_title.InnerText = Session["ChosenATM_name"].ToString();
+
+            //(this.Master as ATM_MasterPage).chooseTitle(Session["ChosenATM_name"].ToString());
+            (this.Master as ATM_MasterPage).chooseTitle("CHOOSE SESSION LATER");
         }
     }
 }

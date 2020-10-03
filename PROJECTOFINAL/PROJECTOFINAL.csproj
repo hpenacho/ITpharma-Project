@@ -89,8 +89,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="advPlaceholder.png" />
+    <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-Front.aspx" />
     <Content Include="ATM-pickupChoice.aspx" />
+    <Content Include="ATM-Search.aspx" />
+    <Content Include="ATM-Shop.aspx" />
     <Content Include="backOffice-AdvertsClient.aspx" />
     <Content Include="backOffice-AdvertsSeasonal.aspx" />
     <Content Include="backOffice-Analytics.aspx" />
@@ -874,6 +877,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ATM-Category.aspx.cs">
+      <DependentUpon>ATM-Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-Category.aspx.designer.cs">
+      <DependentUpon>ATM-Category.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ATM-Front.aspx.cs">
       <DependentUpon>ATM-Front.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -894,6 +904,20 @@
     </Compile>
     <Compile Include="ATM-pickupChoice.aspx.designer.cs">
       <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ATM-Search.aspx.cs">
+      <DependentUpon>ATM-Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-Search.aspx.designer.cs">
+      <DependentUpon>ATM-Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ATM-Shop.aspx.cs">
+      <DependentUpon>ATM-Shop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-Shop.aspx.designer.cs">
+      <DependentUpon>ATM-Shop.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOffice-AdvertsClient.aspx.cs">
       <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>

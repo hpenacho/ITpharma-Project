@@ -7,21 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace PROJECTOFINAL
 {
-    public partial class ATM_MasterPage : System.Web.UI.MasterPage
+    public partial class ATM_Search : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-
-
-        public void chooseTitle(string title)
-        {
-            atmTitle.InnerText = title;
-        }
-
-
-
-
     }
 }
