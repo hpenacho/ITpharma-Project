@@ -186,15 +186,6 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rptModalCart;
 
         /// <summary>
-        /// link_updateCart control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_updateCart;
-
-        /// <summary>
         /// lbl_tax control.
         /// </summary>
         /// <remarks>

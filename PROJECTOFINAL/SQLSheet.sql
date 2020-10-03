@@ -1865,6 +1865,34 @@ GO
 
 
 	-- [ PROC ] Remove item from cart
+	GO
+	create or alter proc usp_increaseCartQty(@clientid int, @cookie varchar(50), @prodref varchar(20)) AS
+	BEGIN TRY
+	BEGIN TRAN
+
+		insert into carrinho values(@clientid, @prodref, @cookie)
+
+
+		select * from Carrinho
+
+	commit
+	end try
+	begin catch
+		rollback
+	end catch
+
 
 
 	-- [ PROC ] Add item from cart
+	GO
+	create or alter proc usp_decreaseCartQty(@clientid int, @cookie varchar(50), @prodref varchar (20)) AS
+    BEGIN TRY
+	BEGIN TRAN
+
+		delete top(1) from Carrinho where (Carrinho.ID_Cliente = @clientid or Carrinho.Cookie = @cookie) AND Carrinho.Prod_ref = @prodref
+
+	commit
+	end try
+	begin catch
+		rollback
+	end catch

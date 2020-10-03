@@ -9,23 +9,23 @@
      
     <script type="text/javascript">
 
-        let amount = $("#cartAmount").val();
+        let amount = $("input[id$='cartAmount']").val();
 
 
         function removeAmount() {
 
             if (amount > 1) {
-                amount = +$("#cartAmount").val();
+                amount = +$("input[id$='cartAmount']").val();
                 amount--;
-                $("#cartAmount").val(amount);
+                $("input[id$='cartAmount']").val(amount);
             }
         }
 
         function addAmount() {
 
-            amount = +$("#cartAmount").val();
+            amount = +$("input[id$='cartAmount']").val();
             amount++;
-            $("#cartAmount").val(amount);
+            $("input[id$='cartAmount']").val(amount);
 
         }
 
@@ -81,9 +81,9 @@
         <div class="row mt-3 ml-3">
          
            <div class="row">
-               <button type="button" class="btn btn-warning mr-2 btn-sm" onclick="removeAmount()"><i class="fas fa-minus"></i></button>
+               <button type="button" class="btn btn-warning mr-2 btn-sm" onclick="removeAmount()" formnovalidate="formnovalidate"><i class="fas fa-minus"></i></button>
                <asp:TextBox id= "cartAmount" pattern="[0-9]+" title="Only numbers" CssClass="form-control text-center bg-white" runat="server" style="width: 3.5em"></asp:TextBox>
-               <button type="button" class="btn btn-warning mr-2 btn-sm ml-2" onclick="addAmount()"><i class="fas fa-plus"></i></button>
+               <button type="button" class="btn btn-warning mr-2 btn-sm ml-2" onclick="addAmount()" formnovalidate="formnovalidate"><i class="fas fa-plus"></i></button>
              <asp:LinkButton ID="link_addToCart" class="btn btn-warning" runat="server" OnClick="link_addToCart_Click1" ToolTip="Adds this item to your cart with the selected ammount (if stock is available)."><i class="fas fa-cart-plus"></i> Add</asp:LinkButton>
           </div>
         </div>
