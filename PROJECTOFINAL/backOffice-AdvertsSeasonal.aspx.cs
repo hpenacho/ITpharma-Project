@@ -14,7 +14,7 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void link_insertSeasonlAd_Click(object sender, EventArgs e)
@@ -134,6 +134,16 @@ namespace PROJECTOFINAL
 
         }
 
-        
+        protected void ddl_filterByType_TextChanged(object sender, EventArgs e)
+        {
+            if (ddl_filterByType.SelectedItem.Text == "Show All")
+            {
+                SqlSourceSeasonAds.SelectCommand = null;
+                SqlSourceSeasonAds.SelectCommand = "SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Sazonal, Pub_Sazonal.Descricao,Pub_Sazonal.DataStart, Pub_Sazonal.DataExpiracao from Publicidade inner join Pub_Sazonal on Publicidade.ID_Pub_Sazonal = Pub_Sazonal.id where Publicidade.Tipo = 1";
+            }                
+
+            else
+                SqlSourceSeasonAds.SelectCommand = SqlSourceSeasonAds.SelectCommand.ToString() + "AND Pub_Sazonal.Descricao = '" + ddl_filterByType.SelectedItem.Text + "'";
+        }
     }
 }

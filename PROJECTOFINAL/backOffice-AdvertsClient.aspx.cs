@@ -137,5 +137,17 @@ namespace PROJECTOFINAL
             }
 
         }
+
+        protected void ddl_filterByType_TextChanged(object sender, EventArgs e)
+        {
+            if (ddl_filterByType.SelectedItem.Text == "Show All")
+            {
+                SqlSourceClientAds.SelectCommand = null;
+                SqlSourceClientAds.SelectCommand = "SELECT Publicidade.ID, Publicidade.imagem, publicidade.ID_Pub_Cliente, Pub_Cliente.Descricao, Pub_Cliente.DataStart, Pub_Cliente.DataExpiracao from Publicidade inner join Pub_Cliente on Publicidade.ID_Pub_Cliente = Pub_Cliente.ID where Publicidade.Tipo = 0";
+            }
+
+            else
+                SqlSourceClientAds.SelectCommand = SqlSourceClientAds.SelectCommand.ToString() + "AND Pub_Cliente.Descricao = '" + ddl_filterByType.SelectedItem.Text + "'";
+        }
     }
 }
