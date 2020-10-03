@@ -1470,7 +1470,7 @@ AND Produto.Descontinuado = 0
 
 GO
 create or alter proc usp_returnRelatedItemPage(@Reference varchar(20)) AS
-select top(5) Codreferencia, nome, preco, resumo, Produto.descricao, imagem, pdfFolheto, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
+select top(4) Codreferencia, nome, preco, resumo, Produto.descricao, imagem, pdfFolheto, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
 from produto inner join marca on produto.ID_Marca = marca.ID
 			 inner join categoria on produto.ID_Categoria = Categoria.ID
 where Produto.Codreferencia != @Reference
