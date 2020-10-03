@@ -208,68 +208,133 @@ namespace PROJECTOFINAL
 
         protected void rptModalCart_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName.Equals("linkDeleteCartItem"))
+           
+            switch (e.CommandName)
             {
-                SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
+                case "linkDeleteCartItem":
+                    deleteItemCart(e);
+                    break;
 
-                myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
-                myCommand.Parameters.AddWithValue("@Prod_Ref", e.CommandArgument.ToString());
-                myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"].Value);
+                case "link_decreaseQty":
+                    removeItemQty(e);
+                    break;
 
-                //OUTPUT - ERROR MESSAGES
-                myCommand.Parameters.Add(Tools.errorOutput("@warning", SqlDbType.VarChar, 200));
-
-                try
-                {
-                    Tools.myConn.Open();
-                    myCommand.ExecuteNonQuery();
-                    System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@warning"].Value.ToString());
-                }
-                catch (SqlException m)
-                {
-                    System.Diagnostics.Debug.WriteLine(m.Message);
-                }
-                finally
-                {
-                    Tools.myConn.Close();
-                    updateCart();
-                }
-
+                case "link_increaseQty":
+                    addItemQty(e);
+                    break;
             }
+
+
         }
 
 
-        //(@clientid int, @cookie varchar(50), @quantity int, @productref varchar(20))
 
-        protected void link_updateCart_Click(object sender, EventArgs e)
+
+        private void deleteItemCart(RepeaterCommandEventArgs e)
         {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
 
-            foreach(RepeaterItem item in rptModalCart.Items)
+            myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
+            myCommand.Parameters.AddWithValue("@Prod_Ref", e.CommandArgument.ToString());
+            myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"].Value);
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@warning", SqlDbType.VarChar, 200));
+
+            try
             {
-
-                SqlCommand myCommand = Tools.SqlProcedure("updateCartQuantities");
-                myCommand.Parameters.AddWithValue("@clientid", Client.userID);
-                myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
-                myCommand.Parameters.AddWithValue("@quantity", Convert.ToInt32(((Label)item.FindControl("lb_total")).Text));
-                myCommand.Parameters.AddWithValue("@productref", Convert.ToInt32(((Label)item.FindControl("Prod_Ref")).Text));
-
-                try
-                {
-                    Tools.myConn.Open();
-                    myCommand.ExecuteNonQuery();
-                }
-                catch (SqlException x)
-                {
-                    System.Diagnostics.Debug.WriteLine(x.Message);
-                }
-                finally
-                {
-                    Tools.myConn.Close();
-                }
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@warning"].Value.ToString());
             }
-
-
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                updateCart();
+            }
         }
+
+
+
+
+        private void addItemQty(RepeaterCommandEventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_increaseCartQty");
+
+            myCommand.Parameters.AddWithValue("@clientid", Client.userID == 0 ? (object)DBNull.Value : Client.userID);
+            myCommand.Parameters.AddWithValue("@prodref", e.CommandArgument.ToString());
+            myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                updateCart();
+            }
+        }
+
+
+        private void removeItemQty(RepeaterCommandEventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_decreaseCartQty");
+
+            myCommand.Parameters.AddWithValue("@clientid", Client.userID);
+            myCommand.Parameters.AddWithValue("@prodref", e.CommandArgument.ToString());
+            myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                updateCart();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
 
