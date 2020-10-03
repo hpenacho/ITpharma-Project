@@ -9,23 +9,23 @@
      
     <script type="text/javascript">
 
-        let amount = $("input[id$='cartAmount']").val();
+        let amount = $("#cartAmount").val();
 
 
         function removeAmount() {
 
             if (amount > 1) {
-                amount = +$("input[id$='cartAmount']").val();
+                amount = +$("#cartAmount").val();
                 amount--;
-                $("input[id$='cartAmount']").val(amount);
+                $("#cartAmount").val(amount);
             }
         }
 
         function addAmount() {
 
-            amount = +$("input[id$='cartAmount']").val();
+            amount = +$("#cartAmount").val();
             amount++;
-            $("input[id$='cartAmount']").val(amount);
+            $("#cartAmount").val(amount);
 
         }
 

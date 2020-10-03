@@ -303,11 +303,11 @@
     </div>
     <!-- /.container -->
 
-
+    <div class="container">
     <!-- Recommended Item -->
     <uc1:TargetedAds runat="server" ID="TargetedAds" />
     <!-- //Recommended Item -->
-    
+    </div>
 
     <!-- SQL SOURCES -->
     <asp:SqlDataSource ID="sqlShopProducts" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_productFiltering" SelectCommandType="StoredProcedure">

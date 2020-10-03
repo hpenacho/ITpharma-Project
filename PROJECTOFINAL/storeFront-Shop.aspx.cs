@@ -100,8 +100,6 @@ namespace PROJECTOFINAL
         {
             rptShopProducts.DataSourceID = sqlShopProducts.ID;
 
-            System.Diagnostics.Debug.WriteLine("Product Filtering current Page " + currentPage);
-
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;

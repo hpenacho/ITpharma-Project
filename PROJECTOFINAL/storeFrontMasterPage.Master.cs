@@ -177,15 +177,6 @@ namespace PROJECTOFINAL
 
         }
 
-
-
-        //// CART
-
-        //protected void btn_checkout_Click(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("storeFront-Checkout.aspx");
-        //}
-
         Decimal total = 0;
         int qtdTotal = 0;
 
@@ -245,6 +236,39 @@ namespace PROJECTOFINAL
                 }
 
             }
+        }
+
+
+        //(@clientid int, @cookie varchar(50), @quantity int, @productref varchar(20))
+
+        protected void link_updateCart_Click(object sender, EventArgs e)
+        {
+
+            foreach(RepeaterItem item in rptModalCart.Items)
+            {
+
+                SqlCommand myCommand = Tools.SqlProcedure("updateCartQuantities");
+                myCommand.Parameters.AddWithValue("@clientid", Client.userID);
+                myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
+                myCommand.Parameters.AddWithValue("@quantity", Convert.ToInt32(((Label)item.FindControl("lb_total")).Text));
+                myCommand.Parameters.AddWithValue("@productref", Convert.ToInt32(((Label)item.FindControl("Prod_Ref")).Text));
+
+                try
+                {
+                    Tools.myConn.Open();
+                    myCommand.ExecuteNonQuery();
+                }
+                catch (SqlException x)
+                {
+                    System.Diagnostics.Debug.WriteLine(x.Message);
+                }
+                finally
+                {
+                    Tools.myConn.Close();
+                }
+            }
+
+
         }
     }
 }
