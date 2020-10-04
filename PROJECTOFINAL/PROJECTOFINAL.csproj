@@ -88,7 +88,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="advPlaceholder.png" />
     <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-Front.aspx" />
     <Content Include="ATM-OrderQRauth.aspx" />
@@ -850,7 +849,6 @@
     <Content Include="storeFront-activateAcc.aspx" />
     <Content Include="storeFront-Checkout.aspx" />
     <Content Include="storeFront-Contacts.aspx" />
-    <Content Include="storeFront-Exams.aspx" />
     <Content Include="storeFront-Index.aspx" />
     <Content Include="storeFront-ItemPage.aspx" />
     <Content Include="storeFront-News.aspx" />
@@ -1030,13 +1028,6 @@
     </Compile>
     <Compile Include="storeFront-Contacts.aspx.designer.cs">
       <DependentUpon>storeFront-Contacts.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="storeFront-Exams.aspx.cs">
-      <DependentUpon>storeFront-Exams.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="storeFront-Exams.aspx.designer.cs">
-      <DependentUpon>storeFront-Exams.aspx</DependentUpon>
     </Compile>
     <Compile Include="storeFront-Index.aspx.cs">
       <DependentUpon>storeFront-Index.aspx</DependentUpon>
