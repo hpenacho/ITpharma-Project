@@ -12,6 +12,9 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            sqlprodcat.SelectParameters["PickupID"].DefaultValue = ATM.ID.ToString();
+
         }
     }
 }

@@ -11,7 +11,10 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["search"] == null)
+                Response.Redirect("ATM-Front.aspx");
 
+            sqlSearchSource.SelectParameters["PickupID"].DefaultValue = ATM.ID.ToString();
         }
     }
 }

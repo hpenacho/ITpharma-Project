@@ -4,21 +4,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-
-    
-        <div class="container mt-3">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-lg-12 text-center">
-                 <a href="ATM-Shop.aspx" class="btn btn-dark shadow shadow-sm" style="font-size:larger; width: 17.5em;">Back</a>
+                 <a href="ATM-Front.aspx" class="btn btn-dark shadow shadow-sm" style="font-size:larger; width: 17.5em;">Back</a>
             </div>
         </div>
     </div>
 
-
-
       <div class="col-lg-12 mt-4 justify-content-around">
         <div class="row">
-            <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlprodcat">
+            <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlSearchSource">
                 <ItemTemplate>
 
                     <div class="col-lg-4 col-md-6 mb-4">
@@ -48,12 +44,12 @@
 
 
     <!-- SQL SOURCES -->
-    <asp:SqlDataSource ID="sqlprodcat" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_atmProductCategory" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="sqlSearchSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_searchATMShopProducts" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:QueryStringParameter DefaultValue="1" Name="ID" QueryStringField="ref" Type="Int32" />
+            <asp:SessionParameter DefaultValue="null" Name="query" SessionField="search" Type="String" />
+            <asp:Parameter Name="PickupID" Type="Int32" />
         </SelectParameters>
-      </asp:SqlDataSource>
-
+    </asp:SqlDataSource>
 
 
 </asp:Content>

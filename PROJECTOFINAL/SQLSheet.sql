@@ -1911,7 +1911,24 @@ from produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
 group by Categoria.descricao, Categoria.ID
 
 GO
-create or alter proc usp_atmProductCategory(@ID int) AS
+create or alter proc usp_atmProductCategory(@ID int, @PickupID int) AS
 select produto.Codreferencia, produto.nome, produto.imagem 
 from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
-where Categoria.ID = @ID AND Produto.Descontinuado = 0 AND Produto.Activo = 1 AND Produto.precisaReceita = 0
+			 inner join StockPickup on Produto.Codreferencia = StockPickup.Prod_ref
+where Categoria.ID = @ID AND 
+	  Produto.Descontinuado = 0 AND 
+	  Produto.Activo = 1 AND 
+	  Produto.precisaReceita = 0 AND
+	  StockPickup.Qtd > 0
+
+GO
+create  or alter proc usp_searchATMShopProducts(@query nvarchar(50), @PickupID int) AS
+select * from produto inner join StockPickup on Produto.Codreferencia = StockPickup.Prod_ref
+					  inner join Pickup on StockPickup.ID_Stock_Pickup = Pickup.ID
+where Produto.Activo = 1 AND 
+     (Produto.nome like '%' + @query + '%' OR Produto.descricao like '%' + @query + '%') AND
+	 Produto.Descontinuado = 0 AND
+	 StockPickup.Qtd > 0 AND
+	 Pickup.ID = @PickupID
+	 
+	 

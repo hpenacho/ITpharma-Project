@@ -28,7 +28,7 @@
 
                     <div class="col-lg-4 col-md-6 mb-4">
                          <a href='ATM-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>' class="text-decoration-none">
-                        <div class="card h-100 border-light shadow shadow-sm rounded category-card border-0 mt-2">
+                        <div class="card h-100 border-light shadow shadow-sm rounded category-card border-0 mt-2 rounded">
                             <center> 
                                 <div class="text-center" style="height:150px; width:150px">
                                     <img style='height: 100%; width: 100%; object-fit: contain' src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Categoria">
@@ -56,6 +56,7 @@
     <asp:SqlDataSource ID="sqlprodcat" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_atmProductCategory" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:QueryStringParameter DefaultValue="1" Name="ID" QueryStringField="ref" Type="Int32" />
+            <asp:Parameter Name="PickupID" Type="Int32" />
         </SelectParameters>
       </asp:SqlDataSource>
 

@@ -91,7 +91,8 @@
     <Content Include="advPlaceholder.png" />
     <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-Front.aspx" />
-    <Content Include="ATM-pickupChoice.aspx" />
+    <Content Include="ATM-ItemPage.aspx" />
+    <Content Include="ATM-PickupChoice.aspx" />
     <Content Include="ATM-Search.aspx" />
     <Content Include="ATM-Shop.aspx" />
     <Content Include="backOffice-AdvertsClient.aspx" />
@@ -891,6 +892,13 @@
     <Compile Include="ATM-Front.aspx.designer.cs">
       <DependentUpon>ATM-Front.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ATM-ItemPage.aspx.cs">
+      <DependentUpon>ATM-ItemPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-ItemPage.aspx.designer.cs">
+      <DependentUpon>ATM-ItemPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ATM-MasterPage.Master.cs">
       <DependentUpon>ATM-MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -898,12 +906,12 @@
     <Compile Include="ATM-MasterPage.Master.designer.cs">
       <DependentUpon>ATM-MasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="ATM-pickupChoice.aspx.cs">
-      <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
+    <Compile Include="ATM-PickupChoice.aspx.cs">
+      <DependentUpon>ATM-PickupChoice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ATM-pickupChoice.aspx.designer.cs">
-      <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
+    <Compile Include="ATM-PickupChoice.aspx.designer.cs">
+      <DependentUpon>ATM-PickupChoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATM-Search.aspx.cs">
       <DependentUpon>ATM-Search.aspx</DependentUpon>
@@ -919,6 +927,7 @@
     <Compile Include="ATM-Shop.aspx.designer.cs">
       <DependentUpon>ATM-Shop.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ATM.cs" />
     <Compile Include="backOffice-AdvertsClient.aspx.cs">
       <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
