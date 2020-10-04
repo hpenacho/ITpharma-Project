@@ -41,7 +41,7 @@ namespace PROJECTOFINAL
         protected void lbtn_emailQR_Click(object sender, EventArgs e)
         {
 
-            string qrLink = "https://api.qrserver.com/v1/create-qr-code/?data=" + Request.QueryString["oID"].ToString() + "_" + Request.QueryString["cID"].ToString() +"_" + Request.QueryString["pID"].ToString();
+            string qrLink = "https://api.qrserver.com/v1/create-qr-code/?data=" + Request.QueryString["oID"].ToString() + "_" + Request.QueryString["cID"].ToString() +"-" + Request.QueryString["pID"].ToString();
             string eSubject = "Your QR code (Order #" + orderNumber + ")";
             string eBody = " <br>" + "<img src=\"" + qrLink + "\"/>" + "<br> <hr> <b>Instructions</b> <br> 1) This unique QR code can be used to receive your items at the ATM specified during checkout. <br/> 2) For your convenience, you may save this image to your device or print it, it must then be presented at the ATM's QR Scanner. <br/> 3) If you decide not to use the QR code, you will have to submit your Order Number, Username and Password for authentication. <br/> 4) You can request a copy of your QR code in this Order's Details Page, under your Personal User Area.";
             Tools.email(Client.email,eBody,eSubject);
