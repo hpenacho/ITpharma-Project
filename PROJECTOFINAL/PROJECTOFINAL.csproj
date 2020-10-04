@@ -90,9 +90,6 @@
   <ItemGroup>
     <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-Front.aspx" />
-    <Content Include="ATM-OrderQRauth.aspx" />
-    <Content Include="ATM-OrderRegularAuth.aspx" />
-    <Content Include="ATM-OrderRetrieved.aspx" />
     <Content Include="ATM-pickupChoice.aspx" />
     <Content Include="ATM-ItemPage.aspx" />
     <Content Include="ATM-PickupChoice.aspx" />

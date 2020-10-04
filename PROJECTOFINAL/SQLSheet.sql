@@ -356,12 +356,6 @@ begin tran
 		if (@ERROR_MESSAGE = 'There is enough stock for this specific order')
 			begin
 				update EncomendaHistorico set EncomendaHistorico.ID_Estado = 1 where EncomendaHistorico.ENC_REF = @thisEnc
-
-				if @Pickup is not null
-					begin
-						update EncomendaHistorico set EncomendaHistorico.ID_Estado = 5 where EncomendaHistorico.ENC_REF = @thisEnc
-					end
-
 			end
 
 		DELETE FROM carrinho WHERE carrinho.ID_Cliente = @IDcliente;
