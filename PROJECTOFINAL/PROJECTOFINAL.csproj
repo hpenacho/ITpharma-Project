@@ -92,6 +92,7 @@
     <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-Front.aspx" />
     <Content Include="ATM-ItemPage.aspx" />
+    <Content Include="ATM-PickupChoice.aspx" />
     <Content Include="ATM-Search.aspx" />
     <Content Include="ATM-Shop.aspx" />
     <Content Include="backOffice-AdvertsClient.aspx" />
@@ -904,6 +905,13 @@
     </Compile>
     <Compile Include="ATM-MasterPage.Master.designer.cs">
       <DependentUpon>ATM-MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ATM-PickupChoice.aspx.cs">
+      <DependentUpon>ATM-PickupChoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-PickupChoice.aspx.designer.cs">
+      <DependentUpon>ATM-PickupChoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATM-Search.aspx.cs">
       <DependentUpon>ATM-Search.aspx</DependentUpon>
