@@ -93,7 +93,6 @@
     <Content Include="ATM-OrderQRauth.aspx" />
     <Content Include="ATM-OrderRegularAuth.aspx" />
     <Content Include="ATM-OrderRetrieved.aspx" />
-    <Content Include="ATM-pickupChoice.aspx" />
     <Content Include="backOffice-AdvertsClient.aspx" />
     <Content Include="backOffice-AdvertsSeasonal.aspx" />
     <Content Include="backOffice-Analytics.aspx" />
@@ -911,13 +910,6 @@
     </Compile>
     <Compile Include="ATM-OrderRetrieved.aspx.designer.cs">
       <DependentUpon>ATM-OrderRetrieved.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ATM-pickupChoice.aspx.cs">
-      <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ATM-pickupChoice.aspx.designer.cs">
-      <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="backOffice-AdvertsClient.aspx.cs">
       <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>
