@@ -112,7 +112,7 @@ namespace PROJECTOFINAL
 
         protected void lbtn_qr_Click(object sender, EventArgs e)
         {
-            Response.Redirect("https://api.qrserver.com/v1/create-qr-code/?data=" + Tools.EncryptString(orderNumber) + "_" + Tools.EncryptString(Client.userID.ToString()) + "_" + Tools.EncryptString(pickupID), false);            
+            Response.Redirect("https://api.qrserver.com/v1/create-qr-code/?data=" + Tools.EncryptString(orderNumber) + "_" + Tools.EncryptString(Client.userID.ToString()) + "-" + Tools.EncryptString(pickupID), false);            
         }
     }
 }
