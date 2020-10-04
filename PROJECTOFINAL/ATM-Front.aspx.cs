@@ -14,9 +14,8 @@ namespace PROJECTOFINAL
             if (ATM.name != null)
                 lbl_chosenATM_title.InnerText = ATM.name;
             else
-                Response.Redirect("ATM-PickupChoice.aspx");
+                Response.Redirect("ATM-ChoicePickup.aspx");
 
-            //COmment para o merge
         }
 
         protected void searchbutton_Click(object sender, EventArgs e)

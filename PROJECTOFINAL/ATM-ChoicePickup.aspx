@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ATM-MasterPage.Master" AutoEventWireup="true" CodeBehind="ATM-PickupChoice.aspx.cs" Inherits="PROJECTOFINAL.ATM_pickupChoice" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/ATM-MasterPage.Master" AutoEventWireup="true" CodeBehind="ATM-ChoicePickup.aspx.cs" Inherits="PROJECTOFINAL.ATM_ChoicePickup" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <style>
+     <style>
 
         body {
             font-family: 'Varela Round', sans-serif;
@@ -99,12 +99,12 @@
 
 
 
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    
-    
-    <div class="row text-center justify-content-center mt-4 mb-4">
+
+        <div class="row text-center justify-content-center mt-4 mb-4">
         <div class="col-lg-8"> 
 
             <p class="text-muted text-center"> Para efeitos de demonstração de funcionalidade, escolha uma das pickups abaixo, a aplicação carregará a respectiva ATM.</p>
@@ -155,6 +155,7 @@
     </div>
 
 
+
+
+
 </asp:Content>
-
-
