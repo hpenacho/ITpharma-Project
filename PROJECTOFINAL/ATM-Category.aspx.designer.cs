@@ -11,34 +11,25 @@ namespace PROJECTOFINAL
 {
 
 
-    public partial class ATM_Front
+    public partial class ATM_Categoria
     {
 
         /// <summary>
-        /// lbl_chosenATM_title control.
+        /// rptShopProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_chosenATM_title;
+        protected global::System.Web.UI.WebControls.Repeater rptShopProducts;
 
         /// <summary>
-        /// searchfield control.
+        /// sqlprodcat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText searchfield;
-
-        /// <summary>
-        /// searchbutton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton searchbutton;
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlprodcat;
     }
 }

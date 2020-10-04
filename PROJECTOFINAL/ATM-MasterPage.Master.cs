@@ -12,6 +12,16 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            setHeaderName();
         }
+
+        //Sets both the name and visibility of the cart panel once it loads
+        private void setHeaderName()
+        {
+            atmTitle.InnerText = ATM.name ?? "ITPharma";
+            atmCartPanel.Visible = (ATM.name != null);
+        }
+
+
     }
 }

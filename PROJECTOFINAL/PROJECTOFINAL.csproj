@@ -89,7 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="advPlaceholder.png" />
+    <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-Front.aspx" />
+    <Content Include="ATM-ItemPage.aspx" />
+    <Content Include="ATM-PickupChoice.aspx" />
+    <Content Include="ATM-Search.aspx" />
+    <Content Include="ATM-Shop.aspx" />
     <Content Include="ATM-OrderQRauth.aspx" />
     <Content Include="ATM-OrderRegularAuth.aspx" />
     <Content Include="ATM-OrderRetrieved.aspx" />
@@ -876,12 +881,26 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ATM-Category.aspx.cs">
+      <DependentUpon>ATM-Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-Category.aspx.designer.cs">
+      <DependentUpon>ATM-Category.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ATM-Front.aspx.cs">
       <DependentUpon>ATM-Front.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ATM-Front.aspx.designer.cs">
       <DependentUpon>ATM-Front.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ATM-ItemPage.aspx.cs">
+      <DependentUpon>ATM-ItemPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-ItemPage.aspx.designer.cs">
+      <DependentUpon>ATM-ItemPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATM-MasterPage.Master.cs">
       <DependentUpon>ATM-MasterPage.Master</DependentUpon>
@@ -890,27 +909,14 @@
     <Compile Include="ATM-MasterPage.Master.designer.cs">
       <DependentUpon>ATM-MasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="ATM-OrderQRauth.aspx.cs">
-      <DependentUpon>ATM-OrderQRauth.aspx</DependentUpon>
+    <Compile Include="ATM-pickupChoice.aspx.cs">
+      <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ATM-OrderQRauth.aspx.designer.cs">
-      <DependentUpon>ATM-OrderQRauth.aspx</DependentUpon>
+    <Compile Include="ATM-pickupChoice.aspx.designer.cs">
+      <DependentUpon>ATM-pickupChoice.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ATM-OrderRegularAuth.aspx.cs">
-      <DependentUpon>ATM-OrderRegularAuth.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ATM-OrderRegularAuth.aspx.designer.cs">
-      <DependentUpon>ATM-OrderRegularAuth.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ATM-OrderRetrieved.aspx.cs">
-      <DependentUpon>ATM-OrderRetrieved.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ATM-OrderRetrieved.aspx.designer.cs">
-      <DependentUpon>ATM-OrderRetrieved.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="ATM.cs" />
     <Compile Include="backOffice-AdvertsClient.aspx.cs">
       <DependentUpon>backOffice-AdvertsClient.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

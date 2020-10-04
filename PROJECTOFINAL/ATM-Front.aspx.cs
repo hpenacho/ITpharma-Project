@@ -11,7 +11,18 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lbl_chosenATM_title.InnerText = Session["ChosenATM_name"].ToString();
+            if (ATM.name != null)
+                lbl_chosenATM_title.InnerText = ATM.name;
+            else
+                Response.Redirect("ATM-PickupChoice.aspx");
+
+            //COmment para o merge
+        }
+
+        protected void searchbutton_Click(object sender, EventArgs e)
+        {
+            Session["search"] = searchfield.Value;
+            Response.Redirect("ATM-Search.aspx");
         }
     }
 }
