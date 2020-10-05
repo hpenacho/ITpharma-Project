@@ -284,6 +284,14 @@
     <!-- //END CONTAINER-FLUID -->
   
 
+
+
+
+
+
+
+
+
     <!-- INSERT PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">

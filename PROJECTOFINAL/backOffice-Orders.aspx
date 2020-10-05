@@ -6,7 +6,9 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $('table.orders').DataTable();
+            $('table.orders').DataTable({
+                "order": [[0, "desc"]]
+            });
         });
 
     </script>
@@ -67,7 +69,7 @@
 
                             <tbody class="text-center">
 
-                                <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlSourceOrderDetails" OnItemCommand="rpt_parent_orders_ItemCommand">
+                                <asp:Repeater ID="rpt_orders" runat="server" DataSourceID="sqlSourceOrderDetails" OnItemCommand="rpt_parent_orders_ItemCommand" OnItemDataBound="rpt_orders_ItemDataBound">
                                     <ItemTemplate>
 
                                         <!-- ORDERS -->
@@ -190,10 +192,7 @@
     <asp:SqlDataSource ID="sqlSourceOrderDetails" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnBackofficeOrders" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
     <!-- Order Status  -->
-    <asp:SqlDataSource ID="sqlSourceStatus" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Estado] WHERE ([Tipo] = @Tipo)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="false" Name="Tipo" Type="Boolean" />
-        </SelectParameters>
+    <asp:SqlDataSource ID="sqlSourceStatus" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select * from estado where tipo = 0">
     </asp:SqlDataSource>
 
 

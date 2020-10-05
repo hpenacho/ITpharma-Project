@@ -1903,6 +1903,9 @@ GO
 		rollback
 	end catch
 
+	-- [QUERY] DDL stock order
+
+	select * from estado where tipo = 0
 
 /****************************************************
 
@@ -1921,11 +1924,13 @@ create or alter proc usp_atmProductCategory(@ID int, @PickupID int) AS
 select produto.Codreferencia, produto.nome, produto.imagem 
 from Produto inner join Categoria on Produto.ID_Categoria = Categoria.ID
 			 inner join StockPickup on Produto.Codreferencia = StockPickup.Prod_ref
+			 inner join Pickup on StockPickup.ID_Stock_Pickup = Pickup.ID
 where Categoria.ID = @ID AND 
 	  Produto.Descontinuado = 0 AND 
 	  Produto.Activo = 1 AND 
 	  Produto.precisaReceita = 0 AND
-	  StockPickup.Qtd > 0
+	  StockPickup.Qtd > 0 AND
+	  Pickup.ID = @PickupID
 
 GO
 create  or alter proc usp_searchATMShopProducts(@query nvarchar(50), @PickupID int) AS

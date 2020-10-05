@@ -55,5 +55,23 @@ namespace PROJECTOFINAL
             }
 
         }
+
+        protected void rpt_orders_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                DataRowView dr = (DataRowView)e.Item.DataItem;
+
+                ((DropDownList)e.Item.FindControl("ddl_orderStatus")).SelectedValue = dr["id_estado"].ToString();
+            }
+
+        }
+
+
+
+
+
+
     }
 }

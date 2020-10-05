@@ -1208,6 +1208,7 @@
     <Content Include="Resources\ITpharmaInvoice.pdf" />
     <None Include="Properties\PublishProfiles\itpharmashop - Web Deploy.pubxml" />
     <Content Include="Scripts\ckeditor\ckeditor.pack" />
+    <Content Include="Resources\BloodAnalysis.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
