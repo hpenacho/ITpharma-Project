@@ -48,7 +48,7 @@
         });
 
         function openModal() {
-            $('#myModal').modal('show');
+            $('#modal-update-product').modal('show');
         }
 
     </script>
@@ -65,12 +65,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
-    <script src="ckeditor/ckeditor.js"></script>
-    <!-- CK EDITOR SCRIPT -->
-
-
-    
 
     <div class="container-fluid">
     
@@ -277,11 +271,9 @@
                 </div>
             </div>
 
-        </div>
+            </div>
         <!-- //ARCHIVED PRODUCT TABLE -->
-
-    </div>
-
+        </div>
     </div>
     <!-- //END CONTAINER-FLUID -->
   
@@ -679,8 +671,9 @@
 
                        </ContentTemplate>
                     </asp:UpdatePanel>
-            </div>
+                </div>
                 <!-- END MODAL BODY CONTENT -->
+            </div>
         </div>
     </div>
     <!-- //UPDATE PRODUCTS MODAL -->

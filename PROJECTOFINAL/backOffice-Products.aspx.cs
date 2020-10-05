@@ -17,8 +17,19 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+            
         }
+
+
+        private void updateBrandsCategories()
+        {
+            SQLcategory.DataBind();
+            SQLbrand.DataBind();
+
+            ddl_category.DataBind();
+            ddl_brand.DataBind();
+        }
+
 
         static byte[] uploadedFile;
 
@@ -39,7 +50,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@nome", tb_name.Value);
             myCommand.Parameters.AddWithValue("@preco", tb_price.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_summary.Value);
-            myCommand.Parameters.AddWithValue("@descricao", ckeditorInsertProduct.Text);
+            //myCommand.Parameters.AddWithValue("@descricao", ckeditorInsertProduct.Text);
             myCommand.Parameters.AddWithValue("@imagem", uploadedFile);
             myCommand.Parameters.AddWithValue("@pdfFolheto", uploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_category.SelectedValue);
@@ -147,7 +158,8 @@ namespace PROJECTOFINAL
             Tools.myConn.Close();
 
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "$('#modal-update-product').modal()", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "$('#modal-update-product').modal()", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Javascript", "javascript:openModal(); ", true);
         }
 
 
@@ -281,6 +293,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                updateBrandsCategories();
             }
         }
 
