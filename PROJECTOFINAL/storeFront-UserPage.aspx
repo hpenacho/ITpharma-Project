@@ -24,7 +24,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-
+    <!-- MAIN CONTAINER --> 
     <div class="container">
         <div class="row mt-5">
 
@@ -138,8 +138,6 @@
                     </div>
                 </div>
 
-
-               
                 <div class="col-lg-8 my-4">
                     <div class="card shadow bg-white pb-4">
                         <div class="card-body">
@@ -504,15 +502,15 @@
 
     <asp:SqlDataSource ID="sqlPartnerships" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [ExamesParceria]"></asp:SqlDataSource>
 
-        <!-- SCRIPTS -->
-        <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-        <script src="BackOffice//BackOffice-Template/dist/assets/demo/chart-area-demo.js"></script>
-        <script src="BackOffice//BackOffice-Template/dist/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script src="BackOffice//BackOffice-Template/dist/assets/demo/datatables-demo.js"></script>
-        <!-- /SCRIPTS -->
+    <!-- SCRIPTS -->
+    <script src="BackOffice/BackOffice-Template/dist/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="BackOffice//BackOffice-Template/dist/assets/demo/chart-area-demo.js"></script>
+    <script src="BackOffice//BackOffice-Template/dist/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="BackOffice//BackOffice-Template/dist/assets/demo/datatables-demo.js"></script>
+    <!-- /SCRIPTS -->
 
 
 </asp:Content>

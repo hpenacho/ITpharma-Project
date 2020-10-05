@@ -1907,6 +1907,18 @@ GO
 
 	select * from estado where tipo = 0
 
+
+
+	/* EXAMES */
+
+	select * from ExamesAnalises
+
+	alter table ExamesAnalises alter column DataPedido date
+
+
+
+
+
 /****************************************************
 
 					[ ATM ]
