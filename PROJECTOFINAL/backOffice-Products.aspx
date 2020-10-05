@@ -744,6 +744,11 @@
                     <label class="mt-2 text-center col-12" id="lbl_BrandMessage" runat="server"></label>
 
                                    </ContentTemplate>
+
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="link_insertBrand" />
+                                </Triggers>
+
                         </asp:UpdatePanel>
                 
                 
