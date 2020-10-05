@@ -66,6 +66,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
+    <script src="Scripts/ckeditor/ckeditor.js"></script>
+    <!-- CK EDITOR SCRIPT -->
+
+
     <div class="container-fluid">
     
 
