@@ -151,7 +151,7 @@ namespace PROJECTOFINAL
 
             //--------------------------------------------------------- E depois de limpas as variaveis de sessão, redirecionamos para a pagina OrderSuccess, que será ligeiramente diferente mediante ser ordem para casa ou pickup
             if (inpHide.Value == "Pickup")
-             Response.Redirect("storeFront-OrderSuccess.aspx?oID=" + Tools.EncryptString(orderNumber) + "&cID=" + Tools.EncryptString(Client.userID.ToString()) + "&pID=" + Tools.EncryptString(ddl_pickUp.SelectedValue.ToString()), false);
+             Response.Redirect("storeFront-OrderSuccess.aspx?oID=" + orderNumber + "&cID=" + Client.userID.ToString() + "&pID=" + ddl_pickUp.SelectedValue.ToString(), false);
 
             else
             {

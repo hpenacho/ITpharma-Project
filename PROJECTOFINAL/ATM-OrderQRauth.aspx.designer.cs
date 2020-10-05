@@ -33,15 +33,6 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_messageQR;
 
         /// <summary>
-        /// tb_decrypterInput control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_decrypterInput;
-
-        /// <summary>
         /// lbtn_QRauth control.
         /// </summary>
         /// <remarks>
@@ -49,5 +40,14 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbtn_QRauth;
+
+        /// <summary>
+        /// qrUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload qrUpload;
     }
 }

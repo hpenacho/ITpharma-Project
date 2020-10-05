@@ -35,7 +35,7 @@
     <script>
         window.onload = (event) => {
             const urlParams = new URLSearchParams(window.location.search);
-            let text = urlParams.get("oID") + "_" + urlParams.get("cID") + "-" + urlParams.get("pID");
+            let text ="Q" + urlParams.get("oID") + "_" + urlParams.get("cID") + "-" + urlParams.get("pID");
             console.log(urlParams.get("oID"));console.log(urlParams.get("cID"));console.log(urlParams.get("pID"));
             let qr = document.getElementById("qrCodeImage");
 
