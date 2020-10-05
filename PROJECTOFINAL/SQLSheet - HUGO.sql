@@ -116,7 +116,7 @@ begin tran
 
     else
         begin
-        update EncomendaHistorico set ID_Estado = 6 where EncomendaHistorico.ID_Cliente = (Select cliente.id from cliente where email = @email) and EncomendaHistorico.ENC_REF = @order_ref	
+        update EncomendaHistorico set ID_Estado = 6, UltimaActualizacao = GETDATE() where EncomendaHistorico.ID_Cliente = (Select cliente.id from cliente where email = @email) and EncomendaHistorico.ENC_REF = @order_ref	
         end
 
 commit
@@ -147,7 +147,7 @@ begin tran
 
     else
         begin
-        update EncomendaHistorico set ID_Estado = 6 where EncomendaHistorico.ENC_REF = @order_ref	
+        update EncomendaHistorico set ID_Estado = 6, UltimaActualizacao = GETDATE() where EncomendaHistorico.ENC_REF = @order_ref	
         end
 
 commit
