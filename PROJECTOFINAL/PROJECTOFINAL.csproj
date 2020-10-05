@@ -595,12 +595,14 @@
     </Compile>
     <Compile Include="ATM-Search.aspx.cs">
       <DependentUpon>ATM-Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ATM-Search.aspx.designer.cs">
       <DependentUpon>ATM-Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATM-Shop.aspx.cs">
       <DependentUpon>ATM-Shop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ATM-Shop.aspx.designer.cs">
       <DependentUpon>ATM-Shop.aspx</DependentUpon>
