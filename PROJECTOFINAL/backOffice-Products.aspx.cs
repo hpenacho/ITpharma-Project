@@ -17,8 +17,6 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
-         
-            
 
         }
 
@@ -41,7 +39,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@nome", tb_name.Value);
             myCommand.Parameters.AddWithValue("@preco", tb_price.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_summary.Value);
-            myCommand.Parameters.AddWithValue("@descricao", tb_description.Value);
+            myCommand.Parameters.AddWithValue("@descricao", ckeditorInsertProduct.Text);
             myCommand.Parameters.AddWithValue("@imagem", uploadedFile);
             myCommand.Parameters.AddWithValue("@pdfFolheto", uploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_category.SelectedValue);
@@ -125,7 +123,7 @@ namespace PROJECTOFINAL
                 tb_updateName.Value = reader["nome"].ToString();
                 tb_updatePrice.Value = reader["preco"].ToString();
                 tb_updateSummary.Value = reader["resumo"].ToString();
-                tb_updateDescription.Value = reader["descricao"].ToString();
+                ckeditorUpdateProduct.Text = reader["descricao"].ToString();
                 ddl_updateCategory.SelectedValue = reader["ID_Categoria"].ToString();
                 ddl_updateBrand.SelectedValue = reader["ID_Marca"].ToString();
 
@@ -185,7 +183,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@nome", tb_updateName.Value);
             myCommand.Parameters.AddWithValue("@preco", tb_updatePrice.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_updateSummary.Value);
-            myCommand.Parameters.AddWithValue("@descricao", tb_updateDescription.Value);
+            myCommand.Parameters.AddWithValue("@descricao", ckeditorUpdateProduct.Text);
             myCommand.Parameters.AddWithValue("@imagem", Tools.imageUpload(fl_updateProductImage));
             myCommand.Parameters.AddWithValue("@pdfFolheto", Tools.imageUpload(fl_updateProductImage)); // alterar no futuro
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_updateCategory.SelectedValue);
