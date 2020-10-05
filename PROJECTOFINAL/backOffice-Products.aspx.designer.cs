@@ -60,13 +60,13 @@ namespace PROJECTOFINAL
         protected global::AjaxControlToolkit.AsyncFileUpload fl_insertProductImage;
 
         /// <summary>
-        /// tb_description control.
+        /// ckeditorInsertProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea tb_description;
+        protected global::CKEditor.NET.CKEditorControl ckeditorInsertProduct;
 
         /// <summary>
         /// tb_summary control.
@@ -222,13 +222,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.FileUpload fl_updateProductImage;
 
         /// <summary>
-        /// tb_updateDescription control.
+        /// ckeditorUpdateProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea tb_updateDescription;
+        protected global::CKEditor.NET.CKEditorControl ckeditorUpdateProduct;
 
         /// <summary>
         /// tb_updateSummary control.

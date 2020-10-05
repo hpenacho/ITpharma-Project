@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false" %>
 
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -46,7 +48,7 @@
         });
 
         function openModal() {
-            $('#myModal').modal('show');
+            $('#modal-update-product').modal('show');
         }
 
     </script>
@@ -64,11 +66,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <script src="ckeditor/ckeditor.js"></script>
+    <script src="Scripts/ckeditor/ckeditor.js"></script>
     <!-- CK EDITOR SCRIPT -->
 
-
-    
 
     <div class="container-fluid">
     
@@ -275,14 +275,20 @@
                 </div>
             </div>
 
-        </div>
+            </div>
         <!-- //ARCHIVED PRODUCT TABLE -->
-
-    </div>
-
+        </div>
     </div>
     <!-- //END CONTAINER-FLUID -->
   
+
+
+
+
+
+
+
+
 
     <!-- INSERT PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
@@ -355,12 +361,7 @@
                                         <label for="tb_description">
                                             <p class="text-muted">Item Description </p>
                                         </label>
-                                        <textarea class="form-control" id="tb_description" runat="server" rows="3" required></textarea>
-                                        <script type="text/javascript">
-
-                                            CKEDITOR.replace('<%=tb_description.ClientID%>', { customConfig: 'custom/menu.js' });
-
-                                        </script>
+                                        <CKEditor:CKEditorControl ID="ckeditorInsertProduct" runat="server"></CKEditor:CKEditorControl>
                                     </div>
 
                                 </div>
@@ -528,10 +529,6 @@
     
     <!-- //INSERT PRODUCTS MODAL -->
 
-
-        <asp:UpdatePanel ID="udpUpdateProduct" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-
     <!-- UPDATE PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
@@ -545,7 +542,7 @@
                 </div>
                 <div class="modal-body">
                  <!-- BEGIN MODAL BODY CONTENT -->
-                    <asp:UpdatePanel runat="server">
+                    <asp:UpdatePanel ID="udpUpdateProduct" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
 
                             <div class="p-4">
@@ -584,12 +581,7 @@
 
                                     <div class="col-lg-12">
                                         <label for="tb_description">Description</label>
-                                        <textarea class="form-control" id="tb_updateDescription" runat="server" rows="3" required></textarea>
-                                        <script type="text/javascript">
-
-                                            CKEDITOR.replace('<%=tb_updateDescription.ClientID%>', { customConfig: 'custom/menu.js' });
-
-                                        </script>
+                                        <CKEditor:CKEditorControl ID="ckeditorUpdateProduct" runat="server"></CKEditor:CKEditorControl>
                                     </div>
                                 </div>
 
@@ -683,14 +675,12 @@
 
                        </ContentTemplate>
                     </asp:UpdatePanel>
-            </div>
+                </div>
                 <!-- END MODAL BODY CONTENT -->
+            </div>
         </div>
     </div>
-    <!-- //UPDATE PRODUTCTS MODAL -->
-                </ContentTemplate>
-            </asp:UpdatePanel>
-
+    <!-- //UPDATE PRODUCTS MODAL -->
 
 
 
@@ -757,10 +747,9 @@
 
                     <label class="mt-2 text-center col-12" id="lbl_BrandMessage" runat="server"></label>
 
-                                   </ContentTemplate>
+                           </ContentTemplate>
                         </asp:UpdatePanel>
-                
-                
+
                 </div> <!-- END MODAL BODY CONTENT -->
             </div>
         </div>
