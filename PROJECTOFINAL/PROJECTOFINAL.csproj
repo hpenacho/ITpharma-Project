@@ -95,6 +95,7 @@
     <Content Include="ATM-ChoicePickup.aspx" />
     <Content Include="ATM-Front.aspx" />
     <Content Include="ATM-ItemPage.aspx" />
+    <Content Include="ATM-Purchase.aspx" />
     <Content Include="ATM-Search.aspx" />
     <Content Include="ATM-Shop.aspx" />
     <Content Include="ATM-OrderQRauth.aspx" />
@@ -937,6 +938,13 @@
     </Compile>
     <Compile Include="ATM-OrderRetrieved.aspx.designer.cs">
       <DependentUpon>ATM-OrderRetrieved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ATM-Purchase.aspx.cs">
+      <DependentUpon>ATM-Purchase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ATM-Purchase.aspx.designer.cs">
+      <DependentUpon>ATM-Purchase.aspx</DependentUpon>
     </Compile>
     <Compile Include="ATM-Search.aspx.cs">
       <DependentUpon>ATM-Search.aspx</DependentUpon>
