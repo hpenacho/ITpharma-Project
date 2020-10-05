@@ -300,10 +300,6 @@
     <!-- MODALS -->
 
     <!-- Modal Schedule BloodWork -->
-    <asp:UpdatePanel ID="bloodSchedule" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-        <ContentTemplate>
-
-
             <div class="modal fade bd-example-modal-lg" id="bloodwork-modal" tabindex="-1" role="dialog" aria-labelledby="bloodWorkLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -318,20 +314,19 @@
                          <!-- MODAL BODY -->
                             <div class="modal-body">
 
-                                <asp:UpdatePanel runat="server">
+                                <asp:UpdatePanel runat="server" ID="udp_bloodwork" UpdateMode="Conditional">
                                     <ContentTemplate>
 
                                         <div class="container-fluid">
 
                                             <h4 class="mb-3 mt-2">Schedule or Check your Exams</h4>
-
                                             <div class="form-group mb-4">
                                                 <div class="form-row">
-                                                    <div class="col-lg-5">
+                                                    <div class="col-lg-4">
                                                         <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control" placeholder="Health Number"/>
                                                     </div>
-                                                    <div class="col-lg-3">
-                                                        <input type="date" id="txt_bloodSchedule" runat="server" class="form-control" />
+                                                    <div class="col-lg-4">
+                                                        <input type="datetime-local" id="txt_bloodSchedule" runat="server" class="form-control" />
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <asp:DropDownList ID="ddl_bloodPartners" runat="server" CssClass="form-control" DataSourceID="sqlPartnerships" DataValueField="ID" DataTextField="Parceria"></asp:DropDownList>
@@ -342,31 +337,26 @@
 
                                             <div class="collapse my-5" id="collapseExams">
 
-                                                <div class="card card-body text-center">
-                                                    <div class="card" style="width: 13rem;">
-                                                        <div class="card-body text-center">
+                                                <div class="col-lg-12">
+                                                    <div class="card-deck text-center">
 
-                                                            <div id="noExam" runat="server">
-                                                                <h4>No exams scheduled or received</h4>
-                                                            </div>
+                                                        <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
+                                                            <ItemTemplate>
+                                                                <div class="card" style="width: 13rem;">
+                                                                    <div class="card-body text-center">
 
-                                                            <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
-                                                                <ItemTemplate>
-
-                                                                    <div runat="server">
                                                                         <h4 class="card-title"><%# Eval("parceria") %></h4>
-                                                                        <h5 class="card-text"><%# Eval("Descricao") %></h5>
-                                                                        <h6 class="small text-muted">Pedido: <%# Eval("DataPedido", "{0:dd/M/yyyy}") %></h6>
-                                                                        <a href="#" class="btn btn-warning">Exam</a>
+                                                                        <h6 class="text-muted">STATUS</h6>
+                                                                        <h6 class="card-text badge-dark rounded-pill mx-auto py-1"><%# Eval("Descricao") %></h6>
+                                                                        <h6 class="small text-muted">Pedido: <%# Eval("DataPedido", "{0:dd/M/yyyy HH:mm}") %></h6>
+                                                                        <asp:LinkButton ID="link_examRedirect" Visible='<%# (int)Eval("ID_estado") == 9 %>' class="btn btn-warning" Target="_blank" href='<%#Eval("PDFcaminho") %>' runat="server">Ver Exame</asp:LinkButton>
                                                                     </div>
-
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-
-                                                        </div>
+                                                                </div>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
                                                     </div>
-                                                </div>
 
+                                                </div>
                                             </div>
 
                                             <div class="form-row text-center my-5 d-flex justify-content-center">
@@ -378,7 +368,6 @@
 
                                             </div>
                                         </div>
-
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -389,9 +378,6 @@
                     </div>
                 </div>
             </div>
-
-        </ContentTemplate>
-    </asp:UpdatePanel>
     <!-- //Modal Schedule Bloodwork -->
 
 

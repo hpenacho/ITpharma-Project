@@ -213,13 +213,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater rpt_orders;
 
         /// <summary>
-        /// bloodSchedule control.
+        /// udp_bloodwork control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel bloodSchedule;
+        protected global::System.Web.UI.UpdatePanel udp_bloodwork;
 
         /// <summary>
         /// txt_bloodHealthNumber control.
@@ -256,15 +256,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblExameWarning;
-
-        /// <summary>
-        /// noExam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl noExam;
 
         /// <summary>
         /// rpt_exams control.

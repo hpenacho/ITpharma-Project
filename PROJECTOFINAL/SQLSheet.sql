@@ -1521,18 +1521,24 @@ create or alter proc usp_returnExams(@ClientID int) AS
 select * from ExamesAnalises inner join Estado on ExamesAnalises.ID_Estado = Estado.ID
 							 inner join ExamesParceria on ExamesAnalises.ID_Parceria = ExamesParceria.ID
 where ExamesAnalises.ID_Cliente = @ClientID
+ORDER BY ExamesAnalises.DataPedido ASC
+
+
+select * from ExamesAnalises
+delete from ExamesAnalises
+
 
 -- [ PROC ] SCHEDULE PERSONAL EXAMS
 
 GO
-create or alter proc usp_scheduleExam(@ClientID int, @DataPedido datetime, @ParceiroID int, @output varchar(200) output) AS
+create or alter proc usp_scheduleExam(@ClientID int, @DataPedido datetime, @CaminhoPDF varchar(MAX), @ParceiroID int, @output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 
 	IF EXISTS(select '*' from ExamesAnalises where ExamesAnalises.DataPedido = @DataPedido AND ExamesAnalises.ID_Parceria = @ParceiroID AND ExamesAnalises.ID_Cliente = @ClientID)
 		throw 60001, 'There is already a scheduled exam for this date at this partner lab', 10
 
-	insert into ExamesAnalises values(@ClientID, null, @DataPedido, 1, @ParceiroID)
+	insert into ExamesAnalises values(@ClientID, @DataPedido, 1, @ParceiroID, @CaminhoPDF);
 
 COMMIT
 END TRY
@@ -1542,11 +1548,31 @@ BEGIN CATCH
 END CATCH
 
 select * from ExamesAnalises
+delete from ExamesAnalises
+
+
+-- [ USP ] ALTER EXAMS DATE
+
+GO
+create or alter proc usp_examStatusChange(@clientID int) AS 
+BEGIN TRY
+BEGIN TRAN
+
+		update ExamesAnalises
+		SET ID_Estado = case  when DATEDIFF(day, DataPedido, getdate()) >= 2 AND DATEDIFF(day, DataPedido, getdate()) < 4 THEN 8	
+							  when DATEDIFF(day, DataPedido, getdate()) >= 4 THEN 9
+							  END
+		WHERE ExamesAnalises.ID_Cliente = @clientID
+	
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH
+
+select * from ExamesAnalises
 
 -- QUERY STOCK AVAILABILITY
-
-select * from produto
-select * from StockPickup
 
 GO
 create or alter proc usp_itemPageAvailability(@reference varchar(50)) AS
@@ -1905,7 +1931,7 @@ GO
 
 	-- [QUERY] DDL stock order
 
-	select * from estado where tipo = 0
+	
 
 /****************************************************
 

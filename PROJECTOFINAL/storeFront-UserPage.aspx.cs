@@ -1,9 +1,12 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,32 +14,51 @@ namespace PROJECTOFINAL
 {
     public partial class storeFront_UserPage : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!Client.isLogged)
                 Response.Redirect("storeFront-Index.aspx");
 
             if (!Page.IsPostBack)
             {
                 fillDetails();
-                txt_bloodSchedule.Value = DateTime.Now.ToString("yyyy-MM-dd");
             }
-               
+           
             txt_oldPassword.ReadOnly = Client.social;
             txt_newPassword.ReadOnly = Client.social;
             txt_repeatPassword.ReadOnly = Client.social;
 
-            noExam.Visible = rpt_exams.Items.Count > 0;
+            updateStatusOrder();
         }
 
+        private void updateStatusOrder()
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_examStatusChange");
 
-        public static bool rptRow;
+            myCommand.Parameters.AddWithValue("@clientID", Client.userID);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+
+        }
 
 
         protected void link_logout_Click(object sender, EventArgs e)
         {
-            //ATENÇÃO PODE HAVER CONFLICTOS COM O CHECKOUT E A INFORMAÇÃO
+            //ATENÇÃO PODE HAVER CONFLICTOS COM O CHECKOUT E A INFORMAÇÃO TESTAR DEPOIS
             Client.resetClient();
             Response.Redirect("storeFront-Index.aspx");
         }
@@ -49,7 +71,7 @@ namespace PROJECTOFINAL
             txt_alternif.Value = Client.NIF;
             txt_zipCode.Value = Client.codPostal;
             txt_alterhealthnumber.Text = Client.nrSaude;
-            txt_alterBirth.Value = Convert.ToDateTime(Client.birthday).ToString("dd/MM/yyyy");
+            txt_alterBirth.Value = Convert.ToDateTime(Client.birthday).ToString("dd-MM-yyyy");
 
             if (Client.birthday == null || Client.birthday.ToString() == "")
                 {txt_alterBirth.Visible = false; txt_alterBirth2.Disabled = false; txt_alterBirth2.Visible = true;}
@@ -61,6 +83,9 @@ namespace PROJECTOFINAL
 
             if (Client.nrSaude == null || Client.nrSaude == "")
                 txt_alterhealthnumber.ReadOnly = false;
+
+
+            txt_bloodSchedule.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ', 'T');
 
             //UTILITY
             welcomeUser.InnerText = "Welcome " + Client.name;
@@ -217,11 +242,30 @@ namespace PROJECTOFINAL
 
         }
 
+
+
         protected void btn_scheduleBlood_Click(object sender, EventArgs e)
         {
+
+            lblExameWarning.InnerText = "";
+
+            if(txt_bloodSchedule.Value == "" || Convert.ToDateTime(txt_bloodSchedule.Value).Day < DateTime.Now.Day)
+            {
+                lblExameWarning.InnerText = "You cannot schedule an exame for a date earlier than tomorrow";
+                return;
+            }
+
+            if (txt_bloodHealthNumber.Value.Trim().Length < 8)
+            {
+                lblExameWarning.InnerText = "Invalid Health Number (e.g 123123123)";
+                return;
+            }
+
             SqlCommand myCommand = Tools.SqlProcedure("usp_scheduleExam");
+
             myCommand.Parameters.AddWithValue("ClientID", Client.userID);
-            myCommand.Parameters.AddWithValue("DataPedido", txt_bloodSchedule.Value);
+            myCommand.Parameters.AddWithValue("DataPedido", Convert.ToDateTime(txt_bloodSchedule.Value.Replace("T", " ")));
+            myCommand.Parameters.AddWithValue("CaminhoPDF", pdf());
             myCommand.Parameters.AddWithValue("ParceiroID", ddl_bloodPartners.SelectedValue);
 
             //OUTPUT - ERROR MESSAGES
@@ -233,7 +277,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
 
-                lblExameWarning.InnerText = myCommand.Parameters["@output"].Value.ToString();
+                lblExameWarning.InnerText = myCommand.Parameters["@output"].Value.ToString() == "" ? "Exam was successfully scheduled" : myCommand.Parameters["@output"].Value.ToString();
 
             }
             catch (SqlException s)
@@ -243,9 +287,32 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                rpt_exams.DataBind();
             }
 
+        }
 
+
+        private string pdf()
+        {
+            string localhost = WebConfigurationManager.AppSettings["localhost"];
+            string pdfpath = AppDomain.CurrentDomain.BaseDirectory + WebConfigurationManager.AppSettings["pdfpath"];
+            string pdfTemplate = pdfpath + "BloodAnalysis.pdf";
+            string PDFname = Tools.EncryptString(Client.userID + txt_bloodSchedule.Value) + ".pdf";
+            string newFile = pdfpath + "\\exams\\" + PDFname;
+
+            PdfReader pdfreader = new PdfReader(pdfTemplate);
+            PdfStamper pdfstamper = new PdfStamper(pdfreader, new FileStream(newFile, FileMode.Create));
+            AcroFields pdfformfields = pdfstamper.AcroFields;
+
+            pdfformfields.SetField("laboratory", ddl_bloodPartners.SelectedItem.Text);
+            pdfformfields.SetField("patientname", Client.name);
+            pdfformfields.SetField("patienthealthnumber", txt_bloodHealthNumber.Value);
+            pdfformfields.SetField("daterequisition", Convert.ToDateTime(txt_bloodSchedule.Value).ToString("dd-MM-yyyy HH:mm").Replace(' ', 'T'));
+
+            pdfstamper.Close();
+
+            return localhost + "Resources/exams/" + PDFname;
         }
 
        
