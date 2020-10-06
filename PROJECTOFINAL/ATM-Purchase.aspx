@@ -3,9 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
+
    <asp:UpdatePanel ID="updshoppingcart" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-                    <ContentTemplate>
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
+     <ContentTemplate>
+                        
 
                         <div class="container">
                             <div>
@@ -87,9 +89,6 @@
                             <!-- ATM FOOTER -->
                             <div class="container">
 
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-
                                 <div class="row justify-content-around">
 
                                     <div class="col-lg-7 text-left">
@@ -122,9 +121,6 @@
                                     </div>
 
                                 </div>
-
-                                  </ContentTemplate>
-                                </asp:UpdatePanel> 
                             </div>
                             <!-- //ATM FOOTER -->
                         </div>
@@ -136,42 +132,46 @@
 
 
 <!-- Payment Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-hand-holding-usd"></i> Payment Method</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-hand-holding-usd"></i>Payment Method</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-          <div class="col-md-12 text-center mb-4">
-                      <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 500px; height: 200px;">
-                          <label class="btn btn-light active">
-                            <input type="radio" name="radioPayMethod" autocomplete="off" checked> <p style="font-size:80px"> <i class="far fa-credit-card text-warning"></i> </p> <span style="font-size:30px"> Card</span>
-                          </label>
-                          <label class="btn btn-light">
-                            <input type="radio" name="radioPayMethod" autocomplete="off"> <p style="font-size:80px"> <i class="far fa-money-bill-alt text-info"></i> </p> <span style="font-size:30px"> Cash </span>
-                          </label>
+
+                    <div class="col-md-12 text-center mb-4">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons" style="width: 500px; height: 200px;">
+                            <label class="btn btn-light active">
+                                <input type="radio" name="radioPayMethod" autocomplete="off" checked>
+                                <p style="font-size: 80px"><i class="far fa-credit-card text-warning"></i></p>
+                                <span style="font-size: 30px">Card</span>
+                            </label>
+                            <label class="btn btn-light">
+                                <input type="radio" name="radioPayMethod" autocomplete="off">
+                                <p style="font-size: 80px"><i class="far fa-money-bill-alt text-info"></i></p>
+                                <span style="font-size: 30px">Cash </span>
+                            </label>
                         </div>
-                      </div>
-
-          <div class="row text-center justify-content-center">
-                <div class="col-md-6">
-                    <input type="text" placeholder="NIF (optional)" class="form-control form-control-user bg-light" pattern="^\d{9}$" title="Insert your 9 Digit NIF (optional)" id="tb_NIF" runat="server"/>
-                      </div>
                     </div>
-          </div>
-      <div class="modal-footer text-center">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <asp:LinkButton ID="lbtn_finalizeOrder" CssClass="btn btn-success" runat="server" OnClick="lbtn_finalizeOrder_Click"> Confirm Payment </asp:LinkButton>
-      </div>
+
+                    <div class="row text-center justify-content-center">
+                        <div class="col-md-6">
+                            <input type="text" placeholder="NIF (optional)" class="form-control form-control-user bg-light" pattern="^\d{9}$" title="Insert your 9 Digit NIF (optional)" id="tb_NIF" runat="server" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <asp:LinkButton ID="lbtn_finalizeOrder" CssClass="btn btn-success" runat="server" OnClick="lbtn_finalizeOrder_Click"> Confirm Payment </asp:LinkButton>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <!-- Sql Source -->
         <asp:SqlDataSource ID="SqlSourceCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
