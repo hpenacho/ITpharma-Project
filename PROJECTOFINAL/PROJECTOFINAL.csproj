@@ -50,7 +50,7 @@
       <HintPath>..\packages\CkeditorForASP.NET.3.6.4.0\lib\CKEditor.NET.dll</HintPath>
     </Reference>
     <Reference Include="BarcodeLib.BarcodeReader">
-      <HintPath>..\..\..\..\..\Desktop\BarcodeLib.BarcodeReader.dll</HintPath>
+      <HintPath>..\packages\BarcodeLib.BarcodeReader.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -292,6 +293,7 @@ namespace PROJECTOFINAL
 
         }
 
+        //AppDomain.CurrentDomain.BaseDirectory + "Resources/exams/" + PDFname;
 
         private string pdf()
         {
@@ -308,13 +310,24 @@ namespace PROJECTOFINAL
             pdfformfields.SetField("laboratory", ddl_bloodPartners.SelectedItem.Text);
             pdfformfields.SetField("patientname", Client.name);
             pdfformfields.SetField("patienthealthnumber", txt_bloodHealthNumber.Value);
-            pdfformfields.SetField("daterequisition", Convert.ToDateTime(txt_bloodSchedule.Value).ToString("dd-MM-yyyy HH:mm").Replace(' ', 'T'));
+            pdfformfields.SetField("daterequisition", Convert.ToDateTime(txt_bloodSchedule.Value).ToString("dd-MM-yyyy HH:mm").Replace('T', ' '));
 
             pdfstamper.Close();
 
-            return localhost + "Resources/exams/" + PDFname;
+            return PDFname;
         }
 
-       
+        protected void rpt_exams_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("link_examEmail"))
+            {
+                string subject = "ITpharma Blood Results";
+                string body = "You can find the results in the attachment";
+
+                Tools.email(Client.email, body, subject, e.CommandArgument.ToString().Replace("/", "\\"));
+
+                lblExameWarning.InnerText = "Exam sent";
+            }
+        }
     }
 }

@@ -1565,6 +1565,7 @@ BEGIN TRAN
 		update ExamesAnalises
 		SET ID_Estado = case  when DATEDIFF(day, DataPedido, getdate()) >= 2 AND DATEDIFF(day, DataPedido, getdate()) < 4 THEN 8	
 							  when DATEDIFF(day, DataPedido, getdate()) >= 4 THEN 9
+							  ELSE 7
 							  END
 		WHERE ExamesAnalises.ID_Cliente = @clientID
 	
@@ -1575,6 +1576,7 @@ BEGIN CATCH
 END CATCH
 
 select * from ExamesAnalises
+delete from ExamesAnalises
 
 -- QUERY STOCK AVAILABILITY
 

@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-        <link href="BackOffice/BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="BackOffice/BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <script type="text/javascript">
 
@@ -13,7 +13,6 @@
                 "order": [[0, "desc"]]
             });
         });
-
 
     </script>
 
@@ -197,17 +196,19 @@
 
 
                                 <div class="col-sm-4 text-center align-self-center">
-                      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                          <label class="btn btn-light">
-                            <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server" > <h6> <i class="fas fa-mars text-primary"> </i>  Male </h6>
-                          </label>
-                          <label class="btn btn-light">
-                            <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server"> <h6><i class="fas fa-venus text-danger"></i>  Female </h6>
-                          </label>
-                        </div>
-                      </div>
-                                 <div class="col-md-4 align-self-center">
-                                  <center>  <asp:Button ID="btn_alterDetails" class="btn btn-dark mt-2" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/> </center>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light">
+                                            <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server">
+                                            <h6><i class="fas fa-mars text-primary"></i>Male </h6>
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server">
+                                            <h6><i class="fas fa-venus text-danger"></i>Female </h6>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 align-self-center">
+                                    <center>  <asp:Button ID="btn_alterDetails" class="btn btn-dark mt-2" runat="server" Text="Change" OnClick="btn_alterarDetails_Click"/> </center>
                                 </div>
 
                             </div>
@@ -215,16 +216,14 @@
                             <div class="form-row">
 
                                 <div class="col-md-6">
-                                     <asp:Label ID="lbl_changeDetailsError" runat="server" class="form-text text-dark" Font-Size="small"></asp:Label>
+                                    <asp:Label ID="lbl_changeDetailsError" runat="server" class="form-text text-dark" Font-Size="small"></asp:Label>
                                 </div>
 
-                               
                             </div>
-
                         </div>
                     </div>
                 </div>
-                </div>
+             </div>
            <!-- //SETTINGS -->
 
            <!-- ORDERS -->
@@ -335,26 +334,28 @@
 
                                             <div class="collapse my-5" id="collapseExams">
 
-                                                <div class="col-lg-12">
                                                     <div class="card-deck text-center">
 
-                                                        <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams">
+                                                        <asp:Repeater ID="rpt_exams" runat="server" DataSourceID="sqlExams" OnItemCommand="rpt_exams_ItemCommand">
                                                             <ItemTemplate>
                                                                 <div class="card" style="width: 13rem;">
                                                                     <div class="card-body text-center">
 
                                                                         <h4 class="card-title"><%# Eval("parceria") %></h4>
                                                                         <h6 class="text-muted">STATUS</h6>
-                                                                        <h6 class="card-text badge-dark rounded-pill mx-auto py-1"><%# Eval("Descricao") %></h6>
+                                                                        <h6 class="card-text badge-dark rounded-pill mx-auto py-1 w-25"><%# Eval("Descricao") %></h6>
                                                                         <h6 class="small text-muted">Pedido: <%# Eval("DataPedido", "{0:dd/M/yyyy HH:mm}") %></h6>
-                                                                        <asp:LinkButton ID="link_examRedirect" Visible='<%# (int)Eval("ID_estado") == 9 %>' class="btn btn-warning" Target="_blank" href='<%#Eval("PDFcaminho") %>' runat="server">Ver Exame</asp:LinkButton>
+
+                                                                        <asp:Panel ID="panelExamButtons" runat="server" Visible='<%# (int)Eval("ID_Estado") == 9 %>'>
+                                                                            <asp:LinkButton ID="link_examRedirect" class="btn btn-warning" Target="_blank" href='<%# "/Resources/exams/" + Eval("PDFcaminho") %>' runat="server">Ver Exame</asp:LinkButton>
+                                                                            <asp:LinkButton ID="link_examEmail" CommandName="link_examEmail" CommandArgument='<%# "Resources/exams/" + Eval("PDFcaminho") %>' class="btn btn-info" runat="server">Enviar Email</asp:LinkButton>
+                                                                        </asp:Panel>
+
                                                                     </div>
                                                                 </div>
                                                             </ItemTemplate>
                                                         </asp:Repeater>
                                                     </div>
-
-                                                </div>
                                             </div>
 
                                             <div class="form-row text-center my-5 d-flex justify-content-center">

@@ -20,17 +20,22 @@ namespace PROJECTOFINAL
         }
 
         protected void lbtn_QRauth_Click(object sender, EventArgs e)
-        {      
+        {
             System.Diagnostics.Debug.WriteLine(qrUpload.PostedFile.FileName);
 
-              if (!qrUpload.HasFile)
-                  {lbl_messageQR.InnerText = "Please submit your QR on the QR scanner.";return;}
-
-              else if(qrUpload.HasFile)
-              { 
-            string orderNumber = "0"; string clientID = "0"; string pickupID = "0";               
-            try
+            if (!qrUpload.HasFile)
             {
+                lbl_messageQR.InnerText = "Please submit your QR on the QR scanner.";
+                return;
+            }
+            else if (qrUpload.HasFile)
+            {
+                string orderNumber = "0";
+                string clientID = "0";
+                string pickupID = "0";
+
+                try
+                {
                     string fileName = qrUpload.PostedFile.FileName;
 
                     string TempfileLocation = @"C:\tempQRs\";
@@ -39,25 +44,25 @@ namespace PROJECTOFINAL
                     qrUpload.SaveAs(FullPath);
 
                     string[] results = BarcodeReader.read(FullPath, BarcodeReader.QRCODE);
-                string qrString = results[0];
+                    string qrString = results[0];
                     File.Delete(FullPath);
 
                     System.Diagnostics.Debug.WriteLine(qrString);
 
-                 orderNumber = qrString.Substring(1, qrString.IndexOf("_") - 1 );
-                 clientID = qrString.Substring(qrString.IndexOf("_") + 1, qrString.IndexOf("-") - qrString.IndexOf("_") - 1);
-                 pickupID = qrString.Substring(qrString.IndexOf("-") + 1);
+                    orderNumber = qrString.Substring(1, qrString.IndexOf("_") - 1);
+                    clientID = qrString.Substring(qrString.IndexOf("_") + 1, qrString.IndexOf("-") - qrString.IndexOf("_") - 1);
+                    pickupID = qrString.Substring(qrString.IndexOf("-") + 1);
 
-                System.Diagnostics.Debug.WriteLine(qrString);
-                System.Diagnostics.Debug.WriteLine("order#: " + orderNumber);
-                System.Diagnostics.Debug.WriteLine("clientID: " + clientID);
-                System.Diagnostics.Debug.WriteLine("pickupID: " + pickupID);
-            }
-            catch (System.ArgumentOutOfRangeException ex)
-            {
-                lbl_messageQR.InnerText = "An invalid QR was submitted, please try again.";
-                return;
-            }
+                    System.Diagnostics.Debug.WriteLine(qrString);
+                    System.Diagnostics.Debug.WriteLine("order#: " + orderNumber);
+                    System.Diagnostics.Debug.WriteLine("clientID: " + clientID);
+                    System.Diagnostics.Debug.WriteLine("pickupID: " + pickupID);
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    lbl_messageQR.InnerText = "An invalid QR was submitted, please try again.";
+                    return;
+                }
 
                 SqlCommand myCommand = Tools.SqlProcedure("usp_qrOrderAuth_ATM");
 
@@ -77,7 +82,6 @@ namespace PROJECTOFINAL
                     {
                         lbl_messageQR.InnerText = myCommand.Parameters["@ERROR_MESSAGE"].Value.ToString();
                     }
-
                     else
                     {
                         Response.Redirect("ATM-OrderRetrieved.aspx");
