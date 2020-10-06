@@ -10,13 +10,13 @@
                         
 
                         <div class="container">
-                            <div>
+                            <div class="mt-4">
 
 
                                 <!-- Shopping cart table -->
-                                <div class="table-responsive">
+                                <div class="table-responsive rounded">
                                     <table class="table">
-                                        <thead class="thead-dark text-white text-center">
+                                        <thead class="text-dark text-center" style="background-color: #82ce34;">
                                             <tr>
                                                 <th scope="col" class="rounded-left text-center">
                                                     <div class="px-2 text-capitalize">Product</div>
@@ -101,7 +101,7 @@
 
                                     <div class="col-lg-5 text-right">
 
-                                        <h5 class="bg-dark rounded rounded-pill py-1 text-white text-center">Summary</h5>
+                                        <h5 class="rounded py-1 text-dark text-center" style="background-color: #82ce34;">Summary</h5>
 
                                         <ul class="list-unstyled mb-4">
 
@@ -177,7 +177,7 @@
         <asp:SqlDataSource ID="SqlSourceCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:Parameter Name="id_cliente" Type="Int32" DefaultValue="0" />
-                <asp:CookieParameter CookieName="noLogID" Name="cookies" Type="String" />
+                <asp:Parameter DefaultValue="NULL" Name="cookies" Type="String" />
             </SelectParameters>
         </asp:SqlDataSource>
 
