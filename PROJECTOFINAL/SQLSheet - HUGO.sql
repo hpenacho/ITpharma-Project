@@ -157,3 +157,23 @@ end try
         rollback;
     end catch
     ---------------------
+
+   --[PROC] -- gets the pickups associated tunnel ID for anonymous clients
+    go
+Create or alter proc usp_getATMtunnelID(
+                                       @atmDesignation varchar(150)                                            
+
+)
+
+as
+begin try
+begin tran
+    
+    select Cliente.ID as 'atmTunnelID' from cliente where Cliente.nome = @atmDesignation
+
+commit
+end try
+    begin catch
+        rollback;
+    end catch
+

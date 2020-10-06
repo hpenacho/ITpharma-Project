@@ -40,7 +40,7 @@
             <asp:Panel ID="atmCartPanel" runat="server">
                 <div class="row d-flex justify-content-end mr-1 mb-2">
                     <div class="col-lg-3 py-2 rounded d-flex justify-content-around" style="background-color: #82ce34">
-                        <a href="#" class="text-decoration-none text-black-50 align-self-center">
+                        <a href="ATM-Purchase.aspx" class="text-decoration-none text-black-50 align-self-center">
                             <i class="fas fa-shopping-cart mr-2 align-self-center" style="font-size: 30px;"></i>
                         </a>
                         <span style="font-size: 20px;" class="align-middle align-self-center">Total: </span>

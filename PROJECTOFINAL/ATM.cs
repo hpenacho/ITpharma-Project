@@ -9,12 +9,14 @@ namespace PROJECTOFINAL
     {
         public static int ID { get; set; }
         public static string name { get; set; } = null;
+        public static int anonTunnelID { get; set; }
 
 
-        public static void setATM(int atmid, string atmname)
+        public static void setATM(int atmid, string atmname, int atmAnonTunnelID)
         {
              ID = atmid;
              name = atmname;
+             anonTunnelID = atmAnonTunnelID;
         }
 
 

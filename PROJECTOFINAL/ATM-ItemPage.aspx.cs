@@ -58,8 +58,31 @@ namespace PROJECTOFINAL
 
         }
 
+        protected void link_addToCart_Click(object sender, EventArgs e)
+        {
 
+            SqlCommand myCommand = Tools.SqlProcedure("usp_addDetailItemProduct");
+            myCommand.Parameters.AddWithValue("@ClientID", ATM.anonTunnelID);
+            myCommand.Parameters.AddWithValue("@cookie", (object)DBNull.Value);
+            myCommand.Parameters.AddWithValue("@reference", Request.QueryString["ref"].ToString());
+            myCommand.Parameters.AddWithValue("@qty", Convert.ToInt32(cartAmount.Text));
 
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException v)
+            {
+                System.Diagnostics.Debug.WriteLine(v.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                //(this.Master as storeFrontMasterPage).updateCart();
+                //cartAmount.Text = "1";
+            }
 
+        }
     }
 }

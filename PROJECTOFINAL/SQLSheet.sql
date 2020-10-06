@@ -359,7 +359,11 @@ begin tran
 
 				if @Pickup is not null
 					begin
-						update EncomendaHistorico set EncomendaHistorico.ID_Estado = 5 where EncomendaHistorico.ENC_REF = @thisEnc
+						IF exists(SELECT * from Cliente where Cliente.id = @IDcliente and Cliente.nome like 'ATM - %') --this is an ATM tunnel ID
+							update EncomendaHistorico set EncomendaHistorico.ID_Estado = 6 where EncomendaHistorico.ENC_REF = @thisEnc
+
+						else --else its a regular client pickup order
+							update EncomendaHistorico set EncomendaHistorico.ID_Estado = 5 where EncomendaHistorico.ENC_REF = @thisEnc
 					end
 
 			end
@@ -1870,7 +1874,8 @@ GO
 	GO
 
 
-	-- [ PROC ] Remove item from cart
+	
+	-- [ PROC ] Add item from cart
 	GO
 	create or alter proc usp_increaseCartQty(@clientid int, @cookie varchar(50), @prodref varchar(20)) AS
 	BEGIN TRY
@@ -1889,7 +1894,7 @@ GO
 
 
 
-	-- [ PROC ] Add item from cart
+	-- [ PROC ] Remove item from cart
 	GO
 	create or alter proc usp_decreaseCartQty(@clientid int, @cookie varchar(50), @prodref varchar (20)) AS
     BEGIN TRY

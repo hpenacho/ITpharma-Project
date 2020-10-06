@@ -83,15 +83,14 @@
 
                 <div class="row mt-3">
                     <div class="col-lg-12 text-center">
-                         <asp:LinkButton ID="link_addToCart" Width="400px" class="btn btn-warning ml-4 p-3 shadow-sm" runat="server" ToolTip="Adds this item to your cart with the selected ammount (if stock is available)."><i class="fas fa-cart-plus"></i>&nbspBUY</asp:LinkButton>
+                         <asp:LinkButton ID="link_addToCart" Width="400px" class="btn btn-warning ml-4 p-3 shadow-sm" runat="server" ToolTip="Adds this item to your cart with the selected ammount (if stock is available)." OnClick="link_addToCart_Click"><i class="fas fa-cart-plus"></i>&nbspBUY</asp:LinkButton>
                     </div>
                 </div>
 
                 <div class="row mt-1">
                     <div class="col-lg-12 text-center">
                         <button type="button" style="width: 400px;" class="btn btn-secondary ml-4 p-3 shadow-sm" data-toggle="modal" data-target="#exampleModalLong">
-                            <i class="fas fa-scroll"></i>&nbspDESCRIPTION
-                        </button>
+                            <i class="fas fa-scroll"></i>&nbspDESCRIPTION</button>
                     </div>
                 </div>
 
