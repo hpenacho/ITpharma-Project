@@ -83,8 +83,8 @@
 
 <body>
     <form id="form1" runat="server">
-
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <!-- COMO TESTE FIZ ENABLE A PARTIAL RENDERING E TAMBEM LOAD SCRIPTS BEFORE UI -->
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" LoadScriptsBeforeUI="true"></asp:ScriptManager>
 
         <!-- Navigation -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top py-2 pb-1 bg-white shadow shadow-sm mb-3">
@@ -273,15 +273,10 @@
         <!-- GET A LOAD OF THIS SHOPPING CART -->
         <div class="modal fade" id="modal-cart-ii" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-
-
-                <asp:UpdatePanel ID="updshoppingcart" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-                    <ContentTemplate>
-
-                        <div class="modal-content">
-                            <div class="modal-body">
-
-
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <asp:UpdatePanel ID="updshoppingcart" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                            <ContentTemplate>
                                 <!-- Shopping cart table -->
                                 <div class="table-responsive">
                                     <table class="table">
@@ -307,7 +302,7 @@
                                         <tbody>
 
                                             <asp:Repeater ID="rptModalCart" runat="server" DataSourceID="SqlSourceCart" OnItemDataBound="rptModalCart_ItemDataBound" OnItemCommand="rptModalCart_ItemCommand">
-                                               
+
                                                 <ItemTemplate>
 
                                                     <tr>
@@ -352,15 +347,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                            <!-- MODLA BODY -->
-
-                            <!-- MODAL FOOTER -->
-                            <div class="container">
-
-                                <asp:UpdatePanel runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-
+                                <!-- FOOTER -->
                                 <div class="row justify-content-around">
 
                                     <div class="col-lg-7 text-left">
@@ -393,15 +380,13 @@
                                     </div>
 
                                 </div>
-
-                                  </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <!-- //MODAL FOOTER -->
-                        </div>
-                      <!-- ASYNC STUFF -->
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                               <!-- //FOOTER -->
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                    <!-- MODAL BODY -->
+                </div>
+                <!-- ASYNC STUFF -->
             </div>
         </div>
         <!-- //GET A LOAD OF THIS SHOPPING CART -->
