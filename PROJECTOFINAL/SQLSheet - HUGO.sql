@@ -176,4 +176,19 @@ end try
     begin catch
         rollback;
     end catch
+    --------------
+  --[query estatistica selectcommand]
+  Select EncomendaHistorico.ID_Pickup, Cliente.nome as 'Pickup', count(EncomendaHistorico.Enc_ref) as 'Orders'
+                                 From Cliente inner join EncomendaHistorico on Cliente.id = EncomendaHistorico.id_cliente
+                                    where Cliente.nome like 'ATM -%'
+                                    group by Cliente.id, Cliente.nome, datanascimento, ID_Pickup                                  
+                 
+           union all
 
+   Select EncomendaHistorico.ID_Pickup,Pickup.Descricao as 'Pickup', count(EncomendaHistorico.Enc_ref) as 'OnlineOrders'
+                                From Cliente inner join EncomendaHistorico on Cliente.id = EncomendaHistorico.id_cliente
+                                inner join Pickup on EncomendaHistorico.ID_Pickup = Pickup.ID
+                                where MoradaEntrega like 'ATM -%'
+                                group by EncomendaHistorico.ID_Pickup, Pickup.Descricao
+                                order by EncomendaHistorico.ID_Pickup
+                                

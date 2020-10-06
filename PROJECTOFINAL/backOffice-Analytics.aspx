@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <style>
 .card-box {
     position: relative;
@@ -198,7 +199,7 @@
         </div>
     </div>
         <!-- end of top row stat cards -->
-
+        
         <div class="row mt-4 justify-content-around">
                             <div class="col-xl-6">
                                 <div class="card mb-4 " style="padding-bottom: 0.72em;">
@@ -251,12 +252,25 @@
                             
                          <div class="col-xl-6">
 
-                             <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Top Buyers
-            </div>
-            <div class="card-body">
+                             <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                 <li class="nav-item">
+                                     <a class="nav-link active" id="TopBuyers-tab" data-toggle="tab" href="#TopBuyers" role="tab" aria-controls="TopBuyers" aria-selected="true"><i class="fas fa-table mr-1"></i> Top-Buyers</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a class="nav-link" id="ATMlocalSales-tab" data-toggle="tab" href="#ATMlocalSales" role="tab" aria-controls="ATMlocalSales" aria-selected="false"><i class="fas fa-cash-register"></i> ATM - Local Sales</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     <a class="nav-link" id="ATMonlineSales-tab" data-toggle="tab" href="#ATMonlineSales" role="tab" aria-controls="ATMonlineSales" aria-selected="false"><i class="fas fa-globe"></i> ATM - Online Sales</a>
+                                 </li>
+                             </ul>
+                             <div class="tab-content" id="myTabContent">
+                                 <!-- Start of TopBuyers TabPane below -->
+                                 <div class="tab-pane fade show active" id="TopBuyers" role="tabpanel" aria-labelledby="TopBuyers-tab">
+
+                                     <div class="card mb-4">
+            
+            <div class="card-body" style="height: 358px">
+                
                 <div class="table-responsive">
 
                     <table class="table table-striped table-hover" width="100%" cellspacing="0">
@@ -300,6 +314,7 @@
                                                   
                                 <asp:SqlDataSource ID="SqlSourceTopBuyers" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="Select top 5 Cliente.id, Cliente.nome, DATEDIFF(year,Cliente.datanascimento,GETDATE()) - iif(datepart(dayofyear,datanascimento) &gt;datepart (dayofyear , getdate()),1,0) as 'Age', count(EncomendaHistorico.Enc_ref) as 'Orders'
                                  From Cliente inner join EncomendaHistorico on Cliente.id = EncomendaHistorico.id_cliente
+                                    where Cliente.nome NOT like 'ATM -%'
                                     group by Cliente.id, Cliente.nome, datanascimento
                                     Order by 'Orders' DESC"> </asp:SqlDataSource>
                                        
@@ -309,6 +324,138 @@
                 </div>
             </div>
         </div>
+
+                                 </div> <!-- End of TopBuyers TabPane -->
+
+
+                                 <!-- Start of ATMlocalSales tabPane below -->
+                                 <div class="tab-pane fade" id="ATMlocalSales" role="tabpanel" aria-labelledby="ATMlocalSales-tab">
+
+                                     <div class="card mb-4">
+           
+            <div class="card-body" style="height: 358px">
+                
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-hover" width="100%" cellspacing="0">
+
+                        <thead class="text-center text-md-center">
+                            <!-- HEADER OF THE TABLE -->
+                            <tr>
+                                <th>Pickup ID</th>
+                                <th>Designation</th>
+                                <th>Local Orders</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="text-center text-md-center">
+                         
+                                <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlSourceATMstats">
+                                <ItemTemplate>
+
+                                    <tr class="text-center">
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_idPickupLoc" runat="server" Text=<%# Eval("Pickup ID") %>></asp:Label>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_name" runat="server" Text=<%# Eval("Designation") %>></asp:Label>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_orders" runat="server" Text=<%# Eval("Orders") %>></asp:Label>
+                                        </td>
+                                    </tr>
+
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+                                                  
+                                <asp:SqlDataSource ID="SqlSourceATMstats" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="Select EncomendaHistorico.ID_Pickup as 'Pickup ID', Cliente.nome as 'Designation', count(EncomendaHistorico.Enc_ref) as 'Orders'
+                                 From Cliente inner join EncomendaHistorico on Cliente.id = EncomendaHistorico.id_cliente
+                                    where Cliente.nome like 'ATM -%'
+                                    group by Cliente.id, Cliente.nome, datanascimento, ID_Pickup "> </asp:SqlDataSource>
+                                       
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+                                 </div>
+                                 <!-- End of atm LOCAL sales stats -->
+
+                                 <!-- Start of atm ONLINE sales stats below -->
+
+                                 <div class="tab-pane fade" id="ATMonlineSales" role="tabpanel" aria-labelledby="ATMonlineSales-tab">
+
+                                     <div class="card mb-4">
+           
+            <div class="card-body" style="height: 358px">
+                
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-hover" width="100%" cellspacing="0">
+
+                        <thead class="text-center text-md-center">
+                            <!-- HEADER OF THE TABLE -->
+                            <tr>
+                                <th>Pickup ID</th>
+                                <th>Designation</th>
+                                <th>Online Orders</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="text-center text-md-center">
+                         
+                                <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlSourceATMonlineStats">
+                                <ItemTemplate>
+
+                                    <tr class="text-center">
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_PickupIDonl" runat="server" Text=<%# Eval("Pickup ID") %>></asp:Label>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_name" runat="server" Text=<%# Eval("Designation") %>></asp:Label>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <asp:Label ID="lbl_orders" runat="server" Text=<%# Eval("OnlineOrders") %>></asp:Label>
+                                        </td>
+                                    </tr>
+
+                                </ItemTemplate>
+
+                            </asp:Repeater>
+                                                  
+                                <asp:SqlDataSource ID="SqlSourceATMonlineStats" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="Select EncomendaHistorico.ID_Pickup as 'Pickup ID',Pickup.Descricao as 'Designation', count(EncomendaHistorico.Enc_ref) as 'OnlineOrders'
+                                From Cliente inner join EncomendaHistorico on Cliente.id = EncomendaHistorico.id_cliente
+                                inner join Pickup on EncomendaHistorico.ID_Pickup = Pickup.ID
+                                where MoradaEntrega like 'ATM -%'
+                                group by EncomendaHistorico.ID_Pickup, Pickup.Descricao
+                                order by EncomendaHistorico.ID_Pickup"> </asp:SqlDataSource>
+                                       
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+                                 </div>
+
+
+                                 <!-- End of atm ONLINE sales -->
+                                <!-- nav tab ends on div below -->
+                             </div>
+
+                             
+
+                             
                              
                              </div>
 
