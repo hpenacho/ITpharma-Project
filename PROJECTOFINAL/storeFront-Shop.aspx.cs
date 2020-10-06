@@ -29,7 +29,7 @@ namespace PROJECTOFINAL
             }
 
             productFiltering();
-            generatePaging();
+           
         }
 
         private void searchProducts()
@@ -107,6 +107,9 @@ namespace PROJECTOFINAL
             sqlShopProducts.SelectParameters["Marca"].DefaultValue = brand;
             sqlShopProducts.SelectParameters["Pagina"].DefaultValue = currentPage.ToString();
             sqlShopProducts.SelectParameters["ItemsPagina"].DefaultValue = numberOfItems.ToString();
+
+
+            generatePaging();
         }
 
 
