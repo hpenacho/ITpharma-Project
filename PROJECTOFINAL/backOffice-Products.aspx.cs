@@ -201,7 +201,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@preco", tb_updatePrice.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_updateSummary.Value);
             myCommand.Parameters.AddWithValue("@descricao", ckeditorUpdateProduct.Text);
-            myCommand.Parameters.AddWithValue("@imagem", Tools.imageUpload(fl_updateProductImage));
+            myCommand.Parameters.AddWithValue("@imagem", uploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_updateCategory.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_updateBrand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_updatePrescription.Checked);
