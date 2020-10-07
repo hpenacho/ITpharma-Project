@@ -12,10 +12,19 @@ namespace PROJECTOFINAL
 {
     public partial class storeFront_Shop : System.Web.UI.Page
     {
+        //FILTERING PRODUCTS
+        string field = "Nome";
+        string order = "ASC";
+        string brand = "All";
+        string category = "All";
+        const int numberOfItems = 9;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            generatePaging();
 
-            if(Session["searchQuery"] != null)
+            if (Session["searchQuery"] != null)
             {
                 searchProducts();
                 return;
@@ -23,13 +32,12 @@ namespace PROJECTOFINAL
 
             if (!Page.IsPostBack)
             {
-                //currentPage = 1;
-                category = "All";
+                sqlShopProducts.SelectParameters["Pagina"].DefaultValue = "1";
                 brand = "All";
+                category = "All";
             }
 
-            productFiltering();
-           
+            
         }
 
         private void searchProducts()
@@ -40,23 +48,13 @@ namespace PROJECTOFINAL
             Session["searchQuery"] = null;
         }
 
-
-        //FILTERING PRODUCTS
-        string field = "Nome";
-        string order = "ASC";
-        string brand = "All";
-        string category = "All";
-        static int currentPage = 1;
-        const double numberOfItems = 9;
-
-
         protected void rptCategory_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName.Equals("linkSelectCategory"))
             {
                 category = e.CommandArgument.ToString();
                 brand = "All";
-                currentPage = 1;
+                sqlShopProducts.SelectParameters["Pagina"].DefaultValue = "1";
                 productFiltering();
             }
         }
@@ -67,7 +65,7 @@ namespace PROJECTOFINAL
             {
                 brand = e.CommandArgument.ToString();
                 category = "All";
-                currentPage = 1;
+                sqlShopProducts.SelectParameters["Pagina"].DefaultValue = "1";
                 productFiltering();
             }
         }
@@ -99,94 +97,95 @@ namespace PROJECTOFINAL
 
         private void productFiltering()
         {
-            rptShopProducts.DataSourceID = sqlShopProducts.ID;
+
+            generatePaging();
 
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
             sqlShopProducts.SelectParameters["Marca"].DefaultValue = brand;
-            sqlShopProducts.SelectParameters["Pagina"].DefaultValue = currentPage.ToString();
             sqlShopProducts.SelectParameters["ItemsPagina"].DefaultValue = numberOfItems.ToString();
 
-
-            generatePaging();
+            rptShopProducts.DataSourceID = sqlShopProducts.ID;
+            sqlShopProducts.DataBind();
+            rptShopProducts.DataBind();
         }
 
 
-
         // PAGINATION
-
         private void generatePaging()
         {
-            DataView dv = (DataView)sqlShopProducts.Select(new DataSourceSelectArguments());
-            DataTable groupsTable = dv.ToTable();
             int totalItems = 1;
 
+            DataView dv = (DataView)sqlShopProducts.Select(new DataSourceSelectArguments());
+            DataTable groupsTable = dv.ToTable();
+            
             foreach (DataRow dr in groupsTable.Rows)
             {
                 totalItems = Convert.ToInt32(dr[0].ToString());
+                break;
             }
 
-            sqlShopProducts.DataBind();
-            rptShopProducts.DataBind();
-
-            pageButtonTemplate((int)Math.Ceiling((double)totalItems / (double)numberOfItems));
+            pageButtonTemplate( (int) Math.Ceiling( (double) totalItems / (double) numberOfItems));
         }
 
         private void pageButtonTemplate(int nrPages)
         {
             pagePanel.Controls.Clear();
 
-            LinkButton pageBefore = new LinkButton();
-            pageBefore.Click += new EventHandler(pageBackwards);
-            pageBefore.CssClass = "btn btn-light text-dark ml-2 mr-2";
-            pageBefore.Text = "«";
+            LinkButton pageBefore = new LinkButton
+            {
+                CssClass = "btn btn-light text-dark ml-2 mr-2",
+                Text = "«"
+            };
 
+            pageBefore.Click += new EventHandler(pageBackwards);
             pagePanel.Controls.Add(pageBefore);
 
             for (int i = 1; i <= nrPages; i++)
             {
-                LinkButton pageButton = new LinkButton();
+                LinkButton pageButton = new LinkButton
+                {
+                    CssClass = i == Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) ? "btn btn-outline-light text-dark ml-2 mr-2" : "btn btn-light text-dark ml-2 mr-2",
+                    Text = i.ToString()
+                };
+
                 pageButton.Click += new EventHandler(mudarPagina);
-                pageButton.CssClass = "btn btn-outline-light text-dark ml-2 mr-2";
-                pageButton.Text = i.ToString();
-
-                if (i == currentPage)
-                    pageButton.CssClass = "btn btn-light border-light text-dark ml-2 mr-2";
-
                 pagePanel.Controls.Add(pageButton);
             }
 
-            LinkButton pageAfter = new LinkButton();
-            pageAfter.Click += new EventHandler(pageForward);
-            pageAfter.CssClass = "btn btn-light text-dark ml-2 mr-2";
-            pageAfter.Text = "»";
+            LinkButton pageAfter = new LinkButton
+            {
+                CssClass = "btn btn-light text-dark ml-2 mr-2",
+                Text = "»"
+            };
 
+            pageAfter.Click += new EventHandler(pageForward);
             pagePanel.Controls.Add(pageAfter);
         }
 
 
         protected void mudarPagina(object sender, EventArgs e)
         {
-            currentPage = Convert.ToInt32(((LinkButton)sender).Text);
-            productFiltering();
+            sqlShopProducts.SelectParameters["Pagina"].DefaultValue = ((LinkButton)sender).Text;
         }
 
         protected void pageBackwards(object sender, EventArgs e)
         {
-            if (currentPage > 0)
-            {
-                currentPage -= 1;
-            }
-        }
 
+            if (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) > 1)
+            {
+                sqlShopProducts.SelectParameters["Pagina"].DefaultValue = (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) - 1).ToString();
+            }
+
+        }
 
         protected void pageForward(object sender, EventArgs e)
         {
 
-            if (currentPage < pagePanel.Controls.Count - 1)
+            if (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) < pagePanel.Controls.Count - 2)
             {
-                currentPage += 1;
+                sqlShopProducts.SelectParameters["Pagina"].DefaultValue = (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) + 1).ToString();
             }
         }
 
