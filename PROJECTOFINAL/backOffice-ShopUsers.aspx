@@ -85,11 +85,11 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <asp:TextBox ID="tb_updateName" runat="server" BorderStyle="None" Text=<%# Eval("nome") %>></asp:TextBox>      
+                                            <asp:TextBox ID="tb_updateName" runat="server" CssClass="text-center rounded-pill border-light bg-light" Text=<%# Eval("nome") %>></asp:TextBox>      
                                         </td>
 
                                         <td class="align-middle">
-                                            <asp:TextBox ID="tb_updateEmail" runat="server" BorderStyle="None" Text=<%# Eval("email") %>></asp:TextBox> 
+                                            <asp:TextBox ID="tb_updateEmail" runat="server" CssClass="text-center rounded-pill border-light bg-light" Text=<%# Eval("email") %>></asp:TextBox> 
                                         </td>
 
                                         <td class="align-middle">
