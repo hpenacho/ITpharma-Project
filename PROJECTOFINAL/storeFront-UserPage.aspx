@@ -93,7 +93,7 @@
 
                             <h3 class="text-dark text-left">Alter Password</h3>
 
-                            <div class="form-row">
+                            <div class="form-row mt-3">
 
                                 <div class="col">
                                     <label for="txt_oldPassword"">Old Password</label>
@@ -140,21 +140,26 @@
                 <div class="col-lg-8 my-4">
                     <div class="card shadow bg-white pb-4">
                         <div class="card-body">
-                            <h3 class="text-dark text-">User</h3>
+                            <h3 class="text-muted text-center"><i class="fas fa-user-edit"></i> Change User Data </h3>
 
-                            <div class="form-row">
+                            <div class="form-row mt-3">
 
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_altername">Name</label>
-                                    <input type="text" id="txt_altername" runat="server" class="form-control bg-light"/>
-                                </div>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                    <input type="text" id="txt_altername" runat="server" class="form-control bg-light" pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" title="First and Last Name without special characters"/>
+                                       </div>
+                                    </div>
 
                                 <div class="col-md-6 mb-3">
 
                                     <label for="validationCustomUsername">Email</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                            <span class="input-group-text" id="inputGroupPrepend"><i class="fas fa-at"></i></span>
                                         </div>
                                         <input type="text" id="txt_alteremail" runat="server" class="form-control bg-light"/>
                                     </div>
@@ -165,33 +170,58 @@
                             <div class="form-row mb-3">
                                 <div class="col-md-8">
                                     <label for="txt_alteraddress">Address</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-house-user"></i></span>  
+                                        </div>
                                     <input type="text" ID="txt_alterAddress" runat="server"  class="form-control bg-light"/>
-                                </div>
+                                    </div>
+                                        </div>
                                 <div class="col-md-4">
                                     <label for="txt_zipCode">Zip-Code</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
+                                        </div>
                                     <input type="text" id="txt_zipCode" runat="server" class="form-control bg-light"/>
-                                </div>
+                                    </div>
+                                    </div>
                             </div>
 
                             <div class="form-row">
 
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alterhealthnumber">Health Number</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-file-medical"></i></span>
+                                        </div>
                                     <asp:TextBox ID="txt_alterhealthnumber" runat="server" class="form-control bg-light" ReadOnly="true" title="Please insert your 9 digit HealthNumber" pattern="^\d{9}$"></asp:TextBox>
-                                </div>
+                                    </div>
+                                    </div>
 
                                 <div class="col-md-6 mb-3">
                                     <label for="txt_alternif">NIF</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-wallet"></i></span>
+                                        </div>
                                     <input type="text" id="txt_alternif" runat="server" class="form-control bg-light" title="Please insert your 9 digit NIF" pattern="^\d{9}$"/>
-                                </div>
+                                    </div>
+                                    </div>
                             </div>
 
                             <div class="form-row">
-
+                                
                                 <div class="col-md-4 mb-3 align-self-center">
                                     <label for="txt_alterBirth">Date Of Birth</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        </div>
                                     <input type="text" id="txt_alterBirth" runat="server" class="form-control bg-light" readonly/>
-                                    <input type="date" class="form-control form-control-user bg-light" runat="server" id="txt_alterBirth2" disabled visible="false" placeholder="Date of Birth" value="2000-01-01">
+                                    </div>
+                                        <input type="date" class="form-control form-control-user bg-light" runat="server" id="txt_alterBirth2" disabled visible="false" placeholder="Date of Birth" value="2000-01-01">
                                 </div>
 
 
@@ -199,11 +229,11 @@
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-light">
                                             <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server">
-                                            <h6><i class="fas fa-mars text-primary"></i>Male </h6>
+                                            <h6><i class="fas fa-mars text-primary"></i> Male </h6>
                                         </label>
                                         <label class="btn btn-light">
                                             <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server">
-                                            <h6><i class="fas fa-venus text-danger"></i>Female </h6>
+                                            <h6><i class="fas fa-venus text-danger"></i> Female </h6>
                                         </label>
                                     </div>
                                 </div>

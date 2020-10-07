@@ -48,7 +48,6 @@ create table Produto(
 	resumo varchar(50) null,
 	descricao varchar(MAX) null,
 	imagem varbinary(MAX) null,
-	pdfFolheto varbinary(MAX) null,
 	ID_Categoria int references Categoria(ID) null,
 	ID_Marca int references Marca(ID) null,
 	precisaReceita bit default 0,
@@ -576,7 +575,6 @@ create or alter proc usp_insertBackofficeProducts(@Codreferencia varchar(20),
 												  @resumo varchar(50),
 												  @descricao varchar(MAX),
 												  @imagem varbinary(MAX),
-												  @pdfFolheto varbinary(MAX),
 												  @ID_Categoria int,
 												  @ID_Marca int,
 												  @precisaReceita bit,
@@ -600,7 +598,7 @@ BEGIN TRAN
 
 	--INSERTION !!WARNING!! THE PDF FLYER IS CURRENTLY BEING INSERTED AS NULL
 
-	INSERT INTO Produto VALUES (@Codreferencia, @nome, @preco, @resumo, @descricao, @imagem, NULL, @ID_Categoria, @ID_Marca, @precisaReceita, @ref_generico, @Activo, 0)
+	INSERT INTO Produto VALUES (@Codreferencia, @nome, @preco, @resumo, @descricao, @imagem, @ID_Categoria, @ID_Marca, @precisaReceita, @ref_generico, @Activo, 0)
 	INSERT INTO StockArmazem values(@Codreferencia, @Qtd, @QtdMin, @QtdMax)
 
 	DECLARE @pickupID as int
@@ -681,15 +679,11 @@ CREATE OR ALTER proc usp_updateBackofficeProducts(@Codreferencia varchar(20),
 												  @resumo varchar(50),
 												  @descricao varchar(MAX),
 												  @imagem varbinary(MAX),
-												  @pdfFolheto varbinary(MAX),
 												  @ID_Categoria int,
 												  @ID_Marca int,
 												  @precisaReceita bit,
 												  @ref_generico varchar(20),
 												  @Activo bit,
-												  @Qtd int,
-												  @QtdMin int,
-												  @QtdMax int,
 												  @errorMessage varchar(200) output) 
 
 AS
@@ -709,19 +703,12 @@ BEGIN TRAN
 		resumo = @resumo, 
 		descricao = @descricao, 
 		imagem = IIF(LEN(@imagem) = 0, imagem , @imagem),
-		pdfFolheto = null,
 		ID_Categoria = @ID_Categoria,
 		ID_Marca = @ID_Marca,
 		precisaReceita = @precisaReceita,
 		ref_generico = @ref_generico,
 		Activo = @Activo
 	Where Produto.Codreferencia = @Codreferencia
-
-	UPDATE StockArmazem
-	Set Qtd = @Qtd,
-		QtdMin = @QtdMin,
-		QtdMax = @QtdMax
-	Where StockArmazem.Prod_Ref = @Codreferencia
 
 COMMIT
 END TRY
@@ -1470,7 +1457,7 @@ end catch
 
 GO
 create or alter proc usp_returnItemDetailPage(@Reference varchar(20)) AS
-select nome, preco, resumo, Produto.descricao, imagem, pdfFolheto,precisaReceita, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
+select nome, preco, resumo, Produto.descricao, imagem,precisaReceita, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
 from produto inner join marca on produto.ID_Marca = marca.ID
 			 inner join categoria on produto.ID_Categoria = Categoria.ID
 where Produto.Codreferencia = @Reference
@@ -1481,7 +1468,7 @@ AND Produto.Descontinuado = 0
 
 GO
 create or alter proc usp_returnRelatedItemPage(@Reference varchar(20)) AS
-select top(4) Codreferencia, nome, preco, resumo, Produto.descricao, imagem, pdfFolheto, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
+select top(4) Codreferencia, nome, preco, resumo, Produto.descricao, imagem, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
 from produto inner join marca on produto.ID_Marca = marca.ID
 			 inner join categoria on produto.ID_Categoria = Categoria.ID
 where Produto.Codreferencia != @Reference

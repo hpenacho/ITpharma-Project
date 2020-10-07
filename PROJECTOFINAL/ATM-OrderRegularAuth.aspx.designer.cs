@@ -30,7 +30,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_clientEmail;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_clientEmail;
 
         /// <summary>
         /// tb_password control.
@@ -51,12 +51,12 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_message;
 
         /// <summary>
-        /// lbtn_regularAuth control.
+        /// btn_regularAuth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtn_regularAuth;
+        protected global::System.Web.UI.WebControls.Button btn_regularAuth;
     }
 }

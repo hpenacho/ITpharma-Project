@@ -50,9 +50,8 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@nome", tb_name.Value);
             myCommand.Parameters.AddWithValue("@preco", tb_price.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_summary.Value);
-            //myCommand.Parameters.AddWithValue("@descricao", ckeditorInsertProduct.Text);
+            myCommand.Parameters.AddWithValue("@descricao", ckeditorInsertProduct.Text);
             myCommand.Parameters.AddWithValue("@imagem", uploadedFile);
-            myCommand.Parameters.AddWithValue("@pdfFolheto", uploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_category.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_brand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_prescription.Checked);
@@ -101,6 +100,12 @@ namespace PROJECTOFINAL
             uploadedFile = Tools.imageUpload(fl_insertProductImage);
         }
 
+        protected void fl_updateProductImage_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
+        {
+            uploadedFile = null;
+            uploadedFile = Tools.imageUpload(fl_updateProductImage);
+        }
+
         protected void rpt_produtosBackoffice_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
 
@@ -142,10 +147,10 @@ namespace PROJECTOFINAL
                 check_updatePrescription.Checked = Convert.ToBoolean(reader["precisaReceita"]);
                 check_updateActive.Checked = Convert.ToBoolean(reader["Activo"]);
 
-
                 if (reader["ref_generico"] == DBNull.Value)
                 {
                     ddl_updateGenericParent.SelectedIndex = 0;
+                    check_updateGeneric.Checked = false;
                 }
                 else
                 {
@@ -197,15 +202,12 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@resumo", tb_updateSummary.Value);
             myCommand.Parameters.AddWithValue("@descricao", ckeditorUpdateProduct.Text);
             myCommand.Parameters.AddWithValue("@imagem", Tools.imageUpload(fl_updateProductImage));
-            myCommand.Parameters.AddWithValue("@pdfFolheto", Tools.imageUpload(fl_updateProductImage)); // alterar no futuro
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_updateCategory.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_updateBrand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_updatePrescription.Checked);
             myCommand.Parameters.AddWithValue("@ref_generico", check_updateGeneric.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@Activo", check_updateActive.Checked);
-            myCommand.Parameters.AddWithValue("@Qtd", 0);
-            myCommand.Parameters.AddWithValue("@QtdMin", 0);
-            myCommand.Parameters.AddWithValue("@QtdMax", 1);
+
 
             //OUTPUT - ERROR MESSAGES
             myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));

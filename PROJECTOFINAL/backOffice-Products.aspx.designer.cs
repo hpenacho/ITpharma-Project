@@ -219,7 +219,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fl_updateProductImage;
+        protected global::AjaxControlToolkit.AsyncFileUpload fl_updateProductImage;
 
         /// <summary>
         /// ckeditorUpdateProduct control.
@@ -267,6 +267,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.DropDownList ddl_updateBrand;
 
         /// <summary>
+        /// check_updateActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_updateActive;
+
+        /// <summary>
         /// check_updatePrescription control.
         /// </summary>
         /// <remarks>
@@ -283,15 +292,6 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_updateGeneric;
-
-        /// <summary>
-        /// check_updateActive control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox check_updateActive;
 
         /// <summary>
         /// ddl_updateGenericParent control.
