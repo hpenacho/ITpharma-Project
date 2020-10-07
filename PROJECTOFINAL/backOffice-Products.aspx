@@ -80,11 +80,11 @@
         <div class="form-row text-center col-lg-12 mt-5 mb-3">
 
             <div class="col-12 col-sm-12 col-md-4 align-middle mb-2">
-                <button type="button" class="btn btn-block btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-brand">Add Brand <i class="fas fa-plus"></i></button>
+                <button type="button" class="btn btn-block btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-brand">Manage Brands <i class="fas fa-plus"></i></button>
             </div>
 
             <div class="col-12 col-sm-12 col-md-4 align-middle mb-2">
-                <button type="button" class="btn btn-block btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-category">Add Category <i class="fas fa-plus"></i></button>
+                <button type="button" class="btn btn-block btn-dark shadow shadow-sm mr-3" data-toggle="modal" data-target="#modal-insert-category">Manage Categories <i class="fas fa-plus"></i></button>
             </div>
 
             <div class="col-12 col-sm-12 col-md-4 align-middle mb-2">
@@ -327,8 +327,13 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-12">
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                        </div>
                                         <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
-                                    </div>
+                                         </div>
+                                        </div>
 
                                 </div>
                                 <!-- /Name -->
@@ -337,8 +342,13 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-6 mt-1">
-                                        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference #" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
-                                    </div>
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
+                                        </div>
+                                        </div>
 
                                     <div class="input-group col-md-6 mt-1">
                                         <div class="custom-file">
@@ -359,7 +369,7 @@
 
                                     <div class="col-lg-12">
                                         <label for="tb_description">
-                                            <p class="text-muted">Item Description </p>
+                                            <p class="text-muted"><i class="fas fa-edit"></i> Item Description </p>
                                         </label>
                                         <CKEditor:CKEditorControl ID="ckeditorInsertProduct" runat="server"></CKEditor:CKEditorControl>
                                     </div>
@@ -371,8 +381,13 @@
                                                        
                         <div class="form-row mt-4 d-flex justify-content-between">
                             <div class="col-lg-6 mb-2">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                                        </div>
                                 <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
-                            </div>
+                                </div>
+                                </div>
                             <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="ddl_category">Category</label>
@@ -388,7 +403,7 @@
                             <div class="col-md-6 mb-2">
                                 <div class="input-group">
                                     <div class="input-group-append">
-                                        <span class="input-group-text" id="inputGroupPrepend4"><i class="fas fa-euro-sign"></i></span>
+                                        <span class="input-group-text text-center"> &nbsp;<i class="fas fa-euro-sign"></i></span>
                                     </div>
                                     <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
                                 </div>
@@ -429,7 +444,7 @@
                          
                             <div class="input-group mb-3 col-md-5 col-sm-12" id="genericParentsDiv" style="display:none;">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_genericParent">Generic&nbsp;&nbsp;</label>
+                                    <label class="input-group-text" for="ddl_genericParent">Parent&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 </div>
                                 <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
                             </div>
@@ -552,9 +567,13 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-12">
-                                        <label for="tb_updateName">Name</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_updateName" placeholder="Title" required>
-                                    </div>
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" runat="server" id="tb_updateName" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
+                                         </div>
+                                        </div>
 
                                 </div>
                                 <!-- /Name -->
@@ -562,13 +581,22 @@
                                 <!-- Reference and Image -->
                                 <div class="form-row">
 
-                                    <div class="form-group col-md-6">
-                                        <label for="tb_updateReference">Reference</label>
-                                        <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference" readonly required>
-                                    </div>
+                                    <div class="form-group col-md-6 mt-1">
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
+                                        </div>
+                                        </div>
 
-                                    <div class="form-group col-md-6" style="margin-top: 2em">
-                                        <asp:FileUpload ID="fl_updateProductImage" runat="server" />
+                                    <div class="input-group col-md-6 mt-1">
+                                        <div class="custom-file">
+                                            <ajaxToolkit:AsyncFileUpload ID="fl_updateProductImage" OnUploadedComplete="fl_updateProductImage_UploadedComplete" class="custom-file-input" aria-describedby="fl_updateProductImage" runat="server" accept=".png,.jpg,.jpeg" />
+                                            <label id="custom-file-label2" class="custom-file-label" for="fl_updateProductImage"> Choose File </label>
+                                        </div>
+                                        <div class="input-group-append">
+                                        </div>
                                     </div>
 
                                 </div>
@@ -580,79 +608,100 @@
                                 <div class="form-row mt-1">
 
                                     <div class="col-lg-12">
-                                        <label for="tb_description">Description</label>
+                                        <label for="tb_description">
+                                            <p class="text-muted"><i class="fas fa-edit"></i> Item Description </p>
+                                        </label>
                                         <CKEditor:CKEditorControl ID="ckeditorUpdateProduct" runat="server"></CKEditor:CKEditorControl>
                                     </div>
+
                                 </div>
 
                                 <!-- Resumo -->
 
-                                <div class="form-row mt-4 d-flex justify-content-between">
-
-                                    <div class="col-lg-6 mb-2">
-                                        <label for="tb_updateSummary">Summary</label>
-                                        <input class="form-control" runat="server" type="text" id="tb_updateSummary" required />
-                                    </div>
-
-                                    <div class="col-md-5">
-                                        <label for="ddl_updateCategory">Category</label>
-                                        <asp:DropDownList ID="ddl_updateCategory" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                                    </div>
-
-                                </div>
-
-                                <!-- /Resumo -->
-
-                                <!-- Price-->
-                                <div class="form-row mt-1 d-flex justify-content-between">
-
-                                    <div class="col-md-6 mb-2">
-                                        <label for="tb_updatePrice">Price</label>
-                                        <div class="input-group">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="inputGroupPrepend3">€</span>
-                                            </div>
-                                            <input type="number" class="form-control" runat="server" id="tb_updatePrice" aria-describedby="inputGroupPrepend3" required>
+                                                       
+                        <div class="form-row mt-4 d-flex justify-content-between">
+                            <div class="col-lg-6 mb-2">
+                                <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-pen"></i></span>
                                         </div>
-                                    </div>
-
-                                    <div class="col-md-5 mt-2">
-                                        <label for="ddl_updateBrand">Brand</label>
-                                        <asp:DropDownList ID="ddl_updateBrand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                                    </div>
-
+                                <input class="form-control" runat="server" type="text" id="tb_updateSummary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
                                 </div>
+                                </div>
+                            <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ddl_category">Category</label>
+                                </div>
+                                <asp:DropDownList ID="ddl_updateCategory" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                            </div>
+
+                        </div>
+                        <!-- /Resumo -->
+                        <!-- Price || Brand-->
+                        <div class="form-row mt-1 d-flex justify-content-between">
+
+                            <div class="col-md-6 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text text-center"> &nbsp;<i class="fas fa-euro-sign"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" runat="server" id="tb_updatePrice" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3 col-md-5 col-sm-12">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                </div>
+                                <asp:DropDownList ID="ddl_updateBrand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                            </div>
+                        </div>
                                 <!-- /Price-->
 
                                 <!-- Generic || Prescription || Generic-Product -->
                                 <div class="form-row mt-2 mb-2 d-flex justify-content-between">
 
-                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-between" style="margin-top: 30px;" data-toggle="buttons">
-
-                                        <label class="btn btn-outline-warning" style="padding-left: 1em; padding-right: 1em;">
-                                            <input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
-                                            Prescription
-                                        </label>
-
-                                        <label class="btn btn-outline-warning" style="padding-left: 2em; padding-right: 2em;">
-                                            <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
-                                            Generic
-                                        </label>
-
-                                        <label class="btn btn-outline-dark" style="padding-left: 2em; padding-right: 2em;">
-                                            <input type="checkbox" name="active" class="pr-2 pl-2" id="check_updateActive" runat="server" autocomplete="off">
-                                            Active
-                                        </label>
+                            <div class="btn-group-toggle col-md-6 d-flex justify-content-around mb-3" data-toggle="buttons">
+                                        
+                                <label class="btn btn-outline-dark rounded-right">
+                                    <input type="checkbox" name="active" id="check_updateActive" runat="server" autocomplete="off">
+                                    Active   
+                                </label>
+                                                                  
+                                <label class="btn btn-outline-warning rounded-left">
+                                    <input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
+                                    Prescription
+                                </label>
+                                                                                   
+                                <label class="btn btn-outline-warning rounded-left" onclick="showHideUpdateGenParents()">
+                                    <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
+                                    Generic
+                                </label>  
                                        
                                     </div>
                                    
-                                    <div class="col-md-5" id="genericUpdateDiv">
-                                        <label for="ddl_updateGenericParent">Parent Product</label>
-                                        <asp:DropDownList ID="ddl_updateGenericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
-                                    </div>
+                                    <div class="input-group mb-3 col-md-5 col-sm-12" id="genericUpdateParentsDiv" style="display:none;">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="ddl_updateGenericParent">Parent&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                </div>
+                                <asp:DropDownList ID="ddl_updateGenericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                            </div>
 
                                 </div>
 
+                                <script>
+
+                                    function showHideUpdateGenParents() {
+                                        let genDiv = document.getElementById("genericUpdateParentsDiv");
+
+                                        if (genDiv.style.display === "none") {
+                                            genDiv.style.display = "";
+
+                                        } else {
+                                            genDiv.style.display = "none";
+                                        }
+                                    }
+                                </script>
+                                               
                                 <!-- //Brand || Prescription || Generic-Product-->
 
                             </div>

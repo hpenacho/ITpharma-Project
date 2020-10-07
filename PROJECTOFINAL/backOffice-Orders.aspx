@@ -34,20 +34,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <div class="container-fluid mt-5">
+     <div class="container-fluid mt-1">
 
         <div class="col-lg-12">
-
-            <h1>Orders</h1>
-            <ol class="breadcrumb bg-dark text-white mb-4 shadow shadow-sm">
-                <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
-                <li class="breadcrumb-item active">Orders</li>
-            </ol>
 
             <div class="card mb-4 shadow shadow-sm">
                 <div class="card-header text-center bg-dark text-white">
                     <i class="fas fa-table mr-1"></i>
-                    Current Orders
+                    <span> Current Orders </span> 
                 </div>
                 <div class="card-body">
 

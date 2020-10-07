@@ -116,11 +116,12 @@
 
 
 
-                    <div class="navbar-nav ml-auto my-2 my-lg-0">
-                        <asp:TextBox ID="searchBox" runat="server" OnTextChanged="searchBox_TextChanged" class="form-control mr-sm-2 bg-light" type="search" aria-label="Search" placeholder="Search"></asp:TextBox>
-                        <button class="nav-link btn bg-transparent my-2 my-sm-0" formnovalidate="formnovalidate"><i class="fas fa-search"></i></button>
+                    <div class="navbar-nav ml-auto my-2 my-lg-0">                        
+                        <asp:TextBox ID="searchBox" runat="server" OnTextChanged="searchBox_TextChanged" class="form-control mr-sm-2 bg-light" type="search" aria-label="Search" placeholder="Search"></asp:TextBox> <!-- pattern="^[a-zA-Z0-9_ ]*$" title="Special characters not allowed." ValidationGroup="searchValidationGroup" -->
+                        <button class="nav-link btn bg-transparent my-2 my-sm-0"> <i class="fas fa-search"></i></button>
+                       <!-- <asp:LinkButton ID="lbtn_goSearch" CssClass="nav-link btn bg-transparent my-2 my-sm-0" runat="server" ValidationGroup="searchValidationGroup"><i class="fas fa-search"></i></asp:LinkButton> -->
                     </div>
-
+                    
 
                     <ul class="navbar-nav ml-auto">
 

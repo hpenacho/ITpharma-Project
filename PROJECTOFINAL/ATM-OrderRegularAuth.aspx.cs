@@ -18,9 +18,8 @@ namespace PROJECTOFINAL
 
         }
 
-        protected void lbtn_regularAuth_Click(object sender, EventArgs e)
+        protected void btn_regularAuth_Click(object sender, EventArgs e)
         {
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_regularOrderAuth_ATM");
 
             myCommand.Parameters.AddWithValue("@order_ref", tb_OrderNumber.Value);
@@ -55,7 +54,6 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
             }
-
         }
     }
 }

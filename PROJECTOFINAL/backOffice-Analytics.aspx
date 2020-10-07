@@ -222,7 +222,7 @@
                                             <BorderSkin BackColor="Transparent" BackImageWrapMode="TileFlipX" />
                                         </asp:Chart>
 
-                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , case when cliente.sexo = 'M' then 'Male' when cliente.sexo = 'F' then 'Female' else 'Other' end as 'Gender' from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente group by cliente.sexo"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , case when cliente.sexo = 'M' then 'Male' when cliente.sexo = 'F' then 'Female' else 'Undisclosed' end as 'Gender' from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente group by cliente.sexo"></asp:SqlDataSource>
                                         <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource2">
                                             <Series>
                                                 <asp:Series BackGradientStyle="TopBottom" BorderDashStyle="NotSet" Color="Silver" Name="Series1" Palette="BrightPastel" XValueMember="Order Status" YValueMembers="Qty Orders">
