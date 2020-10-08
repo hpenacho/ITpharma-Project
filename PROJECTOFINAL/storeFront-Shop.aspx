@@ -305,7 +305,7 @@
 
     <div class="container">
     <!-- Recommended Item -->
-    <uc1:TargetedAds runat="server" ID="TargetedAds" />
+        <uc1:TargetedAds runat="server" ID="TargetedAds" />
     <!-- //Recommended Item -->
     </div>
 

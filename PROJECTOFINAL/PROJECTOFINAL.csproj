@@ -507,6 +507,7 @@
     <Content Include="storeFront-404.aspx" />
     <Content Include="storeFront-405.aspx" />
     <Content Include="storeFront-activateAcc.aspx" />
+    <Content Include="storeFront-Cart.aspx" />
     <Content Include="storeFront-Checkout.aspx" />
     <Content Include="storeFront-Contacts.aspx" />
     <Content Include="storeFront-Index.aspx" />
@@ -716,6 +717,13 @@
     </Compile>
     <Compile Include="storeFront-activateAcc.aspx.designer.cs">
       <DependentUpon>storeFront-activateAcc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="storeFront-Cart.aspx.cs">
+      <DependentUpon>storeFront-Cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="storeFront-Cart.aspx.designer.cs">
+      <DependentUpon>storeFront-Cart.aspx</DependentUpon>
     </Compile>
     <Compile Include="storeFront-Checkout.aspx.cs">
       <DependentUpon>storeFront-Checkout.aspx</DependentUpon>
