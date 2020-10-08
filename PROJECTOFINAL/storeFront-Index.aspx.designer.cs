@@ -15,13 +15,13 @@ namespace PROJECTOFINAL
     {
 
         /// <summary>
-        /// imgSlotSeasonal control.
+        /// imgSlotAge control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgSlotSeasonal;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgSlotAge;
 
         /// <summary>
         /// imgSlotGender control.
@@ -33,12 +33,12 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlImage imgSlotGender;
 
         /// <summary>
-        /// imgSlotAge control.
+        /// imgSlotSeasonal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgSlotAge;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgSlotSeasonal;
     }
 }
