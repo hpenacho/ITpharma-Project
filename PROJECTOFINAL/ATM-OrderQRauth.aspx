@@ -31,31 +31,32 @@
                 <div>
                     <div class="row justify-content-center my-1">
 
-                        <label style="font-size:150px;"> <i class="fas fa-qrcode text-success"></i> <i class="fas fa-upload text-info"></i> </label>
+                        <label style="font-size:150px;"> <i class="fas fa-qrcode text-success"></i> </label>
 
                         </div>
                 </div>
                   
 
                    
-                            <div class="text-center">
-                                <label id="lbl_messageQR" class="text-danger" runat="server"></label>
-                            </div>
+                            
 
                         
                         <div class="row justify-content-center mb-3">
 
                             <div class="col-md-3 text-center">
-                                <asp:LinkButton ID="lbtn_QRauth" class="btn btn-light" runat="server" OnClick="lbtn_QRauth_Click"><i class="fas fa-key" style="font-size:40px;"></i></asp:LinkButton>
+                                <asp:LinkButton ID="lbtn_QRauth" class="btn btn-light" runat="server" OnClick="lbtn_QRauth_Click"> <span style="font-size:40px;"> Authenticate </span>  <i class="fas fa-key" style="font-size:40px;"></i></asp:LinkButton>
                             </div>
-                            <div class="col-md-1"></div>
                        </div>
+
+                             <div class="text-center">
+                                <label id="lbl_messageQR" class="text-danger" runat="server"></label>
+                            </div>
 
                     
                     <!-- -->
                      <hr />         
                     
-                           <div class="row justify-content-center">
+                           <div class="row justify-content-center mb-3">
                                <div class="col-md-4">
                                 <div class="input-group">
                                     <div class="input-group-prepend">

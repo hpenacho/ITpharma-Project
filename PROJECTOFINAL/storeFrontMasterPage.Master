@@ -12,6 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <link rel="icon" href="Resources/images/PHARMALOGO.png" type="image/png">
   <!-- Bootstrap core CSS -->
   <link href="StoreFront/css/modern-business.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/7d8b56b46a.js"></script>
