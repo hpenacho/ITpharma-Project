@@ -66,7 +66,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <script src="Scripts/ckeditor/ckeditor.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
     <!-- CK EDITOR SCRIPT -->
 
 
@@ -280,9 +280,6 @@
         </div>
     </div>
     <!-- //END CONTAINER-FLUID -->
-  
-
-
 
 
 
@@ -291,258 +288,264 @@
 
 
     <!-- INSERT PRODUCTS MODAL -->
-    <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
-        <div class="modal-dialog modal-lg shadow-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Product Insertion
+    <asp:UpdatePanel ID="updinsertProduct" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+        <ContentTemplate>
+            <div class="modal fade ml-3" id="modal-insert-product" tabindex="-1" role="dialog" aria-labelledby="modal-insert-product" aria-hidden="true">
+                <div class="modal-dialog modal-lg shadow-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
+                            <h5 class=" modal-title col-12 text-center" id="modal-insert-label">Product Insertion
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </h5>
-                </div>
-                <div class="modal-body">
-                    <!-- BEGIN MODAL BODY CONTENT -->
-                    <asp:UpdatePanel runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
-                        <ContentTemplate>
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- BEGIN MODAL BODY CONTENT -->
+                            <asp:UpdatePanel runat="server">
+                                <ContentTemplate>
 
-                    <!-- NAVIGATION -->
+                                    <!-- NAVIGATION -->
 
-                    <div class="nav nav nav-pills nav-justified" id="insert-nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" style="margin-left: 2em;" id="insert-nav-home-tab" data-toggle="tab" href="#insert-nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
-                        <a class="nav-item nav-link" style="margin-right: 2em;" id="insert-nav-profile-tab" data-toggle="tab" href="#insert-nav-stock" role="tab" aria-controls="nav-profile" aria-selected="false">Stock</a>
+                                    <div class="nav nav nav-pills nav-justified" id="insert-nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" style="margin-left: 2em;" id="insert-nav-home-tab" data-toggle="tab" href="#insert-nav-details" role="tab" aria-controls="nav-home" aria-selected="true">Details</a>
+                                        <a class="nav-item nav-link" style="margin-right: 2em;" id="insert-nav-profile-tab" data-toggle="tab" href="#insert-nav-stock" role="tab" aria-controls="nav-profile" aria-selected="false">Stock</a>
+                                    </div>
+
+                                    <!-- /NAVIGATION -->
+
+                                    <div class="tab-content" id="insert-nav-tabContent">
+
+                                        <!-- CONTENT 1 DETAILS -->
+                                        <div class="tab-pane fade show active" id="insert-nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+
+                                            <div class="p-4">
+                                                <!-- WINDOW PADDING -->
+
+                                                <!-- Name -->
+                                                <div class="form-row">
+
+                                                    <div class="form-group col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- /Name -->
+
+                                                <!-- Reference and Image -->
+                                                <div class="form-row">
+
+                                                    <div class="form-group col-md-6 mt-1">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="input-group col-md-6 mt-1">
+                                                        <div class="custom-file">
+                                                            <ajaxToolkit:AsyncFileUpload ID="fl_insertProductImage" OnUploadedComplete="fl_insertProductImage_UploadedComplete" class="custom-file-input" aria-describedby="fl_insertProductImage" runat="server" accept=".png,.jpg,.jpeg" />
+                                                            <label id="custom-file-label" class="custom-file-label" for="fl_insertProductImage">Choose File </label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- /Reference and Image -->
+
+
+                                                <!-- Description -->
+
+                                                <div class="form-row mt-1">
+
+                                                    <div class="col-lg-12">
+                                                        <label for="tb_description">
+                                                            <p class="text-muted"><i class="fas fa-edit"></i>Item Description </p>
+                                                        </label>
+                                                        <CKEditor:CKEditorControl ID="ckeditorInsertProduct" runat="server"></CKEditor:CKEditorControl>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Resumo -->
+
+
+                                                <div class="form-row mt-4 d-flex justify-content-between">
+                                                    <div class="col-lg-6 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                                                            </div>
+                                                            <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
+                                                        <div class="input-group-prepend">
+                                                            <label class="input-group-text" for="ddl_category">Category</label>
+                                                        </div>
+                                                        <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                                    </div>
+
+                                                </div>
+                                                <!-- /Resumo -->
+                                                <!-- Price || Brand-->
+                                                <div class="form-row mt-1 d-flex justify-content-between">
+
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text text-center">&nbsp;<i class="fas fa-euro-sign"></i></span>
+                                                            </div>
+                                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group mb-3 col-md-5 col-sm-12">
+                                                        <div class="input-group-prepend">
+                                                            <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                        </div>
+                                                        <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                                <!-- /Price-->
+                                                <!-- Generic || Prescription || Generic-Product -->
+                                                <div class="form-row mt-2 mb-2 d-flex justify-content-between">
+
+                                                    <div class="btn-group-toggle col-md-6 d-flex justify-content-around mb-3" data-toggle="buttons">
+
+
+                                                        <label class="btn btn-outline-dark rounded-right">
+                                                            <input type="checkbox" name="active" id="check_active" runat="server" autocomplete="off">
+                                                            Active
+                                                        </label>
+
+
+
+                                                        <label class="btn btn-outline-warning rounded-left">
+                                                            <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
+                                                            Prescription
+                                                        </label>
+
+
+                                                        <label class="btn btn-outline-warning rounded-left" onclick="showHideGenParents()">
+                                                            <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                                            Generic
+                                                        </label>
+
+                                                    </div>
+
+                                                    <div class="input-group mb-3 col-md-5 col-sm-12" id="genericParentsDiv" style="display: none;">
+                                                        <div class="input-group-prepend">
+                                                            <label class="input-group-text" for="ddl_genericParent">Parent&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                        </div>
+                                                        <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+
+                                                <script>
+                                                    function showHideGenParents() {
+                                                        let genDiv = document.getElementById("genericParentsDiv");
+
+                                                        if (genDiv.style.display === "none") {
+                                                            genDiv.style.display = "";
+
+                                                        } else {
+                                                            genDiv.style.display = "none";
+                                                        }
+                                                    }
+                                                </script>
+
+                                                <!-- //Brand || Prescription || Generic-Product-->
+
+
+
+                                            </div>
+                                            <!-- WINDOW PADDING -->
+
+                                        </div>
+                                        <!-- // CONTENT 1 DETAILS -->
+
+
+                                        <!-- CONTENT 2 DETAILS -->
+                                        <div class="tab-pane fade" id="insert-nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
+
+                                            <!-- STOCK -->
+
+                                            <div class="form-row mt-4 d-flex justify-content-between">
+
+                                                <div class="col-md-3">
+                                                    <div class="input-group">
+                                                        <input type="number" value="0" class="form-control" runat="server" min="0.00" id="tb_qty" aria-describedby="inputGroupPrepend3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Qty</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="input-group">
+                                                        <input type="number" value="0" class="form-control" runat="server" min="0.00" id="tb_minQty" aria-describedby="inputGroupPrepend3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Min Qty</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="input-group">
+                                                        <input type="number" value="1" class="form-control" runat="server" min="0.00" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Max Qty</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- //STOCK-->
+
+                                        </div>
+                                        <!-- // CONTENT 2 DETAILS -->
+
+                                        <div class="form-row mt-2">
+                                            <div class="col text-center">
+                                                <asp:LinkButton ID="link_insertProduct" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertProduct_Click">Insert</asp:LinkButton>
+                                                <!-- INSERTION DRIVE -->
+                                                <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row mt-2 justify-content-center">
+                                            <label id="lbl_errors" class="text-danger" runat="server"></label>
+                                        </div>
+                                    </div>
+                                    <!-- //TAB SYSTEM ENDING -->
+                                    <!-- END INNER UPDATE PANEL -->
+                                </ContentTemplate>
+
+
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="link_insertProduct" />
+                                </Triggers>
+
+
+                            </asp:UpdatePanel>
+                        </div>
+                        <!-- END MODAL BODY CONTENT -->
                     </div>
-
-                    <!-- /NAVIGATION -->
-
-                    <div class="tab-content" id="insert-nav-tabContent">
-
-                        <!-- CONTENT 1 DETAILS -->
-                        <div class="tab-pane fade show active" id="insert-nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
-
-                            <div class="p-4">
-                                <!-- WINDOW PADDING -->
-
-                                <!-- Name -->
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-12">
-                                        <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" runat="server" id="tb_name" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
-                                         </div>
-                                        </div>
-
-                                </div>
-                                <!-- /Name -->
-
-                                <!-- Reference and Image -->
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-6 mt-1">
-                                        <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" runat="server" id="tb_reference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
-                                        </div>
-                                        </div>
-
-                                    <div class="input-group col-md-6 mt-1">
-                                        <div class="custom-file">
-                                            <ajaxToolkit:AsyncFileUpload ID="fl_insertProductImage" OnUploadedComplete="fl_insertProductImage_UploadedComplete" class="custom-file-input" aria-describedby="fl_insertProductImage" runat="server" accept=".png,.jpg,.jpeg" />
-                                            <label id="custom-file-label" class="custom-file-label" for="fl_insertProductImage"> Choose File </label>
-                                        </div>
-                                        <div class="input-group-append">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- /Reference and Image -->
-
-
-                                <!-- Description -->
-
-                                <div class="form-row mt-1">
-
-                                    <div class="col-lg-12">
-                                        <label for="tb_description">
-                                            <p class="text-muted"><i class="fas fa-edit"></i> Item Description </p>
-                                        </label>
-                                        <CKEditor:CKEditorControl ID="ckeditorInsertProduct" runat="server"></CKEditor:CKEditorControl>
-                                    </div>
-
-                                </div>
-
-                                <!-- Resumo -->
-
-                                                       
-                        <div class="form-row mt-4 d-flex justify-content-between">
-                            <div class="col-lg-6 mb-2">
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-pen"></i></span>
-                                        </div>
-                                <input class="form-control" runat="server" type="text" id="tb_summary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
-                                </div>
-                                </div>
-                            <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_category">Category</label>
-                                </div>
-                                <asp:DropDownList ID="ddl_category" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                            </div>
-
-                        </div>
-                        <!-- /Resumo -->
-                        <!-- Price || Brand-->
-                        <div class="form-row mt-1 d-flex justify-content-between">
-
-                            <div class="col-md-6 mb-2">
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text text-center"> &nbsp;<i class="fas fa-euro-sign"></i></span>
-                                    </div>
-                                    <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3 col-md-5 col-sm-12">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                </div>
-                                <asp:DropDownList ID="ddl_brand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                            </div>
-                        </div>
-                        <!-- /Price-->
-                        <!-- Generic || Prescription || Generic-Product -->
-                        <div class="form-row mt-2 mb-2 d-flex justify-content-between">
-
-                            <div class="btn-group-toggle col-md-6 d-flex justify-content-around mb-3" data-toggle="buttons">
-
-                               
-                                <label class="btn btn-outline-dark rounded-right">
-                                    <input type="checkbox" name="active" id="check_active" runat="server" autocomplete="off">
-                                    Active
-                                </label>
-                                    
-
-                               
-                                <label class="btn btn-outline-warning rounded-left">
-                                    <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
-                                    Prescription
-                                </label>
-                                                      
-                               
-                                <label class="btn btn-outline-warning rounded-left" onclick="showHideGenParents()">
-                                    <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
-                                    Generic
-                                </label>                                                     
-
-                            </div>
-                         
-                            <div class="input-group mb-3 col-md-5 col-sm-12" id="genericParentsDiv" style="display:none;">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_genericParent">Parent&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                </div>
-                                <asp:DropDownList ID="ddl_genericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
-                            </div>
-                        </div>
-
-                        <script>
-                            function showHideGenParents() {
-                                let genDiv = document.getElementById("genericParentsDiv");
-
-                                if (genDiv.style.display === "none") {
-                                    genDiv.style.display = "";
-
-                                } else {
-                                    genDiv.style.display = "none";
-                                }
-                            }
-                        </script>
-
-                                <!-- //Brand || Prescription || Generic-Product-->
-
-
-
-                            </div>
-                            <!-- WINDOW PADDING -->
-
-                        </div>
-                        <!-- // CONTENT 1 DETAILS -->
-
-
-                        <!-- CONTENT 2 DETAILS -->
-                        <div class="tab-pane fade" id="insert-nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
-
-                            <!-- STOCK -->
-
-                            <div class="form-row mt-4 d-flex justify-content-between">
-
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="number" value="0" class="form-control" runat="server" min="0.00" id="tb_qty" aria-describedby="inputGroupPrepend3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Qty</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="number" value="0" class="form-control" runat="server" min="0.00" id="tb_minQty" aria-describedby="inputGroupPrepend3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Min Qty</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="input-group">
-                                        <input type="number" value="1" class="form-control" runat="server" min="0.00" id="tb_maxQty" aria-describedby="inputGroupPrepend3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Max Qty</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- //STOCK-->
-
-                        </div>
-                        <!-- // CONTENT 2 DETAILS -->
-
-                        <div class="form-row mt-2">
-                            <div class="col text-center">
-                                <asp:LinkButton ID="link_insertProduct" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertProduct_Click">Insert</asp:LinkButton>
-                                <!-- INSERTION DRIVE -->
-                                <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-
-                        <div class="form-row mt-2 justify-content-center">
-                            <label id="lbl_errors" class="text-danger" runat="server"></label>
-                        </div>
-                    </div>
-                    <!-- //TAB SYSTEM ENDING -->
-                    <!-- END INNER UPDATE PANEL -->
-                       </ContentTemplate>
-
-
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="link_insertProduct" />
-                        </Triggers>
-
-
-                    </asp:UpdatePanel>
                 </div>
-                <!-- END MODAL BODY CONTENT -->
             </div>
-        </div>
-    </div>
-
-    
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- //INSERT PRODUCTS MODAL -->
+
+
+    <asp:UpdatePanel ID="updUpdateProduct" runat="server">
+        <ContentTemplate>
 
     <!-- UPDATE PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
@@ -730,6 +733,9 @@
         </div>
     </div>
     <!-- //UPDATE PRODUCTS MODAL -->
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
 
 
 

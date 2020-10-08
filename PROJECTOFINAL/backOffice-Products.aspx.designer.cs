@@ -33,6 +33,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
 
         /// <summary>
+        /// updinsertProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updinsertProduct;
+
+        /// <summary>
         /// tb_name control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,15 @@ namespace PROJECTOFINAL
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbl_errors;
+
+        /// <summary>
+        /// updUpdateProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updUpdateProduct;
 
         /// <summary>
         /// udpUpdateProduct control.
