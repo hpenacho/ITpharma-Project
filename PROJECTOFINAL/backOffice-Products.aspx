@@ -739,10 +739,6 @@
 
 
 
-
-
-
-
     <!-- INSERT\UPDATE BRANDS Modal -->
     <!--TESTADO ESTÁ A FUNCIONAR COMO DEVE SER -->
     <asp:UpdatePanel ID="udtpBrands" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
