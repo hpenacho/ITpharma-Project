@@ -15,10 +15,11 @@ namespace PROJECTOFINAL
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+
+
         }
 
-
-        bool restockIsNeeded;
 
         protected void rpt_infoStock_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -72,6 +73,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                rpt_itemNeedsRestock.DataBind();
             }
 
         }

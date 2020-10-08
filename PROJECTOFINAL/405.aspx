@@ -1,8 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/storeFrontMasterPage.Master" AutoEventWireup="true" CodeBehind="storeFront-405.aspx.cs" Inherits="PROJECTOFINAL.storeFront_405" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="405.aspx.cs" Inherits="PROJECTOFINAL._405" %>
 
+<!DOCTYPE html>
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>405 - Not Available</title>
 
     <style>
 
@@ -109,24 +112,23 @@
     </style>
 
 
-</asp:Content>
+</head>
+<body>
+    <form id="form1" runat="server">
 
-
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <div class="container bg-white my-3">
-        <div id="notfound">
-            <div class="notfound">
-                <div class="notfound-404">
-                    <h1>405</h1>
+        <div class="container bg-white my-3">
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>405</h1>
+                    </div>
+                    <h2>We are sorry, something happened!</h2>
+                    <p>This page is currently unavailable, please try again later.</p>
+                    <a href="storeFront-index.aspx">Back To Homepage</a>
                 </div>
-                <h2>We are sorry, something happened!</h2>
-                <p>This page is currently unavailable, please try again later.</p>
-                <a href="storeFront-index.aspx">Back To Homepage</a>
             </div>
         </div>
-    </div>
 
-
-</asp:Content>
+    </form>
+</body>
+</html>

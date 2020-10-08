@@ -1,7 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/storeFrontMasterPage.Master" AutoEventWireup="true" CodeBehind="storeFront-404.aspx.cs" Inherits="PROJECTOFINAL.storeFront_404" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="404.aspx.cs" Inherits="PROJECTOFINAL._404" %>
 
-    <style>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>404 - Oops!</title>
+
+        <style>
 
 
         #notfound {
@@ -103,26 +108,27 @@
         }
 
     </style>
+</head>
+<body>
+    <form id="form1" runat="server">
 
 
-</asp:Content>
-
-
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <div class="container bg-white my-3">
-        <div id="notfound">
-            <div class="notfound">
-                <div class="notfound-404">
-                    <h1>404</h1>
+        <div class="container bg-white my-3">
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>404</h1>
+                    </div>
+                    <h2>We are sorry, Page not found!</h2>
+                    <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+                    <a href="storeFront-index.aspx">Back To Homepage</a>
                 </div>
-                <h2>We are sorry, Page not found!</h2>
-                <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
-                <a href="storeFront-index.aspx">Back To Homepage</a>
             </div>
         </div>
-    </div>
 
 
 
-</asp:Content>
+
+    </form>
+</body>
+</html>
