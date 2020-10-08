@@ -72,6 +72,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                rpt_itemNeedsRestock.DataBind();
             }
 
         }
