@@ -17,7 +17,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <header>
-        <div class="container mt-5 pl-5 pr-5">
+        <div class="container mt-3 pl-5 pr-5">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -51,50 +51,60 @@
             </div>
     </header>
 
-    <!-- Page Content -->
-    <div class="container my-5">
 
-        <h1 class="my-4">Welcome to Modern Business</h1>
 
-        <!-- Marketing Icons Section -->
-        <div class="row my-5">
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header">Card Title</h4>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header">Card Title</h4>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card h-100">
-                    <h4 class="card-header">Card Title</h4>
-                    <div class="card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.row -->
+
+    <!-- PROMO -->
+   
+    <div class="container mt-5 shadow-sm text-center">
+        <!-- Image Header -->
+        <img class="img-fluid rounded mb-4 align-self-center" style="width: 60em; height: auto;" src="Resources/images/pharmaBannerII.png" alt="">
     </div>
-    <!-- /.container -->
+
+  <!-- Page Content -->
+  <div class="container mt-4">
+
+    <!-- Portfolio Section -->
+    <div class="row">
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100 border-light text-center">
+          <a href="#"><img class="card-img-top" src="#" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#" class="card-text text-dark">Placeholder 1</a>
+            </h4>
+            <p class="card-text small text-dark">Lorem Ipsum Lorem Ipsum</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100 border-light text-center">
+          <a href="#"><img class="card-img-top" src="#" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#" class="card-text text-dark">Placeholder 2</a>
+            </h4>
+            <p class="card-text small text-dark">Lorem Ipsum Lorem Ipsum</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 portfolio-item">
+        <div class="card h-100 border-light text-center">
+          <a href="#"><img class="card-img-top" src="#" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="#" class="card-text text-dark">Placeholder 3</a>
+            </h4>
+            <p class="card-text small text-dark">Lorem Ipsum Lorem Ipsum</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+  </div>
 
 
     <!-- Bootstrap core JavaScript -->
