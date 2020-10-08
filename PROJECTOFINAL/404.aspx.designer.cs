@@ -11,7 +11,16 @@ namespace PROJECTOFINAL
 {
 
 
-    public partial class storeFront_404
+    public partial class _404
     {
+
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

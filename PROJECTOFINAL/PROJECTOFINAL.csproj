@@ -94,6 +94,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.aspx" />
+    <Content Include="405.aspx" />
     <Content Include="ATM-Category.aspx" />
     <Content Include="ATM-ChoicePickup.aspx" />
     <Content Include="ATM-Front.aspx" />
@@ -504,8 +506,6 @@
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="SQLSheet - HUGO.sql" />
     <Content Include="SQLSheet.sql" />
-    <Content Include="storeFront-404.aspx" />
-    <Content Include="storeFront-405.aspx" />
     <Content Include="storeFront-activateAcc.aspx" />
     <Content Include="storeFront-Cart.aspx" />
     <Content Include="storeFront-Checkout.aspx" />
@@ -541,6 +541,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="405.aspx.cs">
+      <DependentUpon>405.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="405.aspx.designer.cs">
+      <DependentUpon>405.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ATM-Category.aspx.cs">
       <DependentUpon>ATM-Category.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -697,20 +711,6 @@
       <DependentUpon>newsUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="storeFront-404.aspx.cs">
-      <DependentUpon>storeFront-404.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="storeFront-404.aspx.designer.cs">
-      <DependentUpon>storeFront-404.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="storeFront-405.aspx.cs">
-      <DependentUpon>storeFront-405.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="storeFront-405.aspx.designer.cs">
-      <DependentUpon>storeFront-405.aspx</DependentUpon>
-    </Compile>
     <Compile Include="storeFront-activateAcc.aspx.cs">
       <DependentUpon>storeFront-activateAcc.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
