@@ -711,6 +711,11 @@
                                     </div>
 
                                 </ContentTemplate>
+
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="link_updateProductDetails" />
+                                </Triggers>
+
                             </asp:UpdatePanel>
                         </div>
                         <!-- END MODAL BODY CONTENT -->
