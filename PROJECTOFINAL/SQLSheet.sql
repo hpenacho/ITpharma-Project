@@ -1914,6 +1914,22 @@ GO
 	end catch
 
 
+	-- [ PROC ] clear cart
+
+	GO
+	create or alter proc usp_clearCart(@clientid int, @cookie varchar(50)) AS
+	BEGIN TRY
+	BEGIN TRAN 
+			
+		delete from carrinho where Carrinho.ID_Cliente = @clientid OR Carrinho.Cookie = @cookie
+
+	COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK;
+	END CATCH
+
+
 
 	-- [ PROC ] Remove item from cart
 	GO

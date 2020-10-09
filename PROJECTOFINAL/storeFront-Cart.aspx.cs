@@ -168,5 +168,33 @@ namespace PROJECTOFINAL
                 updateCart();
             }
         }
+
+        protected void link_clearCart_Click(object sender, EventArgs e)
+        {
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_clearCart");
+
+            myCommand.Parameters.AddWithValue("@clientid", Client.userID);
+            myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
+
+            try
+            {
+                Tools.myConn.Close();
+                myCommand.ExecuteNonQuery();
+
+            }
+            catch (SqlException x)
+            {
+                System.Diagnostics.Debug.WriteLine(x.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                rptModalCart.DataBind();
+            }
+
+
+
+        }
     }
 }

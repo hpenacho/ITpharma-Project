@@ -98,7 +98,7 @@
 
                         <div class="col-lg-12 mb-2">
                             <a href="storeFront-Checkout.aspx" class="btn btn-warning w-75 rounded mb-1">Checkout</a>
-                            <asp:LinkButton ID="link_clearCart" CssClass="btn btn-dark w-75 rounded mt-1" runat="server">Clear&nbspCart</asp:LinkButton>
+                            <asp:LinkButton ID="link_clearCart" CssClass="btn btn-dark w-75 rounded mt-1" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart</asp:LinkButton>
                         </div>
 
                     </div>
