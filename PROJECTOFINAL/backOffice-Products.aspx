@@ -544,9 +544,8 @@
     <!-- //INSERT PRODUCTS MODAL -->
 
 
-    <asp:UpdatePanel ID="updUpdateProduct" runat="server">
+    <asp:UpdatePanel ID="updUpdateProduct" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
         <ContentTemplate>
-
     <!-- UPDATE PRODUCTS MODAL -->
     <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
         <div class="modal-dialog modal-lg shadow-lg" role="document">
@@ -560,7 +559,7 @@
                 </div>
                 <div class="modal-body">
                  <!-- BEGIN MODAL BODY CONTENT -->
-                    <asp:UpdatePanel ID="udpUpdateProduct" runat="server" UpdateMode="Conditional">
+                    <asp:UpdatePanel ID="udpUpdateProduct" runat="server">
                         <ContentTemplate>
 
                             <div class="p-4">
@@ -726,6 +725,14 @@
                 </div>
 
                        </ContentTemplate>
+
+
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="link_updateProductDetails" />
+                        </Triggers>
+
+
+
                     </asp:UpdatePanel>
                 </div>
                 <!-- END MODAL BODY CONTENT -->
