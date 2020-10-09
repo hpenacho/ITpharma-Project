@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace PROJECTOFINAL
 
         static byte[] uploadedFile;
         static byte[] updateUploadedFile;
+        string updatedGen;
 
         protected void link_insertProduct_Click(object sender, EventArgs e)
         {
@@ -117,7 +119,6 @@ namespace PROJECTOFINAL
             uploadedFile = Tools.imageUpload(fl_insertProductImage);
         }
 
-
         protected void fl_updateProductImage_UploadedComplete(object sender, AsyncFileUploadEventArgs e)
         {
             updateUploadedFile = null;
@@ -125,11 +126,8 @@ namespace PROJECTOFINAL
         }
 
 
-
         protected void rpt_produtosBackoffice_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-
-
 
         }
 
@@ -182,8 +180,6 @@ namespace PROJECTOFINAL
             reader.Close();
             Tools.myConn.Close();
 
-
-            //ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "$('#modal-update-product').modal()", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "Javascript", "javascript:openModal(); ", true);
         }
 
@@ -212,8 +208,7 @@ namespace PROJECTOFINAL
 
         protected void link_updateProductDetails_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("file byte array " + updateUploadedFile);
-            System.Diagnostics.Debug.WriteLine("filename " + fl_updateProductImage.FileName);
+
             lbl_updateErrors.InnerText = "";
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_updateBackofficeProducts");
@@ -223,12 +218,12 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@preco", tb_updatePrice.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_updateSummary.Value);
             myCommand.Parameters.AddWithValue("@descricao", ckeditorUpdateProduct.Text);
-            myCommand.Parameters.AddWithValue("@imagem", updateUploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_updateCategory.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_updateBrand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_updatePrescription.Checked);
-            myCommand.Parameters.AddWithValue("@ref_generico", check_updateGeneric.Checked ? ddl_genericParent.SelectedValue : (object)DBNull.Value);
+            myCommand.Parameters.AddWithValue("@ref_generico", check_updateGeneric.Checked ? ddl_updateGenericParent.SelectedValue : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@Activo", check_updateActive.Checked);
+            myCommand.Parameters.AddWithValue("@imagem", updateUploadedFile == null ? new byte[] { } : updateUploadedFile);
 
 
             //OUTPUT - ERROR MESSAGES
@@ -243,8 +238,6 @@ namespace PROJECTOFINAL
                 {
                     lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
-
-                rpt_produtosBackoffice.DataBind();
             }
             catch (SqlException m)
             {
@@ -255,7 +248,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
             }
 
-
+            rpt_produtosBackoffice.DataBind();
         }
 
         protected void link_insertCategoryBrand(object sender, EventArgs e)

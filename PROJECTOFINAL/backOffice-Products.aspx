@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/backOfficeMasterPage.Master" AutoEventWireup="true" CodeBehind="backOffice-Products.aspx.cs" Inherits="PROJECTOFINAL.backOffice_Products" ValidateRequest="false" EnableViewState="true" %>
 
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
@@ -546,205 +546,185 @@
     <!-- //INSERT PRODUCTS MODAL -->
 
 
-    <asp:UpdatePanel ID="updUpdateProduct" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-        <ContentTemplate>
-    <!-- UPDATE PRODUCTS MODAL -->
-    <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
-        <div class="modal-dialog modal-lg shadow-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
-                    <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Update
+
+
+   <!-- UPDATE PRODUCTS MODAL -->
+            <div class="modal fade ml-3" id="modal-update-product" tabindex="-1" role="dialog" aria-labelledby="modal-update-product" aria-hidden="true">
+                <div class="modal-dialog modal-lg shadow-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header py-3 modal-title bg-dark rounded-top text-light">
+                            <h5 class=" modal-title col-12 text-center" id="modal-update-label">Product Update
                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                       </button>
-                    </h5>
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <!-- BEGIN MODAL BODY CONTENT -->
+                            <asp:UpdatePanel ID="updUpdateProduct" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                                <ContentTemplate>
+
+                                    <div class="p-4">
+                                        <!-- WINDOW PADDING -->
+
+                                        <!-- Name -->
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" runat="server" id="tb_updateName" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /Name -->
+
+                                        <!-- Reference and Image -->
+                                        <div class="form-row">
+
+                                            <div class="form-group col-md-6 mt-1">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group col-md-6 mt-1">
+                                                <div class="custom-file">
+                                                    <ajaxToolkit:AsyncFileUpload ID="fl_updateProductImage" OnUploadedComplete="fl_updateProductImage_UploadedComplete" class="custom-file-input" aria-describedby="fl_updateProductImage" runat="server" accept=".png,.jpg,.jpeg" />
+                                                    <label id="custom-file-label2" class="custom-file-label" for="fl_updateProductImage">Choose File</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /Reference and Image -->
+
+
+                                        <!-- Description -->
+
+                                        <div class="form-row mt-1">
+
+                                            <div class="col-lg-12">
+                                                <label for="tb_description">
+                                                    <p class="text-muted"><i class="fas fa-edit"></i>Item Description </p>
+                                                </label>
+                                                <CKEditor:CKEditorControl ID="ckeditorUpdateProduct" runat="server"></CKEditor:CKEditorControl>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Resumo -->
+
+
+                                        <div class="form-row mt-4 d-flex justify-content-between">
+                                            <div class="col-lg-6 mb-2">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                                                    </div>
+                                                    <input class="form-control" runat="server" type="text" id="tb_updateSummary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="ddl_category">Category</label>
+                                                </div>
+                                                <asp:DropDownList ID="ddl_updateCategory" EnableViewState="true" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                            </div>
+
+                                        </div>
+                                        <!-- /Resumo -->
+                                        <!-- Price || Brand-->
+                                        <div class="form-row mt-1 d-flex justify-content-between">
+
+                                            <div class="col-md-6 mb-2">
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text text-center">&nbsp;<i class="fas fa-euro-sign"></i></span>
+                                                    </div>
+                                                    <input type="number" class="form-control" runat="server" id="tb_updatePrice" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3 col-md-5 col-sm-12">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                </div>
+                                                <asp:DropDownList ID="ddl_updateBrand" EnableViewState="true" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <!-- /Price-->
+
+                                        <!-- Generic || Prescription || Generic-Product -->
+                                        <div class="form-row mt-2 mb-2 d-flex justify-content-between">
+
+                                            <div class="btn-group-toggle col-md-6 d-flex justify-content-around mb-3" data-toggle="buttons">
+
+                                                <label class="btn btn-outline-dark rounded-right">
+                                                    <input type="checkbox" name="active" id="check_updateActive" runat="server" autocomplete="off">
+                                                    Active   
+                                                </label>
+
+                                                <label class="btn btn-outline-warning rounded-left">
+                                                    <input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
+                                                    Prescription
+                                                </label>
+
+                                                <label class="btn btn-outline-warning rounded-left" onclick="showHideUpdateGenParents()">
+                                                    <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
+                                                    Generic
+                                                </label>
+
+                                            </div>
+
+                                            <div class="input-group mb-3 col-md-5 col-sm-12" id="genericUpdateParentsDiv">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="ddl_updateGenericParent">Parent&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                                </div>
+                                                <asp:DropDownList ID="ddl_updateGenericParent" EnableViewState="true" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- //Brand || Prescription || Generic-Product-->
+
+                                    </div>
+                                    <!-- WINDOW PADDING -->
+
+                                    <div class="form-row mt-4">
+                                        <div class="col text-center">
+                                            <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_updateProductDetails_Click">Update</asp:LinkButton>
+                                            <!-- INSERTION DRIVE -->
+                                            <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row mt-2">
+                                        <div class="col text-center">
+                                            <label id="lbl_updateErrors" runat="server"></label>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                </ContentTemplate>
+
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="link_updateProductDetails" />
+                                </Triggers>
+
+                            </asp:UpdatePanel>
+                        </div>
+                        <!-- END MODAL BODY CONTENT -->
+                    </div>
                 </div>
-                <div class="modal-body">
-                 <!-- BEGIN MODAL BODY CONTENT -->
-                    <asp:UpdatePanel ID="udpUpdateProduct" runat="server">
-                        <ContentTemplate>
-
-                            <div class="p-4">
-                                <!-- WINDOW PADDING -->
-
-                                <!-- Name -->
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-12">
-                                        <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" runat="server" id="tb_updateName" placeholder="Product Name" data-toggle="tooltip" data-placement="Top" title="Insert the Product name to be displayed" required>
-                                         </div>
-                                        </div>
-
-                                </div>
-                                <!-- /Name -->
-
-                                <!-- Reference and Image -->
-                                <div class="form-row">
-
-                                    <div class="form-group col-md-6 mt-1">
-                                        <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
-                                        </div>
-                                        </div>
-
-                                    <div class="input-group col-md-6 mt-1">
-                                        <div class="custom-file">
-                                            <ajaxToolkit:AsyncFileUpload ID="fl_updateProductImage" OnUploadedComplete="fl_updateProductImage_UploadedComplete" class="custom-file-input" aria-describedby="fl_updateProductImage" runat="server" accept=".png,.jpg,.jpeg" />
-                                            <label id="custom-file-label2" class="custom-file-label" for="fl_updateProductImage"> Choose File </label>
-                                        </div>
-                                        <div class="input-group-append">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- /Reference and Image -->
-
-
-                                <!-- Description -->
-
-                                <div class="form-row mt-1">
-
-                                    <div class="col-lg-12">
-                                        <label for="tb_description">
-                                            <p class="text-muted"><i class="fas fa-edit"></i> Item Description </p>
-                                        </label>
-                                        <CKEditor:CKEditorControl ID="ckeditorUpdateProduct" runat="server"></CKEditor:CKEditorControl>
-                                    </div>
-
-                                </div>
-
-                                <!-- Resumo -->
-
-                                                       
-                        <div class="form-row mt-4 d-flex justify-content-between">
-                            <div class="col-lg-6 mb-2">
-                                <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-pen"></i></span>
-                                        </div>
-                                <input class="form-control" runat="server" type="text" id="tb_updateSummary" placeholder="Summary" data-toggle="tooltip" data-placement="Top" title="Insert the summary, a shortened product description." required />
-                                </div>
-                                </div>
-                            <div class="input-group mb-3 col-sm-12 col-md-5 col-lg-5">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_category">Category</label>
-                                </div>
-                                <asp:DropDownList ID="ddl_updateCategory" class="form-control" runat="server" DataSourceID="SQLcategory" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                            </div>
-
-                        </div>
-                        <!-- /Resumo -->
-                        <!-- Price || Brand-->
-                        <div class="form-row mt-1 d-flex justify-content-between">
-
-                            <div class="col-md-6 mb-2">
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text text-center"> &nbsp;<i class="fas fa-euro-sign"></i></span>
-                                    </div>
-                                    <input type="number" class="form-control" runat="server" id="tb_updatePrice" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3 col-md-5 col-sm-12">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_brand">Brand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                </div>
-                                <asp:DropDownList ID="ddl_updateBrand" class="form-control" runat="server" DataSourceID="SQLbrand" DataTextField="descricao" DataValueField="ID"></asp:DropDownList>
-                            </div>
-                        </div>
-                                <!-- /Price-->
-
-                                <!-- Generic || Prescription || Generic-Product -->
-                                <div class="form-row mt-2 mb-2 d-flex justify-content-between">
-
-                            <div class="btn-group-toggle col-md-6 d-flex justify-content-around mb-3" data-toggle="buttons">
-                                        
-                                <label class="btn btn-outline-dark rounded-right">
-                                    <input type="checkbox" name="active" id="check_updateActive" runat="server" autocomplete="off">
-                                    Active   
-                                </label>
-                                                                  
-                                <label class="btn btn-outline-warning rounded-left">
-                                    <input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
-                                    Prescription
-                                </label>
-                                                                                   
-                                <label class="btn btn-outline-warning rounded-left" onclick="showHideUpdateGenParents()">
-                                    <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
-                                    Generic
-                                </label>  
-                                       
-                                    </div>
-                                   
-                                    <div class="input-group mb-3 col-md-5 col-sm-12" id="genericUpdateParentsDiv" style="display:none;">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="ddl_updateGenericParent">Parent&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                </div>
-                                <asp:DropDownList ID="ddl_updateGenericParent" class="form-control" runat="server" DataSourceID="SQLgenericParent" DataTextField="nome" DataValueField="Codreferencia"></asp:DropDownList>
-                            </div>
-
-                                </div>
-
-                                <script>
-
-                                    function showHideUpdateGenParents() {
-                                        let genDiv = document.getElementById("genericUpdateParentsDiv");
-
-                                        if (genDiv.style.display === "none") {
-                                            genDiv.style.display = "";
-
-                                        } else {
-                                            genDiv.style.display = "none";
-                                        }
-                                    }
-                                </script>
-                                               
-                                <!-- //Brand || Prescription || Generic-Product-->
-
-                            </div>
-                            <!-- WINDOW PADDING -->
-
-                        <div class="form-row mt-4">
-                            <div class="col text-center">
-                                <asp:LinkButton ID="link_updateProductDetails" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_updateProductDetails_Click">Update</asp:LinkButton>
-                                <!-- INSERTION DRIVE -->
-                                <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-
-                        <div class="form-row mt-2">
-                            <div class="col text-center">
-                                <label id="lbl_updateErrors" runat="server"></label>
-                            </div>
-                        </div>
-                </div>
-
-                       </ContentTemplate>
-
-
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="link_updateProductDetails" />
-                        </Triggers>
-
-
-
-                    </asp:UpdatePanel>
-                </div>
-                <!-- END MODAL BODY CONTENT -->
             </div>
-        </div>
-    </div>
-    <!-- //UPDATE PRODUCTS MODAL -->
-        </ContentTemplate>
-    </asp:UpdatePanel>
-
+   <!-- //UPDATE PRODUCTS MODAL -->
 
 
 
@@ -906,9 +886,9 @@
 
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->
-    <asp:SqlDataSource ID="SQLcategory" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Categoria]"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SQLbrand" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Marca]"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SQLgenericParent" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * from produto where ref_generico IS NULL and produto.Descontinuado != 1"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLcategory" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Categoria] ORDER BY descricao ASC"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLbrand" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * FROM [Marca] ORDER BY descricao ASC"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SQLgenericParent" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT * from produto where ref_generico IS NULL and produto.Descontinuado != 1 ORDER BY Produto.nome"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SQLrptProdutos" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listBackofficeProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SQLrptArchived" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_listArchivedBackofficeProducts" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 

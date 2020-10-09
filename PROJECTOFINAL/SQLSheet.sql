@@ -1,4 +1,6 @@
 
+select * from produto
+
 /****************************************************
 
 				[ SQL BACK OFFICE ]
@@ -702,7 +704,7 @@ BEGIN TRAN
 		preco = @preco, 
 		resumo = @resumo, 
 		descricao = @descricao, 
-		imagem = IIF(LEN(@imagem) = 0, imagem , @imagem),
+		imagem = IIF(LEN(@imagem) <= 1, imagem , @imagem),
 		ID_Categoria = @ID_Categoria,
 		ID_Marca = @ID_Marca,
 		precisaReceita = @precisaReceita,
@@ -717,8 +719,9 @@ BEGIN CATCH
 	print ERROR_MESSAGE();
 	ROLLBACK;
 END CATCH
-GO
 
+
+select * from produto order by nome
 
 
 -- [QUERY] INSERT SHOP USERS INTO CLIENT  //for creating new clients
@@ -1977,4 +1980,7 @@ where Produto.Activo = 1 AND
 	 StockPickup.Qtd > 0 AND
 	 Pickup.ID = @PickupID
 	 
+
+
+SELECT * FROM [Categoria] ORDER BY descricao ASC
 	 
