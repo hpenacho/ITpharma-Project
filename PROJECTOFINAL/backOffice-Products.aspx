@@ -159,8 +159,10 @@
                                                 </td>
 
                                                 <td class="align-middle">
-                                                    <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="70" class="img-fluid rounded align-middle">
-                                                </td>
+                                                    <div style="height:83px; width:83px">
+                                                    <img style='height: 100%; width: 100%; object-fit: contain' src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" class="img-fluid rounded align-middle">
+                                                    </div>
+                                               </td>
 
                                                 <td class="align-middle">
                                                     <%# Eval("nome") %>
@@ -404,7 +406,7 @@
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text text-center">&nbsp;<i class="fas fa-euro-sign"></i></span>
                                                             </div>
-                                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend4" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
+                                                            <input type="number" class="form-control" runat="server" id="tb_price" aria-describedby="inputGroupPrepend4" value="10.00" min="0.00" max="99999.00" step="0.01" placeholder="Price" title="Only numbers allowed" required>
                                                         </div>
                                                     </div>
                                                     <div class="input-group mb-3 col-md-5 col-sm-12">

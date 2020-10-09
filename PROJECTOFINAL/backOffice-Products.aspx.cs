@@ -39,6 +39,22 @@ namespace PROJECTOFINAL
 
             lbl_errors.InnerText = "";
 
+            if (tb_name.Value.Trim().Length < 1 || tb_reference.Value.Trim().Length < 1 || tb_summary.Value.Trim().Length < 1 || tb_price.Value.Trim().Length < 1)
+            {
+                lbl_errors.InnerText = "One or more fields are missing, please fill in all available fields.";
+                return;
+            }
+
+            try{
+                if (Convert.ToDecimal(tb_price.Value) < 0){ 
+                    lbl_errors.InnerText = "Only positive numbers allowed.";
+                    return;
+                }
+            }
+            catch (Exception)
+                {lbl_errors.InnerText = "Only positive numbers allowed."; return;}
+
+
             if (uploadedFile == null)
             {
                 lbl_errors.InnerText = "Please upload an image before product insertion.";

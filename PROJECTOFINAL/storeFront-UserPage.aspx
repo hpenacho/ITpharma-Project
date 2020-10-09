@@ -47,7 +47,8 @@
 
                             <div class="col-lg-12 text-center">
                                 <!-- Controlos de navegação -->
-                                    <h5 class="card-title" id="welcomeUser" runat="server"></h5>
+                                    <h5> Welcome </h5>
+                                    <h5 class="card-title text-success" id="welcomeUser" runat="server"></h5>                       
                                     <p class="text-muted"> Here you can change account info, check current and past orders, schedule exams and consume prescriptions.</p>                               
                             </div>
                         </div>
