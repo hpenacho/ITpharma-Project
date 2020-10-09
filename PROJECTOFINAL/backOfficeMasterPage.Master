@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>ITpharma - BackOffice</title>
 
-
+    <link rel="icon" href="Resources/images/PHARMALOGO.png" type="image/png">
     <!-- NORMAL CSS -->
     <link href="BackOffice/BackOffice-Template/dist/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -71,7 +71,8 @@
         <asp:ScriptManager ID="backOfficeScriptManager" runat="server" EnablePartialRendering="true" ></asp:ScriptManager>
 
          <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark shadow shadow-sm">
-            <a class="navbar-brand" href="backOffice-Index.aspx">ITpharma</a>
+            <img src="Resources/images/PHARMALOGO.png" width="40" alt="">
+            <a class="navbar-brand" href="backOffice-Index.aspx">ITpharma</a>                    
             <button class="btn btn-link order-1 order-lg-0" id="sidebarToggle"><i class="fas fa-bars" style="font-size: 19px;"></i></button>
 
              <ul class="navbar-nav ml-auto ml-md-12">

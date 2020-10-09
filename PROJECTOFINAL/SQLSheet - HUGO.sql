@@ -191,4 +191,52 @@ end try
                                 where MoradaEntrega like 'ATM -%'
                                 group by EncomendaHistorico.ID_Pickup, Pickup.Descricao
                                 order by EncomendaHistorico.ID_Pickup
+
+----------------------------
+--[PROC] Reset ATM - Cart for new Users
+
+GO 
+CREATE OR ALTER PROC usp_resetATMcart(@atmTunnelID int) AS
+BEGIN TRY
+BEGIN TRAN
+
+	delete from carrinho where carrinho.ID_Cliente = @atmTunnelID;
+
+COMMIT
+END TRY
+BEGIN CATCH
+	ROLLBACK;
+END CATCH
+
+-----------------------------
+--[PROC] add to ATM cart
+                
+                 GO
+	create or alter proc usp_increaseATMcartQty(@clientTunnelID int, @prodref varchar(20), @pickupID int) AS
+	BEGIN TRY
+	BEGIN TRAN
                                 
+        if((select count(carrinho.Prod_ref) from carrinho where Prod_ref = @prodref and carrinho.ID_Cliente = @clientTunnelID) < (select StockPickup.qtd from StockPickup inner join Pickup on Pickup.ID = StockPickup.ID_Stock_Pickup where Pickup.ID = @pickupID and StockPickup.Prod_ref = @prodref))                      
+        begin
+		insert into carrinho values(@clientTunnelID, @prodref, null)
+        end
+
+	commit
+	end try
+	begin catch
+		rollback
+	end catch
+
+	------------ [ PROC ] Remove item from cart
+	GO
+	create or alter proc usp_decreaseATMcartQty(@clientTunnelID int, @prodref varchar(20)) AS
+    BEGIN TRY
+	BEGIN TRAN
+
+		delete top(1) from Carrinho where (Carrinho.ID_Cliente = @clientTunnelID) AND Carrinho.Prod_ref = @prodref
+
+	commit
+	end try
+	begin catch
+		rollback
+	end catch

@@ -6,8 +6,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <style>
-
+<style>
 
         body {
             font-family: "Open Sans", sans-serif;
@@ -187,16 +186,9 @@
             }
         }
 
-
     </style>
 
-   
-  
-
-
 </asp:Content>
-
-
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -205,7 +197,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3 mb-3" style="margin-top: 10vh;">
+            <div class="col-lg-3 mb-3" style="margin-top: 7vh;">
 
                 <h6 class="my-4">Filtros</h6>
 
@@ -223,7 +215,8 @@
                 </div>
 
 
-                <h6 class="my-4">Category</h6>
+                <a class="rounded btn btn-block bg-success my-4 h4 text-white font-weight-bolder" data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory"> Category </a>
+                <div class="collapse show" id="collapseCategory">
 
                 <div class="list-group list-group-flush">
 
@@ -237,9 +230,12 @@
                  
                 </div>
 
-                <h6 class="my-4">Brand</h6>
+                    </div>
 
-                <div class="list-group list-group-flush">
+                <a class="rounded btn btn-block bg-dark my-4 h4 text-white font-weight-bolder" data-toggle="collapse" href="#collapseBrand" role="button" aria-expanded="false" aria-controls="collapseBrand"> Brand </a>
+                <div class="collapse" id="collapseBrand">
+                    
+                    <div class="list-group list-group-flush">
 
                     <asp:Repeater ID="rptBrands" runat="server" DataSourceID="sqlBrandsSource" OnItemCommand="rptBrands_ItemCommand">
                         <ItemTemplate>
@@ -252,18 +248,26 @@
 
                 </div>
 
-            </div>
-            <!-- /.col-lg-3 -->
-            <div class="col-lg-9" style="margin-top: 10vh;">
 
-                <div class="row">
+                </div>
+
+                <!--<h6 class="my-4">Brand</h6> -->
+
+                
+
+            </div>
+            <div class="col-lg-1"></div>
+            <!-- /.col-lg-3 -->
+            <div class="col-lg-8 align-self-center" style="margin-top: 10vh;">
+
+                <div class="row justify-content-around">
 
                     <asp:Repeater ID="rptShopProducts" runat="server" DataSourceID="sqlShopProducts">
                         <ItemTemplate>
 
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card h-100 border-white">                                                                        
-                                       <center> <div class="text-center" style="height:215px; width:215px">
+                                       <center> <div class="text-center" style="height:170px; width:170px">
                                             <a href='storeFront-ItemPage.aspx?ref=<%# Eval("Codreferencia") %>'>
                                         <img style='height: 100%; width: 100%; object-fit: contain' src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="Product Image"></a>
                                         </div> </center>

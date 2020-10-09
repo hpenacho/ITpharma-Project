@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/7d8b56b46a.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <link rel="icon" href="Resources/images/PHARMALOGO.png" type="image/png">
 
 
     <!-- SCRIPT NOVOS REMOVER SE DER PROBLEMAS -->
@@ -24,7 +25,101 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+    <style>
 
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .modal-confirm {
+            color: #636363;
+            width: 325px;
+            font-size: 14px;
+        }
+
+            .modal-confirm .modal-content {
+                padding: 20px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            .modal-confirm .modal-header {
+                border-bottom: none;
+                position: relative;
+            }
+
+            .modal-confirm h4 {
+                text-align: center;
+                font-size: 26px;
+                margin: 30px 0 -15px;
+            }
+
+            .modal-confirm .form-control, .modal-confirm .btn {
+                min-height: 40px;
+                border-radius: 3px;
+            }
+
+            .modal-confirm .close {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+            }
+
+            .modal-confirm .modal-footer {
+                border: none;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 13px;
+            }
+
+            .modal-confirm .icon-box {
+                color: #fff;
+                position: absolute;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                top: -70px;
+                width: 95px;
+                height: 95px;
+                border-radius: 50%;
+                z-index: 9;
+                background: #82ce34;
+                padding: 15px;
+                text-align: center;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+            }
+
+                .modal-confirm .icon-box i {
+                    font-size: 58px;
+                    position: relative;
+                    top: 3px;
+                }
+
+            .modal-confirm.modal-dialog {
+                margin-top: 80px;
+            }
+
+            .modal-confirm .btn {
+                color: #fff;
+                border-radius: 4px;
+                background: #82ce34;
+                text-decoration: none;
+                transition: all 0.4s;
+                line-height: normal;
+                border: none;
+            }
+
+                .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+                    background: #6fb32b;
+                    outline: none;
+                }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+
+    </style>
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -32,13 +127,26 @@
 </head>
 <body class="bg-light">
     <form id="form1" runat="server">
-        <h2 class="text-center p-0" runat="server" id="atmTitle">IT-Pharma ATM</h2>
 
+        <h2 class="text-center p-2 mt-3 text-muted font-italic" runat="server" id="atmTitle" > ITpharma ATM </h2>
 
         <div class="container">
 
-            <asp:Panel ID="atmCartPanel" runat="server">
-                <div class="row d-flex justify-content-end mr-1 mb-2">
+            <asp:Panel ID="atmCartPanel" runat="server" >
+                <div class="row d-flex justify-content-between mr-1 ml-1 mb-2">
+
+
+                    <div class="col-lg-3 rounded text-center" style="background-color: #82ce34;">
+                        <button type="button" class="btn" style="background-color: #82ce34;" data-toggle="modal" data-target="#staticBackdrop">
+                         <span class="font-weight-bolder text-white" style="font-size: 20px;"> <i class="fas fa-user-circle "></i> New Customer? </span>
+                    </button>
+                        
+                    </div>
+
+                    <div class="col-lg-3 text-center">
+                        <img src="Resources/images/PHARMALOGO.png" width="50" alt="">
+                    </div>
+
                     <div class="col-lg-3 py-2 rounded d-flex justify-content-around" style="background-color: #82ce34">
                         <a href="ATM-Purchase.aspx" class="text-decoration-none text-black-50 align-self-center">
                             <i class="fas fa-shopping-cart mr-2 align-self-center" style="font-size: 30px;"></i>
@@ -54,7 +162,26 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
-
+        
+        <div id="staticBackdrop" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE876;</i>
+                    </div>
+                    <h4 class="modal-title w-100">New Customer Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Are you a new customer? By touching yes your cart items will be reset.</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <asp:Button ID="btn_newCustomer" runat="server" CssClass="btn btn-primary btn-block" Text="Yes" OnClick="btn_newCustomer_Click" />
+                    <button class="btn btn-danger btn-block" style="background-color: #dc3545 !important;" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
         <!-- Bootstrap core JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

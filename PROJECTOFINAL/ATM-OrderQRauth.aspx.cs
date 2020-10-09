@@ -58,7 +58,7 @@ namespace PROJECTOFINAL
                     System.Diagnostics.Debug.WriteLine("clientID: " + clientID);
                     System.Diagnostics.Debug.WriteLine("pickupID: " + pickupID);
                 }
-                catch (System.ArgumentOutOfRangeException)
+                catch (Exception)
                 {
                     lbl_messageQR.InnerText = "An invalid QR was submitted, please try again.";
                     return;

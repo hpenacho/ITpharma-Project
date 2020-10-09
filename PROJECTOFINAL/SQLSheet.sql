@@ -407,13 +407,13 @@ CREATE OR ALTER PROCEDURE [dbo].[usp_loginAdmins]
 
 	@adminName varchar(50),
 	@pw varchar(100),
-	@OUTPUT varchar(300)
+	@OUTPUT varchar(300) output
 
 AS
 BEGIN TRY
 BEGIN TRAN
 	
-    if not exists (select '*' from administradores where userName=@adminName and password = @pw)					
+    if not exists (select '*' from admins where username=@adminName and password = @pw)					
 			THROW 60001, 'Wrong user name or password', 10
 					
 commit

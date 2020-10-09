@@ -85,7 +85,7 @@
         <div class="row mt-3 mb-3">
 
             <div class="col-lg-5 text-center mt-4">
-                <a href="ATM-OrderPick.aspx" class="text-decoration-none text-dark"><i class="fas fa-qrcode" style="font-size: 15em;"></i></a>
+                <a href="ATM-OrderQRauth.aspx" class="text-decoration-none text-dark"><i class="fas fa-qrcode" style="font-size: 15em;"></i></a>
                 <h2 class="text-dark">FAST&nbspPICKUP</h2>
             </div>
 
@@ -103,7 +103,7 @@
                     </a>
                 </div>
                 <div class="col-lg-12 mb-4">
-                    <a href="#" class="btn btn-block py-lg-1 border-0 atmcolor">
+                    <a href="ATM-OrderRegularAuth.aspx" class="btn btn-block py-lg-1 border-0 atmcolor">
                         <i class="fas fa-prescription-bottle-alt my-2" style="font-size: 3em;"></i>
                         <h6 class="font-weight-bold text-light">PICKUP</h6>
                     </a>

@@ -13,7 +13,17 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlSourceCart.SelectParameters["id_cliente"].DefaultValue = ATM.anonTunnelID.ToString();
+            SqlSourceCart.SelectParameters["id_cliente"].DefaultValue = ATM.anonTunnelID.ToString();      
+        }
+
+        private void checkEmptyCart()
+        {
+            if(rptATMCart.Items.Count < 1)
+            {
+                lbl_tax.InnerText = "";
+                lbl_SubTotal.InnerText = "";
+                lbl_Total.InnerText = "";
+            }
         }
 
         protected void rptATMCart_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -68,11 +78,12 @@ namespace PROJECTOFINAL
 
         private void addItemQty(RepeaterCommandEventArgs e)
         {
-            SqlCommand myCommand = Tools.SqlProcedure("usp_increaseCartQty");
+            SqlCommand myCommand = Tools.SqlProcedure("usp_increaseATMcartQty");
 
-            myCommand.Parameters.AddWithValue("@clientid", ATM.anonTunnelID);
+            myCommand.Parameters.AddWithValue("@clientTunnelID", ATM.anonTunnelID);
             myCommand.Parameters.AddWithValue("@prodref", e.CommandArgument.ToString());
-            myCommand.Parameters.AddWithValue("@cookie", (object)DBNull.Value);
+            myCommand.Parameters.AddWithValue("@pickupID", ATM.ID);
+
 
             try
             {
@@ -93,11 +104,10 @@ namespace PROJECTOFINAL
 
         private void removeItemQty(RepeaterCommandEventArgs e)
         {
-            SqlCommand myCommand = Tools.SqlProcedure("usp_decreaseCartQty");
+            SqlCommand myCommand = Tools.SqlProcedure("usp_decreaseATMcartQty");
 
-            myCommand.Parameters.AddWithValue("@clientid", ATM.anonTunnelID);
+            myCommand.Parameters.AddWithValue("@clientTunnelID", ATM.anonTunnelID);
             myCommand.Parameters.AddWithValue("@prodref", e.CommandArgument.ToString());
-            myCommand.Parameters.AddWithValue("@cookie", (object)DBNull.Value);
 
             try
             {
@@ -142,6 +152,7 @@ namespace PROJECTOFINAL
         public void updateCart()
         {
             rptATMCart.DataBind();
+            checkEmptyCart();
         }
 
         protected void lbtn_finalizeOrder_Click(object sender, EventArgs e)
@@ -174,7 +185,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
                 
             }
-            Response.Redirect("ATM-OrderRetrieved.aspx");
+            Response.Redirect("ATM-OrderRetrieved.aspx",false);
         }
     }
 }
