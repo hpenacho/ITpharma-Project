@@ -168,30 +168,65 @@ namespace PROJECTOFINAL
 
         }
 
-      
+        protected void rpt_hoverCart_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "linkDeleteCartItem":
+                    deleteItemCart(e);
+                    break;
+            }
+        }
 
 
+        public void updateHoverCart()
+        {
+            rpt_hoverCart.DataBind();
+        }
+
+        Decimal total = 0;
+        //int qtdTotal = 0;
+
+        protected void rpt_hoverCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                DataRowView dr = (DataRowView)e.Item.DataItem;
+                total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
+                //qtdTotal += int.Parse(dr["Qty"].ToString());
+            }
+
+            hoverCartTotal.Value = total.ToString() + " €";
+        }
 
 
+        private void deleteItemCart(RepeaterCommandEventArgs e)
+        {
+            SqlCommand myCommand = Tools.SqlProcedure("usp_DeleteSelectedCartItem");
 
+            myCommand.Parameters.AddWithValue("@id_cliente", Client.userID);
+            myCommand.Parameters.AddWithValue("@Prod_Ref", e.CommandArgument.ToString());
+            myCommand.Parameters.AddWithValue("@Cookie", Request.Cookies["noLogID"].Value);
 
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@warning", SqlDbType.VarChar, 200));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@warning"].Value.ToString());
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+        }
 
 
 

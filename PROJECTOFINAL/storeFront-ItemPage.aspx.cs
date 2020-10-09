@@ -98,6 +98,7 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
                 cartAmount.Text = "1";
+                (this.Master as storeFrontMasterPage).updateHoverCart();
             }
 
         }

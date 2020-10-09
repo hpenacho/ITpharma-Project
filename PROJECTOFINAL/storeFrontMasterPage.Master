@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="storeFrontMasterPage.master.cs" Inherits="PROJECTOFINAL.storeFrontMasterPage" %>
+﻿    <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="storeFrontMasterPage.master.cs" Inherits="PROJECTOFINAL.storeFrontMasterPage" %>
 
 <!DOCTYPE html>
 
@@ -19,6 +19,12 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
   <style>
+
+         :root {
+
+            --main-bg-color: #82ce34;
+        }
+
 
       /* width */
       ::-webkit-scrollbar {
@@ -69,6 +75,70 @@
       /*.table-responsive {
             max-height:600px;
       } */
+
+
+      /* UTILITY AND HOVER CART */
+
+      #hover-cart-title:focus {
+          outline: none
+      }
+
+      #hoverCartTotal:focus {
+          outline: none;
+      }
+
+      HTML {
+          scroll-behavior: smooth;
+      }
+
+      #minicart {
+          width: 22rem;
+          position: fixed;
+          top: 0;
+          right: 0;
+          margin-right: 7%;
+          margin-top: 4.5em;
+          display: none;
+      }
+
+         #hover-cart-title:focus{
+            outline:none
+        }
+
+        #hoverCartTotal:focus{
+            outline:none;
+        }
+
+    
+        #btn_backToTop{
+
+            position:fixed;
+            bottom: 0;
+            right: 0;
+            margin-right: 20px;
+            margin-bottom: 27px;
+            padding: 10px;
+            display:none;
+            background-color: var(--main-bg-color);
+            color: whitesmoke;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        #btn_backToTop:hover{
+            background-color: #508a1d;
+        }
+
+        #hover-cart-to-checkout{
+            background-color: var(--main-bg-color) !important;
+            color: whitesmoke;
+        }
+
+        #hover-cart-to-checkout:hover{
+             background-color: #508a1d !important;
+        }
+
       
   </style>
 
@@ -85,6 +155,12 @@
     <form id="form1" runat="server">
         <!-- COMO TESTE FIZ ENABLE A PARTIAL RENDERING E TAMBEM LOAD SCRIPTS BEFORE UI -->
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" LoadScriptsBeforeUI="true"></asp:ScriptManager>
+
+
+        <!-- UP BUTTON -->
+        <i onClick="toTop()" class="fas fa-arrow-up" id="btn_backToTop"></i> 
+
+
 
         <!-- Navigation -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-light fixed-top py-2 pb-1 bg-white shadow shadow-sm mb-3">
@@ -111,10 +187,7 @@
                             <a href="storeFront-Contacts.aspx" class="nav-link bg-transparent">Contacts</a>
                         </li>
 
-
                     </ul>
-
-
 
                     <div class="navbar-nav ml-auto my-2 my-lg-0">                        
                         <asp:TextBox ID="searchBox" runat="server" OnTextChanged="searchBox_TextChanged" class="form-control mr-sm-2 bg-light" type="search" aria-label="Search" placeholder="Search"></asp:TextBox> <!-- pattern="^[a-zA-Z0-9_ ]*$" title="Special characters not allowed." ValidationGroup="searchValidationGroup" -->
@@ -122,7 +195,6 @@
                        <!-- <asp:LinkButton ID="lbtn_goSearch" CssClass="nav-link btn bg-transparent my-2 my-sm-0" runat="server" ValidationGroup="searchValidationGroup"><i class="fas fa-search"></i></asp:LinkButton> -->
                     </div>
                     
-
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
@@ -134,12 +206,71 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link btn bg-transparent" id="modal-cart" href="storeFront-Cart.aspx"><i class="fas fa-shopping-cart" style="font-size:18px"></i></a>
+                            <a class="nav-link btn bg-transparent" id="minicart-trigger" href="storeFront-Cart.aspx">
+                                <i class="fas fa-shopping-cart" style="font-size:18px"></i>
+                                <asp:Label ID="lbl_cartnum" class="nav-pills text-dark" runat="server" Font-Size="10px" Text="&nbsp0"></asp:Label>
+                            </a>
                         </li>
 
                     </ul>
                 </div>
             </div>
+
+              <!-- CART HOVER WINDOW -->
+            <div class="card" id="minicart">
+
+                <div class="card-header bg-white">
+                    <h5 class="card-title font-weight-bold text-center">Shopping Cart</h5>
+                </div>
+
+                <div class="card-body" style="max-height: 20em; overflow: auto;">
+                    <ul class="list-group list-group-flush">
+
+                        <asp:Repeater ID="rpt_hoverCart" runat="server" DataSourceID="sqlMiniCart" OnItemCommand="rpt_hoverCart_ItemCommand" OnItemDataBound="rpt_hoverCart_ItemDataBound">
+                            <ItemTemplate>
+
+                                <li class="list-group-item d-flex align-content-between">
+
+                                    <div class="col-2 d-flex align-content-between" style="margin-left: -25px;">
+                                        <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="Product Image" class="border border-light" width="40">
+                                    </div>
+
+                                    <div class="col-10 mt-2 d-flex align-content-between">
+                                        <a href="storeFront-itemPage.aspx?ref=<%# Eval("Prod_Ref") %>" class="text-dark font-weight-bold text-decoration-none">
+                                            <asp:Label ID="lbl_hoverQtd" CssClass="ml-3" runat="server" Font-Bold="true" Text='<%# Eval("Qty") + " x" %>'></asp:Label>
+                                            <input type="text" id="hover-cart-title" style="cursor: pointer;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
+                                        </a>
+                                    </div>
+
+                                    <div class="col-1 mt-2" style="margin-right: -20px;">
+
+                                        <asp:LinkButton ID="link_deleteFromHoverCart" class="text-danger mt-2 float-right" CommandName="link_deleteFromHoverCart" CommandArgument='<%# Eval("Prod_Ref") %>' Style="cursor: pointer; background-color: transparent; border-color: transparent" runat="server">
+                                            <i class="fas fa-times-circle"></i>
+                                        </asp:LinkButton>
+
+                                    </div>
+                                </li>
+
+                            </ItemTemplate>
+                        </asp:Repeater>
+
+                    </ul>
+                </div>
+
+
+                <div class="card-footer bg-white">
+
+                    <div class="d-flex justify-content-between mb-4">
+                        <label class="text-body font-weight-bold text-monospace align-middle mt-2" for="hoverCartTotal">Shopping Total:</label>
+                        <input type="text" id="hoverCartTotal" runat="server" class="form-control text-monospace bg-white w-50 align-middle" readonly />
+                    </div>
+
+                    <div>
+                        <a href="storeFront-Cart.aspx" id="hover-cart-to-checkout" class="btn btn-block">View Cart</a>
+                    </div>
+                </div>
+            </div>
+            <!-- END OF HOVER CART -->
           
         </nav>
         <br />
@@ -243,23 +374,12 @@
 
                                 </div>
 
-
-
                                 <!-- CONTENT -->
-                                
-
-                        <!-- RECOVER PASSWORD -->
-
-                 
-                         <!-- //RECOVER PASSWORD -->
-
-
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
                     </div>
                         <!-- //CONTENT -->
-
                 </div>
             </div>
         </div>
@@ -267,13 +387,59 @@
 
            </ContentTemplate>
         </asp:UpdatePanel>
-
         <!-- //LOGIN MODAL -->
+
+       
+
+
+        <!-- SQL SOURCE -->
+        <asp:SqlDataSource ID="sqlMiniCart" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserCartItems" SelectCommandType="StoredProcedure">
+            <SelectParameters>
+                <asp:Parameter Name="id_cliente" Type="Int32" DefaultValue="0" />
+                <asp:CookieParameter CookieName="noLogID" Name="cookies" Type="String" />
+            </SelectParameters>
+        </asp:SqlDataSource>
 
 
         <!-- Bootstrap core JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <!-- SCRIPTS -->
+        <script>
+
+            $(document).ready(function () {
+                $("#minicart-trigger").hover(function () { $("#minicart").fadeIn("fast"); });
+                $("#minicart").mouseleave(function () { $("#minicart").fadeOut("fast"); });
+
+            });
+
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+            prm.add_endRequest(function () {
+                $(document).ready(function () {
+                    $("#minicart-trigger").hover(function () { $("#minicart").fadeIn("fast"); });
+                    $("#minicart").mouseleave(function () { $("#minicart").fadeOut("fast"); });
+
+                });
+            });
+
+
+            // BOTÃO PARA O TOPO
+
+            window.onscroll = function () { scrollFunction() };
+            function scrollFunction() {
+                if (document.documentElement.scrollTop > 250 || document.body.scrollTop > 250) { document.getElementById("btn_backToTop").style.display = "block"; }
+                else { document.getElementById("btn_backToTop").style.display = "none"; }
+            }
+
+            function toTop() {
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            }
+
+        </script>
 
     </form>
 </body>
