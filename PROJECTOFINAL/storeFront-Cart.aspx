@@ -15,10 +15,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-
-   
-
-
     <asp:UpdatePanel ID="updshoppingcart" runat="server" UpdateMode="Always">
         <ContentTemplate>
 

@@ -89,7 +89,7 @@ namespace PROJECTOFINAL
             txt_bloodSchedule.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ', 'T');
 
             //UTILITY
-            welcomeUser.InnerText = "Welcome " + Client.name;
+            welcomeUser.InnerText = "Welcome<br\\>" + Client.name;
             sqlOrderSource.SelectParameters["ID"].DefaultValue = Client.userID.ToString();
             sqlExams.SelectParameters["ClientID"].DefaultValue = Client.userID.ToString();
         }

@@ -7,9 +7,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="StoreFront/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="StoreFront/css/modern-business.css" rel="stylesheet">
+
+
 </asp:Content>
 
 

@@ -172,7 +172,7 @@ namespace PROJECTOFINAL
         {
             switch (e.CommandName)
             {
-                case "linkDeleteCartItem":
+                case "link_deleteFromHoverCart":
                     deleteItemCart(e);
                     break;
             }
@@ -185,7 +185,6 @@ namespace PROJECTOFINAL
         }
 
         Decimal total = 0;
-        //int qtdTotal = 0;
 
         protected void rpt_hoverCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -194,7 +193,6 @@ namespace PROJECTOFINAL
             {
                 DataRowView dr = (DataRowView)e.Item.DataItem;
                 total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
-                //qtdTotal += int.Parse(dr["Qty"].ToString());
             }
 
             hoverCartTotal.Value = total.ToString() + " €";
@@ -221,6 +219,7 @@ namespace PROJECTOFINAL
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
+                updateHoverCart();
             }
             finally
             {

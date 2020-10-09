@@ -100,8 +100,8 @@ namespace PROJECTOFINAL
 
         private void productFiltering()
         {
+            generatePaging();
 
-           
             sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
             sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
             sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
@@ -170,7 +170,6 @@ namespace PROJECTOFINAL
         protected void mudarPagina(object sender, EventArgs e)
         {
             sqlShopProducts.SelectParameters["Pagina"].DefaultValue = ((LinkButton)sender).Text;
-            generatePaging();
         }
 
         protected void pageBackwards(object sender, EventArgs e)
@@ -179,7 +178,6 @@ namespace PROJECTOFINAL
             if (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) > 1)
             {
                 sqlShopProducts.SelectParameters["Pagina"].DefaultValue = (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) - 1).ToString();
-                generatePaging();
             }
 
         }
@@ -190,7 +188,6 @@ namespace PROJECTOFINAL
             if (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) < pagePanel.Controls.Count - 2)
             {
                 sqlShopProducts.SelectParameters["Pagina"].DefaultValue = (Convert.ToInt32(sqlShopProducts.SelectParameters["Pagina"].DefaultValue) + 1).ToString();
-                generatePaging();
             }
         }
 

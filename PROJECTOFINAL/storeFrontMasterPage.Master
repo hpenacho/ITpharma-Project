@@ -16,15 +16,16 @@
   <!-- Bootstrap core CSS -->
   <link href="StoreFront/css/modern-business.css" rel="stylesheet">
   <script src="https://kit.fontawesome.com/7d8b56b46a.js"></script>
+  <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> uncomment in case bootstrap acts silly -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 
   <style>
 
-         :root {
-
-            --main-bg-color: #82ce34;
-        }
+      :root {
+          --main-bg-color: #82ce34;
+      }
 
 
       /* width */
@@ -42,30 +43,29 @@
           background: #888;
       }
 
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-          background: #555;
-      }
+          /* Handle on hover */
+          ::-webkit-scrollbar-thumb:hover {
+              background: #555;
+          }
 
-      #modal-body-recover{
-
-          display:none;
+      #modal-body-recover {
+          display: none;
       }
 
       .resizeImg {
-        max-width:150px;
-        max-height:auto;
+          max-width: 150px;
+          max-height: auto;
       }
+
       .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-        background-color: #B5EE9B;
-        transition: all 1s ease;
+          background-color: #B5EE9B;
+          transition: all 1s ease;
       }
 
 
       /* SEARCH CSS */
 
-      #searchBox{
-
+      #searchBox {
           border-top: none;
           border-right: none;
           border-left: none;
@@ -102,46 +102,51 @@
           display: none;
       }
 
-         #hover-cart-title:focus{
-            outline:none
-        }
+      #hover-cart-title:focus {
+          outline: none
+      }
 
-        #hoverCartTotal:focus{
-            outline:none;
-        }
+      #hoverCartTotal:focus {
+          outline: none;
+      }
 
-    
-        #btn_backToTop{
 
-            position:fixed;
-            bottom: 0;
-            right: 0;
-            margin-right: 20px;
-            margin-bottom: 27px;
-            padding: 10px;
-            display:none;
-            background-color: var(--main-bg-color);
-            color: whitesmoke;
-            cursor: pointer;
-            transition: 0.3s;
-            border-radius: 5px;
-        }
+      #btn_backToTop {
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          margin-right: 20px;
+          margin-bottom: 27px;
+          padding: 10px;
+          display: none;
+          background-color: var(--main-bg-color);
+          color: whitesmoke;
+          cursor: pointer;
+          transition: 0.3s;
+          border-radius: 5px;
+      }
 
-        #btn_backToTop:hover{
-            background-color: #508a1d;
-        }
+          #btn_backToTop:hover {
+              background-color: #508a1d;
+          }
 
-        #hover-cart-to-checkout{
-            background-color: var(--main-bg-color) !important;
-            color: whitesmoke;
-        }
+      #hover-cart-to-checkout {
+          background-color: var(--main-bg-color) !important;
+          color: whitesmoke;
+      }
 
-        #hover-cart-to-checkout:hover{
-             background-color: #508a1d !important;
-        }
+          #hover-cart-to-checkout:hover {
+              background-color: #508a1d !important;
+          }
 
-      
+      #minicart-trigger:hover + #minicart{
+          display: contents;
+          display:block;
+      }
+
+
   </style>
+
 
 
   <!-- CONTEUDO HEAD MASTER -->
@@ -155,7 +160,7 @@
 <body>
     <form id="form1" runat="server">
         <!-- COMO TESTE FIZ ENABLE A PARTIAL RENDERING E TAMBEM LOAD SCRIPTS BEFORE UI -->
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" LoadScriptsBeforeUI="true"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
 
 
         <!-- UP BUTTON -->
@@ -209,7 +214,6 @@
                         <li class="nav-item">
                             <a class="nav-link btn bg-transparent" id="minicart-trigger" href="storeFront-Cart.aspx">
                                 <i class="fas fa-shopping-cart" style="font-size:18px"></i>
-                                <asp:Label ID="lbl_cartnum" class="nav-pills text-dark" runat="server" Font-Size="10px" Text="&nbsp0"></asp:Label>
                             </a>
                         </li>
 
@@ -218,9 +222,9 @@
             </div>
 
               <!-- CART HOVER WINDOW -->
-            <div class="card" id="minicart">
+            <div class="card shadow shadow-sm" id="minicart">
 
-                <div class="card-header bg-white">
+                <div class="card-header text-white" style="background-color: var(--main-bg-color) !important ">
                     <h5 class="card-title font-weight-bold text-center">Shopping Cart</h5>
                 </div>
 
@@ -239,7 +243,7 @@
                                     <div class="col-10 mt-2 d-flex align-content-between">
                                         <a href="storeFront-itemPage.aspx?ref=<%# Eval("Prod_Ref") %>" class="text-dark font-weight-bold text-decoration-none">
                                             <asp:Label ID="lbl_hoverQtd" CssClass="ml-3" runat="server" Font-Bold="true" Text='<%# Eval("Qty") + " x" %>'></asp:Label>
-                                            <input type="text" id="hover-cart-title" style="cursor: pointer;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
+                                            <input type="text" style="cursor: pointer;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
                                         </a>
                                     </div>
 
@@ -406,13 +410,12 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
         <!-- SCRIPTS -->
-        <script>
+        <script type="text/javascript">
 
             $(document).ready(function () {
-                $("#minicart-trigger").hover(function () { $("#minicart").fadeIn("fast"); });
-                $("#minicart").mouseleave(function () { $("#minicart").fadeOut("fast"); });
+                $("#minicart-trigger").hover(function () { $("#minicart").fadeIn(); });
+                $("#minicart").mouseleave(function () { $("#minicart").fadeOut(); });
 
             });
 
@@ -441,6 +444,7 @@
             }
 
         </script>
+
 
     </form>
 </body>
