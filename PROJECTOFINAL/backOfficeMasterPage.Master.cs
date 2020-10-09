@@ -11,11 +11,11 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           if (Session["AdminAuthentication"] == null)
-                Response.Redirect("backOffice-Login.aspx");
+           //if (Session["AdminAuthentication"] == null)
+           //     Response.Redirect("backOffice-Login.aspx");
 
-            else
-                lbl_activeUser.Text = Session["activeUser"].ToString();
+           // else
+           //     lbl_activeUser.Text = Session["activeUser"].ToString();
         }
 
         protected void lbtn_logout_Click(object sender, EventArgs e)
