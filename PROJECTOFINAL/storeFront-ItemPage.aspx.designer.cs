@@ -123,6 +123,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.Panel panel_overcounter;
 
         /// <summary>
+        /// panel_genericDrug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_genericDrug;
+
+        /// <summary>
         /// rpt_Generics control.
         /// </summary>
         /// <remarks>

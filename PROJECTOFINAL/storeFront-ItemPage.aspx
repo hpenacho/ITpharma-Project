@@ -115,8 +115,9 @@
           <h5 class="mt-5 mb-4 text-dark small badge badge-warning">Tags</h5>
 
           <div class="text-start" >
-              <asp:Panel ID="panel_prescribed" runat="server"><i class="fas fa-prescription-bottle-alt" style="font-size: 25px"></i><span class="small text-muted">&nbsp prescribed</span></asp:Panel>
-              <asp:Panel ID="panel_overcounter" runat="server"><i class="fas fa-mortar-pestle" style="font-size: 25px"></i><span class="small text-muted">&nbsp over-the-counter</span></asp:Panel>
+              <asp:Panel ID="panel_prescribed" runat="server"><i class="fas fa-prescription-bottle-alt" style="font-size: 25px"></i><span class="small text-muted">&nbsp Prescription&nbspneeded</span></asp:Panel>
+              <asp:Panel ID="panel_overcounter" runat="server"><i class="fas fa-mortar-pestle" style="font-size: 25px"></i><span class="small text-muted">&nbsp Over-the-counter</span></asp:Panel>
+              <asp:Panel ID="panel_genericDrug" runat="server"><i class="fas fa-hand-holding-medical mt-1" style="font-size: 25px"></i><span class="small text-muted">&nbsp Generic</span></asp:Panel>
           </div>
 
 

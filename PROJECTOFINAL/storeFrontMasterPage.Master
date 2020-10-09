@@ -240,10 +240,10 @@
                                         <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="Product Image" class="border border-light" width="40">
                                     </div>
 
-                                    <div class="col-10 mt-2 d-flex align-content-between">
+                                    <div class="col-10 mt-2 d-flex align-content-around align-self-center">
                                         <a href="storeFront-itemPage.aspx?ref=<%# Eval("Prod_Ref") %>" class="text-dark font-weight-bold text-decoration-none">
-                                            <asp:Label ID="lbl_hoverQtd" CssClass="ml-3" runat="server" Font-Bold="true" Text='<%# Eval("Qty") + " x" %>'></asp:Label>
-                                            <input type="text" style="cursor: pointer;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
+                                            <asp:Label ID="lbl_hoverQtd" CssClass="ml-3" runat="server" Font-Bold="true" Text='<%# Eval("Qty") + "&nbspx&nbsp" %>'></asp:Label>
+                                            <input type="text" style="cursor: pointer; font-size: 12px;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
                                         </a>
                                     </div>
 

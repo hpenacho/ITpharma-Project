@@ -1457,12 +1457,14 @@ end catch
 
 GO
 create or alter proc usp_returnItemDetailPage(@Reference varchar(20)) AS
-select nome, preco, resumo, Produto.descricao, imagem,precisaReceita, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria'
+select nome, preco, resumo, Produto.descricao, imagem,precisaReceita, Marca.descricao as 'Marca', Categoria.descricao as 'Categoria', Produto.ref_generico as 'genericref'
 from produto inner join marca on produto.ID_Marca = marca.ID
 			 inner join categoria on produto.ID_Categoria = Categoria.ID
 where Produto.Codreferencia = @Reference
 AND Produto.Activo = 1
 AND Produto.Descontinuado = 0
+
+select * from produto
 
 -- [ PROC ] RELATED ITEM DETAIL PAGE
 
