@@ -32,6 +32,7 @@ namespace PROJECTOFINAL
 
 
         static byte[] uploadedFile;
+        static byte[] updateUploadedFile;
 
         protected void link_insertProduct_Click(object sender, EventArgs e)
         {
@@ -100,11 +101,14 @@ namespace PROJECTOFINAL
             uploadedFile = Tools.imageUpload(fl_insertProductImage);
         }
 
-        protected void fl_updateProductImage_UploadedComplete(object sender, AjaxControlToolkit.AsyncFileUploadEventArgs e)
+
+        protected void fl_updateProductImage_UploadedComplete(object sender, AsyncFileUploadEventArgs e)
         {
-            uploadedFile = null;
-            uploadedFile = Tools.imageUpload(fl_updateProductImage);
+            updateUploadedFile = null;
+            updateUploadedFile = Tools.imageUpload(fl_updateProductImage);
         }
+
+
 
         protected void rpt_produtosBackoffice_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -192,6 +196,8 @@ namespace PROJECTOFINAL
 
         protected void link_updateProductDetails_Click(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("file byte array " + updateUploadedFile);
+            System.Diagnostics.Debug.WriteLine("filename " + fl_updateProductImage.FileName);
             lbl_updateErrors.InnerText = "";
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_updateBackofficeProducts");
@@ -201,7 +207,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@preco", tb_updatePrice.Value);
             myCommand.Parameters.AddWithValue("@resumo", tb_updateSummary.Value);
             myCommand.Parameters.AddWithValue("@descricao", ckeditorUpdateProduct.Text);
-            myCommand.Parameters.AddWithValue("@imagem", uploadedFile);
+            myCommand.Parameters.AddWithValue("@imagem", updateUploadedFile);
             myCommand.Parameters.AddWithValue("@ID_Categoria", ddl_updateCategory.SelectedValue);
             myCommand.Parameters.AddWithValue("@ID_Marca", ddl_updateBrand.SelectedValue);
             myCommand.Parameters.AddWithValue("@precisaReceita", check_updatePrescription.Checked);
@@ -426,6 +432,6 @@ namespace PROJECTOFINAL
             }
         }
 
-       
+      
     }
 }
