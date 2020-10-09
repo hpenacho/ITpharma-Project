@@ -79,8 +79,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
-                //(this.Master as storeFrontMasterPage).updateCart();
-                //cartAmount.Text = "1";
+                cartAmount.Text = "1";
             }
 
         }
