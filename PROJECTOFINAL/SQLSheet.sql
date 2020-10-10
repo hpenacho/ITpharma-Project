@@ -375,11 +375,12 @@ begin tran
 				 inner join Compra on Produto.Codreferencia = Compra.Prod_ref
 				 inner join EncomendaHistorico on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 				 where EncomendaHistorico.ENC_REF = @thisEnc
-				 group by Produto.precisaReceita)
-		
+				 group by Produto.precisaReceita)		
+	begin
 		update Receita
 		set Receita.Levantada = 1, Receita.InCart = 0
 		where Receita.InCart = 1 AND Receita.Levantada = 0 AND Receita.NrSaude = (select Cliente.nrSaude from Cliente where Cliente.ID = @IDcliente)
+	end
 
 		SET @orderNumber = @thisEnc
 commit
@@ -697,7 +698,7 @@ BEGIN TRAN
 	IF EXISTS (SELECT '*' FROM Produto WHERE Produto.nome = @nome AND Produto.Codreferencia != @Codreferencia )
 		THROW 60003, 'Another product with that name already exists', 10
 
-	--!!WARNING!! THE PDF FLYER IS CURRENTLY BEING INSERTED AS NULL
+	
 
 	UPDATE Produto
 	Set nome = @nome, 
@@ -874,10 +875,11 @@ END CATCH
 
 GO
 create or alter proc usp_returnBackofficeOrders as
-select enc_ref as 'Ref', datacompra, cliente.nome as 'clientName', sum(compra.Total) as 'orderTotal', id_estado, ultimaActualizacao 
+select enc_ref as 'Ref', datacompra, cliente.nome as 'clientName', sum(compra.Total) as 'orderTotal', id_estado, estado.Descricao, ultimaActualizacao,ID_Pickup
 from EncomendaHistorico inner join cliente on cliente.id = EncomendaHistorico.ID_Cliente
 						inner join Compra on compra.ID_Encomenda = EncomendaHistorico.ENC_REF
-group by enc_ref, datacompra, cliente.nome, id_estado, ultimaActualizacao 
+						inner join estado on estado.ID = EncomendaHistorico.ID_Estado
+group by enc_ref, datacompra, cliente.nome, id_estado,estado.Descricao, ultimaActualizacao,ID_Pickup
 
 
 -- [PROC] RETURNS ORDER DETAILS
@@ -1327,6 +1329,7 @@ BEGIN TRAN
 					 inner join Categoria on Produto.ID_Categoria = Categoria.ID
 		where Carrinho.ID_Cliente = IIF(@id_cliente = 0, null, @id_cliente) OR Carrinho.Cookie = @cookies 
 		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, produto.resumo, Categoria.descricao, Produto.precisaReceita
+		order by Produto.precisaReceita
 
 COMMIT
 END TRY

@@ -37,9 +37,7 @@ begin tran
  insert into Carrinho 
  select (select Cliente.ID from Cliente where Cliente.nrSaude = @healthNumber), ItemReceita.Prod_ref, null
  from ItemReceita inner join Receita on ItemReceita.ID_Receita = Receita.REC_REF
- where Receita.NrSaude in (
-        select cliente.nrSaude from Cliente where Cliente.nrSaude = @healthNumber
-)
+ where Receita.NrSaude = (select cliente.nrSaude from Cliente where Cliente.nrSaude = @healthNumber) and Receita.REC_REF = @prescription_ref
 
 update Receita set Receita.InCart = 1 where Receita.REC_REF = @prescription_ref
     
@@ -50,6 +48,32 @@ begin catch
     rollback
 end catch
 GO
+-------------------------------------
+--[PROC] Removes All prescription items from Cart
+go
+Create or alter proc usp_removeAllPrescriptionItemsfromCart(
+                                       @healthNumber int,
+                                       @clientID int
+                                       
+)
+
+as
+begin try
+begin tran
+       
+     if exists (select '*' from Receita where Receita.InCart = 1 and NrSaude = @healthNumber)
+     begin
+     update Receita set InCart = 0 where NrSaude = @healthNumber
+     delete Carrinho from Carrinho inner join Produto on Produto.Codreferencia = Carrinho.Prod_ref where (Carrinho.ID_Cliente = @clientID) and (Produto.precisaReceita = 1)
+     end
+
+commit
+end try
+    begin catch
+        rollback;
+    end catch
+
+
 -------------------------------------
 
 --[PROC] For returning User Personal Orders in UserPage

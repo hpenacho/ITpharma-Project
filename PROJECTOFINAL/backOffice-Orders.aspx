@@ -55,6 +55,7 @@
                                     <th>Customer</th>
                                     <th>Total</th>
                                     <th>Status</th>
+                                    <th>Type</th>
                                     <th>Updated</th>
                                     <th class="text-hide"></th>
                                     <th class="text-hide"></th>
@@ -91,6 +92,10 @@
                                             </td>
 
                                             <td style="vertical-align: middle">
+                                                <asp:Label ID="lbl_orderType" runat="server" Text="[type]"></asp:Label>
+                                            </td> 
+
+                                            <td style="vertical-align: middle">
                                                 <%#  DateTime.Parse(Eval("ultimaActualizacao").ToString()).ToString("MMMM dd, yyyy H:mm") %>h
                                             </td>
 
@@ -99,7 +104,7 @@
                                             </td>
 
                                             <td style="vertical-align: middle">
-                                                <asp:LinkButton ID="link_updateOrder" CommandArgument='<%# Eval("Ref") %>' CommandName="link_updateOrder" CssClass="btn btn-warning" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
+                                                <asp:LinkButton ID="link_updateOrder" Enabled='<%# Eval("ID_Pickup") == DBNull.Value %>' CommandArgument='<%# Eval("Ref") %>' CommandName="link_updateOrder" CssClass="btn btn-warning" runat="server"><i id="produpdate" class="fas fa-save"></i></asp:LinkButton>
                                             </td>
 
                                         </tr>
@@ -136,7 +141,9 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td style="vertical-align: middle;">
-                                            <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" width="80" class="img-fluid rounded align-middle">
+                                            <div class="text-center" style="height:84px; width:84px">
+                                            <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("imagem")) %>" alt="" style='height: 100%; width: 100%; object-fit: contain' class="img-fluid rounded align-middle">
+                                            </div>
                                         </td>
 
                                         <td style="vertical-align: middle;">

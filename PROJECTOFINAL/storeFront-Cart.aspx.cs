@@ -41,15 +41,20 @@ namespace PROJECTOFINAL
         {
             Decimal tax = 0;
             Decimal subTotal = 0;
+            bool hasPrescriptionItems = false;
 
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 DataRowView dr = (DataRowView)e.Item.DataItem;
                 total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
                 qtdTotal += int.Parse(dr["Qty"].ToString());
+
+                if (!hasPrescriptionItems && (bool)dr["precisaReceita"])
+                    hasPrescriptionItems = true;
             }
 
-            System.Diagnostics.Debug.WriteLine(qtdTotal);
+            link_clearPrescriptionItems.Visible = hasPrescriptionItems;
+
             tax = Decimal.Multiply(total, 0.06m);
             subTotal = total - tax;
 
@@ -179,7 +184,7 @@ namespace PROJECTOFINAL
 
             try
             {
-                Tools.myConn.Close();
+                Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
 
             }
@@ -192,13 +197,34 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
                 rptModalCart.DataBind();
             }
-
-
+            cleanCart();
 
         }
 
         protected void link_clearPrescriptionItems_Click(object sender, EventArgs e)
         {
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_removeAllPrescriptionItemsfromCart");
+
+            myCommand.Parameters.AddWithValue("@healthNumber", Client.nrSaude);
+            myCommand.Parameters.AddWithValue("@clientID", Client.userID);
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+            }
+            catch (SqlException x)
+            {
+                System.Diagnostics.Debug.WriteLine(x.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+                rptModalCart.DataBind();
+            }
+            cleanCart();
 
         }
     }

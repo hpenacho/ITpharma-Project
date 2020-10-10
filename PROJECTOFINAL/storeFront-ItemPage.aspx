@@ -82,9 +82,9 @@
          
            <div class="row">
                <button type="button" class="btn btn-warning mr-2 btn-sm" onclick="removeAmount()" formnovalidate="formnovalidate"><i class="fas fa-minus"></i></button>
-               <asp:TextBox id= "cartAmount" pattern="[0-9]+" title="Only numbers" CssClass="form-control text-center bg-white" runat="server" style="width: 3.5em"></asp:TextBox>
+               <asp:TextBox id= "cartAmount" pattern="[0-9]+" title="Only numbers" CssClass="form-control text-center bg-white" runat="server" style="width: 3.5em"></asp:TextBox> 
                <button type="button" class="btn btn-warning mr-2 btn-sm ml-2" onclick="addAmount()" formnovalidate="formnovalidate"><i class="fas fa-plus"></i></button>
-             <asp:LinkButton ID="link_addToCart" class="btn btn-warning" runat="server" OnClick="link_addToCart_Click1" ToolTip="Adds this item to your cart with the selected ammount (if stock is available)."><i class="fas fa-cart-plus"></i> Add</asp:LinkButton>
+               <asp:LinkButton ID="link_addToCart" class="btn btn-warning" runat="server" OnClick="link_addToCart_Click1" ToolTip="Adds this item to your cart with the selected amount (if stock is available)." data-toggle="tooltip" data-placement="right"><i class="fas fa-cart-plus"></i> Add</asp:LinkButton>
           </div>
         </div>
 

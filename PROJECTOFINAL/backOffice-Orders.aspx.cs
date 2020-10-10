@@ -65,6 +65,29 @@ namespace PROJECTOFINAL
                 DataRowView dr = (DataRowView)e.Item.DataItem;
 
                 ((DropDownList)e.Item.FindControl("ddl_orderStatus")).SelectedValue = dr["id_estado"].ToString();
+
+                if (dr["ID_Pickup"] != DBNull.Value)
+                {
+                    for (int i = 1; i <= 4; i++)
+                    {
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue(i.ToString()));
+                    }
+                    ((Label)e.Item.FindControl("lbl_orderType")).Text = "Pickup Retrieval";
+                }
+
+                else if (dr["ID_Pickup"] == DBNull.Value)
+                {
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("5"));
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("6"));
+                    ((Label)e.Item.FindControl("lbl_orderType")).Text = "Home Delivery";
+                }
+
+                if (dr["clientName"].ToString().Contains("ATM -"))
+                {
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("0"));
+                    ((Label)e.Item.FindControl("lbl_orderType")).Text = "Local Purchase";
+                }
+
             }
 
         }
