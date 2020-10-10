@@ -1995,8 +1995,3 @@ where Produto.Activo = 1 AND
 	 Produto.Descontinuado = 0 AND
 	 StockPickup.Qtd > 0 AND
 	 Pickup.ID = @PickupID
-	 
-
-
-SELECT * FROM [Categoria] ORDER BY descricao ASC
-	 

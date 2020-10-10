@@ -499,6 +499,8 @@
     <Content Include="Resources\images\founder_H.JPG" />
     <Content Include="Resources\images\frontBanner.jpg" />
     <Content Include="Resources\images\genericUserIcon.png" />
+    <Content Include="Resources\images\loading.gif" />
+    <Content Include="Resources\images\loading2.gif" />
     <Content Include="Resources\images\maleSign.png" />
     <Content Include="Resources\images\pharmabannerII.png" />
     <Content Include="Resources\images\PHARMALOGO.png" />

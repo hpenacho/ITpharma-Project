@@ -8,7 +8,7 @@
 
     <style>
 
-         a.active.nav-item.nav-link{background-color: orange !important;color:white !important;}
+         a.active.nav-item.nav-link{background-color: orange !important;color:whitesmoke !important;}
          a.nav-item.nav-link{color: #333 !important;}
 
          #home-tab.active{background-color: orange !important;color:white !important;}
@@ -282,10 +282,6 @@
         </div>
     </div>
     <!-- //END CONTAINER-FLUID -->
-
-
-
-
 
 
 

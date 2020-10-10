@@ -101,12 +101,11 @@ namespace PROJECTOFINAL
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
-                System.Diagnostics.Debug.WriteLine(lbl_errors.InnerText.ToString());
             }
             finally
             {
                 Tools.myConn.Close();
-                fl_insertProductImage.ClearAllFilesFromPersistedStore();
+                //fl_insertProductImage.ClearAllFilesFromPersistedStore();
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
 
