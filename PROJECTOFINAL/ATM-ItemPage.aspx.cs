@@ -41,7 +41,6 @@ namespace PROJECTOFINAL
                     control_productBrand.InnerText = dr["Marca"].ToString();
                     control_description.Text = dr["descricao"].ToString();
                     txt_itemSummary.InnerText = dr["resumo"].ToString();
-
                 }
 
             }

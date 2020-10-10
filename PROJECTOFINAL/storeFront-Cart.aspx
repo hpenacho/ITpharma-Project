@@ -24,6 +24,7 @@
                 <!-- Shopping cart table -->
                 <div class="table-responsive mt-4">
                     <table class="table">
+
                         <thead class="text-dark text-center" style="background-color: #82ce34 !important">
                             <tr>
                                 <th scope="col" class="rounded-left text-center">
@@ -46,7 +47,6 @@
                         <tbody>
 
                             <asp:Repeater ID="rptModalCart" runat="server" DataSourceID="SqlSourceCart" OnItemDataBound="rptModalCart_ItemDataBound" OnItemCommand="rptModalCart_ItemCommand">
-
                                 <ItemTemplate>
 
                                     <tr>

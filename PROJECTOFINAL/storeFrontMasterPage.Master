@@ -224,40 +224,45 @@
               <!-- CART HOVER WINDOW -->
             <div class="card shadow shadow-sm" id="minicart">
 
-                <div class="card-header text-white" style="background-color: var(--main-bg-color) !important ">
+                <div class="card-header text-white" style="background-color: var(--main-bg-color) !important">
                     <h5 class="card-title font-weight-bold text-center">Shopping Cart</h5>
                 </div>
 
                 <div class="card-body" style="max-height: 20em; overflow: auto;">
                     <ul class="list-group list-group-flush">
+                        <asp:UpdatePanel ID="updHoverCart" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
 
-                        <asp:Repeater ID="rpt_hoverCart" runat="server" DataSourceID="sqlMiniCart" OnItemCommand="rpt_hoverCart_ItemCommand" OnItemDataBound="rpt_hoverCart_ItemDataBound">
-                            <ItemTemplate>
+                                <asp:Repeater ID="rpt_hoverCart" runat="server" DataSourceID="sqlMiniCart" OnItemCommand="rpt_hoverCart_ItemCommand" OnItemDataBound="rpt_hoverCart_ItemDataBound">
+                                    <ItemTemplate>
 
-                                <li class="list-group-item d-flex align-content-between">
+                                        <li class="list-group-item d-flex align-content-between">
 
-                                    <div class="col-2 d-flex align-content-between" style="margin-left: -25px;">
-                                        <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="Product Image" class="border border-light" width="40">
-                                    </div>
+                                            <div class="col-2 d-flex align-content-between" style="margin-left: -25px;">
+                                                <img src="<%# "data:image;base64," + Convert.ToBase64String((byte[])Eval("ProdImage")) %>" alt="Product Image" class="border border-light" width="40">
+                                            </div>
 
-                                    <div class="col-10 mt-2 d-flex align-content-around align-self-center">
-                                        <a href="storeFront-itemPage.aspx?ref=<%# Eval("Prod_Ref") %>" class="text-dark font-weight-bold text-decoration-none">
-                                            <asp:Label ID="lbl_hoverQtd" CssClass="ml-3" runat="server" Font-Bold="true" Text='<%# Eval("Qty") + "&nbspx&nbsp" %>'></asp:Label>
-                                            <input type="text" style="cursor: pointer; font-size: 12px;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
-                                        </a>
-                                    </div>
+                                            <div class="col-10 mt-2 d-flex align-content-around align-self-center">
+                                                <a href="storeFront-itemPage.aspx?ref=<%# Eval("Prod_Ref") %>" class="text-dark font-weight-bold text-decoration-none">
+                                                    <asp:Label ID="lbl_hoverQtd" CssClass="ml-3" runat="server" Font-Bold="true" Text='<%# Eval("Qty") + "&nbspx&nbsp" %>'></asp:Label>
+                                                    <input type="text" style="cursor: pointer; font-size: 12px;" class="text-dark bg-white border-0 font-weight-bold w-75" value='<%# Eval("ProdName") %>' maxlength="70" readonly />
+                                                </a>
+                                            </div>
 
-                                    <div class="col-1 mt-2" style="margin-right: -20px;">
+                                            <div class="col-1 mt-2" style="margin-right: -20px;">
 
-                                        <asp:LinkButton ID="link_deleteFromHoverCart" class="text-danger mt-2 float-right" CommandName="link_deleteFromHoverCart" CommandArgument='<%# Eval("Prod_Ref") %>' Style="cursor: pointer; background-color: transparent; border-color: transparent" runat="server">
+                                                <asp:LinkButton ID="link_deleteFromHoverCart" class="text-danger mt-2 float-right" CommandName="link_deleteFromHoverCart" CommandArgument='<%# Eval("Prod_Ref") %>' Style="cursor: pointer; background-color: transparent; border-color: transparent" runat="server">
                                             <i class="fas fa-times-circle"></i>
-                                        </asp:LinkButton>
+                                                </asp:LinkButton>
 
-                                    </div>
-                                </li>
+                                            </div>
+                                        </li>
 
-                            </ItemTemplate>
-                        </asp:Repeater>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
 
                     </ul>
                 </div>

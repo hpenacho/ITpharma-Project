@@ -17,6 +17,7 @@ namespace PROJECTOFINAL
             generateCookie();
             initiateRegistry();
             switchIcons();
+            updateHoverCart();
 
         }
 
@@ -25,9 +26,6 @@ namespace PROJECTOFINAL
             Session["searchQuery"] = searchBox.Text;
             Response.Redirect("storeFront-Shop.aspx");
         }
-
-
-       
 
 
         private void initiateRegistry()
@@ -214,16 +212,15 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
-                System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@warning"].Value.ToString());
             }
             catch (SqlException m)
             {
                 System.Diagnostics.Debug.WriteLine(m.Message);
-                updateHoverCart();
             }
             finally
             {
                 Tools.myConn.Close();
+                updateHoverCart();
             }
         }
 
