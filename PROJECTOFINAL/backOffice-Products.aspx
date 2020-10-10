@@ -43,12 +43,42 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
             $('[data-toggle="tooltip"]').tooltip();
             $('table.products').DataTable();
+
+
+            if (document.getElementById("<%= check_updateGeneric.ClientID %>").checked) {
+                document.getElementById("genericUpdateParentsDiv").style.display = "";
+            } else {
+                document.getElementById("genericUpdateParentsDiv").style.display = "none";
+            }
+
+
         });
 
         function openModal() {
             $('#modal-update-product').modal('show');
+        }
+
+        function showHideUpdateGenParents(){
+
+            let genUpdateDiv = document.getElementById("genericUpdateParentsDiv");
+
+            genUpdateDiv.style.display = document.getElementById("<%= check_updateGeneric.ClientID %>").checked ? "none" : "";
+
+        }
+
+        function showHideGenParents() {
+
+            let genDiv = document.getElementById("genericParentsDiv");
+
+            if (genDiv.style.display === "none") {
+                genDiv.style.display = "";
+
+            } else {
+                genDiv.style.display = "none";
+            }
         }
 
     </script>
@@ -447,19 +477,7 @@
                                                     </div>
                                                 </div>
 
-                                                <script>
-                                                    function showHideGenParents() {
-                                                        let genDiv = document.getElementById("genericParentsDiv");
-
-                                                        if (genDiv.style.display === "none") {
-                                                            genDiv.style.display = "";
-
-                                                        } else {
-                                                            genDiv.style.display = "none";
-                                                        }
-                                                    }
-                                                </script>
-
+     
                                                 <!-- //Brand || Prescription || Generic-Product-->
 
 
