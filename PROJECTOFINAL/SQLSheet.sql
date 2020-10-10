@@ -1320,12 +1320,13 @@ BEGIN TRAN
 	    Produto.nome as 'ProdName', 
 	    Produto.preco as 'Unit Price', 
 	    count(Carrinho.Prod_ref) as 'Qty', 
-	    sum(Produto.preco) as 'itemTotalPrice' 
+	    sum(Produto.preco) as 'itemTotalPrice',
+		Produto.precisaReceita
 
 		from Produto inner join carrinho on Produto.Codreferencia = Carrinho.Prod_ref
 					 inner join Categoria on Produto.ID_Categoria = Categoria.ID
 		where Carrinho.ID_Cliente = IIF(@id_cliente = 0, null, @id_cliente) OR Carrinho.Cookie = @cookies 
-		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, produto.resumo, Categoria.descricao
+		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, produto.resumo, Categoria.descricao, Produto.precisaReceita
 
 COMMIT
 END TRY
@@ -1921,7 +1922,9 @@ GO
 	BEGIN TRY
 	BEGIN TRAN 
 			
-		delete from carrinho where Carrinho.ID_Cliente = @clientid OR Carrinho.Cookie = @cookie
+		delete carrinho 
+		from carrinho inner join Produto on Carrinho.Prod_ref = Produto.Codreferencia
+		where (Carrinho.ID_Cliente = @clientid OR Carrinho.Cookie = @cookie) AND Produto.precisaReceita = 0
 
 	COMMIT
 	END TRY

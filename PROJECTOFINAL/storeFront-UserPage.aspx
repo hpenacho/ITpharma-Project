@@ -58,12 +58,12 @@
 
             <div class="col-lg-9 col-sm-12 text-center mt-5">
                 <div class="card shadow shadow-sm py-lg-3">
-                    <div class="card-body">
+                    <div class="card-body mt-4">
                         <div class=" card-deck">
                             <div class="card pb-2">
                                 <div class="card-body">
                                     <h5 class="card-title">Schedule BloodWork</h5>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bloodwork-modal">
+                                    <button type="button" class="btn btn-dark mx-auto btn-block" data-toggle="modal" data-target="#bloodwork-modal">
                                         Check
                                     </button>
                                 </div>
@@ -72,7 +72,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Fill Prescription</h5>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#prescriptionModal">
+                                    <button type="button" class="btn btn-dark mx-auto btn-block" data-toggle="modal" data-target="#prescriptionModal">
                                         <i class="fas fa-pills"></i>Prescriptions
                                     </button>
                                 </div>
@@ -86,11 +86,11 @@
 
 
            <!-- SETTINGS -->
-           <div class="row">
+           <div class="row mt-4 mb-5">
                 <!-- Change password -->
-                <div class="col-lg-4 mb-4 my-4">
+                <div class="col-lg-4 mt-4">
                     <div class="card shadow pb-4 bg-white">
-                        <div class="card-body">
+                        <div class="card-body mb-2">
 
                             <h3 class="text-dark text-left">Alter Password</h3>
 
@@ -230,11 +230,11 @@
                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn btn-light">
                                             <input type="radio" name="radioGender" id="gender_male" autocomplete="off" runat="server">
-                                            <h6><i class="fas fa-mars text-primary"></i> Male </h6>
+                                            <i class="fas fa-mars text-primary"></i> Male
                                         </label>
                                         <label class="btn btn-light">
                                             <input type="radio" name="radioGender" id="gender_female" autocomplete="off" runat="server">
-                                            <h6><i class="fas fa-venus text-danger"></i> Female </h6>
+                                            <i class="fas fa-venus text-danger"></i> Female
                                         </label>
                                     </div>
                                 </div>

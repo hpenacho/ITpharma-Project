@@ -24,7 +24,7 @@
                 <!-- Shopping cart table -->
                 <div class="table-responsive mt-4">
                     <table class="table">
-                        <thead class="thead-dark text-white text-center">
+                        <thead class="text-dark text-center" style="background-color: #82ce34 !important">
                             <tr>
                                 <th scope="col" class="rounded-left text-center">
                                     <div class="px-2 text-capitalize">Product</div>
@@ -72,15 +72,16 @@
                                         <td class="align-middle text-center">
 
                                             <div class="justify-content-between align-middle text-center">
-                                                <asp:LinkButton runat="server" ID="link_decreaseQty" CommandName="link_decreaseQty" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn btn-warning btn-sm mr-1 rounded"><i class="fas fa-minus"></i></asp:LinkButton>
+                                                <asp:LinkButton runat="server" ID="link_decreaseQty" Visible='<%# !(bool)Eval("precisaReceita") %>' CommandName="link_decreaseQty" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn btn-warning btn-sm mr-1 rounded"><i class="fas fa-minus"></i></asp:LinkButton>
                                                 <label id="itemQty" class="font-weight-bold border-0 text-center" style="width: 1.5em;"><%# Eval("Qty") %></label>
-                                                <asp:LinkButton runat="server" ID="link_increaseQty" CommandName="link_increaseQty" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn btn-warning btn-sm mr-1 rounded"><i class="fas fa-plus"></i></asp:LinkButton>
+                                                <asp:LinkButton runat="server" ID="link_increaseQty" Visible='<%# !(bool)Eval("precisaReceita") %>' CommandName="link_increaseQty" CommandArgument='<%# Eval("Prod_Ref") %>' class="btn btn-warning btn-sm mr-1 rounded"><i class="fas fa-plus"></i></asp:LinkButton>
                                             </div>
 
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <asp:LinkButton ID="linkDeleteCartItem" class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="linkDeleteCartItem" Visible='<%# !(bool)Eval("precisaReceita") %>' class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
+                                           <asp:Panel runat="server" Visible='<%# (bool)Eval("precisaReceita") %>'><i class="fas fa-mortar-pestle"></i></asp:Panel>
                                         </td>
 
                                     </tr>
@@ -97,15 +98,16 @@
                     <div class="col-lg-7">
 
                         <div class="col-lg-12 mb-2">
-                            <a href="storeFront-Checkout.aspx" class="btn btn-warning w-75 rounded mb-1">Checkout</a>
-                            <asp:LinkButton ID="link_clearCart" CssClass="btn btn-dark w-75 rounded mt-1" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart</asp:LinkButton>
+                            <a href="storeFront-Checkout.aspx" class="btn w-75 rounded mb-1 text-dark font-weight-bold" style="background-color: #82ce34 !important">Checkout</a>
+                            <asp:LinkButton ID="link_clearCart" CssClass="btn w-75 rounded mt-1 border-0 text-dark font-weight-bold" style="background-color: #82ce34 !important" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart</asp:LinkButton>
+                            <asp:LinkButton ID="link_clearPrescriptionItems" CssClass="btn btn-danger w-75 rounded mt-2 text-dark font-weight-bold" runat="server" OnClick="link_clearPrescriptionItems_Click">Remove&nbspall&nbspPrescription&nbspItems</asp:LinkButton>
                         </div>
 
                     </div>
 
                     <div class="col-lg-5 text-right">
 
-                        <h5 class="bg-dark rounded py-1 text-white text-center">Summary</h5>
+                        <h5 class="rounded py-1 text-dark text-center" style="background-color: #82ce34 !important">Summary</h5>
 
                         <ul class="list-unstyled mb-4">
 

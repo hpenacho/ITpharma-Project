@@ -215,7 +215,7 @@
                 </div>
 
 
-                <a class="rounded btn btn-block bg-success my-4 h4 text-white font-weight-bolder" data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory"> Category </a>
+                <a class="rounded btn btn-block bg-success my-4 h4 text-white font-weight-bolder d-flex justify-content-around" data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory">Category</a>
                 <div class="collapse show" id="collapseCategory">
 
                 <div class="list-group list-group-flush">

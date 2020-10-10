@@ -42,6 +42,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_clearCart;
 
         /// <summary>
+        /// link_clearPrescriptionItems control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_clearPrescriptionItems;
+
+        /// <summary>
         /// lbl_tax control.
         /// </summary>
         /// <remarks>
