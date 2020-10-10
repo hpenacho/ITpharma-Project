@@ -85,12 +85,12 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Receiver's Name</label>
-            <input type="text" class="form-control" id="firstName" runat="server" placeholder="First Name" value="" required>
+            <input type="text" class="form-control" id="firstName" runat="server" placeholder="First Name" pattern="^[a-zA-Z_\-]+$" title="Only letters without spaces allowed." value="" required>
 
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" runat="server" placeholder="Last Name" value="" required>
+            <input type="text" class="form-control" id="lastName" runat="server" pattern="^[a-zA-Z_\-]+$" title="Only letters without spaces allowed." placeholder="Last Name" value="" required>
 
           </div>
         </div>
@@ -134,12 +134,12 @@
                             <div class="form-group row mt-2 mb-2">
             <div class="col-md-9">
           <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" name="address" runat="server" placeholder="Address">
+            <input type="text" class="form-control" id="address" name="address" runat="server" placeholder="Address" required>
                 </div>
             
                 <div class="col-md-3 mb-2">
             <label for="zip">Zip-Code</label>
-            <input type="text" name="zip" class="form-control text-center" id="zip" runat="server" placeholder="Zip-Code">        
+            <input type="text" name="zip" class="form-control text-center" id="zip" runat="server" placeholder="Zip-Code" pattern="^[0-9]*$" title="Only numbers allowed." required>        
             </div>
         </div>
                     
@@ -201,14 +201,14 @@
 
           </div>
           <div class="col-md-6 mb-3">
-            <input type="text" class="form-control" id="ccNumber" runat="server" placeholder="Card Number" required>
+            <input type="text" class="form-control" id="ccNumber" runat="server" placeholder="Card Number" pattern="^[0-9]*$" title="Only numbers allowed." required>
 
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="ccExpiration">Expiration Date</label>
-              <input type="date" class="form-control form-control-user bg-light" runat="server" id="ccExpiration" value="2000-01-01">
+              <input type="date" class="form-control form-control-user bg-light" runat="server" id="ccExpiration" value="2021-01-01">
 
           </div>
           <div class="col-md-3 mb-3">

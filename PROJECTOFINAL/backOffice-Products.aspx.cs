@@ -210,6 +210,24 @@ namespace PROJECTOFINAL
 
             lbl_updateErrors.InnerText = "";
 
+            if (tb_updateName.Value.Trim().Length < 1 || tb_updateReference.Value.Trim().Length < 1 || tb_updateSummary.Value.Trim().Length < 1 || tb_updatePrice.Value.Trim().Length < 1)
+            {
+                lbl_updateErrors.InnerText = "One or more fields are missing, please fill in all available fields.";
+                return;
+            }
+
+            try
+            {
+                if (Convert.ToDecimal(tb_updatePrice.Value) < 0)
+                {
+                    lbl_updateErrors.InnerText = "Only positive numbers allowed.";
+                    return;
+                }
+            }
+            catch (Exception)
+            { lbl_updateErrors.InnerText = "Only positive numbers allowed."; return; }
+
+
             SqlCommand myCommand = Tools.SqlProcedure("usp_updateBackofficeProducts");
 
             myCommand.Parameters.AddWithValue("@Codreferencia", tb_updateReference.Value);
