@@ -1555,7 +1555,7 @@ delete from ExamesAnalises
 -- [ USP ] ALTER EXAMS DATE
 
 GO
-create or alter proc usp_examStatusChange(@clientID int) AS 
+create or alter proc usp_StatusChanges(@clientID int) AS 
 BEGIN TRY
 BEGIN TRAN
 
@@ -1565,15 +1565,22 @@ BEGIN TRAN
 							  ELSE 7
 							  END
 		WHERE ExamesAnalises.ID_Cliente = @clientID
-	
+
+		IF EXISTS(select '*' from EncomendaHistorico where EncomendaHistorico.ID_Cliente = @clientID AND EncomendaHistorico.ID_Estado = 5)
+		BEGIN
+
+		update EncomendaHistorico
+		set ID_Estado = 10
+		where EncomendaHistorico.ID_Cliente = @clientID AND ID_Estado = 5 AND DATEDIFF(day, UltimaActualizacao , getdate()) >= 4 AND MoradaEntrega like 'ATM -%'
+
+		END
+
 COMMIT
 END TRY
 BEGIN CATCH
 	ROLLBACK;
 END CATCH
 
-select * from ExamesAnalises
-delete from ExamesAnalises
 
 -- QUERY STOCK AVAILABILITY
 

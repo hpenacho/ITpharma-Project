@@ -35,7 +35,7 @@ namespace PROJECTOFINAL
 
         private void updateStatusOrder()
         {
-            SqlCommand myCommand = Tools.SqlProcedure("usp_examStatusChange");
+            SqlCommand myCommand = Tools.SqlProcedure("usp_StatusChanges");
 
             myCommand.Parameters.AddWithValue("@clientID", Client.userID);
 
