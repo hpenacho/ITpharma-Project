@@ -1329,6 +1329,7 @@ BEGIN TRAN
 					 inner join Categoria on Produto.ID_Categoria = Categoria.ID
 		where Carrinho.ID_Cliente = IIF(@id_cliente = 0, null, @id_cliente) OR Carrinho.Cookie = @cookies 
 		group by Produto.Codreferencia, Produto.imagem, Produto.nome, Produto.preco, produto.resumo, Categoria.descricao, Produto.precisaReceita
+		order by Produto.precisaReceita
 
 COMMIT
 END TRY

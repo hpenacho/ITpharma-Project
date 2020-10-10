@@ -53,8 +53,8 @@ GO
 go
 Create or alter proc usp_removeAllPrescriptionItemsfromCart(
                                        @healthNumber int,
-                                       @id_prescription int
-
+                                       @clientID int
+                                       
 )
 
 as
@@ -62,7 +62,10 @@ begin try
 begin tran
        
      if exists (select '*' from Receita where Receita.InCart = 1 and NrSaude = @healthNumber)
+     begin
      update Receita set InCart = 0 where NrSaude = @healthNumber
+     delete Carrinho from Carrinho inner join Produto on Produto.Codreferencia = Carrinho.Prod_ref where (Carrinho.ID_Cliente = @clientID) and (Produto.precisaReceita = 1)
+     end
 
 commit
 end try

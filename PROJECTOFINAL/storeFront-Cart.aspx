@@ -80,8 +80,8 @@
                                         </td>
 
                                         <td class="align-middle text-center">
-                                            <asp:LinkButton ID="linkDeleteCartItem" Visible='<%# !(bool)Eval("precisaReceita") %>' class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent; font-size: 20px;" runat="server"><i class="fas fa-times-circle"></i></asp:LinkButton>
-                                           <asp:Panel runat="server" Visible='<%# (bool)Eval("precisaReceita") %>'><i class="fas fa-mortar-pestle"></i></asp:Panel>
+                                            <asp:LinkButton ID="linkDeleteCartItem" Visible='<%# !(bool)Eval("precisaReceita") %>' class="text-danger" CommandArgument='<%# Eval("Prod_Ref") %>' CommandName="linkDeleteCartItem" Style="cursor: pointer; background-color: transparent; border-color: transparent;" runat="server"><i class="fas fa-times-circle" style="font-size: 37px;"></i></asp:LinkButton>
+                                           <asp:Panel runat="server" Visible='<%# (bool)Eval("precisaReceita") %>'> <div style="margin-left: 30px;"><i class="far fa-question-circle text-info" style="font-size:15px;" data-toggle="tooltip" data-placement="top" title="This is a prescription Item."></i> </div><i class="fas fa-prescription-bottle-alt text-success mb-4" style="font-size: 37px;"></i></asp:Panel>
                                         </td>
 
                                     </tr>
@@ -97,12 +97,14 @@
 
                     <div class="col-lg-7">
 
-                        <div class="col-lg-12 mb-2">
-                            <a href="storeFront-Checkout.aspx" class="btn w-75 rounded mb-1 text-dark font-weight-bold" style="background-color: #82ce34 !important">Checkout</a>
-                            <asp:LinkButton ID="link_clearCart" CssClass="btn w-75 rounded mt-1 border-0 text-dark font-weight-bold" style="background-color: #82ce34 !important" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart</asp:LinkButton>
-                            <asp:LinkButton ID="link_clearPrescriptionItems" CssClass="btn btn-danger w-75 rounded mt-2 text-dark font-weight-bold" runat="server" OnClick="link_clearPrescriptionItems_Click">Remove&nbspall&nbspPrescription&nbspItems</asp:LinkButton>
-                        </div>
-
+                        <div class="row justify-content-center text-center mb-2">
+                            
+                                <a href="storeFront-Checkout.aspx" class="btn w-75 rounded mb-1 text-dark font-weight-bold" style="background-color: #82ce34 !important">Checkout <i class="fas fa-money-check-alt"></i></a>                                                           
+                                <asp:LinkButton ID="link_clearCart" CssClass="btn w-75 rounded mt-1 border-0 text-light font-weight-bold btn-secondary" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart <i class="fas fa-cart-arrow-down"></i></asp:LinkButton>                                                             
+                                <asp:LinkButton ID="link_clearPrescriptionItems" CssClass="btn btn-danger w-75 rounded mt-2 text-light font-weight-bold" Visible="False" runat="server" OnClick="link_clearPrescriptionItems_Click"> Clear Prescription Items <i class="fas fa-prescription-bottle-alt"></i></asp:LinkButton>
+                               
+                         
+                            </div>
                     </div>
 
                     <div class="col-lg-5 text-right">
