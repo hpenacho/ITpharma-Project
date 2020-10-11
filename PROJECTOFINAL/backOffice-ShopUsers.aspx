@@ -277,7 +277,7 @@
 
 
     <!-- SQLSOURCES AND REPEATER SOURCES -->
-    <asp:SqlDataSource ID="SqlrptShopUsers" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [nome], [email], [firstActivation], [activo] FROM [Cliente]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlrptShopUsers" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="SELECT [ID], [nome], [email], [firstActivation], [activo] FROM [Cliente] where cliente.nome not like 'ATM -%'"></asp:SqlDataSource>
 
 
      </div>

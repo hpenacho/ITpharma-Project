@@ -222,7 +222,7 @@
                                             <BorderSkin BackColor="Transparent" BackImageWrapMode="TileFlipX" />
                                         </asp:Chart>
 
-                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , case when cliente.sexo = 'M' then 'Male' when cliente.sexo = 'F' then 'Female' else 'Undisclosed' end as 'Gender' from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente group by cliente.sexo"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(EncomendaHistorico.ENC_REF) as 'Qty Orders' , case when cliente.sexo = 'M' then 'Male' when cliente.sexo = 'F' then 'Female' else 'Undisclosed' end as 'Gender' from Cliente inner join EncomendaHistorico on Cliente.ID = EncomendaHistorico.ID_Cliente where cliente.nome not like 'ATM -%' group by cliente.sexo"></asp:SqlDataSource>
                                         <asp:Chart ID="Chart2" runat="server" DataSourceID="SqlDataSource2">
                                             <Series>
                                                 <asp:Series BackGradientStyle="TopBottom" BorderDashStyle="NotSet" Color="Silver" Name="Series1" Palette="BrightPastel" XValueMember="Order Status" YValueMembers="Qty Orders">
@@ -244,7 +244,8 @@
                                         </asp:Chart>
                                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="select count(encomendaHistorico.ID_Estado) as 'Qty Orders' ,estado.Descricao as 'Order Status'
                                         from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = estado.ID
-                                        group by estado.Descricao"></asp:SqlDataSource>
+                                        group by estado.Descricao,ID_Estado
+                                        order by ID_Estado"></asp:SqlDataSource>
                                             </div>
                                     </div>
                                 </div>
