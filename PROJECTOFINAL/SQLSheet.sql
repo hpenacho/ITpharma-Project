@@ -1309,29 +1309,29 @@ END CATCH
 -- [PROC] return user's personal orders to the user page, melhorar a lógica no futuro para não usar tanto if else
 
 GO
-create or alter proc usp_returnUserPersonalOrders(@ID int, @estado int) AS
-IF(@estado = 4)
+create or alter proc usp_returnUserPersonalOrders(@ID int, @estado varchar(200)) AS
+IF(@estado = 'Past')
 BEGIN
 select ENC_REF, DataCompra, MoradaEntrega, Sum(Qtd) as 'Qty', sum(Total) as 'Total', Descricao
 from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = Estado.ID
 						inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
-where EncomendaHistorico.ID_Cliente = @ID AND EncomendaHistorico.ID_Estado = 4 OR EncomendaHistorico.ID_Estado = 10
+where EncomendaHistorico.ID_Cliente = @ID AND ((EncomendaHistorico.ID_Estado = 4) OR (EncomendaHistorico.ID_Estado = 10)  OR (EncomendaHistorico.ID_Estado = 6))
 group by ENC_REF, DataCompra, MoradaEntrega, Descricao
 order by EncomendaHistorico.DataCompra DESC
 END
-ELSE
+ELSE if (@estado = 'Active')
 BEGIN
 select ENC_REF, DataCompra, MoradaEntrega, Sum(Qtd) as 'Qty', sum(Total) as 'Total', Descricao
 from EncomendaHistorico inner join estado on EncomendaHistorico.ID_Estado = Estado.ID
 						inner join Compra on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
-where EncomendaHistorico.ID_Cliente = @ID AND EncomendaHistorico.ID_Estado != 4 OR EncomendaHistorico.ID_Estado != 10
+where EncomendaHistorico.ID_Cliente = @ID AND (EncomendaHistorico.ID_Estado != 4) AND (EncomendaHistorico.ID_Estado != 10) AND (EncomendaHistorico.ID_Estado != 6)
 group by ENC_REF, DataCompra, MoradaEntrega, Descricao
 order by EncomendaHistorico.DataCompra DESC
 END
 
 
 
-
+select * from estado
 
 --[PROC] RETURNS CART ITEMS FROM A SPECIFIED USER -- testar a precedência do OR
 -- Comment da alteração: num OR que por é natureza boolean a 1º instrução é avaliada e se for true não corre a segunda fazendo o que se chama short-circuit 

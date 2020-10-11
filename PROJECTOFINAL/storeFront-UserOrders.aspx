@@ -6,21 +6,25 @@
     <div class="container-fluid" style="margin-top: 4em">
         <div class="card shadow shadow-sm mt-3 mb-3" style="border-radius: 15px;">
             <div class="card-header text-center" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-               <div class="row">
-                <div class="col-md-3">
+               <div class="row justify-content-center">
+                <div class="col-md-2 align-self-center">
                     <b>Order Reference #</b><asp:Label ID="lbl_EncRef" runat="server" Text="[missing]"></asp:Label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 align-self-center">
                  <b>Date: </b> <asp:Label ID="lbl_orderDate" runat="server" Text="[missing]"></asp:Label>
                 </div>
-                   <div class="col-md-3">
+                   <div class="col-md-2 align-self-center">
                      <strong>Status: </strong><asp:Label ID="lbl_orderStatus" runat="server" Text="[missing]"></asp:Label>
                    </div>
-                   <div class="col-md-3">
-                       <asp:LinkButton ID="lbtn_pdf" CssClass="btn btn-danger" runat="server" OnClick="lbtn_pdf_Click"><i class="fas fa-file-pdf"></i> <label id="pdfText" runat="server" style="cursor:pointer;">Order PDF</label> </asp:LinkButton>                                           
-                       <asp:LinkButton ID="lbtn_qr" CssClass="btn btn-primary" runat="server" style="cursor:pointer;" Visible="false" OnClick="lbtn_qr_Click"><i class="fas fa-qrcode"></i> View QR Code</> </asp:LinkButton> 
+                   <div class="col-sm-12 col-md-12 col-lg-4 align-self-center mt-2">
+                                                  
+                           <asp:LinkButton ID="lbtn_pdf" CssClass="btn-lg btn-danger text-decoration-none" runat="server" OnClick="lbtn_pdf_Click"><i class="fas fa-file-pdf"></i><label id="pdfText" runat="server" style="cursor: pointer;"> Order&nbspPDF</label>
+                           </asp:LinkButton>
+                                                
+                           <asp:LinkButton ID="lbtn_qr" CssClass="btn-lg btn-primary text-decoration-none" runat="server" Style="cursor: pointer;" Visible="false" OnClick="lbtn_qr_Click"><i class="fas fa-qrcode"></i><label style="cursor: pointer;"> QR&nbspCode</label></></asp:LinkButton>
+                                                  
                    </div>
-                   </div>
+               </div>
             </div>
             <div class="card-body">
                 <div class="row mb-4">
@@ -102,20 +106,20 @@
                                     <td class="left">
                                         <strong>Subtotal</strong>
                                     </td>
-                                    <td class="right"><asp:Label ID="lbl_subTotal" runat="server" Text="[missing]"></asp:Label></td>
+                                    <td class="right"><asp:Label ID="lbl_subTotal" runat="server" Text="[missing]"></asp:Label> € </td>
                                 </tr>                              
                                 <tr>
                                     <td class="left">
                                         <strong>IVA (6%)</strong>
                                     </td>
-                                    <td class="right"> <asp:Label ID="lbl_tax" runat="server" Text="[missing]"></asp:Label> </td>
+                                    <td class="right"> <asp:Label ID="lbl_tax" runat="server" Text="[missing]"></asp:Label> € </td>
                                 </tr>
                                 <tr>
                                     <td class="left">
-                                        <strong>Total(€)</strong>
+                                        <strong>Total(€)</strong>  
                                     </td>
                                     <td class="right">
-                                        <strong> <asp:Label ID="lbl_Total" runat="server" Text="[missing]"></asp:Label> </strong>
+                                        <strong> <asp:Label ID="lbl_Total" runat="server" Text="[missing]"></asp:Label> € </strong>
                                     </td>
                                 </tr>
                             </tbody>

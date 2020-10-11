@@ -204,6 +204,15 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.WebControls.LinkButton link_pastOrders;
 
         /// <summary>
+        /// lbl_orderTypes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_orderTypes;
+
+        /// <summary>
         /// rpt_orders control.
         /// </summary>
         /// <remarks>
