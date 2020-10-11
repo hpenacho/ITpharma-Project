@@ -10,7 +10,7 @@
 
         $(document).ready(function () {
             $('#dataTable').DataTable({
-                "order": [[0, "asc"]]
+                "order": []
             });
         });
 
@@ -292,7 +292,7 @@
                                                 <ItemTemplate>
 
                                             <tr>
-                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM dd, yyyy") %></td>
+                                                <td style="vertical-align:middle"><%# DateTime.Parse(Eval("DataCompra").ToString()).ToString("MMMM , dd  yyyy") %></td>
                                                 <td style="vertical-align:middle"><%# Eval("MoradaEntrega") %></td>
                                                 <td style="vertical-align:middle"><%# Eval("Qty") %></td>
                                                 <td style="vertical-align:middle"><%# Eval("Total") %> €</td>
