@@ -361,7 +361,7 @@ begin tran
 				if @Pickup is not null
 					begin
 						IF exists(SELECT * from Cliente where Cliente.id = @IDcliente and Cliente.nome like 'ATM - %') --this is an ATM tunnel ID
-							update EncomendaHistorico set EncomendaHistorico.ID_Estado = 6 where EncomendaHistorico.ENC_REF = @thisEnc
+							update EncomendaHistorico set EncomendaHistorico.ID_Estado = 11 where EncomendaHistorico.ENC_REF = @thisEnc
 
 						else --else its a regular client pickup order
 							update EncomendaHistorico set EncomendaHistorico.ID_Estado = 5 where EncomendaHistorico.ENC_REF = @thisEnc

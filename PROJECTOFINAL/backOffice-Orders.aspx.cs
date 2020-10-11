@@ -66,25 +66,33 @@ namespace PROJECTOFINAL
 
                 ((DropDownList)e.Item.FindControl("ddl_orderStatus")).SelectedValue = dr["id_estado"].ToString();
 
-                if (dr["ID_Pickup"] != DBNull.Value)
+                if (dr["ID_Pickup"] != DBNull.Value && !dr["clientName"].ToString().Contains("ATM -")) //Online Pickup Order
                 {
                     for (int i = 1; i <= 4; i++)
                     {
                     ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue(i.ToString()));
                     }
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("11"));
                     ((Label)e.Item.FindControl("lbl_orderType")).Text = "Pickup Retrieval";
                 }
 
-                else if (dr["ID_Pickup"] == DBNull.Value)
+                else if (dr["ID_Pickup"] == DBNull.Value) //Online Home Delivery Order
                 {
                     ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("5"));
                     ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("6"));
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("10"));
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("11"));
                     ((Label)e.Item.FindControl("lbl_orderType")).Text = "Home Delivery";
                 }
 
-                if (dr["clientName"].ToString().Contains("ATM -"))
+                else if (dr["clientName"].ToString().Contains("ATM -")) //Local Pickup Order
                 {
+                    for (int i = 1; i <= 6; i++)
+                    {
+                     ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue(i.ToString()));
+                    }
                     ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("0"));
+                    ((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.Remove(((DropDownList)e.Item.FindControl("ddl_orderStatus")).Items.FindByValue("10"));
                     ((Label)e.Item.FindControl("lbl_orderType")).Text = "Local Purchase";
                 }
 
