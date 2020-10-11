@@ -139,7 +139,7 @@
             
                 <div class="col-md-3 mb-2">
             <label for="zip">Zip-Code</label>
-            <input type="text" name="zip" class="form-control text-center" id="zip" runat="server" placeholder="Zip-Code" pattern="^[0-9]*$" title="Only numbers allowed." required>        
+            <input type="text" name="zip" class="form-control text-center" id="zip" runat="server" placeholder="Zip-Code" pattern="^[0-9\-]*$" title="Only numbers allowed." required>        
             </div>
         </div>
                     

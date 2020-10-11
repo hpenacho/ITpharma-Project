@@ -194,14 +194,26 @@ namespace PROJECTOFINAL
 
         protected void link_activeOrders_Click(object sender, EventArgs e)
         {
-            sqlOrderSource.SelectParameters["estado"].DefaultValue = "0";
+            sqlOrderSource.SelectParameters["estado"].DefaultValue = "Active";
+           
             rpt_orders.DataBind();
+
+            link_activeOrders.CssClass = "btn btn-success";
+            link_pastOrders.CssClass = "btn btn-light";
+            lbl_orderTypes.Text = "Active Orders";
+
         }
 
         protected void link_pastOrders_Click(object sender, EventArgs e)
         {
-            sqlOrderSource.SelectParameters["estado"].DefaultValue = "4";
+            sqlOrderSource.SelectParameters["estado"].DefaultValue = "Past";
+            
             rpt_orders.DataBind();
+
+            link_activeOrders.CssClass = "btn btn-light";
+            link_pastOrders.CssClass = "btn btn-success";
+            lbl_orderTypes.Text = "Past Orders";
+
         }
 
         protected void link_validatePrescription_Click(object sender, EventArgs e)

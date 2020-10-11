@@ -115,12 +115,14 @@ end try
         rollback;
     end catch
 
-
------------------------------
+    select * from EncomendaHistorico
+    select * from cliente
+----------------------------- 
 --[PROC] REGULAR ORDER AUTHENTICATION ON PICKUP
 go
 Create or alter proc usp_regularOrderAuth_ATM(
                                              @order_ref int,
+                                             @pickup_id int,
                                              @email varchar(100),
                                              @pw varchar(100),
                                              @ERROR_MESSAGE varchar(200) OUTPUT
@@ -134,10 +136,26 @@ begin tran
     if not exists(select '*' from cliente where cliente.email = @email and cliente.password = @pw)     
        THROW 60001, 'Wrong Email or Password' ,10;   
        
-    if not exists (select '*' from cliente inner join EncomendaHistorico on cliente.ID = EncomendaHistorico.ID_Cliente 
-                   where cliente.email = @email and cliente.password = @pw and EncomendaHistorico.ENC_REF = @order_ref and EncomendaHistorico.ID_Estado = 5)
-       THROW 60002, 'No orders pending retrieval were found for this ATM.', 10;
+    if exists (select '*' from cliente inner join EncomendaHistorico on cliente.ID = EncomendaHistorico.ID_Cliente 
+                   where cliente.email = @email and EncomendaHistorico.ENC_REF = @order_ref and EncomendaHistorico.ID_Estado = 10)
+        THROW 60003, 'This Order has expired.', 10;
 
+    if not exists (select '*' from cliente inner join EncomendaHistorico on cliente.ID = EncomendaHistorico.ID_Cliente 
+                   where cliente.email = @email and cliente.password = @pw and EncomendaHistorico.ENC_REF = @order_ref and EncomendaHistorico.ID_Estado = 5 and EncomendaHistorico.ID_Pickup = @pickup_id)
+       THROW 60002, 'No orders pending retrieval were found for this ATM.', 10;
+    
+  
+    if exists (select '*' from EncomendaHistorico inner join Cliente on Cliente.ID = EncomendaHistorico.ID_Cliente
+               where cliente.email = @email
+               AND (EncomendaHistorico.ID_Estado = 5)
+               AND (datediff(day,EncomendaHistorico.UltimaActualizacao,GETDATE())) >= 4 
+               AND (EncomendaHistorico.ENC_REF = @order_ref))
+       
+       begin 
+       update EncomendaHistorico set ID_Estado = 10, UltimaActualizacao = GETDATE() where EncomendaHistorico.ID_Cliente = (Select cliente.id from cliente where email = @email) and EncomendaHistorico.ENC_REF = @order_ref	
+       set @ERROR_MESSAGE = 'This Order has expired.';
+       end
+        
     else
         begin
         update EncomendaHistorico set ID_Estado = 6, UltimaActualizacao = GETDATE() where EncomendaHistorico.ID_Cliente = (Select cliente.id from cliente where email = @email) and EncomendaHistorico.ENC_REF = @order_ref	

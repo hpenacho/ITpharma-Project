@@ -23,6 +23,7 @@ namespace PROJECTOFINAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_regularOrderAuth_ATM");
 
             myCommand.Parameters.AddWithValue("@order_ref", tb_OrderNumber.Value);
+            myCommand.Parameters.AddWithValue("@pickup_id", ATM.ID);
             myCommand.Parameters.AddWithValue("@email", tb_clientEmail.Value);
             myCommand.Parameters.AddWithValue("@pw", Tools.EncryptString(tb_password.Value));
 

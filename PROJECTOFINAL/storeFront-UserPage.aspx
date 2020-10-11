@@ -263,12 +263,12 @@
                     <div class="col-lg-12">
 
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-dark" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
-                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-dark" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
+                            <asp:LinkButton ID="link_activeOrders" CssClass="btn btn-success" OnClick="link_activeOrders_Click" runat="server">Active</asp:LinkButton>
+                            <asp:LinkButton ID="link_pastOrders" CssClass="btn btn-light" OnClick="link_pastOrders_Click" runat="server">Past</asp:LinkButton>
                         </div>
 
 
-                        <h3 class="text-center my-2 bg-dark py-1 text-white col-12">Encomendas</h3>
+                        <h3 class="text-center my-2 bg-dark py-1 text-white col-12"><asp:Label ID="lbl_orderTypes" runat="server" Text="Active Orders"></asp:Label></h3>
 
                       
                         <!-- ORDER ELEMENT select DataCompra, MoradaEntrega, Sum(Qtd), sum(Total), Descricao, PDF  -->
@@ -507,7 +507,7 @@
     <asp:SqlDataSource ID="sqlOrderSource" runat="server" ConnectionString="<%$ ConnectionStrings:ITpharmaConnectionString %>" SelectCommand="usp_returnUserPersonalOrders" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter DefaultValue="" Name="ID" Type="Int32" />
-            <asp:Parameter DefaultValue="0" Name="estado" Type="Int32" />
+            <asp:Parameter DefaultValue="Active" Name="estado" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
 
