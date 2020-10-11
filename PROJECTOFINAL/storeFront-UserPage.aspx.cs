@@ -228,6 +228,7 @@ namespace PROJECTOFINAL
                     myCommand.ExecuteNonQuery();
 
                     lbl_message.InnerText = "Prescription items were added to your cart! Proceed to checkout to finalize your purchase.";
+                    
                 }
                 catch (SqlException m)
                 {
@@ -237,6 +238,7 @@ namespace PROJECTOFINAL
                 finally
                 {
                     Tools.myConn.Close();
+                    (this.Master as storeFrontMasterPage).updateHoverCart();
                 }
 
             }

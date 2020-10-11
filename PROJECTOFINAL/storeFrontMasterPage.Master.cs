@@ -186,6 +186,7 @@ namespace PROJECTOFINAL
 
         protected void rpt_hoverCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            total = 0;
 
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {

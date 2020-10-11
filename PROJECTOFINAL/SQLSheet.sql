@@ -1785,10 +1785,21 @@ BEGIN TRAN
         IF @Qty < 0
             THROW 60001, 'Inserted quantity below 0, update failed' , 10
 
-        IF @IDpickup > 0
+        IF @IDpickup > 0 -- isto é para pickups
+		BEGIN
             update StockPickup set StockPickup.Qtd = @Qty where StockPickup.Prod_ref = @reference AND StockPickup.ID_Stock_Pickup = @IDpickup
-        ELSE 
+			update EncomendaHistorico set EncomendaHistorico.ID_Estado = 5, 
+										  EncomendaHistorico.UltimaActualizacao = getdate() 
+			where EncomendaHistorico.ID_Estado = 0 AND EncomendaHistorico.ID_Pickup IS NOT NULL
+		END
+        ELSE IF @IDpickup < 1 
+		BEGIN
             update StockArmazem set StockArmazem.Qtd = @Qty where StockArmazem.Prod_Ref = @reference
+			update EncomendaHistorico set EncomendaHistorico.ID_Estado = 2,
+										  EncomendaHistorico.UltimaActualizacao = getdate()
+			where EncomendaHistorico.ID_Estado = 0 AND EncomendaHistorico.ID_Pickup IS NULL
+		END
+
 
 COMMIT
 END TRY
