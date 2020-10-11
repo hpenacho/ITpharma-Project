@@ -32,21 +32,19 @@
 
     <!-- Shop User TABLE -->
 
-    <div class="container-fluid">
-        <h1>Shop Users</h1>
-        <ol class="breadcrumb bg-dark text-white mb-4">
-                                
-            <a class="breadcrumb-item text-white" href="backOffice-Index.aspx">Dashboard</a>
-            <li class="breadcrumb-item active">Shop Users</li>
-       
+    <div class="container-fluid mt-0">
+        <div class="breadcrumb bg-light text-white mb-4 justify-content-around">
+                                       
             <!-- Insert Shop Users | opens a modal with all the fields necessary to insert a Shop User manually -->
-                <div>
-                    <button type="button" class="btn btn-warning mr-3" data-toggle="modal" data-target="#modal-insert-ShopUser">Add Shop User <i class="fas fa-plus"></i></button>    
-                </div>
+                <div class="row">                    
+                    <div class="align-self-center">
+                        <button type="button" class="btn-lg btn-warning mr-3" data-toggle="modal" data-target="#modal-insert-ShopUser">Add Shop User <i class="fas fa-plus"></i></button>    
+                    </div>
+               </div>
             
             
             <!-- /Insert Shop Users -->
-        </ol>
+        </div>
 
         <div class="card mb-4">
             <div class="card-header">
