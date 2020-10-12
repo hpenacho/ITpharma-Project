@@ -282,3 +282,22 @@ END CATCH
 	begin catch
 		rollback
 	end catch
+    -------------------
+
+    --[PROC] Quick patch proc for dealing with SAMIIIIIIIIIIIIIIIIIIIIR
+
+    GO
+	create or alter proc usp_updateATMordersPendingRestock
+    
+    AS
+    BEGIN TRY
+	BEGIN TRAN
+
+		IF exists (Select '*' from EncomendaHistorico where EncomendaHistorico.ID_Estado = 0 and EncomendaHistorico.ID_Pickup is not null)
+			update EncomendaHistorico set EncomendaHistorico.ID_Estado = 5, UltimaActualizacao = GetDATE() where ID_Estado = 0 and EncomendaHistorico.ID_Pickup is not null
+
+	commit
+	end try
+	begin catch
+		rollback
+	end catch

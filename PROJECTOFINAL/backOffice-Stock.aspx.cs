@@ -154,6 +154,21 @@ namespace PROJECTOFINAL
                 restockItems(prodRef, restockQty, warehouseID);
             }
 
+            SqlCommand myCommand = Tools.SqlProcedure("usp_updateATMordersPendingRestock");
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException x)
+            {
+                System.Diagnostics.Debug.WriteLine(x.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
             updateRpt();
         }
 

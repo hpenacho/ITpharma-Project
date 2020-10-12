@@ -1784,7 +1784,7 @@ BEGIN TRAN
 
         IF @Qty < 0
             THROW 60001, 'Inserted quantity below 0, update failed' , 10
-
+		
         IF @IDpickup > 0 -- isto é para pickups
 		BEGIN
             update StockPickup set StockPickup.Qtd = @Qty where StockPickup.Prod_ref = @reference AND StockPickup.ID_Stock_Pickup = @IDpickup
