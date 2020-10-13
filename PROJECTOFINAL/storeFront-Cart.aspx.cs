@@ -93,7 +93,9 @@ namespace PROJECTOFINAL
         private void updateCart()
         {
             rptModalCart.DataBind();
+            (this.Master as storeFrontMasterPage).updateSqlHoverCart();
             (this.Master as storeFrontMasterPage).updateHoverCart();
+           
         }
 
 
@@ -197,9 +199,11 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
                 rptModalCart.DataBind();
+                updateCart();
+                cleanCart();
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
-
-            cleanCart();
+          
 
         }
 
@@ -225,9 +229,11 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
                 rptModalCart.DataBind();
+                updateCart();
+                cleanCart();
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
-
-            cleanCart();
+           
 
         }
     }

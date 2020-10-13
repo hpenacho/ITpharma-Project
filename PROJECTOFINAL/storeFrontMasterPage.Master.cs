@@ -20,7 +20,7 @@ namespace PROJECTOFINAL
             generateCookie();
             initiateRegistry();
             switchIcons();
-            //updateHoverCart();
+            updateHoverCart();
         }
 
         public void socialLoginError()
@@ -198,6 +198,10 @@ namespace PROJECTOFINAL
             total = 0;
         }
 
+        public void updateSqlHoverCart()
+        {
+            sqlMiniCart.DataBind();
+        }
 
         protected void rpt_hoverCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {

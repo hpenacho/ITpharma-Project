@@ -504,6 +504,9 @@
     <Content Include="Resources\images\maleSign.png" />
     <Content Include="Resources\images\pharmabannerII.png" />
     <Content Include="Resources\images\PHARMALOGO.png" />
+    <Content Include="Resources\images\pharmaSlide1.jpg" />
+    <Content Include="Resources\images\pharmaslide2.jpg" />
+    <Content Include="Resources\images\pharmaslide3.jpg" />
     <Content Include="Resources\images\register-nurse.jpg" />
     <Content Include="Resources\stylesHoverBox.css" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
