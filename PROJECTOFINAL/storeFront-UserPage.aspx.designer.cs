@@ -39,7 +39,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_oldPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txt_oldPassword;
 
         /// <summary>
         /// txt_newPassword control.
@@ -48,7 +48,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_newPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txt_newPassword;
 
         /// <summary>
         /// txt_repeatPassword control.
@@ -57,7 +57,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_repeatPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txt_repeatPassword;
 
         /// <summary>
         /// lbl_errorPassword control.
@@ -75,7 +75,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btn_alterPassword;
+        protected global::System.Web.UI.WebControls.Button btn_alterPassword;
 
         /// <summary>
         /// txt_altername control.

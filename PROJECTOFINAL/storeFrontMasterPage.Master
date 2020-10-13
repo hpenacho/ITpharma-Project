@@ -138,21 +138,6 @@
               background-color: #508a1d !important;
           }
 
-      #minicart-trigger:hover + #minicart{
-          display: contents;
-          display:block;
-      }
-
-
-      @media only screen and (max-width: 600px) {
-          body {
-              background-color: lightblue;
-          }
-      }
-
-
-
-
   </style>
 
 
@@ -439,11 +424,12 @@
         <script type="text/javascript">
 
             $(document).ready(function () {
-                $("#minicart-trigger").hover(function () { $("#minicart").fadeIn(); });
-                $("#minicart").mouseleave(function () { $("#minicart").fadeOut(); });
 
+               $("#minicart-trigger").hover(function () { $("#minicart").fadeIn(); });
+               $("#minicart").mouseleave(function () { $("#minicart").fadeOut(); });
             });
 
+            /*
             var prm = Sys.WebForms.PageRequestManager.getInstance();
 
             prm.add_endRequest(function () {
@@ -452,12 +438,13 @@
                     $("#minicart").mouseleave(function () { $("#minicart").fadeOut("fast"); });
 
                 });
-            });
+            }); */
 
 
             // BOTÃO PARA O TOPO
 
             window.onscroll = function () { scrollFunction() };
+
             function scrollFunction() {
                 if (document.documentElement.scrollTop > 250 || document.body.scrollTop > 250) { document.getElementById("btn_backToTop").style.display = "block"; }
                 else { document.getElementById("btn_backToTop").style.display = "none"; }

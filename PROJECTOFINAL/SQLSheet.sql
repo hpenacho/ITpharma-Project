@@ -1188,10 +1188,10 @@ create or alter proc usp_clientAlterPassword(@ID int, @oldPassword varchar(100),
 BEGIN TRY
 BEGIN TRAN
 
-		IF NOT EXISTS(select '*' from Cliente where Cliente.password = @oldPassword)
+		IF NOT EXISTS(select '*' from Cliente where Cliente.password = @oldPassword AND Cliente.ID = @ID)
 			throw 60001, 'Inputed current password is incorrect.', 10;
 
-		IF EXISTS (select cliente.password from cliente where cliente.password = @newPassword)
+		IF EXISTS (select cliente.password from cliente where cliente.password = @newPassword AND Cliente.ID = @ID)
 			throw 60003, 'The new password is the same as the old one.', 10
 
 		update Cliente set cliente.password = @newPassword where cliente.ID = @ID

@@ -15,6 +15,7 @@ namespace PROJECTOFINAL
     {
         string orderNumber;
         string pickupID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -25,12 +26,12 @@ namespace PROJECTOFINAL
 
             SqlDataSource1.SelectParameters["ID_cliente"].DefaultValue = Client.userID.ToString();
 
-
             SqlCommand myCommand = Tools.SqlProcedure("usp_returnStoreFrontUserOrderDetails");
             myCommand.Parameters.AddWithValue("@ID_cliente", Client.userID);
             myCommand.Parameters.AddWithValue("@Enc_reference", Request.QueryString["order"]);
 
             SqlDataReader reader = null;
+
             try
             {
                 Tools.myConn.Open();
@@ -69,6 +70,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                imgSource.Src = "https://api.qrserver.com/v1/create-qr-code/?data=" + "Q" + orderNumber + "_" + Client.userID.ToString() + "-" + pickupID;
             } 
            
         }
@@ -92,6 +94,7 @@ namespace PROJECTOFINAL
             lbl_tax.Text = Math.Round(tax, 2).ToString();
             lbl_Total.Text = total.ToString();
 
+
         }
 
 
@@ -110,9 +113,6 @@ namespace PROJECTOFINAL
             }    
         }
 
-        protected void lbtn_qr_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("https://api.qrserver.com/v1/create-qr-code/?data=" + "Q" + orderNumber + "_" + Client.userID.ToString() + "-" + pickupID, false);            
-        }
+     
     }
 }

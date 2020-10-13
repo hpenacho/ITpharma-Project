@@ -21,7 +21,7 @@
                            <asp:LinkButton ID="lbtn_pdf" CssClass="btn-lg btn-danger text-decoration-none" runat="server" OnClick="lbtn_pdf_Click"><i class="fas fa-file-pdf"></i><label id="pdfText" runat="server" style="cursor: pointer;"> Order&nbspPDF</label>
                            </asp:LinkButton>
                                                 
-                           <asp:LinkButton ID="lbtn_qr" CssClass="btn-lg btn-primary text-decoration-none" runat="server" Style="cursor: pointer;" Visible="false" OnClick="lbtn_qr_Click"><i class="fas fa-qrcode"></i><label style="cursor: pointer;"> QR&nbspCode</label></></asp:LinkButton>
+                           <asp:LinkButton ID="lbtn_qr" CssClass="btn-lg btn-primary text-decoration-none" runat="server" Style="cursor: pointer;" Visible="false" data-toggle="modal" data-target="#qr-modal"><i class="fas fa-qrcode"></i><label style="cursor: pointer;"> QR&nbspCode</label></></asp:LinkButton>
                                                   
                    </div>
                </div>
@@ -125,6 +125,22 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- QR DISPLAY MODAL -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="qr-modal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center my-4">
+                    <img src='#' id="imgSource" runat="server" />
+                </div>
+                <div class="modal-footer d-flex justify-content-center mt-1">
+                    <button type="button" class="btn btn-danger w-50 btn-block mx-auto" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

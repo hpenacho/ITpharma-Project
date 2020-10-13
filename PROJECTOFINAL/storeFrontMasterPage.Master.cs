@@ -74,6 +74,12 @@ namespace PROJECTOFINAL
         {
             lbl_loginWarning.InnerText = "";
 
+            if(txt_loginEmail.Value.Trim().Length < 1 || txt_loginPassword.Value.Trim().Length < 1)
+            {
+                lbl_loginWarning.InnerText = "Please fill all available fields";
+                return;
+            }
+
             SqlCommand myCommand = Tools.SqlProcedure("usp_clientLogin");
             myCommand.Parameters.AddWithValue("@email", txt_loginEmail.Value);
             myCommand.Parameters.AddWithValue("@password", Tools.EncryptString(txt_loginPassword.Value));

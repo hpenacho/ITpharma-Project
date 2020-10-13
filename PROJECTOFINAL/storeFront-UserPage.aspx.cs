@@ -25,12 +25,17 @@ namespace PROJECTOFINAL
             {
                 fillDetails();
             }
-           
-            txt_oldPassword.ReadOnly = Client.social;
-            txt_newPassword.ReadOnly = Client.social;
-            txt_repeatPassword.ReadOnly = Client.social;
 
+            if (Client.social)
+            {
+                txt_oldPassword.Attributes.Add("readonly", "readonly");
+                txt_newPassword.Attributes.Add("readonly", "readonly");
+                txt_repeatPassword.Attributes.Add("readonly", "readonly");
+            }
+
+           
             updateStatusOrder();
+
         }
 
         private void updateStatusOrder()
@@ -94,42 +99,7 @@ namespace PROJECTOFINAL
             sqlExams.SelectParameters["ClientID"].DefaultValue = Client.userID.ToString();
         }
 
-        protected void btn_alterPassword_Click1(object sender, EventArgs e)
-        {
-            lbl_errorPassword.Text = "";
-
-            SqlCommand myCommand = Tools.SqlProcedure("usp_clientAlterPassword");
-
-            myCommand.Parameters.AddWithValue("@ID", Client.userID);
-            myCommand.Parameters.AddWithValue("@oldPassword", Tools.EncryptString(txt_oldPassword.Text));
-            myCommand.Parameters.AddWithValue("@newPassword", Tools.EncryptString(txt_newPassword.Text));
-
-            //OUTPUT - ERROR MESSAGES
-            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
-
-            try
-            {
-                Tools.myConn.Open();
-                myCommand.ExecuteNonQuery();
-
-                lbl_errorPassword.Text = myCommand.Parameters["@errorMessage"].Value.ToString();
-
-                txt_oldPassword.Text = "";
-                txt_repeatPassword.Text = "";
-                txt_newPassword.Text = "";
-
-            }
-            catch (SqlException m)
-            {
-                System.Diagnostics.Debug.WriteLine(m.Message);
-            }
-            finally
-            {
-                Tools.myConn.Close();
-            }
-        }
-
-
+  
         protected void btn_alterarDetails_Click(object sender, EventArgs e)
         {
             DateTime birthdate = Client.birthday.ToString() != "" ? Convert.ToDateTime(txt_alterBirth.Value) : Convert.ToDateTime(txt_alterBirth2.Value);
@@ -198,8 +168,10 @@ namespace PROJECTOFINAL
            
             rpt_orders.DataBind();
 
-            link_activeOrders.CssClass = "btn btn-success";
+            link_activeOrders.CssClass = "btn border-0 text-white";
+            link_activeOrders.Style.Value = "background-color: #82ce34 !important";
             link_pastOrders.CssClass = "btn btn-light";
+            link_pastOrders.Style.Value = "";
             lbl_orderTypes.Text = "Active Orders";
 
         }
@@ -210,8 +182,10 @@ namespace PROJECTOFINAL
             
             rpt_orders.DataBind();
 
+            link_pastOrders.CssClass = "btn border-0 text-white";
+            link_pastOrders.Style.Value = "background-color: #82ce34 !important";
+            link_activeOrders.Style.Value = ""
             link_activeOrders.CssClass = "btn btn-light";
-            link_pastOrders.CssClass = "btn btn-success";
             lbl_orderTypes.Text = "Past Orders";
 
         }
@@ -341,6 +315,47 @@ namespace PROJECTOFINAL
                 Tools.email(Client.email, body, subject, e.CommandArgument.ToString().Replace("/", "\\"));
 
                 lblExameWarning.InnerText = "Exam sent";
+            }
+        }
+
+        protected void btn_alterPassword_Click(object sender, EventArgs e)
+        {
+            lbl_errorPassword.Text = "";
+
+            if(txt_oldPassword.Value.Trim().Length < 1 || txt_newPassword.Value.Trim().Length < 1 || txt_repeatPassword.Value.Trim().Length < 1)
+            {
+                lbl_errorPassword.Text = "One or more fields required";
+                return;
+            }
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_clientAlterPassword");
+
+            myCommand.Parameters.AddWithValue("@ID", Client.userID);
+            myCommand.Parameters.AddWithValue("@oldPassword", Tools.EncryptString(txt_oldPassword.Value));
+            myCommand.Parameters.AddWithValue("@newPassword", Tools.EncryptString(txt_newPassword.Value));
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 200));
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                lbl_errorPassword.Text = myCommand.Parameters["@errorMessage"].Value.ToString();
+
+                txt_oldPassword.Value = "";
+                txt_repeatPassword.Value = "";
+                txt_newPassword.Value = "";
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
             }
         }
     }
