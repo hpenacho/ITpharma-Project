@@ -95,28 +95,6 @@ select Produto.Codreferencia,3,0,0,1
 from Produto
 ------------------------------------
 
---[TRIGGER] For removing inactive or discontinued Items from any and all carts
-go
-Create or alter trigger t_removeInactivesFromCarts on Produto after update
-
-as
-begin try
-begin tran
-    
-    if exists(Select '*' from inserted inner join deleted on inserted.Codreferencia = deleted.Codreferencia where inserted.activo = 0)
-     begin
-        delete from carrinho where carrinho.Prod_ref = (Select inserted.Codreferencia from inserted)
-     end
-
-commit
-end try
-    begin catch
-        print error_message();
-        rollback;
-    end catch
-
-    select * from EncomendaHistorico
-    select * from cliente
 ----------------------------- 
 --[PROC] REGULAR ORDER AUTHENTICATION ON PICKUP
 go

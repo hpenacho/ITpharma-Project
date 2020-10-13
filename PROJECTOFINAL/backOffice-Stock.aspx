@@ -111,7 +111,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="container mt-5">
+    <div class="container">
 
 
         <div class="container-fluid">
@@ -124,9 +124,9 @@
         </div>
 
          <!-- RESTOCK BUTTON -->
-        <div class="row my-5 text-center">
+        <div class="row my-4 text-center">
             <div class="container">
-                 <button type="button" class="btn btn-dark shadow shadow-sm"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-layer-group"></i>&nbsp&nbspRESTOCK ALL</button>
+                 <button type="button" class="btn btn-dark shadow shadow-sm"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-layer-group"></i>&nbsp&nbspAUTO-RESTOCK</button>
             </div>
         </div>
         <!-- //RESTOCK BUTTON -->
@@ -135,10 +135,10 @@
         <div class="container">
             <div class="collapse my-4" id="collapseExample">
 
-                <h4 class="muted small text-center">
-                    you can update all with max restock qty using the restock all button, or individually using the restock selected and 
-                    setting the quantity you want in the qty textbox
-                       </h4>
+                <div class="text-muted small text-center">
+                       <p class="h6"> On this sub-section, you can restock all the selected items with a current quantity below the minimum for that product per ATM or Warehouse. </p>
+                       <p class="h5"> You can also click on "Restock All" to restock all Item Quantities in both the Warehouse and across all ATM's. </p>
+                       </div>
 
                 <div class="card card-body">
                     <table class="table table-hover table-borderless restock">
@@ -160,7 +160,7 @@
                                     <tr class="text-center" style="vertical-align: middle">
                                         <th style="vertical-align: middle">
                                             <div class="btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-warning">
+                                                <label class="btn btn-outline-warning">
                                                     <asp:CheckBox ID="ck_needsRestock" runat="server" autocomplete="off" />
                                                     Restock
                                                 </label>

@@ -37,29 +37,41 @@ namespace PROJECTOFINAL
 
             try
             {
+
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
 
-                var reader = myCommand.ExecuteReader();
-                
-                if(reader.Read())
+
+                if(myCommand.Parameters["@output"].Value.ToString() != "")
                 {
-                   Client.userID = (int)reader["ID"];
-                   Client.name = reader["nome"].ToString();
-                   Client.email = reader["email"].ToString();
-                   Client.address = reader["morada"].ToString();
-                   Client.codPostal = reader["codPostal"].ToString();
-                   Client.NIF = reader["nif"].ToString();
-                   Client.nrSaude = reader["nrSaude"].ToString();
+                    (this.Master as storeFrontMasterPage).socialLoginError();
 
-                   if(reader["dataNascimento"].ToString() != "" && reader["dataNascimento"].ToString() != null)
-                   Client.birthday = Convert.ToDateTime(reader["dataNascimento"].ToString());
+                }
+                else
+                {
 
-                   if(reader["sexo"].ToString() != "" && reader["sexo"].ToString() != null)
-                   Client.gender = Convert.ToChar(reader["sexo"].ToString());
+                    var reader = myCommand.ExecuteReader();
 
-                   Client.isLogged = true;
-                   Client.social = true;
+                    if (reader.Read())
+                    {
+                        Client.userID = (int)reader["ID"];
+                        Client.name = reader["nome"].ToString();
+                        Client.email = reader["email"].ToString();
+                        Client.address = reader["morada"].ToString();
+                        Client.codPostal = reader["codPostal"].ToString();
+                        Client.NIF = reader["nif"].ToString();
+                        Client.nrSaude = reader["nrSaude"].ToString();
+
+                        if (reader["dataNascimento"].ToString() != "" && reader["dataNascimento"].ToString() != null)
+                            Client.birthday = Convert.ToDateTime(reader["dataNascimento"].ToString());
+
+                        if (reader["sexo"].ToString() != "" && reader["sexo"].ToString() != null)
+                            Client.gender = Convert.ToChar(reader["sexo"].ToString());
+
+                        Client.isLogged = true;
+                        Client.social = true;
+                    }
+
                 }
 
             }

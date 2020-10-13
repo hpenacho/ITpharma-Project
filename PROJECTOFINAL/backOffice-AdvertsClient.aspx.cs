@@ -102,6 +102,17 @@ namespace PROJECTOFINAL
 
             lbl_errors2.InnerText = "";
 
+            if (tb_typeName.Value == "")
+            {
+                lbl_errors2.InnerText = "A new type must have a name.";
+                return;
+            }
+            if (Convert.ToDateTime(dateStart.Value) > Convert.ToDateTime(dateExpire.Value))
+            {
+                lbl_errors2.InnerText = "Expiration date must be chronologically after Start Date.";
+                return;
+            }
+
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertClientAdType");
 
             myCommand.Parameters.AddWithValue("@Description", tb_typeName.Value);

@@ -28,8 +28,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
  
-     <label id="lbl_updateError" runat="server"></label>
-
+     
     <!-- Shop User TABLE -->
 
     <div class="container-fluid mt-0">
@@ -41,10 +40,13 @@
                         <button type="button" class="btn-lg btn-warning mr-3" data-toggle="modal" data-target="#modal-insert-ShopUser">Add Shop User <i class="fas fa-plus"></i></button>    
                     </div>
                </div>
-            
-            
+                                    
             <!-- /Insert Shop Users -->
         </div>
+
+                <div class="row text-center justify-content-center">
+                    <label id="lbl_updateError" runat="server" class="h5 text-warning"></label>
+                </div> 
 
         <div class="card mb-4">
             <div class="card-header">
@@ -166,10 +168,10 @@
                                 <!-- Name -->
                                 <div class="form-group row">
                                       <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_name1" placeholder="First Name" required>
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_name1" placeholder="First Name" required pattern="[a-zA-Z]+" title="Only letters allowed, without special characters nor spaces.">
                                       </div>
                                       <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_name2" placeholder="Last Name" required>
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_name2" placeholder="Last Name" required pattern="[a-zA-Z]+" title="Only letters allowed, without special characters nor spaces.">
                                       </div>
                                     </div>
                                 <!-- /Name -->
@@ -178,7 +180,7 @@
                                 <div class="form-row">
 
                                     <div class="form-group col-md-12">
-                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_email" placeholder=" Shop User's Email " data-toggle="tooltip" data-placement="top" title="Insert the Shop User's Email" required>
+                                        <input type="email" class="form-control form-control-user bg-light" runat="server" id="tb_email" placeholder=" Shop User's Email " data-toggle="tooltip" data-placement="top" title="Insert the Shop User's Email" required>
                                     </div>
 
                                 </div>
@@ -188,11 +190,11 @@
                                 <div class="form-group row">
 
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_NIF" placeholder=" NIF " data-toggle="tooltip" data-placement="top" title="Insert NIF" required>
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_NIF" placeholder=" NIF " data-toggle="tooltip" data-placement="top" title="Insert a 9 digit NIF" required pattern="^\d{9}$">
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_healthNumber" placeholder=" Health Number " data-toggle="tooltip" data-placement="top" title="Insert Health Number" required>
+                                        <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_healthNumber" placeholder=" Health Number " data-toggle="tooltip" data-placement="top" title="Insert a 9 digit Health Number" pattern="^\d{9}$" required>
                                     </div>
 
                                 </div>
@@ -204,7 +206,7 @@
                                       <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_address" placeholder="Address" required>
                                     </div>
                                       <div class="col-sm-3">
-                                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" type="tel" pattern="[0-9\-]+" placeholder="Zip-code" required>
+                                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" pattern="[0-9\-]+" title="Please insert a valid zip code. (xxxx-yyy)" placeholder="Zip-code" required>
                                        </div>
                                   </div>
                                 <!-- /Address -->
@@ -240,15 +242,15 @@
 
 
                         <div class="form-row mt-4">
-                            <div class="col text-center">                                
-                                <asp:LinkButton ID="link_insertShopUser" class="btn btn-primary btn-dark w-25 mr-1" runat="server" OnClick="link_insertShopUser_Click"> Insert </asp:LinkButton>
+                            <div class="col text-center">                                                                
+                                <asp:Button ID="btn_insertShopUser" runat="server" class="btn btn-primary btn-dark w-25 mr-1" Text=" Insert " OnClick="btn_insertShopUser_Click"/>
                                 <!-- INSERTION DRIVE -->
                                 <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
 
                         <div class="form-row mt-2">
-                            <label id="lbl_errors" runat="server"></label>
+                            <label id="lbl_errors" class="text-center text-warning" runat="server"></label>
                         </div>
 
                     </div>

@@ -536,7 +536,7 @@
                                         </div>
 
                                         <div class="form-row mt-2 justify-content-center">
-                                            <label id="lbl_errors" class="text-danger" runat="server"></label>
+                                            <label id="lbl_errors" class="text-warning h6" runat="server"></label>
                                         </div>
                                     </div>
                                     <!-- //TAB SYSTEM ENDING -->

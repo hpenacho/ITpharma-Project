@@ -126,7 +126,7 @@
         <div class="modal-dialog modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-light text-center">
-                    <h5 class="modal-title">Order Details</h5>
+                    <h5 class="modal-title">Order # (<asp:Label ID="lbl_titleOrder" runat="server" Text="[missing]" class="text-info"></asp:Label>) Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

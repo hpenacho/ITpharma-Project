@@ -58,7 +58,7 @@
                                             </div>
 
                                             <div class="col ml-2 d-inline-block align-content-end align-self-center">
-                                                <h5 class="mb-0"><a href="storeFront-itemPage.aspx?prod=<%# Eval("Prod_Ref") %>" class="text-dark d-inline-block"><%# Eval("ProdName") %></a></h5>
+                                                <h5 class="mb-0"><a href="storeFront-itemPage.aspx?ref=<%# Eval("Prod_Ref") %>" class="text-dark d-inline-block"><%# Eval("ProdName") %></a></h5>
                                                 <h6 class="small text-muted"><%# Eval("ProdSummary") %></h6>
                                             </div>
 
