@@ -50,7 +50,7 @@ namespace PROJECTOFINAL
                 sqlSourceOrders.SelectParameters["EncRef"].DefaultValue = e.CommandArgument.ToString();
                 sqlSourceOrders.DataBind();
                 rpt_orders.DataBind();
-
+                lbl_titleOrder.Text = e.CommandArgument.ToString();
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "Pop", "$('#order-contents').modal()", true);
             }

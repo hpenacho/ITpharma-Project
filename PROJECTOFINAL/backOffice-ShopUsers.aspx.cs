@@ -27,12 +27,47 @@ namespace PROJECTOFINAL
             switch (e.CommandName)
             {              
                 case "link_updateShopUser": updateUser(e); break;
-                //case "link_deleteShopUser": deleteItem(e); break;
+                case "link_deleteShopUser": deleteUser(e); break;
             }
              rpt_ShopUsersBackOffice.DataBind();
 
         }
        
+        private void deleteUser(RepeaterCommandEventArgs e)
+        {
+
+            lbl_updateError.InnerText = "";
+
+            SqlCommand myCommand = Tools.SqlProcedure("usp_deleteShopUser");
+            myCommand.Parameters.AddWithValue("@id", e.CommandArgument.ToString());
+
+            //OUTPUT - ERROR MESSAGES
+            myCommand.Parameters.Add(Tools.errorOutput("@errorMessage", SqlDbType.VarChar, 300));
+
+            try
+            {
+                Tools.myConn.Open();
+                myCommand.ExecuteNonQuery();
+
+                if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
+                {
+                    lbl_updateError.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                }
+
+                rpt_ShopUsersBackOffice.DataBind();
+
+            }
+            catch (SqlException m)
+            {
+                System.Diagnostics.Debug.WriteLine(m.Message);
+            }
+            finally
+            {
+                Tools.myConn.Close();
+            }
+
+        }
+
         private void updateUser(RepeaterCommandEventArgs e)
         {
             lbl_updateError.InnerText = "";
@@ -70,8 +105,11 @@ namespace PROJECTOFINAL
             }
 
         }
-        protected void link_insertShopUser_Click(object sender, EventArgs e)
+
+
+        protected void btn_insertShopUser_Click(object sender, EventArgs e)
         {
+
             lbl_errors.InnerText = "";
             string pwTemp = Tools.EncryptString(tb_email.Value);
             SqlCommand myCommand = Tools.SqlProcedure("usp_insertShopUser");
@@ -113,6 +151,7 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Close();
             }
+
         }
     }
 }

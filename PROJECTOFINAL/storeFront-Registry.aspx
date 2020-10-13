@@ -65,7 +65,7 @@
                       <input type="text" class="form-control form-control-user bg-light" runat="server" id="tb_address" placeholder="Address" required>
                     </div>
                       <div class="col-sm-3">
-                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" type="tel" title="Please insert a valid zip code. (xxxx-yyy)" pattern="[0-9\-]+" placeholder="Zip-code" required>
+                      <input id="tb_zipcode" runat="server" class="form-control form-control-user bg-light" name="zipcode" title="Please insert a valid zip code. (xxxx-yyy)" pattern="[0-9\-]+" placeholder="Zip-code" required>
                        </div>
                   </div>
                   

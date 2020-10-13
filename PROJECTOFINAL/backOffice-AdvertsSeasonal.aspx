@@ -43,10 +43,8 @@
                                                             <h5><b>Ad Category: <%# Eval("Descricao") %></b></h5>
                                                             <p class="mt-3"><i>Start Date: <%# DateTime.Parse(Eval("DataStart").ToString()).ToString("dd-MM-yyyy") %> </i></p>
                                                             <p><i>Expiration Date: <%# DateTime.Parse(Eval("DataExpiracao").ToString()).ToString("dd-MM-yyyy") %> </i></p>
-                                                        </div>
-                                                        <asp:LinkButton ID="link_updateAdvert" class="btn btn-sm" CommandName="link_updateAdvert" CommandArgument='<%# Eval("ID") %>' runat="server" CausesValidation="false"><i class="fas fa-pen " style="color: white;"></i></asp:LinkButton>
+                                                        </div>                                                        
                                                         <asp:LinkButton ID="link_deleteAdvert" class="btn btn-sm" CommandName="link_deleteAdvert" CommandArgument='<%# Eval("ID") %>' runat="server"><i class="fas fa-trash" style="color: white;"></i></asp:LinkButton>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,7 +162,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- BEGIN MODAL BODY CONTENT -->
-
+                   
 
                     <!-- INNER UPDATE PANEL -->
 
@@ -233,7 +231,7 @@
                         </div>
 
                         <div class="form-row mt-2">
-                            <label id="lbl_errors2" runat="server"></label>
+                            <label id="lbl_errors2" class="text-danger text-center" runat="server"></label>
                         </div>
 
                     </div>
@@ -244,6 +242,8 @@
 
 
                 </div>
+               
+
                 <!-- END MODAL BODY CONTENT -->
             </div>
         </div>

@@ -57,7 +57,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_email;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_email;
 
         /// <summary>
         /// tb_NIF control.
@@ -93,7 +93,7 @@ namespace PROJECTOFINAL
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl tb_zipcode;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tb_zipcode;
 
         /// <summary>
         /// tb_dateOfBirth control.
@@ -123,13 +123,13 @@ namespace PROJECTOFINAL
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton gender_female;
 
         /// <summary>
-        /// link_insertShopUser control.
+        /// btn_insertShopUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_insertShopUser;
+        protected global::System.Web.UI.WebControls.Button btn_insertShopUser;
 
         /// <summary>
         /// lbl_errors control.

@@ -181,7 +181,7 @@ create table Publicidade(
 	ID_Pub_Cliente int references Pub_Cliente(ID)
 )
 
--- INSERTS, UPDATES, DELETES
+-- INSERTS, ateATES, DELETES
 
 /* COMENTÁRIOS 
 
@@ -214,9 +214,9 @@ GO
 create or alter trigger trg_apagarMarca on Marca instead of delete as 
 BEGIN TRY
 BEGIN TRAN
-
-		UPDATE PRODUTO SET PRODUTO.ID_Marca = NULL, PRODUTO.Activo = 0 WHERE PRODUTO.ID_Marca in (select deleted.ID from deleted)
-		delete from Marca where Marca.id in (select deleted.ID from deleted)
+		select deleted.id from deleted
+		UPDATE PRODUTO SET PRODUTO.ID_Marca = NULL, PRODUTO.Activo = 0 WHERE PRODUTO.ID_Marca in (select deleted.ID from deleted inner join Marca on marca.ID = deleted.ID)
+		delete from Marca where Marca.id = (select deleted.ID from deleted)
 
 COMMIT
 END TRY
@@ -698,8 +698,6 @@ BEGIN TRAN
 	IF EXISTS (SELECT '*' FROM Produto WHERE Produto.nome = @nome AND Produto.Codreferencia != @Codreferencia )
 		THROW 60003, 'Another product with that name already exists', 10
 
-	
-
 	UPDATE Produto
 	Set nome = @nome, 
 		preco = @preco, 
@@ -712,6 +710,14 @@ BEGIN TRAN
 		ref_generico = @ref_generico,
 		Activo = @Activo
 	Where Produto.Codreferencia = @Codreferencia
+
+
+	if exists( select '*' from Produto inner join Carrinho on produto.Codreferencia = Carrinho.Prod_ref where produto.Activo = 0) 
+	delete carrinho 
+	from carrinho inner join produto on carrinho.Prod_ref = Produto.Codreferencia
+	where produto.Activo = 0
+
+
 
 COMMIT
 END TRY
@@ -796,6 +802,33 @@ BEGIN CATCH
 END CATCH
 GO
 
+--[PROC]
+GO
+CREATE OR ALTER proc usp_deleteShopUser(@id int,
+										@errorMessage varchar(200) output)
+AS
+BEGIN TRY
+BEGIN TRAN
+
+	if exists(select '*' from EncomendaHistorico where EncomendaHistorico.ID_Cliente = @id)
+		begin	
+			set @errorMessage = 'This client has an order history and cannot be deleted in order to preserve Statistical data and past order records. Client Account has been inactivated instead.'
+			update Cliente set Cliente.activo = 0 where Cliente.ID = @id
+		end
+
+
+	else
+	begin
+	delete from cliente where Cliente.ID = @id
+	end
+
+COMMIT
+END TRY
+BEGIN CATCH
+	set @errorMessage = ERROR_MESSAGE();
+	print ERROR_MESSAGE();
+	ROLLBACK;
+END CATCH
 
 -- [QUERY] LISTS SEASONAL ADS //for backoffice seasonal ad management
 go
@@ -885,8 +918,8 @@ group by enc_ref, datacompra, cliente.nome, id_estado,estado.Descricao, ultimaAc
 -- [PROC] RETURNS ORDER DETAILS
 
 GO
-CREATE PROC usp_returnBackofficeOrderDetails (@EncRef int) as
-select Produto.imagem, Produto.nome, Compra.Qtd, Compra.PriceAtTime, Compra.Total
+CREATE or alter PROC usp_returnBackofficeOrderDetails (@EncRef int) as
+select Produto.imagem, Produto.nome, Compra.Qtd, Compra.PriceAtTime, Compra.Total, EncomendaHistorico.ENC_REF
 from Produto inner join Compra on Compra.Prod_ref = Produto.Codreferencia
              inner join EncomendaHistorico on Compra.ID_Encomenda = EncomendaHistorico.ENC_REF
 where EncomendaHistorico.ENC_REF = @EncRef
@@ -1471,9 +1504,17 @@ create or alter proc usp_socialLogin(@email varchar(50),
 									 @output varchar(200) output) AS
 begin try
 begin tran
+		
+		
 
 		IF NOT EXISTS(SELECT '*' FROM CLIENTE WHERE CLIENTE.email = @EMAIL)
 			INSERT INTO CLIENTE VALUES(@nome, @email, @token, null, 1 , 0 , null, null, null, null, null)
+
+		if exists (select '*' from cliente where cliente.email = @email and cliente.activo = 0)
+		begin
+			;throw 60001, 'This account is currently inactive.', 10
+		end
+
 
 		IF @Cookie IS NOT NULL
 		update carrinho

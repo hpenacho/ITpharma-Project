@@ -21,6 +21,11 @@ namespace PROJECTOFINAL
 
         }
 
+        public void socialLoginError()
+        {
+            lbl_loginWarning.InnerText = "This account is inactive.";
+        }
+
         protected void searchBox_TextChanged(object sender, EventArgs e)
         {
             Session["searchQuery"] = searchBox.Text;

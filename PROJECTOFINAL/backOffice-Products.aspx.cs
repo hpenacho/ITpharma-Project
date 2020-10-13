@@ -34,7 +34,6 @@ namespace PROJECTOFINAL
 
         static byte[] uploadedFile;
         static byte[] updateUploadedFile;
-        string updatedGen;
 
         protected void link_insertProduct_Click(object sender, EventArgs e)
         {
@@ -91,10 +90,12 @@ namespace PROJECTOFINAL
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
                 {
                     lbl_errors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    System.Diagnostics.Debug.WriteLine(myCommand.Parameters["@errorMessage"].Value.ToString());
                 }
                 else
                 {
-                    rpt_produtosBackoffice.DataBind();
+                    lbl_errors.InnerText = "Item Successfully Inserted";
+                    Page.Response.Redirect(Page.Request.Url.ToString(), true);
                 }
 
             }
@@ -103,10 +104,8 @@ namespace PROJECTOFINAL
                 System.Diagnostics.Debug.WriteLine(m.Message);
             }
             finally
-            {
-                Tools.myConn.Close();
-                //fl_insertProductImage.ClearAllFilesFromPersistedStore();
-                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            {               
+                Tools.myConn.Close();                               
             }
 
         }
@@ -157,8 +156,17 @@ namespace PROJECTOFINAL
                 tb_updatePrice.Value = reader["preco"].ToString();
                 tb_updateSummary.Value = reader["resumo"].ToString();
                 ckeditorUpdateProduct.Text = reader["descricao"].ToString();
-                ddl_updateCategory.SelectedValue = reader["ID_Categoria"].ToString();
-                ddl_updateBrand.SelectedValue = reader["ID_Marca"].ToString();
+
+
+                if (reader["ID_Categoria"] == DBNull.Value)
+                    ddl_updateCategory.SelectedIndex = 1;
+                else
+                    ddl_updateCategory.SelectedValue = reader["ID_Categoria"].ToString();
+                
+                if(reader["ID_Marca"] == DBNull.Value)                
+                    ddl_updateBrand.SelectedIndex = 1;
+                else
+                    ddl_updateBrand.SelectedValue = reader["ID_Marca"].ToString();
 
                 //OPTIONS
                 check_updatePrescription.Checked = Convert.ToBoolean(reader["precisaReceita"]);
@@ -166,7 +174,7 @@ namespace PROJECTOFINAL
 
                 if (reader["ref_generico"] == DBNull.Value)
                 {
-                    ddl_updateGenericParent.SelectedIndex = 0;
+                    ddl_updateGenericParent.SelectedIndex = 1;
                     check_updateGeneric.Checked = false;
                 }
                 else
@@ -201,7 +209,10 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
-                SQLrptArchived.DataBind();
+
+                ddl_genericParent.DataBind();
+                ddl_updateGenericParent.DataBind();
+                SQLrptArchived.DataBind();                
             }
         }
 
@@ -255,6 +266,9 @@ namespace PROJECTOFINAL
                 {
                     lbl_updateErrors.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
+
+                else
+                  Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
             catch (SqlException m)
             {
@@ -263,9 +277,9 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                rpt_produtosBackoffice.DataBind();
             }
-
-            rpt_produtosBackoffice.DataBind();
+           
         }
 
         protected void link_insertCategoryBrand(object sender, EventArgs e)
@@ -310,12 +324,14 @@ namespace PROJECTOFINAL
                     SQLbrand.DataBind();
                     ddl_allBrands.DataBind();
                     ddl_allBrands.SelectedIndex = 0;
+                    ddl_updateBrand.DataBind();
                 }
                 else
                 {
                     lbl_CategoryMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                     SQLcategory.DataBind();
                     ddl_allCategories.DataBind();
+                    ddl_updateCategory.DataBind();
                     ddl_allCategories.SelectedIndex = 0;
                 }
 
@@ -357,8 +373,12 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                SQLbrand.DataBind();
                 ddl_allBrands.DataBind();
                 ddl_allBrands.SelectedIndex = 0;
+                ddl_brand.DataBind();
+                ddl_updateBrand.DataBind();
+                
             }
 
         }
@@ -382,8 +402,7 @@ namespace PROJECTOFINAL
                     lbl_BrandMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
 
-                tb_updateBrand.Value = "";
-                ddl_allBrands.DataBind();
+                tb_updateBrand.Value = "";               
             }
             catch (SqlException m)
             {
@@ -391,7 +410,11 @@ namespace PROJECTOFINAL
             }
             finally
             {
-                Tools.myConn.Close();                
+                Tools.myConn.Close();
+                SQLbrand.DataBind();
+                ddl_allBrands.DataBind();
+                ddl_brand.DataBind();
+                ddl_updateBrand.DataBind();
             }
 
         }
@@ -400,6 +423,8 @@ namespace PROJECTOFINAL
 
         protected void link_deleteCategory_Click(object sender, EventArgs e)
         {
+
+           
             SqlCommand myCommand = Tools.SqlProcedure("usp_deleteCategory");
             myCommand.Parameters.AddWithValue("@ID", ddl_allCategories.SelectedValue);
 
@@ -408,8 +433,7 @@ namespace PROJECTOFINAL
             {
                 Tools.myConn.Open();
                 myCommand.ExecuteNonQuery();
-                ddl_allCategories.DataBind();
-
+                
                 if (myCommand.Parameters["@errorMessage"].Value.ToString() != "")
                 {
                     lbl_CategoryMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
@@ -421,8 +445,12 @@ namespace PROJECTOFINAL
                 System.Diagnostics.Debug.WriteLine(m.Message);
             }
             finally
-            {
+            {                
                 Tools.myConn.Close();
+                SQLcategory.DataBind();
+                ddl_allCategories.DataBind();
+                ddl_category.DataBind();
+                ddl_updateCategory.DataBind();
             }
         }
 
@@ -445,8 +473,7 @@ namespace PROJECTOFINAL
                     lbl_CategoryMessage.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
                 }
 
-                tb_updateCategory.Value = "";
-                ddl_allCategories.DataBind();
+                tb_updateCategory.Value = "";                
             }
             catch (SqlException m)
             {
@@ -455,6 +482,10 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
+                SQLcategory.DataBind();
+                ddl_allCategories.DataBind();
+                ddl_category.DataBind();
+                ddl_updateCategory.DataBind();
             }
         }
 

@@ -38,11 +38,6 @@
     <label for="inputPassword">Password</label>
   </div>
 
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
         <asp:Button ID="btn_login" runat="server" class="btn btn-lg btn-primary btn-block" Text="Sign in" OnClick="btn_login_Click" />
   
         <div class="form-label-group">
