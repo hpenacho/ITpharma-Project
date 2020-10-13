@@ -14,11 +14,13 @@ namespace PROJECTOFINAL
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Client.userID != 0)
+                sqlMiniCart.SelectParameters["id_cliente"].DefaultValue = Client.userID.ToString();
+
             generateCookie();
             initiateRegistry();
             switchIcons();
             updateHoverCart();
-
         }
 
         public void socialLoginError()
