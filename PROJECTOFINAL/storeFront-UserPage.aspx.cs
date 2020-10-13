@@ -184,7 +184,7 @@ namespace PROJECTOFINAL
 
             link_pastOrders.CssClass = "btn border-0 text-white";
             link_pastOrders.Style.Value = "background-color: #82ce34 !important";
-            link_activeOrders.Style.Value = ""
+            link_activeOrders.Style.Value = "";
             link_activeOrders.CssClass = "btn btn-light";
             lbl_orderTypes.Text = "Past Orders";
 
