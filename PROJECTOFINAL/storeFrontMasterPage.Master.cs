@@ -20,7 +20,7 @@ namespace PROJECTOFINAL
             generateCookie();
             initiateRegistry();
             switchIcons();
-            updateHoverCart();
+            //updateHoverCart();
         }
 
         public void socialLoginError()
@@ -184,21 +184,25 @@ namespace PROJECTOFINAL
         }
 
 
+        decimal total;
+
         public void updateHoverCart()
         {
             rpt_hoverCart.DataBind();
+            total = 0;
         }
 
-        Decimal total = 0;
 
         protected void rpt_hoverCart_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            total = 0;
 
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+
                 DataRowView dr = (DataRowView)e.Item.DataItem;
+
                 total += Convert.ToDecimal(dr["itemTotalPrice"].ToString());
+               
             }
 
             hoverCartTotal.Value = total.ToString() + " €";

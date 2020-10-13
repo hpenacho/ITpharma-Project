@@ -93,6 +93,7 @@ namespace PROJECTOFINAL
         private void updateCart()
         {
             rptModalCart.DataBind();
+            (this.Master as storeFrontMasterPage).updateHoverCart();
         }
 
 
@@ -197,6 +198,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
                 rptModalCart.DataBind();
             }
+
             cleanCart();
 
         }
@@ -224,6 +226,7 @@ namespace PROJECTOFINAL
                 Tools.myConn.Close();
                 rptModalCart.DataBind();
             }
+
             cleanCart();
 
         }
