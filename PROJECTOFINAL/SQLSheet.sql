@@ -183,71 +183,59 @@ create table Publicidade(
 
 -- INSERTS, UPDATES, DELETES
 
-/* COMENTÁRIOS 
-
-BUGS - É POSSÍVEL O PRODUTO SER O SEU PRÓPRIO GENÉRICO
-	   É POSSÍVEL REACTIVAR UM PRODUTO COM MARCA E CATEGORIA NULA	
-	   [ATENÇÃO: CRIAR REFERENCIA ÚNICA INACTIVA PARA UM GENERICO SEM PAI]
-
-DECISÕES -
-
-	    NÃO SE APAGA PRODUTOS, fica INACTIVO
-
-*/
-
-
--- QUERIES
-
--- SELECCIONAR TODOS OS GENERICOS
-
-SELECT * from produto where ref_generico IS NOT NULL
-
--- SELECCIONAR UM GENERICO 
-
-SELECT * FROM PRODUTO WHERE ref_generico = 'XY1'
-
-
 -- TRIGGERS
-
--- APAGAR A MARCA	
-GO
-create or alter trigger trg_apagarMarca on Marca instead of delete as 
-BEGIN TRY
-BEGIN TRAN
-
-		UPDATE PRODUTO SET PRODUTO.ID_Marca = NULL, PRODUTO.Activo = 0 WHERE PRODUTO.ID_Marca in (select deleted.ID from deleted)
-		delete from Marca where Marca.id in (select deleted.ID from deleted)
-
-COMMIT
-END TRY
-BEGIN CATCH
-	ROLLBACK
-END CATCH
 
 -- APAGAR A CATEGORIA	
 GO
-create or alter trigger trg_apagarCategoria on Categoria instead of delete as 
+ALTER trigger t_deleteCategory on Categoria instead of delete as 
 BEGIN TRY
-BEGIN TRAN
+BEGIN TRANSACTION
 
-		UPDATE PRODUTO SET PRODUTO.ID_Categoria = NULL, PRODUTO.Activo = 0 WHERE PRODUTO.ID_Categoria in (select deleted.ID from deleted)
-		delete from Categoria where Categoria.id in (select deleted.ID from deleted)
+	update produto set produto.Activo = 0,
+					   produto.ID_Categoria = null
+	where Produto.ID_Categoria = (select deleted.id from deleted)
+
+	delete from Categoria where Categoria.id = (select deleted.ID from deleted)
 
 COMMIT
 END TRY
 BEGIN CATCH
 	ROLLBACK
 END CATCH
+
+select * from Categoria
+
+
+-- APAGAR A MARCA	
+
+go
+ALTER trigger t_deleteBrand on marca instead of delete as 
+begin try 
+begin tran
+
+        update produto set produto.Activo = 0, 
+                           produto.ID_Marca = null
+        where Produto.ID_Marca = (select deleted.ID from deleted)
+        
+        DELETE from Marca where Marca.ID = (select deleted.ID from deleted)
+
+commit
+end try
+begin CATCH 
+    ROLLBACK
+end catch
 
 --	APAGAR PRODUTO TENDO EM CONTA O GENÉRICO [ATENÇÃO: CRIAR REFERENCIA ÚNICA INACTIVA PARA UM GENERICO SEM PAI]
 
 GO
-create or alter trigger trg_DelProdRefGen on produto instead of delete AS
+create or alter trigger t_deleteGenericProduct on produto instead of delete AS
 BEGIN TRY
 BEGIN TRAN
 		
 		
-		update produto set produto.ref_generico = null where Produto.ref_generico in (select deleted.codreferencia from deleted)
+		update produto set produto.ref_generico = null 
+		where Produto.ref_generico in (select deleted.codreferencia from deleted)
+
 		delete from Produto where Produto.Codreferencia in (select deleted.codreferencia from deleted)
 
 COMMIT
@@ -1707,9 +1695,9 @@ UPDATE EncomendaHistorico SET ID_Estado = 1 WHERE ENC_REF = 63
 
 
 
--- TRIGGER PARA QUANTIDADES v1.0 (só está prepardo para update ainda não se tratou do insert)
+-- TRIGGER PARA QUANTIDADES v1.0
 GO
-Alter trigger t_updateStockQts on EncomendaHistorico after insert, update AS 
+create or alter trigger t_updateStockQts on EncomendaHistorico after insert, update AS 
 begin TRY
 begin TRAN
 
