@@ -190,40 +190,52 @@
 
                     <ul class="navbar-nav ml-auto mx-auto">
 
-                         <li class="nav-item">
+                        
+                          <li class="nav-item text-center">
                             <a href="storeFront-Shop.aspx" class="nav-link bg-transparent">Shop</a>
                         </li>  
                         
-                        <li class="nav-item">
+                        <li class="nav-item text-center">
                             <a href="storeFront-News.aspx" class="nav-link bg-transparent">News</a>
                         </li>
 
-                          <li class="nav-item">
+                          <li class="nav-item text-center">
                             <a href="storeFront-Contacts.aspx" class="nav-link bg-transparent">Contacts</a>
                         </li>
+                       
 
                     </ul>
 
-                    <div class="navbar-nav ml-auto my-2 my-lg-0">                        
-                        <asp:TextBox ID="searchBox" runat="server" OnTextChanged="searchBox_TextChanged" class="form-control mr-sm-2 bg-light" type="search" aria-label="Search" placeholder="Search"></asp:TextBox> 
-                        <button class="nav-link btn bg-transparent my-2 my-sm-0" formnovalidate="formnovalidate"> <i class="fas fa-search"></i></button>
+                    <div class="navbar-nav ml-auto my-2 my-lg-0">   
+                        <div class="row justify-content-center">
+                            
+                        <asp:TextBox ID="searchBox" runat="server" OnTextChanged="searchBox_TextChanged" class="form-control bg-light w-auto align-self-center" type="search" aria-label="Search" placeholder="Search"></asp:TextBox> 
+                        
+                            
+                                <button class="nav-link btn bg-transparent my-2 my-sm-0 ml-sm-2 align-self-center" formnovalidate="formnovalidate"> <i class="fas fa-search"></i></button>
+                        
+                                </div>
+                       
                     </div>
                     
                     <ul class="navbar-nav ml-auto">
 
+                       
                         <li class="nav-item">
-                            <asp:LinkButton id="userLogin" runat="server" class="nav-link btn bg-transparent" data-toggle="modal" data-target="#login-modal" formnovalidate="formnovalidate"><i class="fas fa-user-circle" style="font-size:18px;"></i></asp:LinkButton>
+                            <asp:LinkButton id="userLogin" runat="server" class="nav-link btn bg-transparent" data-toggle="modal" data-target="#login-modal" formnovalidate="formnovalidate"><i class="fas fa-user-circle" style="font-size:23px;"></i></asp:LinkButton>
                         </li>
 
                         <li class="nav-item">
-                            <a href="storeFront-UserPage.aspx" id="userPage" runat="server" class="nav-link btn bg-transparent"><i class="fas fa-id-card" style="font-size:18px;"></i></a>
+                            <a href="storeFront-UserPage.aspx" id="userPage" runat="server" class="nav-link btn bg-transparent"><i class="fas fa-id-card" style="font-size:23px;"></i></a>
                         </li>
 
                         <li class="nav-item">
+                            
                             <a class="nav-link btn bg-transparent" id="minicart-trigger" href="storeFront-Cart.aspx">
-                                <i class="fas fa-shopping-cart" style="font-size:18px"></i>
+                                <i class="fas fa-shopping-cart" style="font-size:23px"></i>
                             </a>
                         </li>
+                        
 
                     </ul>
                 </div>
