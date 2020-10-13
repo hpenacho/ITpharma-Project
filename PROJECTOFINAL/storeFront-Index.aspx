@@ -59,50 +59,53 @@
     </div>
 
   <!-- Page Content -->
-  <div class="container mt-4">
-    <!-- Portfolio Section -->
-    <div class="row m-5">
+    <div class="container mt-4">
+        <!-- Portfolio Section -->
+        <div class="row m-5">
 
-      <div class="col-lg-4 col-md-12 col-sm-12 portfolio-item">
-        <div class="card h-100 border-light text-center" style="border-radius: 20px;">
-          <a href="#"><img class="card-img-top" src="Resources/images/pharmaSlide1.jpg" style="border-radius: 20px;" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#" class="card-text text-dark">Pharmacy</a>
-            </h4>
-            <p class="card-text text-muted h6">One-stop buy for all your needs</p>
-          </div>
-        </div>
-      </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 portfolio-item">
+                <div class="card h-100 border-light text-center" style="border-radius: 20px;">
+                    <a href="#">
+                        <img class="card-img-top" src="Resources/images/pharmaSlide1.jpg" style="border-radius: 20px;" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#" class="card-text text-dark">Pharmacy</a>
+                        </h4>
+                        <p class="card-text text-muted h6">One-stop buy for all your needs</p>
+                    </div>
+                </div>
+            </div>
 
-      <div class="col-lg-4 col-md-12 col-sm-12 portfolio-item">
-        <div class="card h-100 border-light text-center" style="border-radius: 20px;">
-          <a href="#"><img class="card-img-top" src="Resources/images/pharmaSlide2.jpg" style="border-radius: 20px;" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#" class="card-text text-dark">Exams</a>
-            </h4>
-            <p class="card-text text-muted h6">Schedule yours today</p>
-          </div>
-        </div>
-      </div>
-        
-      <div class="col-lg-4 col-md-12 col-sm-12 portfolio-item">
-        <div class="card h-100 border-light text-center" style="border-radius: 20px;">
-          <a href="#"><img class="card-img-top" src="Resources/images/pharmaSlide3.jpg"  style="border-radius: 20px;" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#" class="card-text text-dark">Prescription</a>
-            </h4>
-            <p class="card-text text-muted h6">Fill yours with us</p>
-          </div>
-        </div>
-      </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 portfolio-item">
+                <div class="card h-100 border-light text-center" style="border-radius: 20px;">
+                    <a href="#">
+                        <img class="card-img-top" src="Resources/images/pharmaSlide2.jpg" style="border-radius: 20px;" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#" class="card-text text-dark">Exams</a>
+                        </h4>
+                        <p class="card-text text-muted h6">Schedule yours today</p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-lg-4 col-md-12 col-sm-12 portfolio-item">
+                <div class="card h-100 border-light text-center" style="border-radius: 20px;">
+                    <a href="#">
+                        <img class="card-img-top" src="Resources/images/pharmaSlide3.jpg" style="border-radius: 20px;" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#" class="card-text text-dark">Prescription</a>
+                        </h4>
+                        <p class="card-text text-muted h6">Fill yours with us</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <hr>
     </div>
-    <!-- /.row -->
-    <hr>
-  </div>
 
 
     <!-- Bootstrap core JavaScript -->

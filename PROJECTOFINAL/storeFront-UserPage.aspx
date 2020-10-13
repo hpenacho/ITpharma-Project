@@ -376,7 +376,7 @@
                                                                         <h4 class="card-title"><%# Eval("parceria") %></h4>
                                                                         <h6 class="text-muted">STATUS</h6>
                                                                         <h6 class="card-text badge-dark rounded-pill mx-auto py-1 w-25"><%# Eval("Descricao") %></h6>
-                                                                        <h6 class="small text-muted">Pedido: <%# Eval("DataPedido", "{0:dd/M/yyyy HH:mm}") %></h6>
+                                                                        <h6 class="small text-muted">Scheduled: <%# Eval("DataPedido", "{0:dd/M/yyyy HH:mm}") %></h6>
 
                                                                         <asp:Panel ID="panelExamButtons" runat="server" Visible='<%# (int)Eval("ID_Estado") == 9 %>'>
                                                                             <asp:LinkButton ID="link_examRedirect" class="btn btn-warning shadow shadow-sm" Target="_blank" href='<%# "/Resources/exams/" + Eval("PDFcaminho") %>' runat="server">Ver Exame</asp:LinkButton>

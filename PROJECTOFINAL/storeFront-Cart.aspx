@@ -100,7 +100,7 @@
                         <div class="row justify-content-center text-center mb-2">
                             
                                 <a href="storeFront-Checkout.aspx" class="btn w-75 rounded mb-1 text-dark font-weight-bold" style="background-color: #82ce34 !important">Checkout <i class="fas fa-money-check-alt"></i></a>                                                           
-                                <asp:LinkButton ID="link_clearCart" CssClass="btn w-75 rounded mt-1 border-0 text-light font-weight-bold btn-secondary" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart <i class="fas fa-cart-arrow-down"></i></asp:LinkButton>                                                             
+                                <asp:LinkButton ID="link_clearCart" CssClass="btn w-75 rounded mt-1 border-0 text-dark font-weight-bold btn-warning" runat="server" OnClick="link_clearCart_Click">Clear&nbspCart <i class="fas fa-cart-arrow-down"></i></asp:LinkButton>                                                             
                                 <asp:LinkButton ID="link_clearPrescriptionItems" CssClass="btn btn-danger w-75 rounded mt-2 text-light font-weight-bold" Visible="False" runat="server" OnClick="link_clearPrescriptionItems_Click"> Clear Prescription Items <i class="fas fa-prescription-bottle-alt"></i></asp:LinkButton>
                                
                          
