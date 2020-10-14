@@ -17,11 +17,23 @@
 <body class="bg-light">
      <form id="form1" runat="server">
     
-     <h2 class="text-center p-0"> IT-Pharma ATM </h2>
-        <div class="text-center my-1" > 
-            <img src="Resources/images/PHARMALOGO.png" style="width:100px"/>
-        </div>
+         <br />
+        <br />
+        <br />
+        <br />
 
+         <asp:Panel ID="atmCartPanel" runat="server" >
+                <div class="row d-flex justify-content-center mr-1 ml-1 mb-2">
+                                     
+                    <div class="col-lg-3 text-center">
+                        <a href="ATM-Front.aspx" style="cursor:pointer;">
+                        <img src="Resources/images/PHARMALOGO.png" width="65" alt=""/>
+                        </a>
+                    </div>
+
+                </div>
+            </asp:Panel>
+     
         <div class="container">
 
             <div class="border rounded">

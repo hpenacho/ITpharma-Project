@@ -18,7 +18,6 @@ namespace PROJECTOFINAL
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //txt_bloodSchedule.Value = DateTime.Today.ToString("yyyy-MM-dd");
 
             if (!Client.isLogged)
                 Response.Redirect("storeFront-Index.aspx");
@@ -63,8 +62,7 @@ namespace PROJECTOFINAL
 
 
         protected void link_logout_Click(object sender, EventArgs e)
-        {
-            //ATENÇÃO PODE HAVER CONFLICTOS COM O CHECKOUT E A INFORMAÇÃO TESTAR DEPOIS
+        {            
             Client.resetClient();
             Response.Redirect("storeFront-Index.aspx");
         }
@@ -241,17 +239,19 @@ namespace PROJECTOFINAL
 
             lblExameWarning.InnerText = "";
 
-            if(txt_bloodSchedule.Value == "" || Convert.ToDateTime(txt_bloodSchedule.Value).Day < DateTime.Now.Day)
-            {
-                lblExameWarning.InnerText = "You cannot schedule an exame for a date earlier than tomorrow";
-                return;
-            }
-
             if (txt_bloodHealthNumber.Value.Trim().Length < 8)
             {
                 lblExameWarning.InnerText = "Invalid Health Number (e.g 123123123)";
                 return;
             }
+
+            if (txt_bloodSchedule.Value == "" || Convert.ToDateTime(txt_bloodSchedule.Value).Day < DateTime.Now.Day)
+            {
+                lblExameWarning.InnerText = "You cannot schedule an exame for a date earlier than tomorrow";
+                return;
+            }
+
+            
 
             SqlCommand myCommand = Tools.SqlProcedure("usp_scheduleExam");
 

@@ -379,8 +379,8 @@
                                                                         <h6 class="small text-muted">Scheduled: <%# Eval("DataPedido", "{0:dd/M/yyyy}") %></h6>
 
                                                                         <asp:Panel ID="panelExamButtons" runat="server" Visible='<%# (int)Eval("ID_Estado") == 9 %>'>
-                                                                            <asp:LinkButton ID="link_examRedirect" class="btn btn-warning shadow shadow-sm" Target="_blank" href='<%# "/Resources/exams/" + Eval("PDFcaminho") %>' runat="server">Ver Exame</asp:LinkButton>
-                                                                            <asp:LinkButton ID="link_examEmail" CommandName="link_examEmail" CommandArgument='<%# "Resources/exams/" + Eval("PDFcaminho") %>' class="btn btn-info shadow shadow-sm" runat="server">Enviar Email</asp:LinkButton>
+                                                                            <asp:LinkButton ID="link_examRedirect" class="btn btn-warning shadow shadow-sm" Target="_blank" href='<%# "/Resources/exams/" + Eval("PDFcaminho") %>' runat="server">Check Results</asp:LinkButton>
+                                                                            <asp:LinkButton ID="link_examEmail" CommandName="link_examEmail" CommandArgument='<%# "Resources/exams/" + Eval("PDFcaminho") %>' class="btn btn-info shadow shadow-sm" runat="server">Send Email</asp:LinkButton>
                                                                         </asp:Panel>
 
                                                                     </div>

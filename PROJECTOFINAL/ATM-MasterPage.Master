@@ -25,6 +25,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+
+
     <style>
 
         body {
@@ -128,31 +130,35 @@
 <body class="bg-light">
     <form id="form1" runat="server">
 
-        <h2 class="text-center p-2 mt-3 text-muted font-italic" runat="server" id="atmTitle" > ITpharma ATM </h2>
+        <br />
+        <br />
+        <br />
+        <br />
 
         <div class="container">
 
             <asp:Panel ID="atmCartPanel" runat="server" >
                 <div class="row d-flex justify-content-between mr-1 ml-1 mb-2">
 
-
+                  
                     <div class="col-lg-3 rounded text-center" style="background-color: #82ce34;">
-                        <button type="button" class="btn" style="background-color: #82ce34;" data-toggle="modal" data-target="#staticBackdrop">
+                        <button type="button" class="btn mt-2" style="background-color: #82ce34;" data-toggle="modal" data-target="#staticBackdrop" formnovalidate="formnovalidate">
                          <span class="font-weight-bolder text-white" style="font-size: 20px;"> <i class="fas fa-user-circle "></i> New Customer? </span>
                     </button>
                         
                     </div>
 
                     <div class="col-lg-3 text-center">
-                        <img src="Resources/images/PHARMALOGO.png" width="50" alt="">
+                        <a href="ATM-Front.aspx" style="cursor:pointer;">
+                        <img src="Resources/images/PHARMALOGO.png" width="65" alt=""/>
+                        </a>
                     </div>
 
                     <div class="col-lg-3 py-2 rounded d-flex justify-content-around" style="background-color: #82ce34">
                         <a href="ATM-Purchase.aspx" class="text-decoration-none text-black-50 align-self-center">
                             <i class="fas fa-shopping-cart mr-2 align-self-center" style="font-size: 30px;"></i>
-                        </a>
-                        <span style="font-size: 20px;" class="align-middle align-self-center">Total: </span>
-                        <span style="font-size: 20px;" class="align-middle align-self-center">0.00€</span>
+                            <span class="h3"> Cart </span>
+                        </a>                       
                     </div>
                 </div>
             </asp:Panel>
@@ -176,7 +182,7 @@
                     <p class="text-center">Are you a new customer? By touching yes your cart items will be reset.</p>
                 </div>
                 <div class="modal-footer border-0">
-                    <asp:Button ID="btn_newCustomer" runat="server" CssClass="btn btn-primary btn-block" Text="Yes" OnClick="btn_newCustomer_Click" />
+                    <asp:Button ID="btn_newCustomer" runat="server" CssClass="btn btn-primary btn-block" Text="Yes" OnClick="btn_newCustomer_Click" formnovalidate="formnovalidate"/>
                     <button class="btn btn-danger btn-block" style="background-color: #dc3545 !important;" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

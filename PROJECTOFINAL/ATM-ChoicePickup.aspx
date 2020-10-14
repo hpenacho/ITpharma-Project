@@ -104,8 +104,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-        <div class="row text-center justify-content-center mt-4 mb-4">
-        <div class="col-lg-8"> 
+        <div class="row text-center justify-content-center my-4">
+        <div class="col-lg-8 mt-4"> 
 
             <p class="text-muted text-center"> Para efeitos de demonstração de funcionalidade, escolha uma das pickups abaixo, a aplicação carregará a respectiva ATM.</p>
 
@@ -113,7 +113,7 @@
     </div>
         <div class="row justify-content-center mb-4">
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-4">
 
                 <asp:DropDownList ID="ddl_ATMchoice" CssClass="form-control" runat="server" DataSourceID="SQLsourceATMs" DataTextField="Descricao" DataValueField="ID"></asp:DropDownList>
 
@@ -141,14 +141,14 @@
                     <div class="icon-box">
                         <i class="material-icons">&#xE876;</i>
                     </div>
-                    <h4 class="modal-title w-100">Awesome!</h4>
+                    <h4 class="modal-title w-100">Confirme a sua escolha</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
+                    <p class="text-center"> Ao clicar em confirmar, será redirecionado para o Landing Page do ATM escolhido. </p>
                 </div>
                 <div class="modal-footer border-0">
-                    <asp:LinkButton ID="lbtn_loadChosenATM" CssClass="btn btn-primary btn-block" runat="server" OnClick="lbtn_loadChosenATM_Click">Confirm</asp:LinkButton>
-                    <button class="btn btn-danger btn-block" style="background-color: #dc3545 !important;" data-dismiss="modal">Cancel</button>
+                    <asp:LinkButton ID="lbtn_loadChosenATM" CssClass="btn btn-primary btn-block" runat="server" OnClick="lbtn_loadChosenATM_Click">Confirmar</asp:LinkButton>
+                    <button class="btn btn-danger btn-block" style="background-color: #dc3545 !important;" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
