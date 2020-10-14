@@ -12,13 +12,8 @@ namespace PROJECTOFINAL
 {
     public partial class storeFront_Shop : System.Web.UI.Page
     {
-        //FILTERING PRODUCTS
-        string field = "Nome";
-        string order = "ASC";
-        string brand = "All";
-        string category = "All";
+        //Number of Products on Display
         const int numberOfItems = 9;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,10 +27,9 @@ namespace PROJECTOFINAL
             if (!Page.IsPostBack)
             {
                 sqlShopProducts.SelectParameters["Pagina"].DefaultValue = "1";
-                brand = "All";
-                category = "All";
+                sqlShopProducts.SelectParameters["Marca"].DefaultValue = "All";
+                sqlShopProducts.SelectParameters["Categoria"].DefaultValue = "All";
             }
-
 
             productFiltering();
             generatePaging();
@@ -53,11 +47,10 @@ namespace PROJECTOFINAL
         {
             if (e.CommandName.Equals("linkSelectCategory"))
             {
-                category = e.CommandArgument.ToString();
-                brand = "All";
+                sqlShopProducts.SelectParameters["Categoria"].DefaultValue = e.CommandArgument.ToString();
+                sqlShopProducts.SelectParameters["Marca"].DefaultValue = "All";
                 sqlShopProducts.SelectParameters["Pagina"].DefaultValue = "1";
                 productFiltering();
-                generatePaging();
             }
         }
 
@@ -65,11 +58,10 @@ namespace PROJECTOFINAL
         {
             if (e.CommandName.Equals("linkSelectBrand"))
             {
-                brand = e.CommandArgument.ToString();
-                category = "All";
+                sqlShopProducts.SelectParameters["Marca"].DefaultValue = e.CommandArgument.ToString();
+                sqlShopProducts.SelectParameters["Categoria"].DefaultValue = "All";
                 sqlShopProducts.SelectParameters["Pagina"].DefaultValue = "1";
                 productFiltering();
-                generatePaging();
             }
         }
 
@@ -78,37 +70,33 @@ namespace PROJECTOFINAL
             switch (ddl_filters.SelectedValue)
             {
                 case "NASC":
-                    field = "Nome";
-                    order = "ASC";
+                    sqlShopProducts.SelectParameters["Campo"].DefaultValue = "Nome";
+                    sqlShopProducts.SelectParameters["Ordem"].DefaultValue = "ASC";
                     break;
                 case "NDESC":
-                    field = "Nome";
-                    order = "DESC";
+                    sqlShopProducts.SelectParameters["Campo"].DefaultValue = "Nome";
+                    sqlShopProducts.SelectParameters["Ordem"].DefaultValue = "DESC";
                     break;
                 case "PASC":
-                    field = "Preco";
-                    order = "ASC";
+                    sqlShopProducts.SelectParameters["Campo"].DefaultValue = "Preco";
+                    sqlShopProducts.SelectParameters["Ordem"].DefaultValue = "ASC";
                     break;
                 case "PDESC":
-                    field = "Preco";
-                    order = "DESC";
+                    sqlShopProducts.SelectParameters["Campo"].DefaultValue = "Preco";
+                    sqlShopProducts.SelectParameters["Ordem"].DefaultValue = "DESC";
                     break;
             }
 
-            productFiltering();
+            rptShopProducts.DataBind();
         }
 
         private void productFiltering()
         {
             generatePaging();
 
-            sqlShopProducts.SelectParameters["Campo"].DefaultValue = field;
-            sqlShopProducts.SelectParameters["Ordem"].DefaultValue = order;
-            sqlShopProducts.SelectParameters["Categoria"].DefaultValue = category;
-            sqlShopProducts.SelectParameters["Marca"].DefaultValue = brand;
             sqlShopProducts.SelectParameters["ItemsPagina"].DefaultValue = numberOfItems.ToString();
-
             rptShopProducts.DataSourceID = sqlShopProducts.ID;
+
             sqlShopProducts.DataBind();
             rptShopProducts.DataBind();
         }

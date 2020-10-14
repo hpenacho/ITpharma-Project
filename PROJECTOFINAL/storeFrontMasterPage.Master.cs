@@ -53,7 +53,6 @@ namespace PROJECTOFINAL
         }
 
 
-
         private void generateCookie()
         {
 
@@ -194,8 +193,17 @@ namespace PROJECTOFINAL
 
         public void updateHoverCart()
         {
+          
             rpt_hoverCart.DataBind();
+
+
+            if (rpt_hoverCart.Items.Count < 1)
+            {
+                hoverCartTotal.Value = "";
+            }
+
             total = 0;
+
         }
 
         public void updateSqlHoverCart()
