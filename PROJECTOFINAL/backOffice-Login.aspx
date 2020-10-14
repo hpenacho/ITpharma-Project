@@ -20,31 +20,33 @@
     <link href="../BackOffice/BackOffice-Logins/floating-labels.css" rel="stylesheet">
 
   </head>
-  <body>
+<body>
     <form class="form-signin" runat="server">
-  <div class="text-center mb-4">
-    <img class="mb-4" src="Resources/images/PHARMALOGO.png" alt="" width="100" height="100">
-    <h1 class="h3 mb-3 font-weight-normal">Administrator Login - ITpharma</h1>
-    <p> Please insert your login credentials below. </p>
-  </div>
 
-  <div class="form-label-group">
-    <input type="text" id="inputUserName" runat="server" class="form-control" placeholder="Administrator Name" required autofocus>
-    <label for="inputUserName">Administrator Name</label>
-  </div>
+        <div class="text-center mb-4">
+            <img class="mb-4" src="Resources/images/PHARMALOGO.png" alt="" width="100" height="100">
+            <h1 class="h3 mb-3 font-weight-normal">Administrator Login - ITpharma</h1>
+            <p>Please insert your login credentials below. </p>
+        </div>
 
-  <div class="form-label-group">
-    <input type="password" id="inputPassword" runat="server" class="form-control" placeholder="Password" required>
-    <label for="inputPassword">Password</label>
-  </div>
+        <div class="form-label-group">
+            <input type="text" id="inputUserName" runat="server" class="form-control" placeholder="Administrator Name" required autofocus>
+            <label for="inputUserName">Administrator Name</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="password" id="inputPassword" runat="server" class="form-control" placeholder="Password" required>
+            <label for="inputPassword">Password</label>
+        </div>
 
         <asp:Button ID="btn_login" runat="server" class="btn btn-lg btn-primary btn-block" Text="Sign in" OnClick="btn_login_Click" />
-  
+
         <div class="form-label-group">
             <asp:Label ID="lbl_errorMessage" runat="server" class="text-center" Text=" " ForeColor="Red"></asp:Label>
         </div>
+
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2020</p>
-    
-</form>
+
+    </form>
 </body>
 </html>

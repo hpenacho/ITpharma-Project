@@ -17,7 +17,7 @@ namespace PROJECTOFINAL
                Response.Redirect("storeFront-Shop.aspx");
 
             if(!Page.IsPostBack)
-                cartAmount.Text = "1";
+                cartAmount.Value = "1";
 
             loadItem();
         }
@@ -81,7 +81,7 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@ClientID", Client.userID == 0 ? (object)DBNull.Value : Client.userID);
             myCommand.Parameters.AddWithValue("@cookie", Request.Cookies["noLogID"].Value);
             myCommand.Parameters.AddWithValue("@reference", Request.QueryString["ref"].ToString());
-            myCommand.Parameters.AddWithValue("@qty", Convert.ToInt32(cartAmount.Text));
+            myCommand.Parameters.AddWithValue("@qty", Convert.ToInt32(cartAmount.Value));
 
             try
             {
@@ -95,7 +95,7 @@ namespace PROJECTOFINAL
             finally
             {
                 Tools.myConn.Close();
-                cartAmount.Text = "1";
+                cartAmount.Value = "1";
                 (this.Master as storeFrontMasterPage).updateHoverCart();
             }
 
