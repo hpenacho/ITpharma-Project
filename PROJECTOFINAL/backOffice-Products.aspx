@@ -456,18 +456,16 @@
 
 
 
-                                                        <label class="btn btn-outline-warning rounded-left">
-                                                            <input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
+                                                        &nbsp;<label class="btn btn-outline-warning rounded-left"><input type="checkbox" name="prescription" id="check_prescription" runat="server" autocomplete="off">
                                                             Prescription
                                                         </label>
 
 
-                                                        <label class="btn btn-outline-warning rounded-left" onclick="showHideGenParents()">
-                                                            <input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
+                                                        &nbsp;<label class="btn btn-outline-warning rounded-left" onclick="showHideGenParents()"><input type="checkbox" name="generic" id="check_generic" runat="server" autocomplete="off">
                                                             Generic
                                                         </label>
 
-                                                    </div>
+                                                    &nbsp;</div>
 
                                                     <div class="input-group mb-3 col-md-5 col-sm-12" id="genericParentsDiv" style="display: none;">
                                                         <div class="input-group-prepend">
@@ -685,17 +683,15 @@
                                                     Active   
                                                 </label>
 
-                                                <label class="btn btn-outline-warning rounded-left">
-                                                    <input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
+                                                &nbsp;<label class="btn btn-outline-warning rounded-left"><input type="checkbox" name="prescription" id="check_updatePrescription" runat="server" autocomplete="off">
                                                     Prescription
                                                 </label>
 
-                                                <label class="btn btn-outline-warning rounded-left" onclick="showHideUpdateGenParents()">
-                                                    <input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
+                                                &nbsp;<label class="btn btn-outline-warning rounded-left" onclick="showHideUpdateGenParents()"><input type="checkbox" name="generic" id="check_updateGeneric" runat="server" autocomplete="off">
                                                     Generic
                                                 </label>
 
-                                            </div>
+                                            &nbsp;</div>
 
                                             <div class="input-group mb-3 col-md-5 col-sm-12" id="genericUpdateParentsDiv">
                                                 <div class="input-group-prepend">

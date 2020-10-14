@@ -1589,7 +1589,7 @@ delete from ExamesAnalises
 -- [ PROC ] SCHEDULE PERSONAL EXAMS
 
 GO
-create or alter proc usp_scheduleExam(@ClientID int, @DataPedido datetime, @CaminhoPDF varchar(MAX), @ParceiroID int, @output varchar(200) output) AS
+create or alter proc usp_scheduleExam(@ClientID int, @DataPedido date, @CaminhoPDF varchar(MAX), @ParceiroID int, @output varchar(200) output) AS
 BEGIN TRY
 BEGIN TRAN
 

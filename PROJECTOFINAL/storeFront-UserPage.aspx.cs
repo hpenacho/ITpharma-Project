@@ -18,6 +18,8 @@ namespace PROJECTOFINAL
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //txt_bloodSchedule.Value = DateTime.Today.ToString("yyyy-MM-dd");
+
             if (!Client.isLogged)
                 Response.Redirect("storeFront-Index.aspx");
 
@@ -33,9 +35,7 @@ namespace PROJECTOFINAL
                 txt_repeatPassword.Attributes.Add("readonly", "readonly");
             }
 
-           
             updateStatusOrder();
-
         }
 
         private void updateStatusOrder()
@@ -90,8 +90,7 @@ namespace PROJECTOFINAL
             if (Client.nrSaude == null || Client.nrSaude == "")
                 txt_alterhealthnumber.ReadOnly = false;
 
-
-            txt_bloodSchedule.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ', 'T');
+            txt_bloodSchedule.Value = DateTime.Today.ToString("yyyy-MM-dd");
 
             //UTILITY
             welcomeUser.InnerText = Client.name;
@@ -257,7 +256,7 @@ namespace PROJECTOFINAL
             SqlCommand myCommand = Tools.SqlProcedure("usp_scheduleExam");
 
             myCommand.Parameters.AddWithValue("ClientID", Client.userID);
-            myCommand.Parameters.AddWithValue("DataPedido", Convert.ToDateTime(txt_bloodSchedule.Value.Replace("T", " ")));
+            myCommand.Parameters.AddWithValue("DataPedido", Convert.ToDateTime(txt_bloodSchedule.Value));
             myCommand.Parameters.AddWithValue("CaminhoPDF", pdf());
             myCommand.Parameters.AddWithValue("ParceiroID", ddl_bloodPartners.SelectedValue);
 
@@ -302,7 +301,7 @@ namespace PROJECTOFINAL
             pdfformfields.SetField("laboratory", ddl_bloodPartners.SelectedItem.Text);
             pdfformfields.SetField("patientname", Client.name);
             pdfformfields.SetField("patienthealthnumber", txt_bloodHealthNumber.Value);
-            pdfformfields.SetField("daterequisition", Convert.ToDateTime(txt_bloodSchedule.Value).ToString("dd-MM-yyyy HH:mm").Replace('T', ' '));
+            pdfformfields.SetField("daterequisition", Convert.ToDateTime(txt_bloodSchedule.Value).ToString("dd-MM-yyyy"));
 
             pdfstamper.Close();
 

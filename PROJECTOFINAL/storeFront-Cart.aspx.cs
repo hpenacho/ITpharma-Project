@@ -93,7 +93,6 @@ namespace PROJECTOFINAL
         private void updateCart()
         {
             rptModalCart.DataBind();
-            (this.Master as storeFrontMasterPage).updateSqlHoverCart();
             (this.Master as storeFrontMasterPage).updateHoverCart();
            
         }

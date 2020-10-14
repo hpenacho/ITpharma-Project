@@ -355,7 +355,7 @@
                                                         <input type="text" id="txt_bloodHealthNumber" runat="server" class="form-control bg-light" placeholder="Health Number"/>
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <input type="datetime-local" id="txt_bloodSchedule" runat="server" class="form-control bg-light" />
+                                                        <input type="date" id="txt_bloodSchedule" enableviewstate="true" runat="server" class="form-control bg-light" />
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <asp:DropDownList ID="ddl_bloodPartners" runat="server" CssClass="form-control bg-light" DataSourceID="sqlPartnerships" DataValueField="ID" DataTextField="Parceria"></asp:DropDownList>
@@ -376,7 +376,7 @@
                                                                         <h4 class="card-title"><%# Eval("parceria") %></h4>
                                                                         <h6 class="text-muted">STATUS</h6>
                                                                         <h6 class="card-text badge-dark rounded-pill mx-auto py-1 w-25"><%# Eval("Descricao") %></h6>
-                                                                        <h6 class="small text-muted">Scheduled: <%# Eval("DataPedido", "{0:dd/M/yyyy HH:mm}") %></h6>
+                                                                        <h6 class="small text-muted">Scheduled: <%# Eval("DataPedido", "{0:dd/M/yyyy}") %></h6>
 
                                                                         <asp:Panel ID="panelExamButtons" runat="server" Visible='<%# (int)Eval("ID_Estado") == 9 %>'>
                                                                             <asp:LinkButton ID="link_examRedirect" class="btn btn-warning shadow shadow-sm" Target="_blank" href='<%# "/Resources/exams/" + Eval("PDFcaminho") %>' runat="server">Ver Exame</asp:LinkButton>
@@ -532,6 +532,5 @@
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="BackOffice//BackOffice-Template/dist/assets/demo/datatables-demo.js"></script>
     <!-- /SCRIPTS -->
-
 
 </asp:Content>

@@ -157,6 +157,8 @@ namespace PROJECTOFINAL
                 tb_updateSummary.Value = reader["resumo"].ToString();
                 ckeditorUpdateProduct.Text = reader["descricao"].ToString();
 
+               
+
 
                 if (reader["ID_Categoria"] == DBNull.Value)
                     ddl_updateCategory.SelectedIndex = 1;
@@ -182,6 +184,14 @@ namespace PROJECTOFINAL
                     ddl_updateGenericParent.SelectedValue = reader["ref_generico"].ToString();
                     check_updateGeneric.Checked = true;
                 }
+
+
+
+                //TESTING
+                var item = ddl_updateGenericParent.Items.FindByValue(reader["Codreferencia"].ToString());
+                ddl_updateGenericParent.Items.Remove(item);
+
+
             }
 
             reader.Close();
