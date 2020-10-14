@@ -858,7 +858,6 @@
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="SQLSheet - HUGO.sql" />
     <Content Include="SQLSheet.sql" />
     <Content Include="storeFront-activateAcc.aspx" />
     <Content Include="storeFront-Cart.aspx" />
