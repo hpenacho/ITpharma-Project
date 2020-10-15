@@ -602,7 +602,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
                                                     </div>
-                                                    <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required>
+                                                    <input type="text" class="form-control" runat="server" id="tb_updateReference" placeholder="Reference Number" data-toggle="tooltip" data-placement="top" title="Insert the reference code supplied by the manufacturer" required readonly="readonly">
                                                 </div>
                                             </div>
 

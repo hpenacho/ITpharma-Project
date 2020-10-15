@@ -191,6 +191,9 @@ namespace PROJECTOFINAL
         {
             lbl_message.InnerText = "";
 
+          
+
+
             if (Client.nrSaude.ToString() != healthNumber.Value)
                 lbl_message.InnerText = "You can only validate prescriptions whose health number matches the health number supplied upon an ITpharma account creation.";
 
@@ -215,12 +218,16 @@ namespace PROJECTOFINAL
                         lbl_message.InnerText = "Prescription items were added to your cart! Proceed to checkout to finalize your purchase.";
                         Page.Response.Redirect(Page.Request.Url.ToString(), true);
                     }
-
+                                     
                 }
                 catch (SqlException m)
                 {
                     System.Diagnostics.Debug.WriteLine(m.Message);
-                    lbl_message.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    if (myCommand.Parameters["@errorMessage"].Value != null)
+                        lbl_message.InnerText = myCommand.Parameters["@errorMessage"].Value.ToString();
+                    else
+                        lbl_message.InnerText = "Invalid data was submited.";
+
                 }
                 finally
                 {

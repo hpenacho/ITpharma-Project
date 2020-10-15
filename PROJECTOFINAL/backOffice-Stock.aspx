@@ -276,7 +276,7 @@
 
                                                     <td class="align-middle">
                                                         <label class="text-hide" style="display: none"><%# Eval("Qtd") %></label>
-                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qty" runat="server" min="0" value='<%# Eval("Qtd") %>' />
+                                                        <input type="number" style="max-width: 7em" class="text-center border-0 bg-transparent" id="txt_qty" runat="server" min="0" value='<%# Eval("Qtd") %>'/>
                                                     </td>
 
                                                     <td class="align-middle">
