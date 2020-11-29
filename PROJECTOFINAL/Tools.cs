@@ -216,8 +216,8 @@ namespace PROJECTOFINAL
             OAuthManager.RegisterClient(
 
                        "google",
-                       "471126422232-se1ig73pabld0jjjf839kkedcvhjps1s.apps.googleusercontent.com",
-                       "e974tjnTDry_lGRJWSpMOm4V"
+                       "487532592737-1k5r32pb16ighmrsupd88n5nnbnglu5p.apps.googleusercontent.com",
+                       "3RkF_SHanaZlN2ACkjEhPDw9"
                );
 
             OAuthManager.RegisterClient( 
