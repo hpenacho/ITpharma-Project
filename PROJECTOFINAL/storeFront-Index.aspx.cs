@@ -18,6 +18,7 @@ namespace PROJECTOFINAL
             bannerAds();
         }
 
+        //test comment
         private void bannerAds()
         {
             bool hasGender = false;
