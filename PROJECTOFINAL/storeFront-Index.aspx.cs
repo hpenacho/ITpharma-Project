@@ -18,7 +18,6 @@ namespace PROJECTOFINAL
             bannerAds();
         }
 
-        
         private void bannerAds()
         {
             bool hasGender = false;
@@ -28,7 +27,7 @@ namespace PROJECTOFINAL
 
             SqlConnection myConn = new SqlConnection(ConfigurationManager.ConnectionStrings["ITpharmaConnectionString"].ConnectionString);
             SqlCommand myCommand = new SqlCommand();
-        
+
             myCommand.CommandType = CommandType.StoredProcedure;
             myCommand.CommandText = "usp_getRelevantAds";
             myCommand.Connection = myConn;
@@ -36,9 +35,9 @@ namespace PROJECTOFINAL
             myCommand.Parameters.AddWithValue("@clientGender", hasGender ? Client.gender : (object)DBNull.Value);
             myCommand.Parameters.AddWithValue("@clientBirthday", Client.birthday == null ? (object)DBNull.Value : Convert.ToDateTime(Client.birthday));
 
-            
+
             List<Advertisements> advertList = new List<Advertisements>();
-            
+
             try
             {
                 myConn.Open();
@@ -54,7 +53,7 @@ namespace PROJECTOFINAL
                     ad.Description = reader["descricao"].ToString();
                     ad.type = (bool)reader["adType"];
                     advertList.Add(ad);
-                    System.Diagnostics.Debug.WriteLine(ad.Description.ToString()) ;
+                    System.Diagnostics.Debug.WriteLine(ad.Description.ToString());
                 }
 
             }
@@ -71,19 +70,23 @@ namespace PROJECTOFINAL
             Random random = new Random();
 
             List<Advertisements> seasonalAds = advertList.Where(x => x.type == true).ToList();
-            imgSlotSeasonal.Src = "data:image;base64," + Convert.ToBase64String(seasonalAds[random.Next(0,seasonalAds.Count())].binaryImg);
-
             List<Advertisements> genderAds = advertList.Where(x => x.type == false && (x.Description.Equals("Male") || x.Description.Equals("Female"))).ToList();
-            imgSlotGender.Src = "data:image;base64," + Convert.ToBase64String(genderAds[random.Next(0, genderAds.Count())].binaryImg);
-
             List<Advertisements> ageAds = advertList.Where(x => x.type == false).ToList();
             ageAds = ageAds.Except(genderAds).ToList();
-            imgSlotAge.Src = "data:image;base64," + Convert.ToBase64String(ageAds[random.Next(0, ageAds.Count())].binaryImg);
 
-        }
-    
-    
-    
+
+            if (seasonalAds.Count() > 0) {
+                imgSlotSeasonal.Src = "data:image;base64," + Convert.ToBase64String(seasonalAds[random.Next(0, seasonalAds.Count())].binaryImg);
+            } else { imgSlotSeasonal.Src = "Resources/images/adPlaceholderExample.png"; }
+
+            if (genderAds.Count() > 0) {
+            imgSlotGender.Src = "data:image;base64," + Convert.ToBase64String(genderAds[random.Next(0, genderAds.Count())].binaryImg);
+            } else { imgSlotGender.Src = "Resources/images/adPlaceholderExample.png"; }
+
+            if (ageAds.Count() > 0){
+            imgSlotAge.Src = "data:image;base64," + Convert.ToBase64String(ageAds[random.Next(0, ageAds.Count())].binaryImg);
+            } else { imgSlotAge.Src = "Resources/images/adPlaceholderExample.png"; }                        
+        }       
     }
 
     public class Advertisements
